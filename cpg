@@ -1,0 +1,31 @@
+#!/bin/bash
+if [[ "$1" == "" && "$2" == "" ]]; then
+	echo "Compile - OPENGL + GLUT - C files
+Parameter 'p' to compile and play
+
+Examples:
+	cpg p example.c
+	cpg example.c"
+	exit
+fi
+if [ "$2" != "" ]; then
+ #relative path var
+ rfile="$2"
+else
+  rfile="$1"
+fi
+
+path=$(pwd)
+path+="/"
+o="$path$rfile"
+opath=${o/.c/.out}
+gcc "$rfile"  -lglut -lGLU -lGL -o $opath
+
+if [ "$2" != "" ]; then
+ if [ "$1" == "p" ]; then
+  $opath 
+ else
+  echo "Parameter not recognized."
+  exit
+ fi 
+fi
