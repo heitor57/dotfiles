@@ -4,4 +4,4 @@
 # dict	|MAIN
 # dictd dict-gcide	|OFFLINE
 
-dict $1
+dict $1 | less
