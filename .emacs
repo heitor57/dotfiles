@@ -32,7 +32,7 @@
 
 "
       )
-
+(global-linum-mode t)
 ;;(setq initial-buffer-choice t)
 ;;(setq initial-buffer-choice "")
 ;;hide bars
@@ -54,10 +54,10 @@
 ;; helm
 (use-package helm
   :config
-  (require 'helm-config))
-(global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
-(global-set-key (kbd "C-x C-f") #'helm-find-files)
+  (global-set-key (kbd "M-x") #'helm-M-x)
+  (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+  (global-set-key (kbd "C-x C-f") #'helm-find-files)
+  )
 ;; 
 (use-package markdown-mode)
 (use-package page-break-lines)
@@ -66,6 +66,20 @@
 (use-package auto-complete
   :config
   (ac-config-default))
+(use-package powerline
+  :config
+  (powerline-default-theme))
+(use-package smex
+  :config
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  ;; This is your old M-x.
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+  (smex-initialize))
+(use-package helm-smex
+  :config
+  (global-set-key (kbd "M-x") #'helm-smex)
+  (global-set-key (kbd "M-X") #'helm-smex-major-mode-commands))
 (use-package magit)
 (use-package dashboard
   :config
@@ -78,7 +92,9 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(custom-enabled-themes (quote (wombat)))
- '(package-selected-packages (quote (cider evil-visual-mark-mode evil-anzu))))
+ '(package-selected-packages
+   (quote
+    (restart-emacs helm-smex smex cider evil-visual-mark-mode evil-anzu))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
