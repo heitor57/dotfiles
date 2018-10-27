@@ -66,6 +66,10 @@
 (use-package powerline
   :config
   (powerline-default-theme))
+(use-package moe-theme
+  :config
+  (moe-dark)
+  (moe-theme-set-color 'orange))
 (use-package smex
   :config
   (global-set-key (kbd "M-x") 'smex)
@@ -107,22 +111,3 @@
   (add-to-list 'achead:include-directories '"/usr/include"))
 ;;(use-package google-c-style)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(custom-enabled-themes (quote (deeper-blue)))
- '(package-selected-packages
-   (quote
-    (htmlize iedit google-c-style auto-complete-c-headers yasnippet org-bullets evil-org org-evil org-link-minor-mode restart-emacs helm-smex smex cider evil-visual-mark-mode evil-anzu))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
