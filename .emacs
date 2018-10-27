@@ -63,9 +63,6 @@
 (use-package page-break-lines)
 (use-package projectile)
 (use-package cider)
-(use-package auto-complete
-  :config
-  (ac-config-default))
 (use-package powerline
   :config
   (powerline-default-theme))
@@ -84,6 +81,32 @@
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook))
+;; org-mode
+(use-package org)
+(use-package org-bullets
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;; programming
+(use-package iedit)
+(use-package auto-complete
+  :config
+  (ac-config-default))
+(use-package yasnippet
+  :config
+  (use-package yasnippet-snippets)
+  (yas-global-mode 1))
+
+;; c
+(use-package auto-complete-c-headers
+  :config
+  (defun my:ac-c-headers-init ()
+    (require 'auto-complete-c-headers)
+    (add-to-list 'ac-sources 'ac-source-c-headers))
+  (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
+  (add-hook 'c-mode-hook 'my:ac-c-headers-init)
+  (add-to-list 'achead:include-directories '"/usr/include"))
+;;(use-package google-c-style)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -91,10 +114,12 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
- '(custom-enabled-themes (quote (wombat)))
+ '(ansi-color-names-vector
+   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
+ '(custom-enabled-themes (quote (deeper-blue)))
  '(package-selected-packages
    (quote
-    (restart-emacs helm-smex smex cider evil-visual-mark-mode evil-anzu))))
+    (htmlize iedit google-c-style auto-complete-c-headers yasnippet org-bullets evil-org org-evil org-link-minor-mode restart-emacs helm-smex smex cider evil-visual-mark-mode evil-anzu))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
