@@ -8,6 +8,7 @@
 (package-initialize)
 
 (setq inhibit-startup-screen t)
+
 (setq initial-scratch-message
       "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%%%%%%%%%%%@@@@@@@%@
 @@@@@&%%%%%%&@@@@@@@@@@@%%@@@@@@@@%%@@@@@%%%%%%%%%%%%%%%%%%
@@ -103,6 +104,8 @@
   (yas-global-mode 1))
 
 ;; c
+(setq c-default-style "linux"
+      c-basic-offset 2)
 (use-package auto-complete-c-headers
   :config
   (defun my:ac-c-headers-init ()
@@ -111,7 +114,65 @@
   (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
   (add-hook 'c-mode-hook 'my:ac-c-headers-init)
   (add-to-list 'achead:include-directories '"/usr/include"))
-;;(use-package google-c-style)
+;; (use-package google-c-style
+;;   :config
+;;   (add-hook 'c-mode-common-hook 'google-set-c-style)
+;;   )
+
+;; R
+(use-package ess)
+;; rmarkdown
+(use-package polymode)
+(use-package poly-markdown)
+(add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown-mode))
+
+(defvar rmd-render-history nil "History list for spa/rmd-render.")
+(defun spa/rmd-render (arg)
+  "Render the current Rmd file to PDF output.
+   With a prefix arg, edit the R command in the minibuffer"
+  (interactive "P")
+  ;; Build the default R render command
+  (setq rcmd (concat "rmarkdown::render('" buffer-file-name "',"
+                 "output_dir = '.',"
+                 "output_format = 'pdf_document')"))
+  ;; Check for prefix argument
+  (if arg
+      (progn
+    ;; Use last command as the default (if non-nil)
+    (setq prev-history (car rmd-render-history))
+    (if prev-history
+        (setq rcmd prev-history)
+      nil)
+    ;; Allow the user to modify rcmd
+    (setq rcmd
+          (read-from-minibuffer "Run: " rcmd nil nil 'rmd-render-history))
+    )
+    ;; With no prefix arg, add default rcmd to history
+    (setq rmd-render-history (add-to-history 'rmd-render-history rcmd)))
+  ;; Build and evaluate the shell command
+  (setq command (concat "echo \"" rcmd "\" | R --vanilla"))
+  (compile command))
+(global-set-key (kbd "C-c r") 'spa/rmd-render)
+
+;; tex
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq TeX-save-query nil)
+					;(setq TeX-PDF-mode t)
+
+(require 'flymake)
+
+(defun flymake-get-tex-args (file-name)
+(list "pdflatex"
+(list "-file-line-error" "-draftmode" "-interaction=nonstopmode" file-name)))
+
+(add-hook 'LaTeX-mode-hook 'flymake-mode)
+(defun turn-on-outline-minor-mode ()
+(outline-minor-mode 1))
+
+(add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
+(add-hook 'latex-mode-hook 'turn-on-outline-minor-mode)
+(setq outline-minor-mode-prefix "\C-c \C-o") ; Or something else
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -120,7 +181,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
+    (ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
