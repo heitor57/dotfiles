@@ -6,7 +6,7 @@
 
 (setq package-enable-at-startup nil)
 (package-initialize)
-
+(visual-line-mode)
 (setq inhibit-startup-screen t)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq initial-scratch-message
@@ -89,10 +89,28 @@
   :config
   (dashboard-setup-startup-hook))
 ;; org-mode
-(use-package org)
+(use-package org
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (C . t)
+     (R . t)
+     ))
+  (org-toggle-inline-images)
+  )
 (use-package org-bullets
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted) 
+
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
 ;; programming
 (use-package iedit)
 (use-package auto-complete
@@ -133,20 +151,20 @@
   (interactive "P")
   ;; Build the default R render command
   (setq rcmd (concat "rmarkdown::render('" buffer-file-name "',"
-                 "output_dir = '.',"
-                 "output_format = 'pdf_document')"))
+		     "output_dir = '.',"
+		     "output_format = 'pdf_document')"))
   ;; Check for prefix argument
   (if arg
       (progn
-    ;; Use last command as the default (if non-nil)
-    (setq prev-history (car rmd-render-history))
-    (if prev-history
-        (setq rcmd prev-history)
-      nil)
-    ;; Allow the user to modify rcmd
-    (setq rcmd
-          (read-from-minibuffer "Run: " rcmd nil nil 'rmd-render-history))
-    )
+	;; Use last command as the default (if non-nil)
+	(setq prev-history (car rmd-render-history))
+	(if prev-history
+	    (setq rcmd prev-history)
+	  nil)
+	;; Allow the user to modify rcmd
+	(setq rcmd
+	      (read-from-minibuffer "Run: " rcmd nil nil 'rmd-render-history))
+	)
     ;; With no prefix arg, add default rcmd to history
     (setq rmd-render-history (add-to-history 'rmd-render-history rcmd)))
   ;; Build and evaluate the shell command
@@ -163,12 +181,12 @@
 (require 'flymake)
 
 (defun flymake-get-tex-args (file-name)
-(list "pdflatex"
-(list "-file-line-error" "-draftmode" "-interaction=nonstopmode" file-name)))
+  (list "pdflatex"
+	(list "-file-line-error" "-draftmode" "-interaction=nonstopmode" file-name)))
 
 (add-hook 'LaTeX-mode-hook 'flymake-mode)
 (defun turn-on-outline-minor-mode ()
-(outline-minor-mode 1))
+  (outline-minor-mode 1))
 
 (add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
 (add-hook 'latex-mode-hook 'turn-on-outline-minor-mode)
