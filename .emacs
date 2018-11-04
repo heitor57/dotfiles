@@ -6,7 +6,6 @@
 
 (setq package-enable-at-startup nil)
 (package-initialize)
-(visual-line-mode)
 (setq inhibit-startup-screen t)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq initial-scratch-message
@@ -102,14 +101,7 @@
 (use-package org-bullets
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
-(add-to-list 'org-latex-packages-alist '("" "minted"))
-(setq org-latex-listings 'minted) 
-
-(setq org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+(global-visual-line-mode 1)
 
 ;; programming
 (use-package iedit)
