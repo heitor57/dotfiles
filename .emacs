@@ -184,6 +184,10 @@
 (add-hook 'latex-mode-hook 'turn-on-outline-minor-mode)
 (setq outline-minor-mode-prefix "\C-c \C-o") ; Or something else
 
+;; Writing
+(setq ispell-dictionary "brasileiro")
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
