@@ -3,7 +3,7 @@
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-
+(setq tab-width 2)
 (setq package-enable-at-startup nil)
 (package-initialize)
 (setq inhibit-startup-screen t)
@@ -88,6 +88,7 @@
   :config
   (dashboard-setup-startup-hook))
 ;; org-mode
+(use-package org-ref)
 (use-package org
   :config
   (org-babel-do-load-languages
@@ -97,12 +98,23 @@
      (R . t)
      ))
   (org-toggle-inline-images)
+  (setq org-latex-caption-above nil)
   )
 (use-package org-bullets
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 (global-visual-line-mode 1)
 
+(setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted"))
+      org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq ;;org-src-preserve-indentation t
+      ;;indent-tabs-mode nil
+      org-confirm-babel-evaluate nil)
+(setq org-src-tab-acts-natively t)
 ;; programming
 (use-package iedit)
 (use-package auto-complete
@@ -195,7 +207,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
+    (org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
