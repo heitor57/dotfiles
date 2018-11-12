@@ -65,9 +65,9 @@
 (use-package page-break-lines)
 (use-package projectile)
 (use-package cider)
-(use-package powerline
+(use-package telephone-line
   :config
-  (powerline-default-theme))
+  (telephone-line-mode 1))
 (use-package moe-theme
   :config
   (moe-dark)
