@@ -5,7 +5,17 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (setq tab-width 2)
 (setq package-enable-at-startup nil)
+(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.saves/"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)       ; use versioned backups
+
 (package-initialize)
+
 (setq inhibit-startup-screen t)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq initial-scratch-message
@@ -39,6 +49,9 @@
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1) 
+;; file explorer
+
+
 ;;use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -51,6 +64,46 @@
   :config
   (evil-mode t)
   )
+
+
+(define-key evil-normal-state-map (kbd "z m")
+  (lambda () (interactive) (async-shell-command
+			    (concat "pandoc " buffer-file-name " -t beamer -o pres.pdf")
+			    ))
+)
+
+(define-key evil-normal-state-map (kbd "z g")
+  (lambda () (interactive) (async-shell-command
+			    (concat "pandoc " buffer-file-name " -t beamer -o pres.pdf")
+			    )
+(async-shell-command
+			    (concat "zathura pres.pdf")
+			    )
+
+		)
+)
+
+
+;; hideshow
+(load-library "hideshow")
+(add-hook 'c-mode-common-hook   'hs-minor-mode)
+(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+(add-hook 'java-mode-hook       'hs-minor-mode)
+(add-hook 'lisp-mode-hook       'hs-minor-mode)
+(add-hook 'perl-mode-hook       'hs-minor-mode)
+(add-hook 'sh-mode-hook         'hs-minor-mode)
+(defun toggle-hiding (column)
+  (interactive "P")
+  (if hs-minor-mode
+      (if (condition-case nil
+	      (hs-toggle-hiding)
+	    (error t))
+	  (hs-show-all))
+    (toggle-selective-display column)))
+(define-key evil-normal-state-map (kbd "z a") 'toggle-hiding)
+(define-key evil-normal-state-map (kbd "z M") 'hs-hide-all)
+(define-key evil-normal-state-map (kbd "z R") 'hs-show-all)
+
 ;; helm
 (use-package helm
   :config
@@ -109,12 +162,23 @@
       org-latex-packages-alist '(("" "minted"))
       org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 (setq ;;org-src-preserve-indentation t
-      ;;indent-tabs-mode nil
-      org-confirm-babel-evaluate nil)
+ ;;indent-tabs-mode nil
+ org-confirm-babel-evaluate nil)
 (setq org-src-tab-acts-natively t)
+
+
+(add-to-list 'org-latex-classes
+             '("beamer"
+               "\\documentclass\[presentation\]\{beamer\}"
+               ("\\section\{%s\}" . "\\section*\{%s\}")
+               ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+               ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
+
+
+
 ;; programming
 (use-package iedit)
 (use-package auto-complete
