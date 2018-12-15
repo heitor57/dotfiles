@@ -182,7 +182,7 @@ bindsym $mod+F3 exec pactl set-sink-volume 0 +5%
 bindsym $mod+F11 exec xbacklight -dec 10
 bindsym $mod+F12 exec xbacklight -inc 10
 exec --no-startup-id setxkbmap br
-#exec --no-startup-id feh --bg-scale /home/heitor/path854.png
+exec --no-startup-id feh --bg-scale ~/wallpaper.png
 exec --no-startup-id compton
 default_border pixel 1
 mode "moveit" {
