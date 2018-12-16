@@ -104,6 +104,8 @@
 (define-key evil-normal-state-map (kbd "z M") 'hs-hide-all)
 (define-key evil-normal-state-map (kbd "z R") 'hs-show-all)
 
+(define-key evil-normal-state-map (kbd "z p") 'preview-buffer)
+(define-key evil-normal-state-map (kbd "z ç") 'preview-clearout-buffer)
 ;; helm
 (use-package helm
   :config
@@ -240,7 +242,7 @@
   (compile command))
 (global-set-key (kbd "C-c r") 'spa/rmd-render)
 
-;; tex
+;; latex
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq TeX-save-query nil)
@@ -251,7 +253,6 @@
 (defun flymake-get-tex-args (file-name)
   (list "pdflatex"
 	(list "-file-line-error" "-draftmode" "-interaction=nonstopmode" file-name)))
-
 (add-hook 'LaTeX-mode-hook 'flymake-mode)
 (defun turn-on-outline-minor-mode ()
   (outline-minor-mode 1))
