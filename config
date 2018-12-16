@@ -203,3 +203,7 @@ bindsym $mod+p exec gksu "wpa_supplicant -i wlp6s0 -c /etc/wpa_supplicant/wpa_su
 
 
 exec --no-startup-id i3-battery-popup
+
+
+bindsym $mod+Shift+F1 exec mv /tmp/latest-screenshot.png ~/wallpaper.png && feh --bg-scale ~/wallpaper.png
+bindsym $mod+Shift+F2 exec addwp

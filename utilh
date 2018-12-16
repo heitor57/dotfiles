@@ -1,0 +1,15 @@
+#!/bin/bash
+addwp () # add wallpaper from buffer : /tmp/latest-screenshot.png
+{
+	size=${#$(ls ~/Pictures/wallpaper*.png)[@]}
+	newnumber=$[size+1]
+	newname=$(echo ~/Pictures/wallpaper$newnumber".png")
+	
+	if mv /tmp/latest-screenshot.png $newname
+	then
+		feh --bg-scale $newname
+		echo "Success"
+	else
+		echo "Failure"
+	fi
+}

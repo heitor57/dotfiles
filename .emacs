@@ -106,6 +106,8 @@
 
 (define-key evil-normal-state-map (kbd "z p") 'preview-buffer)
 (define-key evil-normal-state-map (kbd "z ç") 'preview-clearout-buffer)
+(define-key evil-normal-state-map (kbd "z o") 'preview-at-point)
+(define-key evil-normal-state-map (kbd "z l") 'preview-clearout-at-point)
 ;; helm
 (use-package helm
   :config
