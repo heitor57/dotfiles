@@ -182,7 +182,7 @@ bindsym $mod+F3 exec pactl set-sink-volume 0 +5%
 bindsym $mod+F11 exec xbacklight -dec 10
 bindsym $mod+F12 exec xbacklight -inc 10
 exec --no-startup-id setxkbmap br
-exec --no-startup-id feh --bg-scale ~/wallpaper.png
+exec --no-startup-id uselastwp
 exec --no-startup-id compton
 default_border pixel 1
 mode "moveit" {
@@ -201,8 +201,6 @@ bindsym $mod+n exec nemo
 bindsym $mod+t exec emacs
 bindsym $mod+p exec gksu "wpa_supplicant -i wlp6s0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D nl80211 -B"
 
-
-exec --no-startup-id i3-battery-popup
 
 
 bindsym $mod+Shift+F1 exec mv /tmp/latest-screenshot.png ~/wallpaper.png && feh --bg-scale ~/wallpaper.png
