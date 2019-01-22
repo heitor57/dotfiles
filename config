@@ -184,6 +184,7 @@ bindsym $mod+F12 exec xbacklight -inc 10
 exec --no-startup-id setxkbmap br
 exec --no-startup-id uselastwp
 exec --no-startup-id compton
+exec_always --no-startup-id /usr/bin/feh --bg-scale ~/Pictures/wallpaper.png
 default_border pixel 1
 mode "moveit" {
     bindsym Up move up 20px
