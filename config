@@ -1,5 +1,5 @@
 set $BROWSER firefox
-# i3 config file (v4)
+set $TERMINAL konsole
 
 set_from_resource $darkblack	color0  #000000
 set_from_resource $black	color8  #000000
@@ -40,7 +40,7 @@ font pango:Hack 9
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec st
+bindsym $mod+Return exec $TERMINAL
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -173,14 +173,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-
-
-bar {
-	#status_command i3status
-#     i3bar_command $HOME/.config/polybar/launch.sh
-	status_command i3blocks
-}
-
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 ## MY CONFIG
 set $F1 67
 set $F2 68
@@ -197,6 +190,7 @@ exec --no-startup-id uselastwp
 exec --no-startup-id compton
 exec_always --no-startup-id /usr/bin/feh --bg-scale ~/Pictures/wallpaper.png
 default_border pixel 1
+gaps inner 6
 mode "moveit" {
 	bindsym Up move up 20px
 		bindsym Left move left 20px
@@ -211,7 +205,7 @@ bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png 
 bindsym $mod+b exec evince
 bindsym $mod+n exec nemo
 bindsym $mod+t exec emacs
-bindsym $mod+p exec gksu "wpa_supplicant -i wlp6s0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D nl80211 -B"
+#bindsym $mod+p exec gksu "wpa_supplicant -i wlp6s0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D nl80211 -B"
 
 
 
