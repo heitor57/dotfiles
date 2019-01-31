@@ -143,7 +143,16 @@
 (use-package magit)
 (use-package dashboard
   :config
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+  ; set banner
+  (setq dashboard-startup-banner 2)
+  ; set items
+  (setq dashboard-items '((recents  . 5)
+			  (bookmarks . 5)
+			  (projects . 8)
+			  (agenda . 5)
+			  (registers . 5)))
+  )
 ;; org-mode
 (use-package org-ref)
 (use-package org
@@ -175,11 +184,11 @@
 
 
 (add-to-list 'org-latex-classes
-             '("beamer"
-               "\\documentclass\[presentation\]\{beamer\}"
-               ("\\section\{%s\}" . "\\section*\{%s\}")
-               ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
-               ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
+	     '("beamer"
+	       "\\documentclass\[presentation\]\{beamer\}"
+	       ("\\section\{%s\}" . "\\section*\{%s\}")
+	       ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+	       ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
 
 
 
@@ -279,11 +288,11 @@
 	      100)
 	 '(85 . 50) '(100 . 100)))))
 (global-set-key (kbd "C-c t") 'toggle-transparency)
- ;; Set transparency of emacs
- (defun transparency (value)
-   "Sets the transparency of the frame window. 0=transparent/100=opaque"
-   (interactive "nTransparency Value 0 - 100 opaque:")
-   (set-frame-parameter (selected-frame) 'alpha value))
+;; Set transparency of emacs
+(defun transparency (value)
+  "Sets the transparency of the frame window. 0=transparent/100=opaque"
+  (interactive "nTransparency Value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))
 (transparency 80)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -292,7 +301,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
+    (fontawesome org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
