@@ -2,9 +2,12 @@
 
 uselastwp()
 {
-    feh --bg-scale ${$(ls ~/Pictures/wallpaper*.png)[-1]}
+    feh --bg-scale "~/Pictures/"${$(ls ~/Pictures/wallpaper*.png)[-1]}
 }
-
+usewp()
+{
+    feh --bg-scale "~/Pictures/"${$(ls ~/Pictures/wallpaper*.png)[1]}
+}
 addwp () # add wallpaper from buffer : /tmp/latest-screenshot.png
 {
     size=${#$(ls ~/Pictures/wallpaper*.png)[@]}

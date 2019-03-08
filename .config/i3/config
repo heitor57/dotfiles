@@ -116,7 +116,7 @@ set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
+bindsym $mod+1 workspace $ws1 
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
@@ -204,6 +204,7 @@ bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png 
 
 bindsym $mod+b exec evince
 bindsym $mod+n exec nemo
+bindsym $mod+z exec zathura
 bindsym $mod+t exec emacs
 #bindsym $mod+p exec gksu "wpa_supplicant -i wlp6s0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D nl80211 -B"
 
@@ -214,3 +215,4 @@ bindsym $mod+Shift+F2 exec addwp
 
 bindsym $mod+F4 exec sxiv -t ~/Pictures
 bindsym $mod+c exec --no-startup-id $BROWSER
+bindsym $mod+g exec st -e ranger

@@ -116,7 +116,8 @@
   (global-set-key (kbd "C-x C-f") #'helm-find-files)
   (use-package helm-gtags
     :config
-    (global-set-key (kbd "C-c C-.") 'helm-gtags-dwim)))
+    (global-set-key (kbd "C-c C-.") 'helm-gtags-dwim))
+  (use-package helm-swoop))
 ;; 
 (use-package markdown-mode)
 (use-package page-break-lines)
@@ -144,9 +145,9 @@
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
-  ; set banner
+					; set banner
   (setq dashboard-startup-banner 2)
-  ; set items
+					; set items
   (setq dashboard-items '((recents  . 5)
 			  (bookmarks . 5)
 			  (projects . 8)
@@ -275,6 +276,20 @@
 ;; Writing
 (setq ispell-dictionary "brasileiro")
 
+
+;; math calc
+
+(defun calc-eval-region (arg beg end)
+  "Calculate the region and display the result in the echo area.
+With prefix ARG non-nil, insert the result at the end of region."
+  (interactive "P\nr")
+  (let* ((expr (buffer-substring-no-properties beg end))
+	 (result (calc-eval expr)))
+    (if (null arg)
+	(message "%s = %s" expr result)
+      (goto-char end)
+      (save-excursion
+	(insert result)))))
 ;; ETC
 (defun toggle-transparency ()
   (interactive)
@@ -301,11 +316,10 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (fontawesome org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
+    (helm-ag helm-projectile fontawesome org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
