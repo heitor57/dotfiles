@@ -66,6 +66,13 @@
   )
 
 
+(define-key evil-normal-state-map (kbd "z 1") 'org-latex-export-to-pdf)
+
+(define-key evil-normal-state-map (kbd "z 2") 
+(lambda () (interactive) 
+		(async-shell-command
+		 (concat "zathura doc.pdf"))))
+
 (define-key evil-normal-state-map (kbd "z m")
   (lambda () (interactive) (async-shell-command
 			    (concat "pandoc " buffer-file-name " -t beamer -o pres.pdf")
@@ -175,9 +182,9 @@
 (setq org-latex-listings 'minted
       org-latex-packages-alist '(("" "minted"))
       org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
+      '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex -f %f"))
+;'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+;"")
 (setq ;;org-src-preserve-indentation t
  ;;indent-tabs-mode nil
  org-confirm-babel-evaluate nil)
@@ -290,6 +297,17 @@ With prefix ARG non-nil, insert the result at the end of region."
       (goto-char end)
       (save-excursion
 	(insert result)))))
+;; finder, fuzzy finder fzf, ag
+(use-package fzf)
+(define-key evil-normal-state-map (kbd "f f")
+  (lambda () (interactive) 
+			    (fzf/start "~/computer-science/aeds3/tp1")
+			    ))
+(define-key evil-normal-state-map (kbd "f d")
+  (lambda () (interactive) 
+			    (find-file "~/dotfiles/.emacs")
+			    ))
+(define-key evil-normal-state-map (kbd "f a") 'helm-ag)
 ;; ETC
 (defun toggle-transparency ()
   (interactive)
@@ -316,7 +334,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (helm-ag helm-projectile fontawesome org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
+    (auto-package-update ag swiper fzf helm-ag helm-projectile fontawesome org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
