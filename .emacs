@@ -50,6 +50,7 @@
 (toggle-scroll-bar -1)
 (tool-bar-mode -1) 
 ;; file explorer
+;(global-hl-line-mode +1)
 
 
 ;;use-package
@@ -65,6 +66,7 @@
   (evil-mode t)
   )
 
+(define-key evil-normal-state-map (kbd "z c") 'flyspell-auto-correct-word)
 
 (define-key evil-normal-state-map (kbd "z 1") 'org-latex-export-to-pdf)
 
@@ -170,19 +172,23 @@
    '((python . t)
      (C . t)
      (R . t)
+     (shell . t)
      ))
   (org-toggle-inline-images)
   (setq org-latex-caption-above nil)
   )
+
 (use-package org-bullets
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 (global-visual-line-mode 1)
 
-(setq org-latex-listings 'minted
-      org-latex-packages-alist '(("" "minted"))
-      org-latex-pdf-process
-      '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex -f %f"))
+;(setq org-latex-listings 'minted
+;      org-latex-packages-alist '(("" "minted")))
+(setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex %f"))
+;(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-directory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
+
+      ;
 ;'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 ;"")
 (setq ;;org-src-preserve-indentation t
@@ -307,6 +313,7 @@ With prefix ARG non-nil, insert the result at the end of region."
   (lambda () (interactive) 
 			    (find-file "~/dotfiles/.emacs")
 			    ))
+(use-package helm-ag)
 (define-key evil-normal-state-map (kbd "f a") 'helm-ag)
 ;; ETC
 (defun toggle-transparency ()
@@ -327,6 +334,12 @@ With prefix ARG non-nil, insert the result at the end of region."
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
 (transparency 80)
+;; ace mode
+
+(use-package ace-jump-mode)
+
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -334,7 +347,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (auto-package-update ag swiper fzf helm-ag helm-projectile fontawesome org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
+    (ace-jump-mode lua-mode auto-package-update ag swiper fzf helm-ag helm-projectile fontawesome org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
