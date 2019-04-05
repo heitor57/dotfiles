@@ -1,5 +1,5 @@
 set $BROWSER firefox
-set $TERMINAL konsole
+set $TERMINAL st
 
 set_from_resource $darkblack	color0  #000000
 set_from_resource $black	color8  #000000
@@ -190,7 +190,7 @@ exec --no-startup-id uselastwp
 exec --no-startup-id compton
 exec_always --no-startup-id /usr/bin/feh --bg-scale ~/Pictures/wallpaper.png
 default_border pixel 1
-gaps inner 6
+#gaps inner 0
 mode "moveit" {
 	bindsym Up move up 20px
 		bindsym Left move left 20px
@@ -216,3 +216,4 @@ bindsym $mod+Shift+F2 exec addwp
 bindsym $mod+F4 exec sxiv -t ~/Pictures
 bindsym $mod+c exec --no-startup-id $BROWSER
 bindsym $mod+g exec st -e ranger
+bindsym $mod+F5 exec du -a ~/Documents/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r zathura
