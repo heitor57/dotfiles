@@ -216,4 +216,5 @@ bindsym $mod+Shift+F2 exec addwp
 bindsym $mod+F4 exec sxiv -t ~/Pictures
 bindsym $mod+c exec --no-startup-id $BROWSER
 bindsym $mod+g exec st -e ranger
-bindsym $mod+F5 exec du -a ~/Documents/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r zathura
+bindsym $mod+F5 exec du -a ~/Documents/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r rifle
+bindsym $mod+F6 exec du -a ~/Downloads/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r rifle
