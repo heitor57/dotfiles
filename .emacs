@@ -52,6 +52,15 @@
 ;; file explorer
 ;(global-hl-line-mode +1)
 
+;; open with
+(use-package openwith
+  :config
+  (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
+				("\\.html\\'" "firefox" (file))
+				))
+  (openwith-mode t)
+  )
+
 
 ;;use-package
 (unless (package-installed-p 'use-package)
@@ -92,31 +101,32 @@
 		)
 )
 
+(define-key evil-normal-state-map (kbd "m") 'helm-M-x)
 
 ;; hideshow
-(load-library "hideshow")
-(add-hook 'c-mode-common-hook   'hs-minor-mode)
-(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-(add-hook 'java-mode-hook       'hs-minor-mode)
-(add-hook 'lisp-mode-hook       'hs-minor-mode)
-(add-hook 'perl-mode-hook       'hs-minor-mode)
-(add-hook 'sh-mode-hook         'hs-minor-mode)
-(defun toggle-hiding (column)
-  (interactive "P")
-  (if hs-minor-mode
-      (if (condition-case nil
-	      (hs-toggle-hiding)
-	    (error t))
-	  (hs-show-all))
-    (toggle-selective-display column)))
-(define-key evil-normal-state-map (kbd "z a") 'toggle-hiding)
-(define-key evil-normal-state-map (kbd "z M") 'hs-hide-all)
-(define-key evil-normal-state-map (kbd "z R") 'hs-show-all)
+;; (load-library "hideshow")
+;; (add-hook 'c-mode-common-hook   'hs-minor-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+;; (add-hook 'java-mode-hook       'hs-minor-mode)
+;; (add-hook 'lisp-mode-hook       'hs-minor-mode)
+;; (add-hook 'perl-mode-hook       'hs-minor-mode)
+;; (add-hook 'sh-mode-hook         'hs-minor-mode)
+;; (defun toggle-hiding (column)
+;;   (interactive "P")
+;;   (if hs-minor-mode
+;;       (if (condition-case nil
+;; 	      (hs-toggle-hiding)
+;; 	    (error t))
+;; 	  (hs-show-all))
+;;     (toggle-selective-display column)))
+;; (define-key evil-normal-state-map (kbd "z a") 'toggle-hiding)
+;; (define-key evil-normal-state-map (kbd "z M") 'hs-hide-all)
+;; (define-key evil-normal-state-map (kbd "z R") 'hs-show-all)
 
-(define-key evil-normal-state-map (kbd "z p") 'preview-buffer)
-(define-key evil-normal-state-map (kbd "z ç") 'preview-clearout-buffer)
-(define-key evil-normal-state-map (kbd "z o") 'preview-at-point)
-(define-key evil-normal-state-map (kbd "z l") 'preview-clearout-at-point)
+;; (define-key evil-normal-state-map (kbd "z p") 'preview-buffer)
+;; (define-key evil-normal-state-map (kbd "z ç") 'preview-clearout-buffer)
+;; (define-key evil-normal-state-map (kbd "z o") 'preview-at-point)
+;; (define-key evil-normal-state-map (kbd "z l") 'preview-clearout-at-point)
 ;; helm
 (use-package helm
   :config
@@ -132,13 +142,16 @@
 (use-package page-break-lines)
 (use-package projectile)
 (use-package cider)
-(use-package telephone-line
-  :config
-  (telephone-line-mode 1))
+;; (use-package telephone-line
+;;   :config
+;;   (telephone-line-mode 1))
 (use-package moe-theme
   :config
   (moe-dark)
-  (moe-theme-set-color 'orange))
+					;(moe-theme-set-color 'orange)
+  ;(moe-theme-random-color)
+  (moe-theme-set-color 'orange)
+  )
 (use-package smex
   :config
   (global-set-key (kbd "M-x") 'smex)
@@ -163,7 +176,7 @@
 			  (agenda . 5)
 			  (registers . 5)))
   )
-;; org-mode
+;; org-mode org orgmode
 (use-package org-ref)
 (use-package org
   :config
@@ -177,6 +190,12 @@
   (org-toggle-inline-images)
   (setq org-latex-caption-above nil)
   )
+;; orgagenda tasks
+(setq org-agenda-files  '("~/agenda.org"))
+(setq org-log-done 'time)
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
 
 (use-package org-bullets
   :config
@@ -305,12 +324,21 @@ With prefix ARG non-nil, insert the result at the end of region."
 	(insert result)))))
 ;; finder, fuzzy finder fzf, ag
 (use-package fzf)
+
+(defcustom personal-ff "~/Documents"
+  "fuzzy finder personal local"
+  :type 'string)
+
+
 (define-key evil-normal-state-map (kbd "f f")
   (lambda () (interactive) 
-			    (fzf/start "~/computer-science/aeds3/tp1")
+			    (fzf/start personal-ff)
 			    ))
 (define-key evil-normal-state-map (kbd "f d")
   (lambda () (interactive) 
+			    (find-file "~/dotfiles/.emacs")
+			    ))
+(global-set-key (kbd "C-c C-c") (lambda () (interactive) 
 			    (find-file "~/dotfiles/.emacs")
 			    ))
 (use-package helm-ag)
@@ -333,12 +361,14 @@ With prefix ARG non-nil, insert the result at the end of region."
   "Sets the transparency of the frame window. 0=transparent/100=opaque"
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
-(transparency 80)
+;(transparency 80)
 ;; ace mode
 
 (use-package ace-jump-mode)
 
+;; dired
 
+(define-key dired-mode-map ";" 'dired-kill-tree)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -347,7 +377,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ace-jump-mode lua-mode auto-package-update ag swiper fzf helm-ag helm-projectile fontawesome org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
+    (openwith ace-jump-mode lua-mode auto-package-update ag swiper fzf helm-ag helm-projectile fontawesome org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
