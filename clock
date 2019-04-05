@@ -1,0 +1,30 @@
+#!/bin/bash
+if [[ $1 = "" ]]; then
+	exit
+fi
+min=60
+hr=3600
+outputstd=1
+while getopts "m:h:s:p:" opt; do
+    case $opt in
+	s) time=$(($OPTARG));;
+	m) time=$(($OPTARG*$min));;
+	h) time=$(($OPTARG*$hr));;
+	p)
+	    case $OPTARG in
+		s)outputstd=1;;
+		m)outputstd=60;;
+		h)outputstd=3600;;
+	    esac
+	    ;;
+	\?) exit 1;;
+    esac
+done
+
+while [[ $time -gt 0  ]]; do
+    sleep 1;
+    echo $time
+    time=$(($time-1))
+done
+
+
