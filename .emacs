@@ -15,7 +15,6 @@
    version-control t)       ; use versioned backups
 
 (package-initialize)
-
 (setq inhibit-startup-screen t)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq initial-scratch-message
@@ -50,7 +49,7 @@
 (toggle-scroll-bar -1)
 (tool-bar-mode -1) 
 ;; file explorer
-;(global-hl-line-mode +1)
+					;(global-hl-line-mode +1)
 
 ;; open with
 (use-package openwith
@@ -80,26 +79,26 @@
 (define-key evil-normal-state-map (kbd "z 1") 'org-latex-export-to-pdf)
 
 (define-key evil-normal-state-map (kbd "z 2") 
-(lambda () (interactive) 
-		(async-shell-command
-		 (concat "zathura doc.pdf"))))
+  (lambda () (interactive) 
+    (async-shell-command
+     (concat "zathura doc.pdf"))))
 
-(define-key evil-normal-state-map (kbd "z m")
-  (lambda () (interactive) (async-shell-command
-			    (concat "pandoc " buffer-file-name " -t beamer -o pres.pdf")
-			    ))
-)
+;; (define-key evil-normal-state-map (kbd "z m")
+;;   (lambda () (interactive) (async-shell-command
+;; 			    (concat "pandoc " buffer-file-name " -t beamer -o pres.pdf")
+;; 			    ))
+;;   )
 
-(define-key evil-normal-state-map (kbd "z g")
-  (lambda () (interactive) (async-shell-command
-			    (concat "pandoc " buffer-file-name " -t beamer -o pres.pdf")
-			    )
-(async-shell-command
-			    (concat "zathura pres.pdf")
-			    )
+;; (define-key evil-normal-state-map (kbd "z g")
+;;   (lambda () (interactive) (async-shell-command
+;; 			    (concat "pandoc " buffer-file-name " -t beamer -o pres.pdf")
+;; 			    )
+;;     (async-shell-command
+;;      (concat "zathura pres.pdf")
+;;      )
 
-		)
-)
+;;     )
+;;   )
 
 (define-key evil-normal-state-map (kbd "m") 'helm-M-x)
 
@@ -138,27 +137,30 @@
     (global-set-key (kbd "C-c C-.") 'helm-gtags-dwim))
   (use-package helm-swoop))
 ;; 
-(use-package markdown-mode)
+					;(use-package markdown-mode)
 (use-package page-break-lines)
-(use-package projectile)
-(use-package cider)
+					;(use-package projectile)
+
+;; Clojure Interactive Development Environment
+					;(use-package cider)
 ;; (use-package telephone-line
 ;;   :config
 ;;   (telephone-line-mode 1))
-(use-package moe-theme
-  :config
-  (moe-dark)
-					;(moe-theme-set-color 'orange)
-  ;(moe-theme-random-color)
-  (moe-theme-set-color 'orange)
-  )
+;; (use-package moe-theme
+;;   :config
+;;   (moe-dark)
+;; 					;(moe-theme-set-color 'orange)
+;;   ;(moe-theme-random-color)
+;;   (moe-theme-set-color 'orange)
+;;   )
 (use-package smex
   :config
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+					;(global-set-key (kbd "M-x") 'smex)
+					;(global-set-key (kbd "M-X") 'smex-major-mode-commands)
   ;; This is your old M-x.
-  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-  (smex-initialize))
+					;(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+					;(smex-initialize)
+  )
 (use-package helm-smex
   :config
   (global-set-key (kbd "M-x") #'helm-smex)
@@ -182,8 +184,7 @@
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((python . t)
-     (C . t)
+   '((C . t)
      (R . t)
      (shell . t)
      ))
@@ -202,14 +203,14 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 (global-visual-line-mode 1)
 
-;(setq org-latex-listings 'minted
-;      org-latex-packages-alist '(("" "minted")))
+					;(setq org-latex-listings 'minted
+					;      org-latex-packages-alist '(("" "minted")))
 (setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex %f"))
-;(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-directory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
+					;(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-directory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
 
-      ;
-;'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-;"")
+					;
+					;'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+					;"")
 (setq ;;org-src-preserve-indentation t
  ;;indent-tabs-mode nil
  org-confirm-babel-evaluate nil)
@@ -252,8 +253,9 @@
 ;;   )
 
 ;; R
-(use-package ess)
+					;(use-package ess)
 ;; rmarkdown
+
 (use-package polymode)
 (use-package poly-markdown)
 (add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown-mode))
@@ -285,7 +287,6 @@
   (setq command (concat "echo \"" rcmd "\" | R --vanilla"))
   (compile command))
 (global-set-key (kbd "C-c r") 'spa/rmd-render)
-
 ;; latex
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -324,7 +325,6 @@ With prefix ARG non-nil, insert the result at the end of region."
 	(insert result)))))
 ;; finder, fuzzy finder fzf, ag
 (use-package fzf)
-
 (defcustom personal-ff "~/Documents"
   "fuzzy finder personal local"
   :type 'string)
@@ -332,15 +332,15 @@ With prefix ARG non-nil, insert the result at the end of region."
 
 (define-key evil-normal-state-map (kbd "f f")
   (lambda () (interactive) 
-			    (fzf/start personal-ff)
-			    ))
+    (fzf/start personal-ff)
+    ))
 (define-key evil-normal-state-map (kbd "f d")
   (lambda () (interactive) 
-			    (find-file "~/dotfiles/.emacs")
-			    ))
+    (find-file "~/dotfiles/.emacs")
+    ))
 (global-set-key (kbd "C-c C-c") (lambda () (interactive) 
-			    (find-file "~/dotfiles/.emacs")
-			    ))
+				  (find-file "~/dotfiles/.emacs")
+				  ))
 (use-package helm-ag)
 (define-key evil-normal-state-map (kbd "f a") 'helm-ag)
 ;; ETC
@@ -361,10 +361,13 @@ With prefix ARG non-nil, insert the result at the end of region."
   "Sets the transparency of the frame window. 0=transparent/100=opaque"
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
-;(transparency 80)
+					;(transparency 80)
 ;; ace mode
 
-(use-package ace-jump-mode)
+(use-package ace-jump-mode
+  :config
+  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+  )
 
 ;; dired
 
@@ -375,9 +378,10 @@ With prefix ARG non-nil, insert the result at the end of region."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (openwith ace-jump-mode lua-mode auto-package-update ag swiper fzf helm-ag helm-projectile fontawesome org-ref ess-R-data-view ess-smart-equals ess-view ess helm-gtags yasnippet-snippets use-package smart-mode-line-powerline-theme restart-emacs rainbow-mode projectile org-link-minor-mode org-evil org-bullets moe-theme markdown-mode magit iedit htmlize helm-smex google-c-style evil-org dashboard cider auto-complete-c-headers auctex))))
+ '(ansi-color-names-vector
+   ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
+ '(custom-enabled-themes (quote (wheatgrass)))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
