@@ -218,3 +218,9 @@ bindsym $mod+c exec --no-startup-id $BROWSER
 bindsym $mod+g exec st -e ranger
 bindsym $mod+F5 exec du -a ~/Documents/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r rifle
 bindsym $mod+F6 exec du -a ~/Downloads/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r rifle
+bindsym $mod+F7 exec du -a ~/cs/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r rifle
+
+
+bindsym $mod+Shift+b exec cat ~/.websites | dmenu -i -l 6 -fn Monospace-11 | xargs -r firefox
+
+bindsym $mod+Shift+a exec du -a ~/Downloads/ ~/Documents/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r rifle
