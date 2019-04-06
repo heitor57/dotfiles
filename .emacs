@@ -6,13 +6,13 @@
 (setq tab-width 2)
 (setq package-enable-at-startup nil)
 (setq
-   backup-by-copying t      ; don't clobber symlinks
-   backup-directory-alist
-    '(("." . "~/.saves/"))    ; don't litter my fs tree
-   delete-old-versions t
-   kept-new-versions 6
-   kept-old-versions 2
-   version-control t)       ; use versioned backups
+ backup-by-copying t      ; don't clobber symlinks
+ backup-directory-alist
+ '(("." . "~/.saves/"))    ; don't litter my fs tree
+ delete-old-versions t
+ kept-new-versions 6
+ kept-old-versions 2
+ version-control t)       ; use versioned backups
 
 (package-initialize)
 (setq inhibit-startup-screen t)
@@ -41,6 +41,8 @@
 
 "
       )
+(setq gc-cons-threshold 402653184)
+(setq gc-cons-percentage 0.6)
 (global-linum-mode t)
 ;;(setq initial-buffer-choice t)
 ;;(setq initial-buffer-choice "")
@@ -50,6 +52,12 @@
 (tool-bar-mode -1) 
 ;; file explorer
 					;(global-hl-line-mode +1)
+;;use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
 
 ;; open with
 (use-package openwith
@@ -61,27 +69,24 @@
   )
 
 
-;;use-package
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile
-  (require 'use-package))
 ;; evil
 (setq use-package-always-ensure t)
 (use-package evil
   :config
   (evil-mode t)
+  (define-key evil-normal-state-map (kbd "z c") 'flyspell-auto-correct-word)
+
+  (define-key evil-normal-state-map (kbd "z 1") 'org-latex-export-to-pdf)
+
+  (define-key evil-normal-state-map (kbd "z 2") 
+    (lambda () (interactive) 
+      (async-shell-command
+       (concat "zathura doc.pdf"))))
+  
+  (define-key evil-normal-state-map (kbd "m") 'helm-M-x)
   )
 
-(define-key evil-normal-state-map (kbd "z c") 'flyspell-auto-correct-word)
 
-(define-key evil-normal-state-map (kbd "z 1") 'org-latex-export-to-pdf)
-
-(define-key evil-normal-state-map (kbd "z 2") 
-  (lambda () (interactive) 
-    (async-shell-command
-     (concat "zathura doc.pdf"))))
 
 ;; (define-key evil-normal-state-map (kbd "z m")
 ;;   (lambda () (interactive) (async-shell-command
@@ -100,7 +105,6 @@
 ;;     )
 ;;   )
 
-(define-key evil-normal-state-map (kbd "m") 'helm-M-x)
 
 ;; hideshow
 ;; (load-library "hideshow")
@@ -179,8 +183,10 @@
 			  (registers . 5)))
   )
 ;; org-mode org orgmode
-(use-package org-ref)
+(use-package org-ref
+  :defer 2)
 (use-package org
+  :defer 2
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -190,41 +196,43 @@
      ))
   (org-toggle-inline-images)
   (setq org-latex-caption-above nil)
-  )
-;; orgagenda tasks
-(setq org-agenda-files  '("~/agenda.org"))
-(setq org-log-done 'time)
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
+  ;; orgagenda tasks
+  (setq org-agenda-files  '("~/agenda.org"))
+  (setq org-log-done 'time)
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
 
 
-(use-package org-bullets
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-(global-visual-line-mode 1)
+  (use-package org-bullets
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (global-visual-line-mode 1)
 
 					;(setq org-latex-listings 'minted
 					;      org-latex-packages-alist '(("" "minted")))
-(setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex %f"))
+  (setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex %f"))
 					;(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-directory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
 
 					;
 					;'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 					;"")
-(setq ;;org-src-preserve-indentation t
- ;;indent-tabs-mode nil
- org-confirm-babel-evaluate nil)
-(setq org-src-tab-acts-natively t)
+  (setq ;;org-src-preserve-indentation t
+   ;;indent-tabs-mode nil
+   org-confirm-babel-evaluate nil)
+  (setq org-src-tab-acts-natively t)
 
 
-(add-to-list 'org-latex-classes
-	     '("beamer"
-	       "\\documentclass\[presentation\]\{beamer\}"
-	       ("\\section\{%s\}" . "\\section*\{%s\}")
-	       ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
-	       ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
 
 
+  )
+(with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-classes
+	       '("beamer"
+		 "\\documentclass\[presentation\]\{beamer\}"
+		 ("\\section\{%s\}" . "\\section*\{%s\}")
+		 ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+		 ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
+)
 
 ;; programming
 (use-package iedit)
@@ -373,6 +381,23 @@ With prefix ARG non-nil, insert the result at the end of region."
 
 (define-key dired-mode-map ";" 'dired-kill-tree)
 
+;; startup time
+
+(add-hook 'emacs-startup-hook
+	  (lambda ()
+	    
+	    (setq gc-cons-threshold 16777216)
+	    (setq gc-cons-percentage 0.1)))
+
+;; Use a hook so the message doesn't get clobbered by other messages.
+(add-hook 'emacs-startup-hook
+	  (lambda ()
+	    (message "Emacs ready in %s with %d garbage collections."
+		     (format "%.2f seconds"
+			     (float-time
+			      (time-subtract after-init-time before-init-time)))
+		     gcs-done)))
+;; vars variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -381,7 +406,9 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(ansi-color-names-vector
    ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
  '(custom-enabled-themes (quote (wheatgrass)))
- )
+ '(package-selected-packages
+   (quote
+    (esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
