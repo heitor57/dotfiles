@@ -200,7 +200,7 @@ mode "moveit" {
 }
 bindsym $mod+m focus floating; mode "moveit"
 bindsym $mod+i exec --no-startup-id i3lock -c 000000 ; exec --no-startup-id xset dpms force off
-bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
+bindsym $mod+x exec --no-startup-id import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
 
 bindsym $mod+b exec evince
 bindsym $mod+n exec nemo
@@ -216,14 +216,15 @@ bindsym $mod+Shift+F2 exec addwp
 bindsym $mod+F4 exec sxiv -t ~/Pictures
 bindsym $mod+c exec --no-startup-id $BROWSER
 bindsym $mod+g exec st -e ranger
-bindsym $mod+F5 exec du -a ~/Documents/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r rifle
-bindsym $mod+F6 exec du -a ~/Downloads/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r rifle
-bindsym $mod+F7 exec du -a ~/cs/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r rifle
+#bindsym $mod+F5 exec du -a ~/Documents/ | awk '{print $2}' | dmenu -i -l 7 -fn Monospace-11 | xargs -r rifle
+#bindsym $mod+F6 exec du -a ~/Downloads/ | awk '{print $2}' | dmenu -i -l 7 -fn Monospace-11 | xargs -r rifle
+#bindsym $mod+F7 exec du -a ~/cs/ | awk '{print $2}' | dmenu -i -l 7 -fn Monospace-11 | xargs -r rifle
 # keybinds used
-bindsym $mod+F8 exec grep -oP '(?<=bindsym )\$(mod)([^\s]+)' ~/.config/i3/config | dmenu -i -l 5 -fn Monospace-11
+bindsym $mod+F8 exec grep -vP "^#" ~/.config/i3/config | grep -oP '(?<=bindsym )\$(mod)([^\s]+)' | dmenu -i -l 5 -fn Monospace-11
 
 
 bindsym $mod+Shift+b exec cat ~/.websites | dmenu -i -l 6 -fn Monospace-11 | xargs -r firefox
+# find ~/Documents/ ~/Downloads/ | dmenu -i -l 10 -fn Monospace-11 | xargs -r rifle
 
-
-bindsym $mod+Shift+a exec du -a ~/Downloads/ ~/Documents/ | awk '{print $2}' | dmenu -i -l 20 -fn Monospace-11 | xargs -r rifle
+#bindsym $mod+Shift+a exec du -a ~/Downloads/ ~/Documents/ | awk '{print $2}' | dmenu -i -l 5 -fn Monospace-11 | xargs -r rifle
+bindsym $mod+Shift+a exec find ~/Documents/ ~/Downloads/ | dmenu -i -l 10 -fn Monospace-11 | echo "'$(cat -)'" | xargs -r rifle
