@@ -41,6 +41,7 @@
 
 "
       )
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 (setq gc-cons-threshold 402653184)
 (setq gc-cons-percentage 0.6)
 (global-linum-mode t)

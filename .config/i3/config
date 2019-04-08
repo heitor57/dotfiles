@@ -205,7 +205,7 @@ bindsym $mod+x exec --no-startup-id import /tmp/latest-screenshot.png && xclip -
 bindsym $mod+b exec evince
 bindsym $mod+n exec nemo
 bindsym $mod+z exec zathura
-bindsym $mod+t exec emacs
+bindsym $mod+t exec emacsclient -c
 #bindsym $mod+p exec gksu "wpa_supplicant -i wlp6s0 -c /etc/wpa_supplicant/wpa_supplicant.conf -D nl80211 -B"
 
 
