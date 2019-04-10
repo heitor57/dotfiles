@@ -41,7 +41,7 @@
 
 "
       )
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+
 (setq gc-cons-threshold 402653184)
 (setq gc-cons-percentage 0.6)
 (global-linum-mode t)
@@ -176,13 +176,16 @@
   :config
   (dashboard-setup-startup-hook)
 					; set banner
-  (setq dashboard-startup-banner 2)
+  (setq dashboard-startup-banner nil)
 					; set items
   (setq dashboard-items '((recents  . 5)
 			  (bookmarks . 5)
 			  (projects . 8)
 			  (agenda . 5)
 			  (registers . 5)))
+ 
+
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   )
 ;; org-mode org orgmode
 (use-package org-ref
@@ -234,7 +237,7 @@
 		 ("\\section\{%s\}" . "\\section*\{%s\}")
 		 ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
 		 ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
-)
+  )
 
 ;; programming
 (use-package iedit)
@@ -390,16 +393,16 @@ With prefix ARG non-nil, insert the result at the end of region."
 
 ;; server
 
-; define function to shutdown emacs server instance
+					; define function to shutdown emacs server instance
 (defun server-shutdown ()
   "Save buffers, Quit, and Shutdown (kill) server"
   (interactive)
   (save-some-buffers)
   (kill-emacs)
   )
-; disable scroll bar on new frames
+					; disable scroll bar on new frames
 (add-to-list 'default-frame-alist
-             '(vertical-scroll-bars . nil))
+	     '(vertical-scroll-bars . nil))
 
 
 ;; startup time
