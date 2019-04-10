@@ -84,7 +84,8 @@
       (async-shell-command
        (concat "zathura doc.pdf"))))
   
-  (define-key evil-normal-state-map (kbd "m") 'helm-M-x)
+  (define-key evil-normal-state-map (kbd "m") 'buffer-menu)
+  (define-key evil-normal-state-map (kbd "<f5>") 'save-some-buffers)
   )
 
 
@@ -381,6 +382,25 @@ With prefix ARG non-nil, insert the result at the end of region."
 ;; dired
 
 (define-key dired-mode-map ";" 'dired-kill-tree)
+(use-package all-the-icons)
+(use-package all-the-icons-dired
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+  )
+
+;; server
+
+; define function to shutdown emacs server instance
+(defun server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+; disable scroll bar on new frames
+(add-to-list 'default-frame-alist
+             '(vertical-scroll-bars . nil))
+
 
 ;; startup time
 
@@ -407,9 +427,10 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(ansi-color-names-vector
    ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
  '(custom-enabled-themes (quote (wheatgrass)))
+ '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode))))
+    (mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
