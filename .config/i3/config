@@ -46,7 +46,7 @@ bindsym $mod+Return exec $TERMINAL
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run -theme android_notification
+bindsym $mod+d exec rofi -show drun -theme android_notification
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -175,11 +175,6 @@ bindsym $mod+r mode "resize"
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 ## MY CONFIG
-set $F1 67
-set $F2 68
-set $F3 69
-set $F11 76
-set $F12 77
 bindsym $mod+F1 exec pactl set-sink-mute 0 toggle
 bindsym $mod+F2 exec pactl set-sink-volume 0 -5%
 bindsym $mod+F3 exec pactl set-sink-volume 0 +5%
@@ -202,7 +197,7 @@ bindsym $mod+m focus floating; mode "moveit"
 bindsym $mod+i exec --no-startup-id i3lock -c 000000 ; exec --no-startup-id xset dpms force off
 bindsym $mod+x exec --no-startup-id import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
 
-bindsym $mod+b exec evince
+#bindsym $mod+b exec evince
 bindsym $mod+n exec nemo
 bindsym $mod+z exec zathura
 bindsym $mod+t exec emacsclient -c
