@@ -109,29 +109,29 @@
 
 
 ;; hideshow
-;; (load-library "hideshow")
-;; (add-hook 'c-mode-common-hook   'hs-minor-mode)
-;; (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-;; (add-hook 'java-mode-hook       'hs-minor-mode)
-;; (add-hook 'lisp-mode-hook       'hs-minor-mode)
-;; (add-hook 'perl-mode-hook       'hs-minor-mode)
-;; (add-hook 'sh-mode-hook         'hs-minor-mode)
-;; (defun toggle-hiding (column)
-;;   (interactive "P")
-;;   (if hs-minor-mode
-;;       (if (condition-case nil
-;; 	      (hs-toggle-hiding)
-;; 	    (error t))
-;; 	  (hs-show-all))
-;;     (toggle-selective-display column)))
-;; (define-key evil-normal-state-map (kbd "z a") 'toggle-hiding)
-;; (define-key evil-normal-state-map (kbd "z M") 'hs-hide-all)
-;; (define-key evil-normal-state-map (kbd "z R") 'hs-show-all)
+(load-library "hideshow")
+(add-hook 'c-mode-common-hook   'hs-minor-mode)
+(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+(add-hook 'java-mode-hook       'hs-minor-mode)
+(add-hook 'lisp-mode-hook       'hs-minor-mode)
+(add-hook 'perl-mode-hook       'hs-minor-mode)
+(add-hook 'sh-mode-hook         'hs-minor-mode)
+(defun toggle-hiding (column)
+  (interactive "P")
+  (if hs-minor-mode
+      (if (condition-case nil
+	      (hs-toggle-hiding)
+	    (error t))
+	  (hs-show-all))
+    (toggle-selective-display column)))
+(define-key evil-normal-state-map (kbd "z a") 'toggle-hiding)
+(define-key evil-normal-state-map (kbd "z M") 'hs-hide-all)
+(define-key evil-normal-state-map (kbd "z R") 'hs-show-all)
 
-;; (define-key evil-normal-state-map (kbd "z p") 'preview-buffer)
-;; (define-key evil-normal-state-map (kbd "z ç") 'preview-clearout-buffer)
-;; (define-key evil-normal-state-map (kbd "z o") 'preview-at-point)
-;; (define-key evil-normal-state-map (kbd "z l") 'preview-clearout-at-point)
+(define-key evil-normal-state-map (kbd "z p") 'preview-buffer)
+(define-key evil-normal-state-map (kbd "z ç") 'preview-clearout-buffer)
+(define-key evil-normal-state-map (kbd "z o") 'preview-at-point)
+(define-key evil-normal-state-map (kbd "z l") 'preview-clearout-at-point)
 ;; helm
 (use-package helm
   :config
@@ -143,12 +143,12 @@
     (global-set-key (kbd "C-c C-.") 'helm-gtags-dwim))
   (use-package helm-swoop))
 ;; 
-					;(use-package markdown-mode)
+					(use-package markdown-mode)
 (use-package page-break-lines)
-					;(use-package projectile)
+					(use-package projectile)
 
 ;; Clojure Interactive Development Environment
-					;(use-package cider)
+					(use-package cider)
 ;; (use-package telephone-line
 ;;   :config
 ;;   (telephone-line-mode 1))
@@ -225,7 +225,7 @@
    ;;indent-tabs-mode nil
    org-confirm-babel-evaluate nil)
   (setq org-src-tab-acts-natively t)
-
+	(plist-put org-format-latex-options :scale 2)
 
 
 
@@ -351,6 +351,15 @@ With prefix ARG non-nil, insert the result at the end of region."
   (lambda () (interactive) 
     (find-file "~/dotfiles/.emacs")
     ))
+(define-key evil-normal-state-map (kbd "f 1")
+  (lambda () (interactive) 
+    (find-file "~/cs/aeds3/tp1")
+    ))
+(define-key evil-normal-state-map (kbd "f 2")
+  (lambda () (interactive) 
+    (find-file "~/cs/aeds3/tp2")
+    ))
+
 (global-set-key (kbd "C-c C-c") (lambda () (interactive) 
 				  (find-file "~/dotfiles/.emacs")
 				  ))
@@ -433,7 +442,8 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode))))
+    (mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+ '(personal-ff "~/cs"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
