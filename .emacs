@@ -107,7 +107,11 @@
 ;;     )
 ;;   )
 
-
+;; multiple-cursors multiple cursors
+;; (use-package multiple-cursors
+;;   :config
+;;   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+;;   )
 ;; hideshow
 (load-library "hideshow")
 (add-hook 'c-mode-common-hook   'hs-minor-mode)
@@ -149,16 +153,16 @@
 
 ;; Clojure Interactive Development Environment
 					(use-package cider)
-;; (use-package telephone-line
-;;   :config
-;;   (telephone-line-mode 1))
-;; (use-package moe-theme
-;;   :config
-;;   (moe-dark)
-;; 					;(moe-theme-set-color 'orange)
-;;   ;(moe-theme-random-color)
-;;   (moe-theme-set-color 'orange)
-;;   )
+(use-package telephone-line
+  :config
+  (telephone-line-mode 1))
+(use-package moe-theme
+  :config
+  (moe-dark)
+					;(moe-theme-set-color 'orange)
+  ;(moe-theme-random-color)
+  (moe-theme-set-color 'orange)
+  )
 (use-package smex
   :config
 					;(global-set-key (kbd "M-x") 'smex)
@@ -189,9 +193,10 @@
   )
 ;; org-mode org orgmode
 (use-package org-ref
-  :defer 2)
+  ;;:defer 2
+  )
 (use-package org
-  :defer 2
+  ;;:defer 2
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -227,7 +232,7 @@
   (setq org-src-tab-acts-natively t)
 	(plist-put org-format-latex-options :scale 2)
 
-
+  (require 'org-tempo)
 
   )
 (with-eval-after-load 'ox-latex
@@ -267,6 +272,7 @@
 
 ;; R
 					;(use-package ess)
+(use-package mips-mode :mode "\\.asm$")
 ;; rmarkdown
 
 (use-package polymode)
@@ -436,13 +442,10 @@ With prefix ARG non-nil, insert the result at the end of region."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
- '(custom-enabled-themes (quote (wheatgrass)))
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
