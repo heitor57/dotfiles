@@ -50,7 +50,8 @@
 ;;hide bars
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
-(tool-bar-mode -1) 
+(tool-bar-mode -1)
+
 ;; file explorer
 					;(global-hl-line-mode +1)
 ;;use-package
@@ -64,8 +65,7 @@
 (use-package openwith
   :config
   (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
-				("\\.html\\'" "firefox" (file))
-				))
+				("\\.html\\'" "firefox" (file))))
   (openwith-mode t)
   )
 
@@ -153,15 +153,23 @@
 
 ;; Clojure Interactive Development Environment
 					(use-package cider)
-(use-package telephone-line
-  :config
-  (telephone-line-mode 1))
+;; (use-package telephone-line
+;;   :config
+
+;; (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
+;;       telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
+;;       telephone-line-primary-right-separator 'telephone-line-cubed-right
+;;       telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
+;; (setq telephone-line-height 24
+;;       telephone-line-evil-use-short-tag t)
+;;   (telephone-line-mode 1))
 (use-package moe-theme
   :config
   (moe-dark)
 					;(moe-theme-set-color 'orange)
   ;(moe-theme-random-color)
-  (moe-theme-set-color 'orange)
+  ;(moe-theme-set-color 'orange)
+  (moe-theme-set-color 'cyan)
   )
 (use-package smex
   :config
@@ -203,6 +211,7 @@
    '((C . t)
      (R . t)
      (shell . t)
+     (dot . t)
      ))
   (org-toggle-inline-images)
   (setq org-latex-caption-above nil)
@@ -213,14 +222,14 @@
   (org-clock-persistence-insinuate)
 
 
-  (use-package org-bullets
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  ;; (use-package org-bullets
+  ;;   :config
+  ;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
   (global-visual-line-mode 1)
 
-					;(setq org-latex-listings 'minted
-					;      org-latex-packages-alist '(("" "minted")))
-  (setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex %f"))
+					;; (setq org-latex-listings 'minted
+					;;      org-latex-packages-alist '(("" "minted")))
+  (setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex %f"))
 					;(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-directory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
 
 					;
@@ -232,9 +241,10 @@
   (setq org-src-tab-acts-natively t)
 	(plist-put org-format-latex-options :scale 2)
 
-  (require 'org-tempo)
 
+(require 'org-tempo)
   )
+
 (with-eval-after-load 'ox-latex
   (add-to-list 'org-latex-classes
 	       '("beamer"
@@ -398,7 +408,7 @@ With prefix ARG non-nil, insert the result at the end of region."
   )
 
 ;; dired
-
+(setq dired-listing-switches "-alh")
 (define-key dired-mode-map ";" 'dired-kill-tree)
 (use-package all-the-icons)
 (use-package all-the-icons-dired
@@ -436,6 +446,9 @@ With prefix ARG non-nil, insert the result at the end of region."
 			     (float-time
 			      (time-subtract after-init-time before-init-time)))
 		     gcs-done)))
+
+(use-package graphviz-dot-mode)
+
 ;; vars variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -445,7 +458,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
