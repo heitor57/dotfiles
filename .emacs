@@ -81,8 +81,8 @@
 
   (define-key evil-normal-state-map (kbd "z 2") 
     (lambda () (interactive) 
-      (async-shell-command
-       (concat "zathura doc.pdf"))))
+      (call-process-shell-command
+       (concat "zathura doc.pdf") nil 0)))
   
   ;; (define-key evil-normal-state-map (kbd "m m") 'buffer-menu)
   (define-key evil-normal-state-map (kbd "<f5>") 'save-some-buffers)
@@ -451,6 +451,16 @@ With prefix ARG non-nil, insert the result at the end of region."
 ;; ranger
 (use-package ranger)
 (define-key evil-normal-state-map (kbd "m") 'ranger)
+
+(defun auto-rerun-sxhkd ()
+  "Used in `after-save-hook', sxhkd helper."
+  (when (equal buffer-file-name "/home/heitor/.config/sxhkd/sxhkdrc")
+(call-process-shell-command
+     (concat "killall sxhkd; setsid sxhkd") nil 0
+     )
+    ))
+
+(add-hook 'after-save-hook 'auto-rerun-sxhkd)
 ;; vars variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
