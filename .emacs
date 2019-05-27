@@ -84,7 +84,7 @@
       (async-shell-command
        (concat "zathura doc.pdf"))))
   
-  (define-key evil-normal-state-map (kbd "m") 'buffer-menu)
+  ;; (define-key evil-normal-state-map (kbd "m m") 'buffer-menu)
   (define-key evil-normal-state-map (kbd "<f5>") 'save-some-buffers)
   )
 
@@ -188,7 +188,7 @@
   :config
   (dashboard-setup-startup-hook)
 					; set banner
-  (setq dashboard-startup-banner nil)
+ (setq dashboard-startup-banner nil)
 					; set items
   (setq dashboard-items '((recents  . 5)
 			  (bookmarks . 5)
@@ -448,7 +448,9 @@ With prefix ARG non-nil, insert the result at the end of region."
 		     gcs-done)))
 
 (use-package graphviz-dot-mode)
-
+;; ranger
+(use-package ranger)
+(define-key evil-normal-state-map (kbd "m") 'ranger)
 ;; vars variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -458,7 +460,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
