@@ -209,6 +209,7 @@ bindsym $mod+Shift+F1 exec mv /tmp/latest-screenshot.png ~/wallpaper.png && feh 
 bindsym $mod+Shift+F2 exec addwp
 
 bindsym $mod+F4 exec sxiv -t ~/Pictures
+bindsym $mod+F5 exec mv --backup=t /tmp/latest-screenshot.png ~/Pictures/
 bindsym $mod+c exec --no-startup-id $BROWSER
 bindsym $mod+g exec st -e ranger
 #bindsym $mod+F5 exec du -a ~/Documents/ | awk '{print $2}' | dmenu -i -l 7 -fn Monospace-11 | xargs -r rifle
