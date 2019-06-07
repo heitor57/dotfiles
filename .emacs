@@ -83,6 +83,9 @@
     (lambda () (interactive) 
       (call-process-shell-command
        (concat "zathura doc.pdf") nil 0)))
+  (define-key evil-normal-state-map (kbd "z 3") (lambda () (interactive)
+						  (call-process-shell-command
+						   (concat "rm doc.bbl") nil 0)))
   
   ;; (define-key evil-normal-state-map (kbd "m m") 'buffer-menu)
   (define-key evil-normal-state-map (kbd "<f5>") 'save-some-buffers)
@@ -147,12 +150,12 @@
     (global-set-key (kbd "C-c C-.") 'helm-gtags-dwim))
   (use-package helm-swoop))
 ;; 
-					(use-package markdown-mode)
+(use-package markdown-mode)
 (use-package page-break-lines)
-					(use-package projectile)
+(use-package projectile)
 
 ;; Clojure Interactive Development Environment
-					(use-package cider)
+(use-package cider)
 ;; (use-package telephone-line
 ;;   :config
 
@@ -167,8 +170,8 @@
   :config
   (moe-dark)
 					;(moe-theme-set-color 'orange)
-  ;(moe-theme-random-color)
-  ;(moe-theme-set-color 'orange)
+					;(moe-theme-random-color)
+					;(moe-theme-set-color 'orange)
   (moe-theme-set-color 'cyan)
   )
 (use-package smex
@@ -188,14 +191,14 @@
   :config
   (dashboard-setup-startup-hook)
 					; set banner
- (setq dashboard-startup-banner nil)
+  (setq dashboard-startup-banner nil)
 					; set items
-  (setq dashboard-items '((recents  . 5)
+  (setq dashboard-items '((recents  . 13)
 			  (bookmarks . 5)
 			  (projects . 8)
 			  (agenda . 5)
 			  (registers . 5)))
- 
+  
 
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   )
@@ -212,6 +215,7 @@
      (R . t)
      (shell . t)
      (dot . t)
+     (gnuplot . t)
      ))
   (org-toggle-inline-images)
   (setq org-latex-caption-above nil)
@@ -227,8 +231,8 @@
   ;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
   (global-visual-line-mode 1)
 
-					;; (setq org-latex-listings 'minted
-					;;      org-latex-packages-alist '(("" "minted")))
+  ;; (setq org-latex-listings 'minted
+  ;;      org-latex-packages-alist '(("" "minted")))
   (setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex %f"))
 					;(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-directory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
 
@@ -239,10 +243,10 @@
    ;;indent-tabs-mode nil
    org-confirm-babel-evaluate nil)
   (setq org-src-tab-acts-natively t)
-	(plist-put org-format-latex-options :scale 2)
+  (plist-put org-format-latex-options :scale 2)
 
 
-(require 'org-tempo)
+  ;(require 'org-tempo)
   )
 
 (with-eval-after-load 'ox-latex
@@ -455,12 +459,14 @@ With prefix ARG non-nil, insert the result at the end of region."
 (defun auto-rerun-sxhkd ()
   "Used in `after-save-hook', sxhkd helper."
   (when (equal buffer-file-name "/home/heitor/.config/sxhkd/sxhkdrc")
-(call-process-shell-command
+    (call-process-shell-command
      (concat "killall sxhkd; setsid sxhkd") nil 0
      )
     ))
-
+(use-package dracula-theme)
 (add-hook 'after-save-hook 'auto-rerun-sxhkd)
+(use-package gnuplot)
+(use-package gnuplot-mode)
 ;; vars variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -470,7 +476,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
