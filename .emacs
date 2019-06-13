@@ -271,14 +271,7 @@
 ;; c
 (setq c-default-style "linux"
       c-basic-offset 2)
-(use-package auto-complete-c-headers
-  :config
-  (defun my:ac-c-headers-init ()
-    (require 'auto-complete-c-headers)
-    (add-to-list 'ac-sources 'ac-source-c-headers))
-  (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
-  (add-hook 'c-mode-hook 'my:ac-c-headers-init)
-  (add-to-list 'achead:include-directories '"/usr/include"))
+
 ;; (use-package google-c-style
 ;;   :config
 ;;   (add-hook 'c-mode-common-hook 'google-set-c-style)
