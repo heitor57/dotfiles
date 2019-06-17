@@ -8,6 +8,7 @@ alias em="emacsclient -nw"
 alias zs="cd ~/cs/aeds3/tp4"
 alias mc="make clean"
 alias r="ranger"
+shopt -s autocd
 export PS1="\[\033[38;5;219m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;228m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\] \t \[$(tput sgr0)\]\[\033[38;5;48m\]\w\[$(tput sgr0)\] "
 function me () {
 	feh --bg-scale $1
