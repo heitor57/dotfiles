@@ -65,7 +65,8 @@
 (use-package openwith
   :config
   (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
-				("\\.html\\'" "firefox" (file))))
+				("\\.html\\'" "firefox" (file))
+				("\\.png\\'" "sxiv" (file))))
   (openwith-mode t)
   )
 
