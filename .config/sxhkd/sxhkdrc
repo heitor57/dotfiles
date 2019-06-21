@@ -1,0 +1,30 @@
+super + e
+    emacsclient -c
+super + F1
+    exec pactl set-sink-mute 0 toggle
+super + F2
+    exec pactl set-sink-volume 0 -5%
+super + F3
+    exec pactl set-sink-volume 0 +5%
+super + F4
+    sxiv -t ~/Pictures
+super + F5
+     slock& sleep 0.5; xset dpms force off
+super + F11
+    exec xbacklight -dec 10
+super + F12
+    exec xbacklight -inc 10
+super + c
+    firefox
+super + shift + a
+    find ~/Documents/ ~/Downloads/ ~/cs/ | dmenu -i -l 10 -fn Monospace-11 | echo "'$(cat -)'" | xargs -r rifle
+super + z
+    zathura
+super + p
+    rofi -show drun -theme arthur 
+super + g
+      st -e ranger ~
+super + x
+    import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
+super + w
+      emacsclient -c ~/agenda.org
