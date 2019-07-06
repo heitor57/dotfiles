@@ -3,7 +3,6 @@
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(setq tab-width 2)
 (setq package-enable-at-startup nil)
 (setq
  backup-by-copying t      ; don't clobber symlinks
@@ -225,8 +224,8 @@
   (setq org-log-done 'time)
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
-
-
+  
+  (setq org-latex-prefer-user-labels t)
   ;; (use-package org-bullets
   ;;   :config
   ;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
@@ -247,7 +246,7 @@
   (plist-put org-format-latex-options :scale 2)
 
 
-  ;(require 'org-tempo)
+					;(require 'org-tempo)
   )
 
 (with-eval-after-load 'ox-latex
@@ -452,7 +451,7 @@ With prefix ARG non-nil, insert the result at the end of region."
 
 (defun auto-rerun-sxhkd ()
   "Used in `after-save-hook', sxhkd helper."
-  (when (equal buffer-file-name "/home/heitor/.config/sxhkd/sxhkdrc")
+  (when (or (equal buffer-file-name "/home/heitor/.config/sxhkd/sxhkdrc") (equal buffer-file-name "/home/heitor/dotfiles/.config/sxhkd/sxhkdrc"))
     (call-process-shell-command
      (concat "killall sxhkd; setsid sxhkd") nil 0
      )
@@ -461,6 +460,8 @@ With prefix ARG non-nil, insert the result at the end of region."
 (add-hook 'after-save-hook 'auto-rerun-sxhkd)
 (use-package gnuplot)
 (use-package gnuplot-mode)
+
+(setq org-src-window-setup 'current-window)
 ;; vars variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -470,7 +471,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
