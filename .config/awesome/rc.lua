@@ -231,6 +231,19 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    awful.key({ modkey,           }, "F1",function () awful.util.spawn_with_shell("exec pactl set-sink-mute 0 toggle") end,
+              {description="Volume toggle", group="awesome"}),
+    awful.key({ modkey,           }, "F2",function () awful.util.spawn_with_shell("exec pactl set-sink-volume 0 -5%") end,
+              {description="Volume decrease", group="awesome"}),
+    awful.key({ modkey,           }, "F3",function () awful.util.spawn_with_shell("pactl set-sink-volume 0 +5%") end,
+              {description="Volume increase", group="awesome"}),
+    awful.key({ modkey,           }, "F4",function () awful.util.spawn_with_shell("sxiv -t ~/Pictures") end,
+              {description="Show pictures directory", group="awesome"}),
+    awful.key({ modkey,           }, "F11",function () awful.util.spawn_with_shell("exec xbacklight -dec 10") end,
+              {description="Brightness decrease", group="awesome"}),
+    awful.key({ modkey,           }, "F12",function () awful.util.spawn_with_shell("exec xbacklight -inc 10") end,
+              {description="Brightness increase", group="awesome"}),
+
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
