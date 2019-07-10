@@ -239,6 +239,8 @@ globalkeys = gears.table.join(
               {description="Volume increase", group="awesome"}),
     awful.key({ modkey,           }, "F4",function () awful.util.spawn_with_shell("sxiv -t ~/Pictures") end,
               {description="Show pictures directory", group="awesome"}),
+    awful.key({ modkey,           }, "i",function () awful.util.spawn_with_shell("slock& sleep 0.5; xset dpms force off") end,
+              {description="Lock screen", group="awesome"}),
     awful.key({ modkey,           }, "F11",function () awful.util.spawn_with_shell("exec xbacklight -dec 10") end,
               {description="Brightness decrease", group="awesome"}),
     awful.key({ modkey,           }, "F12",function () awful.util.spawn_with_shell("exec xbacklight -inc 10") end,
@@ -351,7 +353,7 @@ clientkeys = gears.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
+    awful.key({ modkey,  }, "q",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
