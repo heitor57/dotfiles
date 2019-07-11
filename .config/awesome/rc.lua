@@ -249,7 +249,7 @@ globalkeys = gears.table.join(
               {description="Brightness decrease", group="personal"}),
     awful.key({            }, "XF86MonBrightnessUp",function () awful.util.spawn_with_shell("exec xbacklight -inc 10") end,
               {description="Brightness increase", group="personal"}),
-    awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("emacs") end,
+    awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("emacsclient -c") end,
               {description="Emacs", group="personal"}),
     awful.key({ modkey,           }, "t",function () awful.util.spawn_with_shell("thunderbird") end,
               {description="Thunderbird", group="personal"}),
