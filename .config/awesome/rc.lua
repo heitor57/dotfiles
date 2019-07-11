@@ -231,20 +231,33 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    awful.key({ modkey,           }, "c",function () awful.util.spawn_with_shell("firefox") end,
+              {description="Firefox", group="personal"}),
+    awful.key({ modkey,           }, "g",function () awful.util.spawn_with_shell("st -e ranger") end,
+              {description="Ranger", group="personal"}),
     awful.key({ modkey,           }, "F1",function () awful.util.spawn_with_shell("exec pactl set-sink-mute 0 toggle") end,
-              {description="Volume toggle", group="awesome"}),
+              {description="Volume toggle", group="personal"}),
     awful.key({ modkey,           }, "F2",function () awful.util.spawn_with_shell("exec pactl set-sink-volume 0 -5%") end,
-              {description="Volume decrease", group="awesome"}),
+              {description="Volume decrease", group="personal"}),
     awful.key({ modkey,           }, "F3",function () awful.util.spawn_with_shell("pactl set-sink-volume 0 +5%") end,
-              {description="Volume increase", group="awesome"}),
+              {description="Volume increase", group="personal"}),
     awful.key({ modkey,           }, "F4",function () awful.util.spawn_with_shell("sxiv -t ~/Pictures") end,
-              {description="Show pictures directory", group="awesome"}),
+              {description="Show pictures directory", group="personal"}),
     awful.key({ modkey,           }, "i",function () awful.util.spawn_with_shell("slock& sleep 0.5; xset dpms force off") end,
-              {description="Lock screen", group="awesome"}),
+              {description="Lock screen", group="personal"}),
     awful.key({ modkey,           }, "F11",function () awful.util.spawn_with_shell("exec xbacklight -dec 10") end,
-              {description="Brightness decrease", group="awesome"}),
+              {description="Brightness decrease", group="personal"}),
     awful.key({ modkey,           }, "F12",function () awful.util.spawn_with_shell("exec xbacklight -inc 10") end,
-              {description="Brightness increase", group="awesome"}),
+              {description="Brightness increase", group="personal"}),
+    awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("emacs") end,
+              {description="Emacs", group="personal"}),
+    awful.key({ modkey,           }, "t",function () awful.util.spawn_with_shell("thunderbird") end,
+              {description="Thunderbird", group="personal"}),
+    awful.key({ modkey,           }, "z",function () awful.util.spawn_with_shell("zathura") end,
+              {description="Zathura", group="personal"}),
+
+
+
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
