@@ -111,6 +111,19 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
+
+local lain = require("lain")
+local cpu = lain.widget.cpu {
+    settings = function()
+       widget:set_markup("Cpu[" .. cpu_now.usage .. "]")
+    end
+}
+local mymem = lain.widget.mem{
+   settings= function()
+      widget:set_markup("Mem[" .. mem_now.perc .. "]")
+   end
+}
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -211,8 +224,10 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+	   layout = wibox.layout.fixed.horizontal,
+	   mymem,
+	   cpu,
+	    mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
