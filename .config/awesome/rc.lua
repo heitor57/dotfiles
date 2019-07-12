@@ -129,6 +129,17 @@ local bat = lain.widget.bat{
    end
 }
 
+--Volume bar
+local volume = lain.widget.alsabar(
+    {
+    width=100, height=10, followtag = true,
+    ticks = true, ticks_size = 10
+    }
+)
+
+local volume_widget = wibox.container.background(volume.bar)
+volume_widget.bgimage=beautiful.widget_display
+
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -234,6 +245,7 @@ awful.screen.connect_for_each_screen(function(s)
 	   mymem,
 	   cpu,
 	   bat,
+volume_widget,
 	    mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
