@@ -456,11 +456,11 @@ With prefix ARG non-nil, insert the result at the end of region."
      (concat "killall sxhkd; setsid sxhkd") nil 0
      )
     ))
-(use-package dracula-theme)
+;(use-package dracula-theme)
 (add-hook 'after-save-hook 'auto-rerun-sxhkd)
 (use-package gnuplot)
 (use-package gnuplot-mode)
-
+(use-package lua-mode)
 (setq org-src-window-setup 'current-window)
 ;; vars variables
 (custom-set-variables
