@@ -408,6 +408,7 @@ With prefix ARG non-nil, insert the result at the end of region."
 (setq dired-listing-switches "-alh")
 (define-key dired-mode-map ";" 'dired-kill-tree)
 (use-package all-the-icons)
+; Install latest fonts: M-x all-the-icons-install-fonts
 (use-package all-the-icons-dired
   :config
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
@@ -461,6 +462,8 @@ With prefix ARG non-nil, insert the result at the end of region."
 (use-package gnuplot)
 (use-package gnuplot-mode)
 (use-package lua-mode)
+(use-package ein)
+
 (setq org-src-window-setup 'current-window)
 ;; vars variables
 (custom-set-variables
@@ -471,7 +474,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
