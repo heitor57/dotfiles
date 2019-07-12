@@ -61,10 +61,10 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
+    awful.layout.suit.tile,
     awful.layout.suit.fair,
     awful.layout.suit.floating,
     -- awful.layout.suit.floating,
-    -- awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
@@ -115,14 +115,20 @@ mytextclock = wibox.widget.textclock()
 local lain = require("lain")
 local cpu = lain.widget.cpu {
     settings = function()
-       widget:set_markup("Cpu[" .. cpu_now.usage .. "]")
+       widget:set_markup("Cpu[" .. cpu_now.usage .. "%]")
     end
 }
 local mymem = lain.widget.mem{
    settings= function()
-      widget:set_markup("Mem[" .. mem_now.perc .. "]")
+      widget:set_markup("Mem[" .. mem_now.perc .. "%]")
    end
 }
+local bat = lain.widget.bat{
+   settings= function()
+      widget:set_markup("Bat[" .. bat_now.perc .. "%] |".. bat_now.ac_status .. "|")
+   end
+}
+
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -227,6 +233,7 @@ awful.screen.connect_for_each_screen(function(s)
 	   layout = wibox.layout.fixed.horizontal,
 	   mymem,
 	   cpu,
+	   bat,
 	    mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
