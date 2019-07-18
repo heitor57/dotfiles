@@ -79,14 +79,14 @@
 
   (define-key evil-normal-state-map (kbd "z 1") 'org-latex-export-to-pdf)
 
-  (define-key evil-normal-state-map (kbd "z 2") 
-    (lambda () (interactive) 
+  (define-key evil-normal-state-map (kbd "z 2")
+    (lambda () (interactive)
       (call-process-shell-command
        (concat "zathura doc.pdf") nil 0)))
   (define-key evil-normal-state-map (kbd "z 3") (lambda () (interactive)
 						  (call-process-shell-command
 						   (concat "rm doc.bbl") nil 0)))
-  
+
   ;; (define-key evil-normal-state-map (kbd "m m") 'buffer-menu)
   (define-key evil-normal-state-map (kbd "<f5>") 'save-some-buffers)
   )
@@ -463,8 +463,32 @@ With prefix ARG non-nil, insert the result at the end of region."
 (use-package gnuplot-mode)
 (use-package lua-mode)
 (use-package ein)
+(use-package ess)
 
 (setq org-src-window-setup 'current-window)
+
+
+(use-package neotree)
+(global-set-key [f8] 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+(evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+(evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+(evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+(evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+
+
+(global-whitespace-mode)
+(setq whitespace-style '(face tabs tab-mark trailing))
+(custom-set-faces
+ '(whitespace-tab ((t (:foreground "#636363")))))
+
+(setq whitespace-display-mappings
+  '((tab-mark 9 [124 9] [92 9])))
 ;; vars variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -474,7 +498,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
