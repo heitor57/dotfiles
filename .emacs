@@ -1,5 +1,4 @@
 (require 'package)
-
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
@@ -50,6 +49,7 @@
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
+;(global-visual-line-mode t)
 
 ;; file explorer
 					;(global-hl-line-mode +1)
@@ -64,7 +64,7 @@
 (use-package openwith
   :config
   (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
-				("\\.html\\'" "firefox" (file))
+					;("\\.html\\'" "firefox" (file))
 				("\\.png\\'" "sxiv" (file))))
   (openwith-mode t)
   )
@@ -86,29 +86,15 @@
   (define-key evil-normal-state-map (kbd "z 3") (lambda () (interactive)
 						  (call-process-shell-command
 						   (concat "rm doc.bbl") nil 0)))
-
+  (define-key evil-normal-state-map (kbd "z 6")
+    (lambda () (interactive)
+      (progn
+	(org-html-export-to-html)
+	(call-process-shell-command
+	 (concat "firefox doc.html") nil 0))))
   ;; (define-key evil-normal-state-map (kbd "m m") 'buffer-menu)
   (define-key evil-normal-state-map (kbd "<f5>") 'save-some-buffers)
   )
-
-
-
-;; (define-key evil-normal-state-map (kbd "z m")
-;;   (lambda () (interactive) (async-shell-command
-;; 			    (concat "pandoc " buffer-file-name " -t beamer -o pres.pdf")
-;; 			    ))
-;;   )
-
-;; (define-key evil-normal-state-map (kbd "z g")
-;;   (lambda () (interactive) (async-shell-command
-;; 			    (concat "pandoc " buffer-file-name " -t beamer -o pres.pdf")
-;; 			    )
-;;     (async-shell-command
-;;      (concat "zathura pres.pdf")
-;;      )
-
-;;     )
-;;   )
 
 ;; multiple-cursors multiple cursors
 ;; (use-package multiple-cursors
@@ -149,7 +135,7 @@
     :config
     (global-set-key (kbd "C-c C-.") 'helm-gtags-dwim))
   (use-package helm-swoop))
-;; 
+;;
 (use-package markdown-mode)
 (use-package page-break-lines)
 (use-package projectile)
@@ -198,7 +184,7 @@
 			  (projects . 8)
 			  (agenda . 8)
 			  (registers . 5)))
-  
+
 
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   )
@@ -224,17 +210,15 @@
   (setq org-log-done 'time)
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
-  
   (setq org-latex-prefer-user-labels t)
   ;; (use-package org-bullets
   ;;   :config
   ;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-  (global-visual-line-mode 1)
 
   ;; (setq org-latex-listings 'minted
   ;;      org-latex-packages-alist '(("" "minted")))
   (setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex %f"))
-					;(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-directory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
+					;(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-diretory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
 
 					;
 					;'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
@@ -244,7 +228,7 @@
    org-confirm-babel-evaluate nil)
   (setq org-src-tab-acts-natively t)
   (plist-put org-format-latex-options :scale 2)
-
+  ;(setq org-startup-truncated nil)
 
 					;(require 'org-tempo)
   )
@@ -357,23 +341,23 @@ With prefix ARG non-nil, insert the result at the end of region."
 
 
 (define-key evil-normal-state-map (kbd "f f")
-  (lambda () (interactive) 
+  (lambda () (interactive)
     (fzf/start personal-ff)
     ))
 (define-key evil-normal-state-map (kbd "f d")
-  (lambda () (interactive) 
+  (lambda () (interactive)
     (find-file "~/dotfiles/.emacs")
     ))
 (define-key evil-normal-state-map (kbd "f 1")
-  (lambda () (interactive) 
+  (lambda () (interactive)
     (find-file "~/cs/aeds3/tp1")
     ))
 (define-key evil-normal-state-map (kbd "f 2")
-  (lambda () (interactive) 
+  (lambda () (interactive)
     (find-file "~/cs/aeds3/tp2")
     ))
 
-(global-set-key (kbd "C-c C-c") (lambda () (interactive) 
+(global-set-key (kbd "C-c C-c") (lambda () (interactive)
 				  (find-file "~/dotfiles/.emacs")
 				  ))
 (use-package helm-ag)
@@ -408,7 +392,7 @@ With prefix ARG non-nil, insert the result at the end of region."
 (setq dired-listing-switches "-alh")
 (define-key dired-mode-map ";" 'dired-kill-tree)
 (use-package all-the-icons)
-; Install latest fonts: M-x all-the-icons-install-fonts
+					; Install latest fonts: M-x all-the-icons-install-fonts
 (use-package all-the-icons-dired
   :config
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
@@ -432,7 +416,6 @@ With prefix ARG non-nil, insert the result at the end of region."
 
 (add-hook 'emacs-startup-hook
 	  (lambda ()
-	    
 	    (setq gc-cons-threshold 16777216)
 	    (setq gc-cons-percentage 0.1)))
 
@@ -457,7 +440,7 @@ With prefix ARG non-nil, insert the result at the end of region."
      (concat "killall sxhkd; setsid sxhkd") nil 0
      )
     ))
-;(use-package dracula-theme)
+					;(use-package dracula-theme)
 (add-hook 'after-save-hook 'auto-rerun-sxhkd)
 (use-package gnuplot)
 (use-package gnuplot-mode)
@@ -485,10 +468,33 @@ With prefix ARG non-nil, insert the result at the end of region."
 (global-whitespace-mode)
 (setq whitespace-style '(face tabs tab-mark trailing))
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(whitespace-tab ((t (:foreground "#636363")))))
 
 (setq whitespace-display-mappings
-  '((tab-mark 9 [124 9] [92 9])))
+      '((tab-mark 9 [124 9] [92 9])))
+
+(use-package yaml-mode)
+
+(use-package engine-mode
+  :config
+  (require 'engine-mode)
+  (engine-mode t)
+  (engine/set-keymap-prefix (kbd "C-c /"))
+  (defengine google
+    "http://www.google.com/search?ie=utf-8&oe=utf-8&q=%s"
+    :keybinding "g")
+  (defengine youtube
+    "http://www.youtube.com/results?aq=f&oq=&search_query=%s"
+    :keybinding "y")
+  (defengine google-scholar
+    "https://scholar.google.com.br/scholar?ie=utf-8&oe=utf-8&q=%s"
+    :keybinding "s"))
+					;(defengine github "")
+
 ;; vars variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -498,11 +504,6 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
