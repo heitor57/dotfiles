@@ -202,6 +202,7 @@
      (shell . t)
      (dot . t)
      (gnuplot . t)
+     (python . t)
      ))
   (org-toggle-inline-images)
   (setq org-latex-caption-above nil)
