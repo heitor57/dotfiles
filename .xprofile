@@ -1,31 +1,3 @@
 sxhkd &
 
-dte(){
-  dte="$(date +" %A %d-%m-%y | 🕒 %H:%M:%S")"
-  echo -e "$dte"
-}
-
-mem(){
-  mem=`free | awk '/Mem/ {printf "%d MiB/%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
-  echo -e " $mem"
-}
-
-cpu(){
-  read cpu a b c previdle rest < /proc/stat
-  prevtotal=$((a+b+c+previdle))
-  sleep 0.5
-  read cpu a b c idle rest < /proc/stat
-  total=$((a+b+c+idle))
-  cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
-  echo -e " $cpu% cpu"
-}
-function statusBarUpdateDwm(){
-    :
-    while :; do
-	xsetroot -name "$(cpu) ≪ $(mem) ≪ $(dte) ≪ Battery:$(acpi | awk '{print $4}' | sed 's/.$//')"
-	sleep 1m    # Update time every ten seconds
-    done
-}
-
-statusBarUpdateDwm &
 
