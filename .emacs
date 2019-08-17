@@ -42,6 +42,12 @@
 
 (setq gc-cons-threshold 402653184)
 (setq gc-cons-percentage 0.6)
+;; startup time
+(add-hook 'emacs-startup-hook
+	  (lambda ()
+	    (setq gc-cons-threshold 16777216)
+	    (setq gc-cons-percentage 0.1)))
+
 (global-linum-mode t)
 ;;(setq initial-buffer-choice t)
 ;;(setq initial-buffer-choice "")
@@ -157,14 +163,14 @@
 ;; (setq telephone-line-height 24
 ;;       telephone-line-evil-use-short-tag t)
 ;;   (telephone-line-mode 1))
-(use-package moe-theme
-  :config
-  (moe-dark)
-					;(moe-theme-set-color 'orange)
-					;(moe-theme-random-color)
-					;(moe-theme-set-color 'orange)
-  (moe-theme-set-color 'cyan)
-  )
+;; (use-package moe-theme
+;;   :config
+;;   (moe-dark)
+;; 					;(moe-theme-set-color 'orange)
+;; 					;(moe-theme-random-color)
+;; 					;(moe-theme-set-color 'orange)
+;;   (moe-theme-set-color 'cyan)
+;;   )
 (use-package smex
   :config
 					;(global-set-key (kbd "M-x") 'smex)
@@ -195,10 +201,9 @@
   )
 ;; org-mode org orgmode
 (use-package org-ref
-  ;;:defer 2
-  )
+  :commands org-ref)
 (use-package org
-  ;;:defer 2
+  :commands org-mode
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -419,12 +424,6 @@ With prefix ARG non-nil, insert the result at the end of region."
 	     '(vertical-scroll-bars . nil))
 
 
-;; startup time
-
-(add-hook 'emacs-startup-hook
-	  (lambda ()
-	    (setq gc-cons-threshold 16777216)
-	    (setq gc-cons-percentage 0.1)))
 
 ;; Use a hook so the message doesn't get clobbered by other messages.
 (add-hook 'emacs-startup-hook
@@ -447,7 +446,7 @@ With prefix ARG non-nil, insert the result at the end of region."
      (concat "killall sxhkd; setsid sxhkd") nil 0
      )
     ))
-					;(use-package dracula-theme)
+;; (use-package dracula-theme)
 (add-hook 'after-save-hook 'auto-rerun-sxhkd)
 (use-package gnuplot)
 (use-package gnuplot-mode)
@@ -504,17 +503,36 @@ With prefix ARG non-nil, insert the result at the end of region."
 (add-hook 'python-mode-hook
   (lambda ()
     (setq indent-tabs-mode t)
-    (setq python-indent 8)
+    (setq python-indent 4)
     (setq tab-width 4)))
+;; (use-package eclim
+;;   :config
+;;   (setq eclimd-autostart t)
+;;   (defun my-java-mode-hook ()
+;;     (eclim-mode t))
+;;   (add-hook 'java-mode-hook 'my-java-mode-hook)
+;;   (custom-set-variables
+;;    '(eclim-executable "/usr/lib/eclipse/eclim"))
+;;   )
 ;; vars variables
+
+(use-package kaolin-themes
+  :config
+  (load-theme 'kaolin-dark t))
+(use-package elpy
+  :defer t
+  :config
+  (elpy-enable))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote (default)))
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (elpy kaolin-themes eclim fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 
