@@ -256,13 +256,10 @@
 
 ;; programming
 (use-package iedit)
+
 (use-package auto-complete
   :config
   (ac-config-default))
-(use-package yasnippet
-  :config
-  (use-package yasnippet-snippets)
-  (yas-global-mode 1))
 
 ;; c
 (setq c-default-style "linux"
@@ -451,7 +448,9 @@ With prefix ARG non-nil, insert the result at the end of region."
 (use-package gnuplot)
 (use-package gnuplot-mode)
 (use-package lua-mode)
-(use-package ein)
+(use-package ein
+  :config
+  (setq ein:use-auto-complete t))
 (use-package ess)
 
 (setq org-src-window-setup 'current-window)
@@ -533,6 +532,6 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(mips-interpreter "/usr/bin/qtspim")
  '(package-selected-packages
    (quote
-    (elpy kaolin-themes eclim fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup yasnippet yasnippet-snippets use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (company-mode elpy kaolin-themes eclim fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 

@@ -21,4 +21,4 @@ super + g
 super + x
     import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
 super + s
-      jupyter lab ~/recsys/
+      jupyter notebook ~/recsys/
