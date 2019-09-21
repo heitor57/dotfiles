@@ -183,3 +183,4 @@ bar {
 }
 
 new_window 1pixel
+bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
