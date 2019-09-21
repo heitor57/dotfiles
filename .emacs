@@ -137,6 +137,7 @@
   (global-set-key (kbd "M-x") #'helm-M-x)
   (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
   (global-set-key (kbd "C-x C-f") #'helm-find-files)
+  (global-set-key (kbd "C-x b") #'helm-mini)
   (use-package helm-gtags
     :config
     (global-set-key (kbd "C-c C-.") 'helm-gtags-dwim))
@@ -499,11 +500,11 @@ With prefix ARG non-nil, insert the result at the end of region."
     "https://scholar.google.com.br/scholar?ie=utf-8&oe=utf-8&q=%s"
     :keybinding "s"))
 					;(defengine github "")
-(add-hook 'python-mode-hook
-  (lambda ()
-    (setq indent-tabs-mode t)
-    (setq python-indent 4)
-    (setq tab-width 4)))
+;; (add-hook 'python-mode-hook
+;;   (lambda ()
+;;     (setq indent-tabs-mode t)
+;;     (setq python-indent 4)
+;;     (setq tab-width 4)))
 ;; (use-package eclim
 ;;   :config
 ;;   (setq eclimd-autostart t)
@@ -514,10 +515,9 @@ With prefix ARG non-nil, insert the result at the end of region."
 ;;    '(eclim-executable "/usr/lib/eclipse/eclim"))
 ;;   )
 ;; vars variables
-
-(use-package kaolin-themes
+(use-package solarized-theme
   :config
-  (load-theme 'kaolin-dark t))
+  (load-theme 'solarized-dark t))
 (use-package elpy
   :defer t
   :config
