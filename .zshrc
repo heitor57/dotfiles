@@ -24,3 +24,5 @@ antibody bundle < ~/.zsh_plugins.txt
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+alias l="ls"
