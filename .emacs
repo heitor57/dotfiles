@@ -69,13 +69,15 @@
   (require 'use-package))
 
 ;; open with
-;; (use-package openwith
-;;   :config
-;;   (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
-;; 					;("\\.html\\'" "firefox" (file))
-;; 				("\\.png\\'" "sxiv" (file))))
-;;   (openwith-mode t)
-;;   )
+(use-package openwith
+  :config
+  (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
+					;("\\.html\\'" "firefox" (file))
+				("\\.png\\'" "sxiv" (file))
+				("\\.jpg\\'" "sxiv" (file))
+				))
+  (openwith-mode t)
+  )
 
 
 ;; evil
@@ -243,7 +245,7 @@
    org-confirm-babel-evaluate nil)
   (setq org-src-tab-acts-natively t)
   (plist-put org-format-latex-options :scale 2)
-  ;(setq org-startup-truncated nil)
+					;(setq org-startup-truncated nil)
 
 					;(require 'org-tempo)
   )
