@@ -168,14 +168,14 @@
 ;; (setq telephone-line-height 24
 ;;       telephone-line-evil-use-short-tag t)
 ;;   (telephone-line-mode 1))
-;; (use-package moe-theme
-;;   :config
-;;   (moe-dark)
-;; 					;(moe-theme-set-color 'orange)
-;; 					;(moe-theme-random-color)
-;; 					;(moe-theme-set-color 'orange)
-;;   (moe-theme-set-color 'cyan)
-;;   )
+(use-package moe-theme
+  :config
+  (moe-dark)
+					;(moe-theme-set-color 'orange)
+					;(moe-theme-random-color)
+					;(moe-theme-set-color 'orange)
+  (moe-theme-set-color 'cyan)
+  )
 (use-package smex
   :config
 					;(global-set-key (kbd "M-x") 'smex)
@@ -482,7 +482,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(whitespace-tab ((t (:foreground "#636363")))))
+ )
 
 (setq whitespace-display-mappings
       '((tab-mark 9 [124 9] [92 9])))
@@ -533,6 +533,7 @@ With prefix ARG non-nil, insert the result at the end of region."
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes (quote (default)))
  '(mips-interpreter "/usr/bin/qtspim")
+ '(org-agenda-files nil)
  '(package-selected-packages
    (quote
     (nimbus-theme company-mode elpy kaolin-themes eclim fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
