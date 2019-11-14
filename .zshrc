@@ -26,3 +26,7 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 alias l="ls"
+lsxhkd(){
+	sxhkd&
+	disown %1	
+}
