@@ -458,7 +458,7 @@ With prefix ARG non-nil, insert the result at the end of region."
      (concat "killall sxhkd; setsid sxhkd") nil 0
      )
     ))
-;; (use-package dracula-theme)
+(use-package dracula-theme)
 (add-hook 'after-save-hook 'auto-rerun-sxhkd)
 (use-package gnuplot)
 (use-package gnuplot-mode)
@@ -529,13 +529,17 @@ With prefix ARG non-nil, insert the result at the end of region."
 ;;    '(eclim-executable "/usr/lib/eclipse/eclim"))
 ;;   )
 ;; vars variables
-(use-package nimbus-theme)
+;;(use-package nimbus-theme)
 
 (use-package elpy
   :defer t
   :config
   (elpy-enable))
 
+
+(use-package back-button
+  :config
+  (back-button-mode 1))
 
 
 (custom-set-variables
@@ -548,6 +552,6 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(org-agenda-files nil)
  '(package-selected-packages
    (quote
-    (nimbus-theme company-mode elpy kaolin-themes eclim fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (back-button nimbus-theme company-mode elpy kaolin-themes eclim fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 
