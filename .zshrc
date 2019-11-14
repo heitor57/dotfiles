@@ -30,3 +30,4 @@ lsxhkd(){
 	sxhkd&
 	disown %1	
 }
+setopt autocd autopushd
