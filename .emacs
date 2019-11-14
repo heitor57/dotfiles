@@ -371,6 +371,16 @@ With prefix ARG non-nil, insert the result at the end of region."
     (find-file "~/cs/aeds3/tp2")
     ))
 
+(define-key evil-normal-state-map (kbd "f 3")
+  (lambda () (interactive)
+    (find-file "~/cs/monitoria/aeds3/tp2/")
+    ))
+
+(define-key evil-normal-state-map (kbd "f 4")
+  (lambda () (interactive)
+    (find-file "~/Downloads")
+    ))
+
 (global-set-key (kbd "C-c C-c") (lambda () (interactive)
 				  (find-file "~/dotfiles/.emacs")
 				  ))
@@ -525,6 +535,8 @@ With prefix ARG non-nil, insert the result at the end of region."
   :defer t
   :config
   (elpy-enable))
+
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
