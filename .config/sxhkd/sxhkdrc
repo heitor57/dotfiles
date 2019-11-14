@@ -2,8 +2,14 @@ super + e
       emacsclient -c
 super + F4
       sxiv -t ~/Pictures
-super + i
-     slock& sleep 0.5; xset dpms force off
+super + shift + i
+      slock
+XF86AudioRaiseVolume
+	pactl set-sink-volume @DEFAULT_SINK@ +10%
+XF86AudioLowerVolume
+	pactl set-sink-volume @DEFAULT_SINK@ -10%
+XF86AudioMute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
 super + F11
     exec xbacklight -dec 10
 super + F12
@@ -22,3 +28,5 @@ super + x
     import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
 super + s
       jupyter notebook ~/recsys/
+super + a
+      xclip -o | xargs -r mpv
