@@ -17,7 +17,7 @@ super + F12
 super + c
     firefox
 super + shift + a
-    find ~/Documents/ ~/Downloads/ ~/cs/ | dmenu -i -l 10 -fn Monospace-11 | echo "'$(cat -)'" | xargs -r rifle
+      rifle "$(find ~/Documents/ ~/Downloads/ ~/cs/ | dmenu -i -l 10 -fn Monospace-11)"
 super + z
     zathura
 #super + p
