@@ -16,3 +16,4 @@ set hlsearch
 set incsearch
 
 nmap <C-x>g :Magit<CR>
+nmap <C-b> :!nvcc -ccbin clang-3.8 %:t -o %:r && ./%:r<CR>
