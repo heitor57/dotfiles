@@ -16,3 +16,4 @@ set hlsearch
 set incsearch
 
 nmap <C-x>g :Magit<CR>
+nmap <C-x> :!python tp2.py -i in.txt -o out.txt<CR>
