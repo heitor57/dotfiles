@@ -14,6 +14,8 @@
  kept-old-versions 2
  version-control t)       ; use versioned backups
 
+(set-default-font "Fira Code" nil t)
+
 (package-initialize)
 (setq inhibit-startup-screen t)
 (fset 'yes-or-no-p 'y-or-n-p)
