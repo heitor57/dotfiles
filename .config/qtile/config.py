@@ -24,7 +24,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-NUMBER_OF_STACKS = 3
 
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
@@ -33,6 +32,8 @@ from libqtile import layout, bar, widget
 from typing import List  # noqa: F401
 
 mod = "mod4"
+
+color_alert = '#ee9900'
 
 keys = [
     # Switch between windows in current stack pane
@@ -114,6 +115,11 @@ screens = [
 #                widget.TextBox("QWorld", name="default"),
                 widget.Systray(),
                 widget.Clock(format='%Y-%m-%d %A %H:%m:%S'),
+                widget.Battery(
+                    charge_char = u'▲',
+                    discharge_char = u'▼',
+                    low_foreground = color_alert,
+                ),
                 widget.Volume(update_interval=3),
             ],
             24,
