@@ -57,8 +57,7 @@ keys = [
     Key([mod], "c", lazy.spawn("firefox")),
     Key([mod], "z", lazy.spawn("zathura")),
     Key([mod], "e", lazy.spawn("emacsclient -c")),
-    Key([mod,"shift"], "a", lazy.spawn('bash -c "rifle \\"$(find ~/Documents/ ~/Downloads/ ~/cs/ | dmenu -i -l 10 -fn Monospace-11)\\""')),
-    Key([mod], "a", lazy.spawn("")),
+    Key([mod], "a", lazy.spawn('bash -c "rifle \\"$(find ~/Documents/ ~/Downloads/ ~/cs/ | dmenu -fn \'Fira Code\' -i -l 10 -fn Monospace-11)\\""')),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -99,7 +98,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='sans',
+    font='Fira Code',
     fontsize=12,
     padding=3,
 )
@@ -112,7 +111,7 @@ screens = [
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
-                widget.TextBox("QWorld", name="default"),
+#                widget.TextBox("QWorld", name="default"),
                 widget.Systray(),
                 widget.Clock(format='%Y-%m-%d %A %H:%m:%S'),
                 widget.Volume(update_interval=3),
