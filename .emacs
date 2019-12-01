@@ -42,13 +42,13 @@
 "
       )
 
-(setq gc-cons-threshold 402653184)
-(setq gc-cons-percentage 0.6)
+;; (setq gc-cons-threshold 402653184)
+;; (setq gc-cons-percentage 0.6)
 ;; startup time
-(add-hook 'emacs-startup-hook
-	  (lambda ()
-	    (setq gc-cons-threshold 16777216)
-	    (setq gc-cons-percentage 0.1)))
+;; (add-hook 'emacs-startup-hook
+;; 	  (lambda ()
+;; 	    (setq gc-cons-threshold 16777216)
+;; 	    (setq gc-cons-percentage 0.1)))
 
 (global-linum-mode t)
 ;;(setq initial-buffer-choice t)
@@ -228,15 +228,14 @@
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
   (setq org-latex-prefer-user-labels t)
-  ;; (use-package org-bullets
-  ;;   :config
-  ;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (use-package org-bullets
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
   ;; (setq org-latex-listings 'minted
   ;;      org-latex-packages-alist '(("" "minted")))
-  (setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex %f"))
-					;(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-diretory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
-
+  ;; (setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f' -pdf -bibtex %f"))
+  (setq org-latex-pdf-process '("pdflatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-diretory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
 					;
 					;'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 					;"")
@@ -267,8 +266,8 @@
   (ac-config-default))
 
 ;; c
-(setq c-default-style "linux"
-      c-basic-offset 2)
+(setq c-default-style "linux")
+      ;c-basic-offset 2)
 
 ;; (use-package google-c-style
 ;;   :config
@@ -532,7 +531,6 @@ With prefix ARG non-nil, insert the result at the end of region."
 ;;(use-package nimbus-theme)
 
 (use-package elpy
-  :defer t
   :config
   (elpy-enable))
 
@@ -550,6 +548,19 @@ With prefix ARG non-nil, insert the result at the end of region."
   (bind-key "<tab>" #'dired-subtree-toggle dired-mode-map)
   (bind-key "<backtab>" #'dired-subtree-cycle dired-mode-map))
 
+(use-package cuda-mode)
+
+(use-package cmake-mode)
+
+
+
+(add-hook 'python-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode nil)
+        (setq tab-width 4)
+        (setq python-indent-offset 4)))
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -560,6 +571,6 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(org-agenda-files nil)
  '(package-selected-packages
    (quote
-    (dired-subtree back-button nimbus-theme company-mode elpy kaolin-themes eclim fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (cmake-mode ox-latex cuda-mode dired-subtree back-button nimbus-theme company-mode elpy kaolin-themes eclim fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 
