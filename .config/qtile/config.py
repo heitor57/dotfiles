@@ -117,7 +117,7 @@ screens = [
                 widget.CPUGraph(frequency=10),
                 widget.Memory(),
                 widget.MemoryGraph(frequency=10),
-                widget.Clock(format='%Y-%m-%d %A %H:%m:%S'),
+                widget.Clock(format='%Y-%m-%d %A %H:%M:%S'),
                 widget.Battery(
                     charge_char = u'▲',
                     discharge_char = u'▼',
