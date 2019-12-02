@@ -94,7 +94,7 @@ for i in groups:
     ])
 
 layouts = [
-    layout.MonadTall(border_focus='#118311',margin = 10,border_width=1),
+    layout.MonadTall(border_focus='#118311',margin=10, border_width=1),
     layout.Max(),
 ]
 
@@ -114,6 +114,9 @@ screens = [
                 widget.WindowName(),
 #                widget.TextBox("QWorld", name="default"),
                 widget.Systray(),
+                widget.CPUGraph(frequency=10),
+                widget.Memory(),
+                widget.MemoryGraph(frequency=10),
                 widget.Clock(format='%Y-%m-%d %A %H:%m:%S'),
                 widget.Battery(
                     charge_char = u'▲',
@@ -121,6 +124,8 @@ screens = [
                     low_foreground = color_alert,
                 ),
                 widget.Volume(update_interval=3),
+                widget.Wallpaper(directory='/home/heitor/Pictures/wallpapers/',random_selection=True),
+                
             ],
             24,
         ),
