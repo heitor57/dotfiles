@@ -41,8 +41,8 @@ keys = [
     Key([mod], "k", lazy.layout.up()),
 
     # Move windows up or down in current stack
-    Key([mod, "control"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "control"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod], "l", lazy.layout.grow()),
     Key([mod], "h", lazy.layout.shrink()),
     # Switch window focus to other pane(s) of stack
