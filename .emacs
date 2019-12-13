@@ -94,7 +94,7 @@
   (define-key evil-normal-state-map (kbd "z 2")
     (lambda () (interactive)
       (call-process-shell-command
-       (concat "zathura doc.pdf") nil 0)))
+       (concat "zathura " (file-name-base) ".pdf") nil 0)))
   (define-key evil-normal-state-map (kbd "z 3") (lambda () (interactive)
 						  (call-process-shell-command
 						   (concat "rm doc.bbl") nil 0)))
