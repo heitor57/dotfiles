@@ -454,11 +454,14 @@ With prefix ARG non-nil, insert the result at the end of region."
 
 ;; ssh
 (use-package hydra
+  :bind
+  ("C-c c" . hydra-zoom/body)
   :config
-  (defhydra hydra-zoom (global-map "<f2>")
+  (defhydra hydra-zoom (:color blue)
     "zoom"
     ("g" text-scale-increase "in")
-    ("l" text-scale-decrease "out")))
+    ("l" text-scale-decrease "out"))
+  )
 
 (defun auto-rerun-sxhkd ()
   "Used in `after-save-hook', sxhkd helper."
@@ -561,8 +564,6 @@ With prefix ARG non-nil, insert the result at the end of region."
 (use-package cuda-mode)
 
 (use-package cmake-mode)
-
-
 
 (add-hook 'python-mode-hook
 	  (lambda ()
