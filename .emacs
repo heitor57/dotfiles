@@ -452,6 +452,14 @@ With prefix ARG non-nil, insert the result at the end of region."
 (use-package ranger)
 (define-key evil-normal-state-map (kbd "m") 'ranger)
 
+;; ssh
+(use-package hydra
+  :config
+  (defhydra hydra-zoom (global-map "<f2>")
+    "zoom"
+    ("g" text-scale-increase "in")
+    ("l" text-scale-decrease "out")))
+
 (defun auto-rerun-sxhkd ()
   "Used in `after-save-hook', sxhkd helper."
   (when (or (equal buffer-file-name "/home/heitor/.config/sxhkd/sxhkdrc") (equal buffer-file-name "/home/heitor/dotfiles/.config/sxhkd/sxhkdrc"))
@@ -557,10 +565,10 @@ With prefix ARG non-nil, insert the result at the end of region."
 
 
 (add-hook 'python-mode-hook
-      (lambda ()
-        (setq indent-tabs-mode nil)
-        (setq tab-width 4)
-        (setq python-indent-offset 4)))
+	  (lambda ()
+	    (setq indent-tabs-mode nil)
+	    (setq tab-width 4)
+	    (setq python-indent-offset 4)))
 
 
 (custom-set-variables
@@ -573,6 +581,6 @@ With prefix ARG non-nil, insert the result at the end of region."
  '(org-agenda-files nil)
  '(package-selected-packages
    (quote
-    (cmake-mode ox-latex cuda-mode dired-subtree back-button nimbus-theme company-mode elpy kaolin-themes eclim fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
+    (ediprolog cmake-mode ox-latex cuda-mode dired-subtree back-button nimbus-theme company-mode elpy kaolin-themes eclim fasd engine-mode yaml-mode neotree ein visws gnuplot-mode gnuplot dracula-theme ranger graphviz-dot-mode org-re-reveal-ref multiple-cursors mips-mode all-the-icons-install-fonts all-the-icons-dired all-the-icons-dired-mode esup use-package telephone-line projectile poly-markdown org-ref org-bullets openwith moe-theme magit lua-mode iedit helm-swoop helm-smex helm-gtags helm-ag fzf evil ess dired-hacks-utils dashboard cider auto-complete-c-headers ace-jump-mode)))
  '(personal-ff "~/cs"))
 
