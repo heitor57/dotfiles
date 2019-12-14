@@ -453,15 +453,19 @@ With prefix ARG non-nil, insert the result at the end of region."
 (define-key evil-normal-state-map (kbd "m") 'ranger)
 
 ;; ssh
+
+(defun dired-connect-ssh (user ip)
+  (interactive "sUser name:\nsIp to connect:")
+  (find-file (concat "/ssh:" user "@" ip ":~")))
+
 (use-package hydra
   :bind
-  ("C-c c" . hydra-zoom/body)
+  ("C-c c" . hydra-ssh/body)
   :config
-  (defhydra hydra-zoom (:color blue)
-    "zoom"
-    ("g" text-scale-increase "in")
-    ("l" text-scale-decrease "out"))
-  )
+  (defhydra hydra-ssh (:color blue)
+    "Connect"
+    ; duff
+    ("d" (dired-connect-ssh "heitor" "200.17.66.6") "duff")))
 
 (defun auto-rerun-sxhkd ()
   "Used in `after-save-hook', sxhkd helper."
