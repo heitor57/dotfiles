@@ -27,13 +27,35 @@
 
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
-from libqtile import layout, bar, widget
+from libqtile import layout, bar, widget, hook
 
 from typing import List  # noqa: F401
 
 mod = "mod4"
 
 color_alert = '#ee9900'
+
+import subprocess, re
+
+def is_running(process):
+    s = subprocess.Popen(["ps", "axw"], stdout=subprocess.PIPE)
+    for x in s.stdout:
+        if re.search(process, x):
+            return True
+    return False
+
+def execute_once(process):
+    if not is_running(process):
+        return subprocess.Popen(process.split())
+
+def execute(process):
+    """run a process."""
+    return subprocess.Popen(process.split())
+
+@hook.subscribe.startup_once
+def startup():
+	execute('compton')
+
 
 keys = [
     # Switch between windows in current stack pane
@@ -130,6 +152,7 @@ screens = [
                 
             ],
             24,
+            opacity = 0.8,
         ),
     ),
 ]
