@@ -81,6 +81,7 @@ keys = [
     Key([mod], "Return", lazy.spawn("st")),
     Key([mod], "c", lazy.spawn("firefox")),
     Key([mod], "z", lazy.spawn("zathura")),
+#    Key([mod], "s", lazy.spawn("jupyter notebook ~/recsys")),
     Key([mod], "e", lazy.spawn("emacsclient -c")),
     Key([mod], "a", lazy.spawn('bash -c "rifle \\"$(find ~/Documents/ ~/Downloads/ ~/cs/ | dmenu -fn \'Fira Code\' -i -l 10 -fn Monospace-11)\\""')),
 
@@ -118,7 +119,7 @@ for i in groups:
     ])
 
 layouts = [
-    layout.MonadTall(border_focus='#118311',margin=10, border_width=1),
+    layout.MonadTall(border_focus='#118311',margin=0, border_width=1),
     layout.Max(),
 ]
 
