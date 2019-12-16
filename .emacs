@@ -465,7 +465,8 @@ With prefix ARG non-nil, insert the result at the end of region."
   (defhydra hydra-ssh (:color blue)
     "Connect"
     ; duff
-    ("d" (dired-connect-ssh "heitor" "200.17.66.6") "duff")))
+    ("d" (dired-connect-ssh "heitor" "200.17.66.6") "duff")
+    ("e" (dired-connect-ssh "heitor" "172.18.0.216") "Iduff")))
 
 (defun auto-rerun-sxhkd ()
   "Used in `after-save-hook', sxhkd helper."
