@@ -121,6 +121,7 @@ for i in groups:
 layouts = [
     layout.MonadTall(border_focus='#118311',margin=0, border_width=1),
     layout.Max(),
+    layout.TreeTab(),
 ]
 
 widget_defaults = dict(
