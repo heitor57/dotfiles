@@ -78,7 +78,7 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn("st")),
+    Key([mod], "Return", lazy.spawn("urxvt")),
     Key([mod], "c", lazy.spawn("firefox")),
     Key([mod], "z", lazy.spawn("zathura")),
 #    Key([mod], "s", lazy.spawn("jupyter notebook ~/recsys")),
