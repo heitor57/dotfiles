@@ -31,3 +31,7 @@ lsxhkd(){
 	disown %1	
 }
 setopt autocd autopushd
+
+
+
+alias em='emacsclient -c'
