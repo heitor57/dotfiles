@@ -78,8 +78,11 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
+    Key([mod, "shift"], "i", lazy.spawn("slock")),
     Key([mod], "Return", lazy.spawn("urxvt")),
     Key([mod], "c", lazy.spawn("firefox")),
+    Key([mod], "x", lazy.spawn("import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png")),
+
     Key([mod], "z", lazy.spawn("zathura")),
 #    Key([mod], "s", lazy.spawn("jupyter notebook ~/recsys")),
     Key([mod], "e", lazy.spawn("emacsclient -c")),
@@ -105,6 +108,8 @@ keys = [
         [], "XF86AudioMute",
         lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
     ),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10")),
 ]
 
 groups = [Group(i) for i in "12345"]
@@ -121,7 +126,6 @@ for i in groups:
 layouts = [
     layout.MonadTall(border_focus='#118311',margin=0, border_width=1),
     layout.Max(),
-    layout.TreeTab(),
 ]
 
 widget_defaults = dict(
