@@ -75,8 +75,8 @@
   :config
   (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
 					;("\\.html\\'" "firefox" (file))
-				("\\.png\\'" "sxiv" (file))
-				("\\.jpg\\'" "sxiv" (file))
+				;; ("\\.png\\'" "sxiv" (file))
+				;; ("\\.jpg\\'" "sxiv" (file))
 				))
   (openwith-mode t)
   )
@@ -550,7 +550,8 @@ With prefix ARG non-nil, insert the result at the end of region."
 
 (use-package elpy
   :config
-  (elpy-enable))
+  (elpy-enable)
+  (setq elpy-rpc-virtualenv-path 'current))
 
 
 (use-package back-button
@@ -575,6 +576,7 @@ With prefix ARG non-nil, insert the result at the end of region."
 	    (setq indent-tabs-mode nil)
 	    (setq tab-width 4)
 	    (setq python-indent-offset 4)))
+
 
 
 (custom-set-variables
