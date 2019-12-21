@@ -1,4 +1,3 @@
-urxvt*depth: 32
 urxvt*background: rgba:0000/0000/0200/c800
 
 !! Colorscheme
@@ -41,7 +40,7 @@ urxvt*background: rgba:0000/0000/0200/c800
 *.color15: #fdf6e3
 
 !! URxvt Appearance
-URxvt*font: xft:Source Code Pro Medium:size=11
+URxvt*font: xft:Source Code Pro Medium:size=10
 ! URxvt.boldFont: -*-rissole-*
 ! URxvt.italicFont: -*-rissole-*
 ! URxvt.boldItalicfont: -*-rissole-*
