@@ -20,8 +20,8 @@ super + shift + a
     rifle "$(find ~/Documents/ ~/Downloads/ ~/cs/ | dmenu -i -l 10 -fn Monospace-11)"
 super + z
     zathura
-#super + p
-#    rofi -show drun -theme arthur
+super + d
+   rofi -show drun -theme arthur -show-icons
 super + g
     st -e ranger ~
 super + x
@@ -30,3 +30,7 @@ super + s
       jupyter notebook ~/recsys/
 super + a
       xclip -o | xargs -r mpv
+XF86MonBrightnessDown
+	xbacklight -dec 10
+XF86MonBrightnessUp
+	xbacklight -inc 10
