@@ -50,3 +50,25 @@
 (use-package auto-complete
   :config
   (ac-config-default))
+
+(defun dired-connect-ssh (user ip)
+  (interactive "sUser name:\nsIp to connect:")
+  (find-file (concat "/ssh:" user "@" ip ":~")))
+
+(use-package hydra
+  :bind
+  ("C-c c" . hydra-ssh/body)
+  :config
+  (defhydra hydra-ssh (:color blue)
+    "Connect"
+    ; duff
+    ("d" (dired-connect-ssh "heitor" "200.17.66.6") "duff")
+    ("e" (dired-connect-ssh "heitor" "172.18.0.216") "Iduff")))
+
+(defun auto-rerun-sxhkd ()
+  "Used in `after-save-hook', sxhkd helper."
+  (when (or (equal buffer-file-name "/home/heitor/.config/sxhkd/sxhkdrc") (equal buffer-file-name "/home/heitor/dotfiles/.config/sxhkd/sxhkdrc"))
+    (call-process-shell-command
+     (concat "killall sxhkd; setsid sxhkd") nil 0
+     )
+    ))
