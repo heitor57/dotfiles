@@ -12,6 +12,8 @@
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
 (set-default-font "Fira Code" nil t)
+(add-to-list 'default-frame-alist
+	     '(vertical-scroll-bars . nil))
 
 (defun server-shutdown ()
   "Save buffers, Quit, and Shutdown (kill) server"
@@ -55,6 +57,8 @@
   (interactive "sUser name:\nsIp to connect:")
   (find-file (concat "/ssh:" user "@" ip ":~")))
 
+(setq dired-listing-switches "-alh")
+
 (use-package hydra
   :bind
   ("C-c c" . hydra-ssh/body)
@@ -65,10 +69,13 @@
     ("d" (dired-connect-ssh "heitor" "200.17.66.6") "duff")
     ("e" (dired-connect-ssh "heitor" "172.18.0.216") "Iduff")))
 
+
+(use-package helm
+  :config
+  (global-set-key (kbd "M-x") #'helm-M-x))
+
 (defun auto-rerun-sxhkd ()
   "Used in `after-save-hook', sxhkd helper."
   (when (or (equal buffer-file-name "/home/heitor/.config/sxhkd/sxhkdrc") (equal buffer-file-name "/home/heitor/dotfiles/.config/sxhkd/sxhkdrc"))
     (call-process-shell-command
-     (concat "killall sxhkd; setsid sxhkd") nil 0
-     )
-    ))
+     (concat "killall sxhkd; setsid sxhkd") nil 0)))
