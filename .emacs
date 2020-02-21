@@ -80,3 +80,4 @@
     (call-process-shell-command
      (concat "killall sxhkd; setsid sxhkd") nil 0)))
 
+(add-hook 'after-save-hook 'auto-rerun-sxhkd)
