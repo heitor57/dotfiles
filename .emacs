@@ -69,13 +69,14 @@
     ("d" (dired-connect-ssh "heitor" "200.17.66.6") "duff")
     ("e" (dired-connect-ssh "heitor" "172.18.0.216") "Iduff")))
 
-
-(use-package helm
+(use-package helm-smex
   :config
-  (global-set-key (kbd "M-x") #'helm-M-x))
+  (global-set-key (kbd "M-x") #'helm-smex)
+  (global-set-key (kbd "M-X") #'helm-smex-major-mode-commands))
 
 (defun auto-rerun-sxhkd ()
   "Used in `after-save-hook', sxhkd helper."
   (when (or (equal buffer-file-name "/home/heitor/.config/sxhkd/sxhkdrc") (equal buffer-file-name "/home/heitor/dotfiles/.config/sxhkd/sxhkdrc"))
     (call-process-shell-command
      (concat "killall sxhkd; setsid sxhkd") nil 0)))
+
