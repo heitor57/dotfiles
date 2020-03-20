@@ -35,6 +35,11 @@
   :config
   (evil-mode 1)
   (define-key evil-normal-state-map (kbd "<f5>") 'save-some-buffers)
+  (define-key evil-normal-state-map (kbd "z 1") 'org-latex-export-to-pdf)
+  (define-key evil-normal-state-map (kbd "z 2")
+    (lambda () (interactive)
+      (call-process-shell-command
+       (concat "zathura " (file-name-base) ".pdf") nil 0)))
   )
 
 (use-package magit)
@@ -82,3 +87,4 @@
 
 (add-hook 'after-save-hook 'auto-rerun-sxhkd)
 (setq dired-dwim-target t)
+(setq org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-diretory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))

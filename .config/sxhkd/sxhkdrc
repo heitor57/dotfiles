@@ -23,7 +23,7 @@ super + z
 super + d
    rofi -show drun -theme arthur -show-icons
 super + g
-    st -e ranger ~
+    urxvt -e ranger ~
 super + x
     import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
 super + s
@@ -34,3 +34,5 @@ XF86MonBrightnessDown
 	xbacklight -dec 10
 XF86MonBrightnessUp
 	xbacklight -inc 10
+super + m
+    urxvt -e ssh duff
