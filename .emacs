@@ -56,6 +56,7 @@
 
 (use-package company
   :config
+  (setq company-idle-delay 0)
   (add-hook 'after-init-hook 'global-company-mode))
 
 (defun dired-connect-ssh (user ip)
