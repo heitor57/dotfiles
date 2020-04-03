@@ -54,9 +54,9 @@
 			  (registers . 5)))
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
 
-(use-package auto-complete
+(use-package company
   :config
-  (ac-config-default))
+  (add-hook 'after-init-hook 'global-company-mode))
 
 (defun dired-connect-ssh (user ip)
   (interactive "sUser name:\nsIp to connect:")
@@ -88,3 +88,28 @@
 (add-hook 'after-save-hook 'auto-rerun-sxhkd)
 (setq dired-dwim-target t)
 (setq org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-diretory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
+
+(use-package org-ref)
+
+
+(use-package projectile
+  :config
+  (projectile-mode +1)
+  ;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (define-key evil-normal-state-map (kbd "z p") 'projectile-command-map)
+  )
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (company-mode zenburn-theme yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

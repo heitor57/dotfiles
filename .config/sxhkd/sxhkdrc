@@ -15,7 +15,7 @@ super + F11
 super + F12
     exec xbacklight -inc 10
 super + c
-    firefox
+    google-chrome-stable
 super + shift + a
     rifle "$(find ~/Documents/ ~/Downloads/ ~/cs/ ~/Dropbox/ | dmenu -i -l 10 -fn Monospace-11)"
 super + z
