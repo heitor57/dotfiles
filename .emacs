@@ -15,6 +15,27 @@
 (add-to-list 'default-frame-alist
 	     '(vertical-scroll-bars . nil))
 
+(setq
+ backup-by-copying t      ; don't clobber symlinks
+ backup-directory-alist
+ '(("." . "~/.saves/"))    ; don't litter my fs tree
+ delete-old-versions t
+ kept-new-versions 6
+ kept-old-versions 2
+ version-control t)       ; use versioned backups
+
+
+
+(use-package openwith
+  :config
+  (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
+					;("\\.html\\'" "firefox" (file))
+				;; ("\\.png\\'" "sxiv" (file))
+				;; ("\\.jpg\\'" "sxiv" (file))
+				))
+  (openwith-mode t)
+  )
+
 (defun server-shutdown ()
   "Save buffers, Quit, and Shutdown (kill) server"
   (interactive)
@@ -31,10 +52,16 @@
 
 (setq use-package-always-ensure t)
 
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive) (revert-buffer t t))
+
 (use-package evil
   :config
   (evil-mode 1)
   (define-key evil-normal-state-map (kbd "<f5>") 'save-some-buffers)
+  (define-key evil-normal-state-map (kbd "<f6>") 'revert-buffer-no-confirm)
+
   (define-key evil-normal-state-map (kbd "z 1") 'org-latex-export-to-pdf)
   (define-key evil-normal-state-map (kbd "z 2")
     (lambda () (interactive)
@@ -71,7 +98,7 @@
   :config
   (defhydra hydra-ssh (:color blue)
     "Connect"
-    ; duff
+					; duff
     ("d" (dired-connect-ssh "heitor" "200.17.66.6") "duff")
     ("e" (dired-connect-ssh "heitor" "172.18.0.216") "Iduff")))
 
@@ -88,10 +115,17 @@
 
 (add-hook 'after-save-hook 'auto-rerun-sxhkd)
 (setq dired-dwim-target t)
-(setq org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-diretory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
+
+(use-package org
+  :config
+  (setq org-startup-truncated nil)
+  (setq org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-diretory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
+  (setq org-latex-prefer-user-labels 1))
+
+
 
 (use-package org-ref)
-
+(use-package auctex)
 
 (use-package projectile
   :config
@@ -99,15 +133,25 @@
   ;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (define-key evil-normal-state-map (kbd "z p") 'projectile-command-map)
   )
+(use-package helm-bibtex
+  :config
+  (setq bibtex-completion-bibliography
+	'("~/Dropbox/RecSys2020SurveyPOIs/Apoio/doc.bib"
+	  ;; "~/Dropbox/RecSys2020SurveyPOIs/v02/recsys20.bib"
+	  ))
+  )
 
+;; (global-hl-line-mode 1)
+;; (set-face-attribute 'hl-line nil :inherit nil :background "gray7")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
    (quote
-    (company-mode zenburn-theme yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode))))
+    (auctex django-mode company-mode zenburn-theme yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
