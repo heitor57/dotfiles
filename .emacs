@@ -11,9 +11,9 @@
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
-(set-default-font "Fira Code" nil t)
 (add-to-list 'default-frame-alist
 	     '(vertical-scroll-bars . nil))
+(add-to-list 'default-frame-alist '(font . "Hack 10"))
 
 (setq
  backup-by-copying t      ; don't clobber symlinks
@@ -23,8 +23,6 @@
  kept-new-versions 6
  kept-old-versions 2
  version-control t)       ; use versioned backups
-
-
 
 (use-package openwith
   :config
@@ -98,8 +96,9 @@
   :config
   (defhydra hydra-ssh (:color blue)
     "Connect"
-					; duff
     ("d" (dired-connect-ssh "heitor" "200.17.66.6") "duff")
+    ("t" (dired-connect-ssh "heitor" "200.17.66.5") "tesla")
+    ("r" (dired-connect-ssh "heitor" "200.17.66.4") "ralph")
     ("e" (dired-connect-ssh "heitor" "172.18.0.216") "Iduff")))
 
 (use-package helm-smex
@@ -123,9 +122,9 @@
   (setq org-latex-prefer-user-labels 1))
 
 
-
 (use-package org-ref)
 (use-package auctex)
+(use-package ein)
 
 (use-package projectile
   :config
@@ -140,7 +139,38 @@
 	  ;; "~/Dropbox/RecSys2020SurveyPOIs/v02/recsys20.bib"
 	  ))
   )
+(use-package helm-ag
+  :config
+  (define-key evil-normal-state-map (kbd "f a") 'helm-ag)
+  )
 
+;; (use-package dracula-theme)
+;; (use-package minsk-theme)
+;; (require 'google-translate)
+
+
+
+
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/google-translate/"))
+;; (message (expand-file-name "~/.emacs.d/google-translate/"))
+;; (load "google-translate")
+;; (setq google-translate-translation-directions-alist '(("en" . "pt")))
+;; (require 'google-translate)
+
+;; (load "~/.emacs.d/google-translate/google-translate.el")
+(use-package google-translate
+ :init (setq google-translate-translation-directions-alist '(("en" . "pt")))
+ :config
+ (setq google-translate-backend-method 'curl)
+ ;; ;; (setq google-translate-backend-method 'curl)
+ ;; (require 'google-translate-smooth-ui)
+ (setq google-translate-output-destination nil)
+ :bind (("\C-ct" . google-translate-smooth-translate))
+ )
+;(google-translate-smooth-translate "ewqewqe")
+;; hello world
+
+;(set-frame-font "Fira Code" nil t)
 ;; (global-hl-line-mode 1)
 ;; (set-face-attribute 'hl-line nil :inherit nil :background "gray7")
 (custom-set-variables
@@ -151,7 +181,7 @@
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
    (quote
-    (auctex django-mode company-mode zenburn-theme yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode))))
+    (minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
