@@ -144,33 +144,15 @@
   (define-key evil-normal-state-map (kbd "f a") 'helm-ag)
   )
 
-;; (use-package dracula-theme)
+(use-package dracula-theme)
 ;; (use-package minsk-theme)
-;; (require 'google-translate)
-
-
-
-
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/google-translate/"))
-;; (message (expand-file-name "~/.emacs.d/google-translate/"))
-;; (load "google-translate")
-;; (setq google-translate-translation-directions-alist '(("en" . "pt")))
-;; (require 'google-translate)
-
-;; (load "~/.emacs.d/google-translate/google-translate.el")
 (use-package google-translate
  :init (setq google-translate-translation-directions-alist '(("en" . "pt")))
  :config
  (setq google-translate-backend-method 'curl)
- ;; ;; (setq google-translate-backend-method 'curl)
- ;; (require 'google-translate-smooth-ui)
  (setq google-translate-output-destination nil)
  :bind (("\C-ct" . google-translate-smooth-translate))
  )
-;(google-translate-smooth-translate "ewqewqe")
-;; hello world
-
-;(set-frame-font "Fira Code" nil t)
 ;; (global-hl-line-mode 1)
 ;; (set-face-attribute 'hl-line nil :inherit nil :background "gray7")
 (custom-set-variables
