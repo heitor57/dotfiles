@@ -4,8 +4,8 @@ PS1="%B%{$fg[blue]%}{-=%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%M %{$fg[mage
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=100000
+HISTSIZE=100000
+SAVEHIST=10000000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -34,4 +34,4 @@ setopt autocd autopushd
 
 
 
-alias em='emacsclient -c'
+alias e='emacsclient -c -nw'
