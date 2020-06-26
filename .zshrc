@@ -1,7 +1,6 @@
 autoload -U colors && colors
 PS1="%B%{$fg[blue]%}{-=%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%M %{$fg[magenta]%}%~%{$fg[blue]%}-=}%{$reset_color%}$%b "
 
-
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=100000
@@ -18,7 +17,6 @@ compinit
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #
 
-
 source <(antibody init)
 antibody bundle < ~/.zsh_plugins.txt
 
@@ -31,7 +29,5 @@ lsxhkd(){
 	disown %1	
 }
 setopt autocd autopushd
-
-
 
 alias e='emacsclient -c -nw'
