@@ -5,6 +5,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 
+(setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~") "/.local/bin"))
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-startup-screen t)
 (global-linum-mode t)
@@ -14,6 +15,7 @@
 (add-to-list 'default-frame-alist
 	     '(vertical-scroll-bars . nil))
 (add-to-list 'default-frame-alist '(font . "Hack 10"))
+;; (setq-default indent-tabs-mode nil)
 
 (setq
  backup-by-copying t      ; don't clobber symlinks
@@ -23,6 +25,7 @@
  kept-new-versions 6
  kept-old-versions 2
  version-control t)       ; use versioned backups
+
 
 (use-package openwith
   :config
@@ -60,7 +63,8 @@
   (define-key evil-normal-state-map (kbd "<f5>") 'save-some-buffers)
   (define-key evil-normal-state-map (kbd "<f6>") 'revert-buffer-no-confirm)
 
-  (define-key evil-normal-state-map (kbd "z 1") 'org-latex-export-to-pdf)
+  (define-key evil-normal-state-map (kbd "z 3") 'org-latex-export-to-pdf)
+  (define-key evil-normal-state-map (kbd "z 1") 'org-beamer-export-to-pdf)
   (define-key evil-normal-state-map (kbd "z 2")
     (lambda () (interactive)
       (call-process-shell-command
@@ -117,10 +121,30 @@
 
 (use-package org
   :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((C . t)
+     (R . t)
+     (shell . t)
+     (dot . t)
+     (gnuplot . t)
+     (python . t)
+     (sql . t)
+     ))
   (setq org-startup-truncated nil)
   (setq org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-diretory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
-  (setq org-latex-prefer-user-labels 1))
+  (setq org-latex-prefer-user-labels 1)
+  (setq org-beamer-frame-level 2)
+  )
 
+;; (with-eval-after-load 'ox-latex
+;;   (add-to-list 'org-latex-classes
+;; 	       '("beamer"
+;; 		 "\\documentclass\[presentation\]\{beamer\}"
+;; 		 ("\\section\{%s\}" . "\\section*\{%s\}")
+;; 		 ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+;; 		 ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
+;;   )
 
 (use-package org-ref)
 (use-package auctex)
@@ -144,7 +168,7 @@
   (define-key evil-normal-state-map (kbd "f a") 'helm-ag)
   )
 
-(use-package dracula-theme)
+;; (use-package dracula-theme)
 ;; (use-package minsk-theme)
 (use-package google-translate
  :init (setq google-translate-translation-directions-alist '(("en" . "pt")))
@@ -153,8 +177,61 @@
  (setq google-translate-output-destination nil)
  :bind (("\C-ct" . google-translate-smooth-translate))
  )
+
+(use-package kotlin-mode
+  :config
+  (define-key evil-normal-state-map (kbd "f k") '(lambda () (interactive)
+      (call-process-shell-command
+       (concat "kotlinr " (buffer-file-name)) nil 0)))
+  )
+(use-package material-theme)
+(use-package ace-jump-mode
+  :config
+  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+  )
+;; (call-process-shell-command
+;;        (concat "kotlin " (buffer-file-name)) nil t)
+
+;; (call-process-shell-command
+;;  (concat "kotlinr " (buffer-file-name)) nil t)
+
 ;; (global-hl-line-mode 1)
 ;; (set-face-attribute 'hl-line nil :inherit nil :background "gray7")
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'latex-mode-hook 'turn-on-auto-fill)
+(add-hook 'python-mode-hook 'turn-on-auto-fill)
+(eval-after-load "artist"
+   '(define-key artist-mode-map (kbd "C-,") 'artist-mouse-choose-operation)
+   )
+(defun how-many-region (begin end regexp &optional interactive)
+  "Print number of non-trivial matches for REGEXP in region.                    
+   Non-interactive arguments are Begin End Regexp"
+  (interactive "r\nsHow many matches for (regexp): \np")
+  (let ((count 0) opoint)
+    (save-excursion
+      (setq end (or end (point-max)))
+      (goto-char (or begin (point)))
+      (while (and (< (setq opoint (point)) end)
+                  (re-search-forward regexp end t))
+        (if (= opoint (point))
+            (forward-char 1)
+          (setq count (1+ count))))
+      (if interactive (message "%d occurrences" count))
+      count)))
+
+(defun infer-indentation-style ()
+  ;; if our source file uses tabs, we use tabs, if spaces spaces, and if        
+  ;; neither, we use the current indent-tabs-mode                               
+  (progn
+    (setq indent-tabs-mode nil)
+    (let ((space-count (how-many-region (point-min) (point-max) "^  "))
+	  (tab-count (how-many-region (point-min) (point-max) "^\t")))
+      (if (> space-count tab-count) (setq indent-tabs-mode nil))
+      (if (> tab-count space-count) (setq indent-tabs-mode t)))
+    )
+  )
+
+(add-hook 'python-mode-hook 'infer-indentation-style)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -163,7 +240,7 @@
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
    (quote
-    (minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode))))
+    (ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
