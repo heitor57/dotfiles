@@ -3,7 +3,7 @@ XF86MonBrightnessDown
 XF86MonBrightnessUp
     xbacklight -inc 10
 super + Return
-    st
+    cd ~ && st
 super + F4
     sxiv -t ~/Pictures
 super + shift + i
@@ -23,7 +23,7 @@ super + shift + a
 super + e
     emacsclient -c
 super + c
-    google-chrome-stable
+    firefox
 super + z
     zathura
 super + a
