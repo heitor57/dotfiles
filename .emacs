@@ -30,6 +30,7 @@
 (use-package openwith
   :config
   (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
+				("\\.jar\\'" "java -jar " (file))
 					;("\\.html\\'" "firefox" (file))
 				;; ("\\.png\\'" "sxiv" (file))
 				;; ("\\.jpg\\'" "sxiv" (file))
@@ -76,7 +77,7 @@
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner nil)
-  (setq dashboard-items '((recents  . 13)
+  (setq dashboard-items '((recents  . 60)
 			  (bookmarks . 5)
 			  (projects . 8)
 			  (agenda . 8)
@@ -148,7 +149,10 @@
 
 (use-package org-ref)
 (use-package auctex)
-(use-package ein)
+(use-package ein
+  :config
+  (setq ein:worksheet-enable-undo t)
+  )
 
 (use-package projectile
   :config
