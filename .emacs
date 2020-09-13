@@ -64,8 +64,8 @@
   (define-key evil-normal-state-map (kbd "<f5>") 'save-some-buffers)
   (define-key evil-normal-state-map (kbd "<f6>") 'revert-buffer-no-confirm)
 
-  (define-key evil-normal-state-map (kbd "z 3") 'org-latex-export-to-pdf)
-  (define-key evil-normal-state-map (kbd "z 1") 'org-beamer-export-to-pdf)
+  (define-key evil-normal-state-map (kbd "z 3") 'org-beamer-export-to-pdf)
+  (define-key evil-normal-state-map (kbd "z 1") 'org-latex-export-to-pdf)
   (define-key evil-normal-state-map (kbd "z 2")
     (lambda () (interactive)
       (call-process-shell-command
@@ -199,11 +199,11 @@
 ;; (call-process-shell-command
 ;;  (concat "kotlinr " (buffer-file-name)) nil t)
 
-;; (global-hl-line-mode 1)
-;; (set-face-attribute 'hl-line nil :inherit nil :background "gray7")
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'latex-mode-hook 'turn-on-auto-fill)
-(add-hook 'python-mode-hook 'turn-on-auto-fill)
+(global-hl-line-mode 1)
+(set-face-attribute 'hl-line nil :inherit nil :background "gray7")
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; (add-hook 'latex-mode-hook 'turn-on-auto-fill)
+;; (add-hook 'python-mode-hook 'turn-on-auto-fill)
 (eval-after-load "artist"
    '(define-key artist-mode-map (kbd "C-,") 'artist-mouse-choose-operation)
    )
@@ -236,6 +236,18 @@
   )
 
 (add-hook 'python-mode-hook 'infer-indentation-style)
+
+(setq ispell-dictionary "brasileiro")
+(setq org-time-stamp-formats '("<%Y-%m-%d %H:%M> " . "<%Y-%m-%d %a %H:%M>"))
+(evil-set-initial-state 'nov-mode 'emacs)
+(evil-set-initial-state 'calendar 'emacs)
+(defun increment-number-at-point ()
+  (interactive)
+  (skip-chars-backward "0-9")
+  (or (looking-at "[0-9]+")
+      (error "No number at point"))
+  (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
+(use-package smartparens)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -243,8 +255,7 @@
  ;; If there is more than one, they won't work right.
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
-   (quote
-    (ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode))))
+   '(smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
