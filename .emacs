@@ -248,6 +248,16 @@
       (error "No number at point"))
   (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
 (use-package smartparens)
+(use-package all-the-icons
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+  )
+
+;; (use-package spaceline
+;;   :config
+;;   (require 'spaceline-config)
+;;   )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
