@@ -187,4 +187,4 @@ new_window 1pixel
 bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
 gaps inner 9
 
-exec_always compton
+exec_always compton -i 1
