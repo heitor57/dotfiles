@@ -243,6 +243,7 @@
 (setq org-time-stamp-formats '("<%Y-%m-%d %H:%M> " . "<%Y-%m-%d %a %H:%M>"))
 (evil-set-initial-state 'nov-mode 'emacs)
 (evil-set-initial-state 'calendar 'emacs)
+(evil-set-initial-state 'ses-mode 'emacs)
 (defun increment-number-at-point ()
   (interactive)
   (skip-chars-backward "0-9")
