@@ -32,6 +32,7 @@
   (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
 				("\\.jar\\'" "java -jar " (file))
 				("\\.mkv\\'" "mpv " (file))
+				("\\.mp4\\'" "mpv " (file))
 
 					;("\\.html\\'" "firefox" (file))
 				;; ("\\.png\\'" "sxiv" (file))
