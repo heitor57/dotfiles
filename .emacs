@@ -26,13 +26,13 @@
  kept-old-versions 2
  version-control t)       ; use versioned backups
 
-
 (use-package openwith
   :config
   (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
 				("\\.jar\\'" "java -jar " (file))
 				("\\.mkv\\'" "mpv " (file))
 				("\\.mp4\\'" "mpv " (file))
+				("\\.eps\\'" "evince " (file))
 
 					;("\\.html\\'" "firefox" (file))
 				;; ("\\.png\\'" "sxiv" (file))
@@ -135,8 +135,10 @@
      (python . t)
      (sql . t)
      ))
+  (setq org-confirm-babel-evaluate nil)
   (setq org-startup-truncated nil)
   (setq org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-diretory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
+  ;; (setq org-latex-pdf-process '("pdflatex %f" "bibtex %b" "pdflatex %f" "pdflatex %f"))
   (setq org-latex-prefer-user-labels 1)
   (setq org-beamer-frame-level 2)
   )
@@ -238,7 +240,7 @@
     )
   )
 
-(add-hook 'python-mode-hook 'infer-indentation-style)
+;; (add-hook 'python-mode-hook 'infer-indentation-style)
 
 (setq ispell-dictionary "brasileiro")
 (setq org-time-stamp-formats '("<%Y-%m-%d %H:%M> " . "<%Y-%m-%d %a %H:%M>"))
@@ -266,12 +268,14 @@
 ;;   (lambda ()
 ;;     (interactive)
 ;;     (message (dired-get-marked-files))))
-
+(setq-default indent-tabs-mode nil)
+(global-undo-tree-mode)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-undo-system 'undo-tree)
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
    '(org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
