@@ -1,0 +1,6 @@
+#!/bin/bash
+# function kotlinr() {
+echo Compiling...
+kotlinc $1 -include-runtime -d ${1%.*}.jar
+java -jar ${1%.*}.jar
+# }
