@@ -91,7 +91,13 @@
 (use-package company
   :config
   (setq company-idle-delay 0)
-  (add-hook 'after-init-hook 'global-company-mode))
+  (use-package company-anaconda
+    :config
+    (add-to-list 'company-backends 'company-anaconda)
+    (add-hook 'python-mode-hook 'anaconda-mode))
+  (add-hook 'after-init-hook 'global-company-mode)
+
+  )
 
 (defun dired-connect-ssh (user ip)
   (interactive "sUser name:\nsIp to connect:")
@@ -164,14 +170,14 @@
   :config
   (projectile-mode +1)
   ;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (define-key evil-normal-state-map (kbd "z p") 'projectile-command-map)
+  (define-key evil-normal-state-map (kbd "´") 'projectile-command-map)
   )
 (use-package helm-bibtex
   :config
   (setq bibtex-completion-bibliography
-	'("~/Dropbox/RecSys2020SurveyPOIs/Apoio/doc.bib"
-	  ;; "~/Dropbox/RecSys2020SurveyPOIs/v02/recsys20.bib"
-	  ))
+        '("~/Dropbox/RecSys2020SurveyPOIs/Apoio/doc.bib"
+          ;; "~/Dropbox/RecSys2020SurveyPOIs/v02/recsys20.bib"
+          ))
   )
 (use-package helm-ag
   :config
@@ -182,18 +188,18 @@
 ;; (use-package dracula-theme)
 ;; (use-package minsk-theme)
 (use-package google-translate
- :init (setq google-translate-translation-directions-alist '(("en" . "pt")))
- :config
- (setq google-translate-backend-method 'curl)
- (setq google-translate-output-destination nil)
- :bind (("\C-ct" . google-translate-smooth-translate))
- )
+  :init (setq google-translate-translation-directions-alist '(("en" . "pt")))
+  :config
+  (setq google-translate-backend-method 'curl)
+  (setq google-translate-output-destination nil)
+  :bind (("\C-ct" . google-translate-smooth-translate))
+  )
 
 (use-package kotlin-mode
   :config
   (define-key evil-normal-state-map (kbd "f k") '(lambda () (interactive)
-      (call-process-shell-command
-       (concat "kotlinr " (buffer-file-name)) nil 0)))
+                                                   (call-process-shell-command
+                                                    (concat "kotlinr " (buffer-file-name)) nil 0)))
   )
 (use-package material-theme)
 (use-package ace-jump-mode
@@ -212,8 +218,8 @@
 ;; (add-hook 'latex-mode-hook 'turn-on-auto-fill)
 ;; (add-hook 'python-mode-hook 'turn-on-auto-fill)
 (eval-after-load "artist"
-   '(define-key artist-mode-map (kbd "C-,") 'artist-mouse-choose-operation)
-   )
+  '(define-key artist-mode-map (kbd "C-,") 'artist-mouse-choose-operation)
+  )
 (defun how-many-region (begin end regexp &optional interactive)
   "Print number of non-trivial matches for REGEXP in region.                    
    Non-interactive arguments are Begin End Regexp"
@@ -236,7 +242,7 @@
   (progn
     (setq indent-tabs-mode nil)
     (let ((space-count (how-many-region (point-min) (point-max) "^  "))
-	  (tab-count (how-many-region (point-min) (point-max) "^\t")))
+          (tab-count (how-many-region (point-min) (point-max) "^\t")))
       (if (> space-count tab-count) (setq indent-tabs-mode nil))
       (if (> tab-count space-count) (setq indent-tabs-mode t)))
     )
@@ -294,6 +300,9 @@
   (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
   )
+
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -302,7 +311,7 @@
  '(evil-undo-system 'undo-tree)
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
-   '(indent-tools org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
+   '(helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
