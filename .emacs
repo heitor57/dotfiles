@@ -91,6 +91,14 @@
 (use-package company
   :config
   (setq company-idle-delay 0)
+  (use-package company-irony
+    :config
+    (add-to-list 'company-backends 'company-irony)
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'objc-mode-hook 'irony-mode)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+    )
   (use-package company-anaconda
     :config
     (add-to-list 'company-backends 'company-anaconda)
@@ -311,7 +319,7 @@
  '(evil-undo-system 'undo-tree)
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
-   '(helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
+   '(irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
