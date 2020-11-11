@@ -309,14 +309,18 @@
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
   )
 
-(use-package flycheck
-  :config
-  (setq flycheck-python-pycompile-executable "python3")
-  (global-flycheck-mode)
-  )
-(use-package flycheck-irony
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+;; (use-package flycheck
+;;   :config
+;;   (setq flycheck-python-pycompile-executable "python3")
+;;   (global-flycheck-mode)
+;;   )
+;; (use-package flycheck-irony
+;;   :config
+;;   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+;; (use-package irony-eldoc
+;;   :config
+;;   (add-hook 'irony-mode-hook #'irony-eldoc)
+;;   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -325,7 +329,7 @@
  '(evil-undo-system 'undo-tree)
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
-   '(flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
+   '(irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
