@@ -26,8 +26,6 @@ super + c
     firefox
 super + z
     zathura
-super + d
-   rofi -show drun -theme arthur -show-icons -theme-str 'element-icon \{ size: 2.4ch;\}'
 super + g
     st -e ranger ~
 super + x
