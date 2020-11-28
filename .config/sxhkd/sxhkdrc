@@ -9,11 +9,14 @@ super + F4
 super + shift + i
     slock
 XF86AudioRaiseVolume
-    pactl set-sink-volume @DEFAULT_SINK@ +5%
+    i3-volume -e 50 -n -N xosd up 5
+# pactl set-sink-volume @DEFAULT_SINK@ +5%
 XF86AudioLowerVolume
-    pactl set-sink-volume @DEFAULT_SINK@ -5%
+    i3-volume -e 50 -n -N xosd down 5
+# pactl set-sink-volume @DEFAULT_SINK@ -5%
 XF86AudioMute
-    pactl set-sink-mute @DEFAULT_SINK@ toggle
+    i3-volume -e 50 -n -N xosd mute
+# pactl set-sink-mute @DEFAULT_SINK@ toggle
 super + F11
     exec xbacklight -dec 10
 super + F12
