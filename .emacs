@@ -28,12 +28,12 @@
 
 (use-package openwith
   :config
-  (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))
+  (setq openwith-associations '(("\\.pdf\\'" "evince" (file))
 				("\\.jar\\'" "java -jar " (file))
 				("\\.mkv\\'" "mpv " (file))
 				("\\.mp4\\'" "mpv " (file))
 				("\\.eps\\'" "evince " (file))
-				("\\.png\\'" "sxiv " (file))
+				;; ("\\.png\\'" "sxiv " (file))
 
 					;("\\.html\\'" "firefox" (file))
 				;; ("\\.png\\'" "sxiv" (file))
@@ -73,7 +73,7 @@
   (define-key evil-normal-state-map (kbd "z 2")
     (lambda () (interactive)
       (call-process-shell-command
-       (concat "zathura " (file-name-base) ".pdf") nil 0)))
+       (concat "evince " (file-name-base) ".pdf") nil 0)))
   )
 
 (use-package magit)
@@ -309,18 +309,18 @@
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
   )
 
-;; (use-package flycheck
-;;   :config
-;;   (setq flycheck-python-pycompile-executable "python3")
-;;   (global-flycheck-mode)
-;;   )
-;; (use-package flycheck-irony
-;;   :config
-;;   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-;; (use-package irony-eldoc
-;;   :config
-;;   (add-hook 'irony-mode-hook #'irony-eldoc)
-;;   )
+(use-package flycheck
+  :config
+  (setq flycheck-python-pycompile-executable "python3")
+  (global-flycheck-mode)
+  )
+(use-package flycheck-irony
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+(use-package irony-eldoc
+  :config
+  (add-hook 'irony-mode-hook #'irony-eldoc)
+  )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
