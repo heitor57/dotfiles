@@ -39,3 +39,6 @@ super + a
     xclip -o | xargs -r mp
 super + m
     st -e ssh duff
+super + F7
+    pactl set-source-mute 1 toggle
+    
