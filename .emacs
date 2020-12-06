@@ -14,7 +14,7 @@
 (tool-bar-mode -1)
 (add-to-list 'default-frame-alist
 	     '(vertical-scroll-bars . nil))
-(add-to-list 'default-frame-alist '(font . "Hack 10"))
+;; (add-to-list 'default-frame-alist '(font . "Hack 10"))
 ;; (setq-default indent-tabs-mode nil)
 
 (setq
@@ -62,6 +62,7 @@
   "Revert buffer without confirmation."
   (interactive) (revert-buffer t t))
 
+(use-package undo-tree)
 (use-package evil
   :config
   (evil-mode 1)
@@ -74,7 +75,9 @@
     (lambda () (interactive)
       (call-process-shell-command
        (concat "evince " (file-name-base) ".pdf") nil 0)))
-  )
+;; (evil-set-undo-system 'undo-tree)
+)
+;; (global-undo-tree-mode)
 
 (use-package magit)
 (use-package dashboard
@@ -174,11 +177,12 @@
   (setq ein:worksheet-enable-undo t)
   )
 
+(use-package counsel-projectile)
 (use-package projectile
   :config
-  (projectile-mode +1)
   ;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (define-key evil-normal-state-map (kbd "´") 'projectile-command-map)
+  (counsel-projectile-mode +1)
   )
 (use-package helm-bibtex
   :config
@@ -285,7 +289,7 @@
 ;;     (interactive)
 ;;     (message (dired-get-marked-files))))
 (setq-default indent-tabs-mode nil)
-(global-undo-tree-mode)
+;; (global-undo-tree-mode)
 ;; (add-hook 'image-mode-hook
 ;;   (lambda ()
 ;;     (auto-revert-mode)
@@ -309,18 +313,25 @@
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
   )
 
-(use-package flycheck
-  :config
-  (setq flycheck-python-pycompile-executable "python3")
-  (global-flycheck-mode)
-  )
-(use-package flycheck-irony
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-(use-package irony-eldoc
-  :config
-  (add-hook 'irony-mode-hook #'irony-eldoc)
-  )
+;; (use-package flycheck
+;;   :config
+;;   (setq flycheck-python-pycompile-executable "python3")
+;;   (global-flycheck-mode)
+;;   )
+;; (use-package flycheck-irony
+;;   :config
+;;   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+;; (use-package irony-eldoc
+;;   :config
+;;   (add-hook 'irony-mode-hook #'irony-eldoc)
+;;   )
+
+
+
+(global-undo-tree-mode)
+(with-eval-after-load 'undo-tree (defun undo-tree-overridden-undo-bindings-p () nil))
+
+(turn-on-undo-tree-mode)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -329,10 +340,12 @@
  '(evil-undo-system 'undo-tree)
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
-   '(irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
+   '(counsel-projectile irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
