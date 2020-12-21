@@ -32,7 +32,7 @@
 				("\\.jar\\'" "java -jar " (file))
 				("\\.mkv\\'" "mpv " (file))
 				("\\.mp4\\'" "mpv " (file))
-				("\\.eps\\'" "evince " (file))
+				;; ("\\.eps\\'" "evince " (file))
 				;; ("\\.png\\'" "sxiv " (file))
 
 					;("\\.html\\'" "firefox" (file))
@@ -102,10 +102,10 @@
     (add-hook 'objc-mode-hook 'irony-mode)
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
     )
-  (use-package company-anaconda
-    :config
-    (add-to-list 'company-backends 'company-anaconda)
-    (add-hook 'python-mode-hook 'anaconda-mode))
+  ;; (use-package company-anaconda
+  ;;   :config
+  ;;   (add-to-list 'company-backends 'company-anaconda)
+  ;;   (add-hook 'python-mode-hook 'anaconda-mode))
   (add-hook 'after-init-hook 'global-company-mode)
 
   )
@@ -262,7 +262,7 @@
 
 ;; (add-hook 'python-mode-hook 'infer-indentation-style)
 
-(setq ispell-dictionary "brasileiro")
+;; (setq ispell-dictionary "brasileiro")
 (setq org-time-stamp-formats '("<%Y-%m-%d %H:%M> " . "<%Y-%m-%d %a %H:%M>"))
 (evil-set-initial-state 'nov-mode 'emacs)
 (evil-set-initial-state 'calendar 'emacs)
