@@ -102,10 +102,10 @@
     (add-hook 'objc-mode-hook 'irony-mode)
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
     )
-  ;; (use-package company-anaconda
-  ;;   :config
-  ;;   (add-to-list 'company-backends 'company-anaconda)
-  ;;   (add-hook 'python-mode-hook 'anaconda-mode))
+  (use-package company-anaconda
+    :config
+    (add-to-list 'company-backends 'company-anaconda)
+    (add-hook 'python-mode-hook 'anaconda-mode))
   (add-hook 'after-init-hook 'global-company-mode)
 
   )
@@ -132,13 +132,6 @@
   (global-set-key (kbd "M-x") #'helm-smex)
   (global-set-key (kbd "M-X") #'helm-smex-major-mode-commands))
 
-(defun auto-rerun-sxhkd ()
-  "Used in `after-save-hook', sxhkd helper."
-  (when (or (equal buffer-file-name "/home/heitor/.config/sxhkd/sxhkdrc") (equal buffer-file-name "/home/heitor/dotfiles/.config/sxhkd/sxhkdrc"))
-    (call-process-shell-command
-     (concat "killall sxhkd; setsid sxhkd") nil 0)))
-
-(add-hook 'after-save-hook 'auto-rerun-sxhkd)
 (setq dired-dwim-target t)
 
 (use-package org
@@ -332,6 +325,12 @@
 (with-eval-after-load 'undo-tree (defun undo-tree-overridden-undo-bindings-p () nil))
 
 (turn-on-undo-tree-mode)
+
+(use-package lsp-java
+  :config
+(add-hook 'java-mode-hook #'lsp)
+  )
+(use-package vterm)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -340,7 +339,7 @@
  '(evil-undo-system 'undo-tree)
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
-   '(counsel-projectile irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
+   '(vterm lsp-java counsel-projectile irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump material-theme kotlin-mode minsk-theme modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package solarized-theme ranger projectile poly-markdown org-ref org-bullets openwith nimbus-theme neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
