@@ -75,9 +75,7 @@
     (lambda () (interactive)
       (call-process-shell-command
        (concat "evince " (file-name-base) ".pdf") nil 0)))
-;; (evil-set-undo-system 'undo-tree)
 )
-;; (global-undo-tree-mode)
 
 (use-package magit)
 (use-package dashboard
@@ -149,19 +147,9 @@
   (setq org-confirm-babel-evaluate nil)
   (setq org-startup-truncated nil)
   (setq org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f" "bibtex %b" "pdflatex -interaction nonstopmode -output-diretory %o %f" "pdflatex -interaction nonstopmode -output-directory %o %f"))
-  ;; (setq org-latex-pdf-process '("pdflatex %f" "bibtex %b" "pdflatex %f" "pdflatex %f"))
   (setq org-latex-prefer-user-labels 1)
   (setq org-beamer-frame-level 2)
   )
-
-;; (with-eval-after-load 'ox-latex
-;;   (add-to-list 'org-latex-classes
-;; 	       '("beamer"
-;; 		 "\\documentclass\[presentation\]\{beamer\}"
-;; 		 ("\\section\{%s\}" . "\\section*\{%s\}")
-;; 		 ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
-;; 		 ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
-;;   )
 
 (use-package org-ref)
 (use-package auctex)
@@ -214,17 +202,9 @@
   :config
   (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
   )
-;; (call-process-shell-command
-;;        (concat "kotlin " (buffer-file-name)) nil t)
-
-;; (call-process-shell-command
-;;  (concat "kotlinr " (buffer-file-name)) nil t)
 
 (global-hl-line-mode 1)
 (set-face-attribute 'hl-line nil :inherit nil :background "gray7")
-;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
-;; (add-hook 'latex-mode-hook 'turn-on-auto-fill)
-;; (add-hook 'python-mode-hook 'turn-on-auto-fill)
 (eval-after-load "artist"
   '(define-key artist-mode-map (kbd "C-,") 'artist-mouse-choose-operation)
   )
@@ -256,8 +236,6 @@
     )
   )
 
-;; (add-hook 'python-mode-hook 'infer-indentation-style)
-
 ;; (setq ispell-dictionary "brasileiro")
 (setq org-time-stamp-formats '("<%Y-%m-%d %H:%M> " . "<%Y-%m-%d %a %H:%M>"))
 (evil-set-initial-state 'nov-mode 'emacs)
@@ -275,15 +253,7 @@
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
   )
 (require 'org-tempo)
-;; (use-package spaceline
-;;   :config
-;;   (require 'spaceline-config)
-;;   )
 
-;; (define-key dired-mode-map (kbd "F")
-;;   (lambda ()
-;;     (interactive)
-;;     (message (dired-get-marked-files))))
 (setq-default indent-tabs-mode nil)
 ;; (global-undo-tree-mode)
 ;; (add-hook 'image-mode-hook
