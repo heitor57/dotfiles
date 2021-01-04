@@ -165,13 +165,7 @@
   (define-key evil-normal-state-map (kbd "´") 'projectile-command-map)
   (counsel-projectile-mode +1)
   )
-(use-package helm-bibtex
-  :config
-  (setq bibtex-completion-bibliography
-        '("~/Dropbox/RecSys2020SurveyPOIs/Apoio/doc.bib"
-          ;; "~/Dropbox/RecSys2020SurveyPOIs/v02/recsys20.bib"
-          ))
-  )
+(use-package helm-bibtex)
 (use-package helm-ag
   :config
   (define-key evil-normal-state-map (kbd "f a") 'helm-ag)
@@ -182,7 +176,6 @@
 :config
 (load-theme 'dracula t)
   )
-;; (use-package minsk-theme)
 (use-package google-translate
   :init (setq google-translate-translation-directions-alist '(("en" . "pt")))
   :config
@@ -197,7 +190,6 @@
                                                    (call-process-shell-command
                                                     (concat "kotlinr " (buffer-file-name)) nil 0)))
   )
-;; (use-package material-theme)
 (use-package ace-jump-mode
   :config
   (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
