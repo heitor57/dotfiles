@@ -302,6 +302,13 @@
   (global-set-key (kbd "C-x o") 'switch-window)
   )
 
+(use-package visual-regexp-steroids
+  :config
+  (define-key global-map (kbd "C-c r") 'vr/replace)
+  (define-key global-map (kbd "C-c q") 'vr/query-replace)
+  (define-key esc-map (kbd "C-r") 'vr/isearch-backward)
+  (define-key esc-map (kbd "C-s") 'vr/isearch-forward))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -310,7 +317,7 @@
  '(evil-undo-system 'undo-tree)
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
-   '(switch-window vterm lsp-java counsel-projectile irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump kotlin-mode modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package ranger projectile poly-markdown org-ref org-bullets openwith neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
+   '(visual-regexp-steroids switch-window vterm lsp-java counsel-projectile irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump kotlin-mode modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package ranger projectile poly-markdown org-ref org-bullets openwith neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
