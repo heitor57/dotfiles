@@ -168,7 +168,8 @@
 (use-package helm-bibtex)
 (use-package helm-ag
   :config
-  (define-key evil-normal-state-map (kbd "f a") 'helm-ag)
+  ;; (define-key evil-normal-state-map (kbd "f a") 'helm-ag)
+  (global-set-key (kbd "C-c d") 'helm-ag)
   (global-set-key (kbd "C-x b") 'helm-buffers-list)
   )
 
