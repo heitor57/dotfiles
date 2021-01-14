@@ -321,6 +321,13 @@
 
 (add-hook 'python-mode-hook 'highlight-indentation-mode)
 (add-hook 'yaml-mode-hook 'highlight-indentation-mode)
+
+(use-package origami
+  :config
+  (global-origami-mode)
+  (define-key origami-mode-map (kbd "C-c f") 'origami-recursively-toggle-node)
+  (define-key origami-mode-map (kbd "C-c v") 'origami-toggle-all-nodes)
+)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -330,7 +337,7 @@
  '(key-chord-two-keys-delay 0.05)
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
-   '(smart-shift highlight-indentation-mode visual-regexp-steroids switch-window vterm lsp-java counsel-projectile irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump kotlin-mode modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package ranger projectile poly-markdown org-ref org-bullets openwith neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
+   '(origami smart-shift highlight-indentation-mode visual-regexp-steroids switch-window vterm lsp-java counsel-projectile irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump kotlin-mode modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package ranger projectile poly-markdown org-ref org-bullets openwith neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
