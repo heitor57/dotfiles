@@ -3,7 +3,7 @@ XF86MonBrightnessDown
 XF86MonBrightnessUp
     xbacklight -inc 10
 super + Return
-    cd ~ && urxvt
+    cd ~ && st
 super + F4
     sxiv -t ~/Pictures
 super + shift + i
@@ -30,7 +30,7 @@ super + c
 super + z
     zathura
 super + g
-    urxvt -e ranger ~
+    st -e ranger ~
 super + x
     import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
 super + s
@@ -38,7 +38,7 @@ super + s
 super + a
     xclip -o | xargs -r mp
 super + m
-    urxvt -e ssh duff
+    st -e ssh duff
 super + F7
     pactl set-source-mute 1 toggle
     
