@@ -4,6 +4,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
 endif
 
+set tabstop=2
 set number
 set hlsearch
 set incsearch
