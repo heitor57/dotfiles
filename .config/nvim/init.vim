@@ -18,9 +18,10 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
 Plug 'scrooloose/nerdTree'
-nmap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 Plug 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup = 1
 Plug 'bling/vim-airline'
@@ -32,10 +33,11 @@ Plug 'ayu-theme/ayu-vim'
 set termguicolors     " enable true colors support
 let ayucolor="mirage"  " for light version of theme
 Plug 'preservim/nerdcommenter'
-map <A-;> <plug>NERDCommenterToggle
+nnoremap <A-;> <plug>NERDCommenterToggle
 "Plug 'jreybert/vimagit'
 Plug 'tpope/vim-fugitive'
-map <C-a> :Git<CR>
+nnoremap <A-g> :Git<CR>
+nnoremap <A-p> :Gpush<CR>
+nnoremap <A-ç> :Gpull<CR>
 call plug#end()
 colorscheme ayu
-
