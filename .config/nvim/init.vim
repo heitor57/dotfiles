@@ -29,8 +29,8 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-Plug 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_enable_on_vim_startup = 1
+"Plug 'nathanaelkane/vim-indent-guides'
+"let g:indent_guides_enable_on_vim_startup = 1
 Plug 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -48,5 +48,7 @@ nnoremap <A-p> :Gpush<CR>
 nnoremap <A-ç> :Gpull<CR>
 Plug 'pedrohdz/vim-yaml-folds'
 
+"Plug 'airblade/vim-rooter'
+Plug 'mhinz/vim-startify'
 call plug#end()
 colorscheme ayu
