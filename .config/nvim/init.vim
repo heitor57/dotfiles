@@ -8,6 +8,12 @@ set number
 set hlsearch
 set incsearch
 set inccommand=nosplit
+set foldmethod=indent
+set nofoldenable
+set foldexpr=VimFolds(v:lnum)
+set foldtext=MyFoldText()
+set fillchars=fold:\
+
 call plug#begin('~/.vim/plugged')
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -39,5 +45,7 @@ Plug 'tpope/vim-fugitive'
 nnoremap <A-g> :Git<CR>
 nnoremap <A-p> :Gpush<CR>
 nnoremap <A-ç> :Gpull<CR>
+Plug 'pedrohdz/vim-yaml-folds'
+
 call plug#end()
 colorscheme ayu
