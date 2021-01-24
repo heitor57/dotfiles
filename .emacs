@@ -8,7 +8,7 @@
 (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~") "/.local/bin"))
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-startup-screen t)
-(global-linum-mode t)
+(global-display-line-numbers-mode)
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
@@ -317,17 +317,26 @@
   (define-key esc-map (kbd "C-r") 'vr/isearch-backward)
   (define-key esc-map (kbd "C-s") 'vr/isearch-forward))
 
-(use-package highlight-indentation)
-
-(add-hook 'python-mode-hook 'highlight-indentation-mode)
-(add-hook 'yaml-mode-hook 'highlight-indentation-mode)
-
-(use-package origami
+(use-package highlight-indentation
   :config
-  (global-origami-mode)
-  (define-key origami-mode-map (kbd "C-c f") 'origami-recursively-toggle-node)
-  (define-key origami-mode-map (kbd "C-c v") 'origami-toggle-all-nodes)
-)
+  (add-hook 'prog-mode-hook 'highlight-indentation-mode)
+  (add-hook 'yaml-mode-hook 'highlight-indentation-mode)
+  )
+
+(use-package yafolding
+  :config
+  (add-hook 'prog-mode-hook
+            (lambda () (yafolding-mode)))
+  (add-hook 'yaml-mode-hook
+            (lambda () (yafolding-mode)))
+  (define-key yafolding-mode-map (kbd "C-c f") 'yafolding-toggle-all)
+  (define-key yafolding-mode-map (kbd "C-c v") 'yafolding-toggle-element)
+  )
+(use-package indent-tools
+  :config
+(global-set-key (kbd "C-c >") 'indent-tools-hydra/body)
+  )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -337,7 +346,7 @@
  '(key-chord-two-keys-delay 0.05)
  '(org-ref-pdf-directory "~/Downloads/")
  '(package-selected-packages
-   '(origami smart-shift highlight-indentation-mode visual-regexp-steroids switch-window vterm lsp-java counsel-projectile irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump kotlin-mode modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package ranger projectile poly-markdown org-ref org-bullets openwith neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
+   '(fold-dwim prog-mode bicycle origami smart-shift highlight-indentation-mode visual-regexp-steroids switch-window vterm lsp-java counsel-projectile irony-eldoc flycheck-irony flycheck irony-server company-irony helm-projectile company-jedi indent-tools org-tempo smartparens nov ace-jump kotlin-mode modus-vivendi-theme auctex django-mode company-mode yaml-mode web-mode use-package ranger projectile poly-markdown org-ref org-bullets openwith neotree moe-theme mips-mode magit lua-mode kaolin-themes impatient-mode iedit helm-swoop helm-smex helm-gtags helm-ag graphviz-dot-mode gnuplot-mode gnuplot fzf find-file-in-project fasd evil ess engine-mode elpy ein ediprolog eclim dracula-theme dired-subtree dashboard cuda-mode cmake-mode cider back-button all-the-icons-dired ace-jump-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
