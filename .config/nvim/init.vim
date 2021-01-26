@@ -4,6 +4,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
 endif
 
+set cursorline
 set tabstop=2
 set number
 set hlsearch
@@ -29,19 +30,16 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
+nnoremap ,b :CtrlPBuffer<CR>
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 "Plug 'nathanaelkane/vim-indent-guides'
 "let g:indent_guides_enable_on_vim_startup = 1
 Plug 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-"Plug 'vim-airline/vim-airline-themes'
-"let g:airline_theme='jellybeans'
-Plug 'ayu-theme/ayu-vim'
-set termguicolors     " enable true colors support
-let ayucolor="mirage"  " for light version of theme
 Plug 'preservim/nerdcommenter'
-nnoremap <A-;> <plug>NERDCommenterToggle
+vmap <A-;> <plug>NERDCommenterToggle
+nmap <A-;> <plug>NERDCommenterToggle
 "Plug 'jreybert/vimagit'
 Plug 'tpope/vim-fugitive'
 nnoremap <A-g> :Git<CR>
@@ -49,9 +47,15 @@ nnoremap <A-p> :Gpush<CR>
 nnoremap <A-ç> :Gpull<CR>
 nnoremap <A-l> :Glog<CR>
 Plug 'pedrohdz/vim-yaml-folds'
-
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/vim-startify'
+Plug 'ayu-theme/ayu-vim' " or other package manager
+set termguicolors     " enable true colors support
+"let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+"let ayucolor="dark"   " for dark version of theme
+Plug 'rking/ag.vim'
 call plug#end()
 colorscheme ayu
 nnoremap , :qa!<CR>
+nnoremap <A-]> :PlugInstall<CR>
