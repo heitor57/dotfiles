@@ -26,6 +26,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
 Plug 'scrooloose/nerdTree'
 nnoremap <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
@@ -48,7 +49,8 @@ nnoremap <A-p> :Gpush<CR>
 nnoremap <A-ç> :Gpull<CR>
 Plug 'pedrohdz/vim-yaml-folds'
 
-"Plug 'airblade/vim-rooter'
+Plug 'airblade/vim-rooter'
 Plug 'mhinz/vim-startify'
 call plug#end()
 colorscheme ayu
+nnoremap , :qa!<CR>
