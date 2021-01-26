@@ -47,6 +47,7 @@ Plug 'tpope/vim-fugitive'
 nnoremap <A-g> :Git<CR>
 nnoremap <A-p> :Gpush<CR>
 nnoremap <A-ç> :Gpull<CR>
+nnoremap <A-l> :Glog<CR>
 Plug 'pedrohdz/vim-yaml-folds'
 
 Plug 'airblade/vim-rooter'
