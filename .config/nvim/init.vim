@@ -4,6 +4,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
 endif
 
+set clipboard=unnamedplus
 set cursorline
 set tabstop=2
 set number
@@ -68,5 +69,6 @@ colorscheme ayu
 nnoremap , :qa!<CR>
 nnoremap <A-]> :PlugInstall<CR>
 map gn :bn<cr>
+map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 "autocmd QuickFixCmdPost *grep* cwindow
