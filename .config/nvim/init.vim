@@ -12,9 +12,9 @@ set incsearch
 set inccommand=nosplit
 set foldmethod=indent
 set nofoldenable
-set foldexpr=VimFolds(v:lnum)
-set foldtext=MyFoldText()
-set fillchars=fold:\
+"set foldexpr=VimFolds(v:lnum)
+"set foldtext=MyFoldText()
+"set fillchars=fold:\
 
 call plug#begin('~/.vim/plugged')
 Plug 'ncm2/ncm2'
@@ -46,6 +46,8 @@ nnoremap <A-g> :Git<CR>
 nnoremap <A-p> :Gpush<CR>
 nnoremap <A-ç> :Gpull<CR>
 nnoremap <A-l> :Glog<CR>
+command -nargs=+ Ggr execute 'Ggrep' <q-args> | cw
+nnoremap <A-a> :Ggr 
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/vim-startify'
@@ -54,8 +56,17 @@ set termguicolors     " enable true colors support
 "let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 "let ayucolor="dark"   " for dark version of theme
-Plug 'rking/ag.vim'
+"Plug 'mileszs/ack.vim'
+"
+Plug 'king/ag.vim'
+nnoremap <A-q> :Ag 
+let g:ag_working_path_mode="r"
+"Plug 'tmhedberg/SimpylFold'
+"let g:SimpylFold_docstring_preview = 1
 call plug#end()
 colorscheme ayu
 nnoremap , :qa!<CR>
 nnoremap <A-]> :PlugInstall<CR>
+map gn :bn<cr>
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+"autocmd QuickFixCmdPost *grep* cwindow
