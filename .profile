@@ -1,4 +1,4 @@
-export EDITOR="emacsclient -nw"
+export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export TERMINAL="st"
 export BROWSER="firefox"
