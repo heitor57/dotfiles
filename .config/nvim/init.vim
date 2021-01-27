@@ -21,14 +21,16 @@ call plug#begin('~/.vim/plugged')
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
+set completeopt=noinsert,menuone
 " list of sources: https://github.com/ncm2/ncm2/wiki
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
 Plug 'scrooloose/nerdTree'
 nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-m> :NERDTreeFind<cr>
 let NERDTreeShowHidden=1
+
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 nnoremap ,b :CtrlPBuffer<CR>
