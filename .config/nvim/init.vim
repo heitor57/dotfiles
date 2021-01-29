@@ -4,6 +4,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
 endif
 
+let mapleader=","
+
 set clipboard=unnamedplus
 set cursorline
 set tabstop=2
@@ -27,8 +29,8 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
 Plug 'scrooloose/nerdTree'
-nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <C-m> :NERDTreeFind<cr>
+nnoremap <C-n> :NERDTreeToggle<cr>
+nnoremap <Leader>n :NERDTreeFind<cr>
 let NERDTreeShowHidden=1
 
 Plug 'tpope/vim-surround'
@@ -45,12 +47,12 @@ vmap <A-;> <plug>NERDCommenterToggle
 nmap <A-;> <plug>NERDCommenterToggle
 "Plug 'jreybert/vimagit'
 Plug 'tpope/vim-fugitive'
-nnoremap <A-g> :Git<CR>
-nnoremap <A-p> :Gpush<CR>
-nnoremap <A-ç> :Gpull<CR>
-nnoremap <A-l> :Glog<CR>
+nnoremap <Leader>g :Git<CR>
+nnoremap <Leader>p :Gpush<CR>
+nnoremap <Leader>ç :Gpull<CR>
+nnoremap <Leader>l :Glog<CR>
 command -nargs=+ Ggr execute 'Ggrep' <q-args> | cw
-nnoremap <A-a> :Ggr 
+nnoremap <Leader>a :Ggr 
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/vim-startify'
@@ -61,16 +63,21 @@ let ayucolor="mirage" " for mirage version of theme
 "let ayucolor="dark"   " for dark version of theme
 "Plug 'mileszs/ack.vim'
 "
-Plug 'king/ag.vim'
-nnoremap <A-q> :Ag 
+Plug 'rking/ag.vim'
+nnoremap <Leader-q> :Ag 
 let g:ag_working_path_mode="r"
 "Plug 'tmhedberg/SimpylFold'
 "let g:SimpylFold_docstring_preview = 1
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'puremourning/vimspector'
+let g:vimspector_enable_mappings = 'HUMAN'
 call plug#end()
+
 colorscheme ayu
-nnoremap , :qa!<CR>
-nnoremap <A-]> :PlugInstall<CR>
+nnoremap <Leader><Leader> :qa!<CR>
+nnoremap <Leader>] :PlugInstall<CR>
 map gn :bn<cr>
 map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-"autocmd QuickFixCmdPost *grep* cwindow
+nnoremap <Leader>. :wa<CR>
