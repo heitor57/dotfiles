@@ -15,9 +15,8 @@ set incsearch
 set inccommand=nosplit
 set foldmethod=indent
 set nofoldenable
-"set foldexpr=VimFolds(v:lnum)
-"set foldtext=MyFoldText()
-"set fillchars=fold:\
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 call plug#begin('~/.vim/plugged')
 Plug 'ncm2/ncm2'
@@ -72,6 +71,11 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'puremourning/vimspector'
 let g:vimspector_enable_mappings = 'HUMAN'
+Plug 'mindriot101/vim-yapf'
+:nnoremap <leader>y :call Yapf()<cr>
+let g:yapf_style = "google"
+
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 colorscheme ayu
