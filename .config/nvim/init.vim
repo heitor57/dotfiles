@@ -5,6 +5,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 let mapleader=","
+"let maplocalleader = ";"
 
 set clipboard=unnamedplus
 set cursorline
@@ -49,7 +50,7 @@ Plug 'tpope/vim-fugitive'
 nnoremap <Leader>g :Git<CR>
 nnoremap <Leader>p :Gpush<CR>
 nnoremap <Leader>ç :Gpull<CR>
-nnoremap <Leader>l :Glog<CR>
+nnoremap <Leader>o :Glog<CR>
 command -nargs=+ Ggr execute 'Ggrep' <q-args> | cw
 nnoremap <Leader>a :Ggr 
 Plug 'pedrohdz/vim-yaml-folds'
@@ -76,6 +77,8 @@ Plug 'mindriot101/vim-yapf'
 let g:yapf_style = "google"
 
 Plug 'Yggdroot/indentLine'
+Plug 'lervag/vimtex'
+let g:vimtex_view_general_viewer = 'evince'
 call plug#end()
 
 colorscheme ayu
