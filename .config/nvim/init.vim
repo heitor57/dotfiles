@@ -88,3 +88,4 @@ map gn :bn<cr>
 map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <Leader>. :wa<CR>
+nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
