@@ -6,7 +6,7 @@ endif
 
 let mapleader=","
 "let maplocalleader = ";"
-
+set termguicolors     " enable true colors support
 set clipboard=unnamedplus
 set cursorline
 set tabstop=2
@@ -56,11 +56,6 @@ nnoremap <Leader>a :Ggr
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/vim-startify'
-Plug 'ayu-theme/ayu-vim' " or other package manager
-set termguicolors     " enable true colors support
-"let ayucolor="light"  " for light version of theme
-let ayucolor="mirage" " for mirage version of theme
-"let ayucolor="dark"   " for dark version of theme
 "Plug 'mileszs/ack.vim'
 "
 Plug 'rking/ag.vim'
@@ -81,7 +76,6 @@ Plug 'lervag/vimtex'
 let g:vimtex_view_general_viewer = 'evince'
 call plug#end()
 
-colorscheme ayu
 nnoremap <Leader><Leader> :qa!<CR>
 nnoremap <Leader>] :PlugInstall<CR>
 map gn :bn<cr>
