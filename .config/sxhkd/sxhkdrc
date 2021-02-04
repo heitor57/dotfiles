@@ -37,8 +37,7 @@ super + s
     jupyter notebook ~/recsys/
 super + a
     xclip -o | xargs -r mp
-super + m
-    st -e ssh duff
 super + F7
     pactl set-source-mute 1 toggle
-    
+super + o ; {q,w,e,a,s}
+				{st -e ssh labpi-208,st -e ssh labpi-211,st -e ssh labpi-213,st -e ssh duff,st -e ssh tesla}
