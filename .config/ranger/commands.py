@@ -12,13 +12,11 @@ class fzf_fasd(Command):
     """
     def execute(self):
         import subprocess
-        if self.quantifier:
-            command="fasd | fzf -e -i --tac --no-sort | awk '{print $2}'"
-        else:
-            command="fasd | fzf -e -i --tac --no-sort | awk '{print $2}'"
+        command="fasd | fzf -e -i --tac --no-sort | awk '{$1=\"\";print $0}' | cut -c 2-"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:
+            print(stdout.decode('utf-8').rstrip('\n'))
             fzf_file = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
             if os.path.isdir(fzf_file):
                 self.fm.cd(fzf_file)
@@ -38,5 +36,5 @@ class fasd(Command):
         import subprocess
         arg = self.rest(1)
         if arg:
-            directory = subprocess.check_output(["fasd", "-d"]+arg.split(), universal_newlines=True).strip()
+            directory = subprocess.check_output(["fasd", "-d"]+list(arg), universal_newlines=True).strip()
             self.fm.cd(directory)
