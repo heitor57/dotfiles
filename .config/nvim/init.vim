@@ -30,7 +30,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi'
 Plug 'scrooloose/nerdTree'
 nnoremap <C-n> :NERDTreeToggle<cr>
-nnoremap <Leader>n :NERDTreeFind<cr>
+nnoremap <C-h> :NERDTreeFind<cr>
 let NERDTreeShowHidden=1
 
 Plug 'tpope/vim-surround'
