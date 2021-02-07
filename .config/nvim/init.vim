@@ -71,7 +71,7 @@ Plug 'mindriot101/vim-yapf'
 :nnoremap <leader>y :call Yapf()<cr>
 let g:yapf_style = "google"
 
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 Plug 'lervag/vimtex'
 let g:vimtex_view_general_viewer = 'evince'
 call plug#end()
@@ -83,3 +83,4 @@ map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <Leader>. :wa<CR>
 nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
+let g:tex_conceal = ''
