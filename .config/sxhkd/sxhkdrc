@@ -33,6 +33,8 @@ super + g
     st -e ranger ~
 super + x
     import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
+super + shift + x
+		import -window $(i3-msg -t get_tree | jq 'recurse(.nodes[]) | select(.focused).window') png:- > /tmp/latest-screenshot.png
 super + s
     jupyter notebook ~/recsys/
 super + a
