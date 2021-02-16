@@ -74,6 +74,12 @@ let g:yapf_style = "google"
 "Plug 'Yggdroot/indentLine'
 Plug 'lervag/vimtex'
 let g:vimtex_view_general_viewer = 'evince'
+
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
 call plug#end()
 
 nnoremap <Leader><Leader> :qa!<CR>
