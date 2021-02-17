@@ -28,7 +28,7 @@ lsxhkd(){
 	sxhkd&
 	disown %1	
 }
-setopt autocd autopushd
+#setopt autocd autopushd
 
 alias e='emacsclient -c -nw'
 #eval "$(/home/heitor/miniconda3/bin/conda shell.zsh hook)"
