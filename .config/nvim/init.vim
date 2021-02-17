@@ -75,11 +75,11 @@ let g:yapf_style = "google"
 Plug 'lervag/vimtex'
 let g:vimtex_view_general_viewer = 'evince'
 
-if has('nvim') || has('patch-8.0.902')
-  Plug 'mhinz/vim-signify'
-else
-  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-endif
+"if has('nvim') || has('patch-8.0.902')
+  "Plug 'mhinz/vim-signify'
+"else
+  "Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+"endif
 call plug#end()
 
 nnoremap <Leader><Leader> :qa!<CR>
@@ -88,5 +88,5 @@ map gn :bn<cr>
 map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <Leader>. :wa<CR>
-nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
-let g:tex_conceal = ''
+nmap <Leader>d :up<CR>:!dot -Tpng % -o %:r.png<CR>
+
