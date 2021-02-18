@@ -88,5 +88,5 @@ map gn :bn<cr>
 map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <Leader>. :wa<CR>
-nmap <Leader>d :up<CR>:!dot -Tpng % -o %:r.png<CR>
+nmap <Leader>d :up<CR>:!dot -Tpng % -o %:r.png<CR><CR>
 
