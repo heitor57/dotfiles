@@ -65,6 +65,14 @@ let g:ag_working_path_mode="r"
 "let g:SimpylFold_docstring_preview = 1
 Plug 'kevinhwang91/rnvimr'
 nnoremap <silent> <leader>f :RnvimrToggle<CR>
+let g:rnvimr_layout = {
+            \ 'relative': 'editor',
+            \ 'width': float2nr(round(1.0 * &columns)),
+            \ 'height': float2nr(round(1.0 * &lines)),
+            \ 'col': float2nr(round(0.5 * &columns)),
+            \ 'row': float2nr(round(0.5 * &lines)),
+            \ 'style': 'minimal'
+            \ }
 "Plug 'rbgrouleff/bclose.vim'
 Plug 'puremourning/vimspector'
 let g:vimspector_enable_mappings = 'HUMAN'
