@@ -63,8 +63,9 @@ nnoremap <Leader-q> :Ag
 let g:ag_working_path_mode="r"
 "Plug 'tmhedberg/SimpylFold'
 "let g:SimpylFold_docstring_preview = 1
-Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim'
+Plug 'kevinhwang91/rnvimr'
+nnoremap <silent> <leader>f :RnvimrToggle<CR>
+"Plug 'rbgrouleff/bclose.vim'
 Plug 'puremourning/vimspector'
 let g:vimspector_enable_mappings = 'HUMAN'
 Plug 'mindriot101/vim-yapf'
@@ -89,4 +90,3 @@ map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <Leader>. :wa<CR>
 nmap <Leader>d :up<CR>:!dot -Tpng % -o %:r.png<CR><CR>
-
