@@ -65,6 +65,7 @@ let g:ag_working_path_mode="r"
 "let g:SimpylFold_docstring_preview = 1
 Plug 'kevinhwang91/rnvimr'
 nnoremap <silent> <leader>f :RnvimrToggle<CR>
+tnoremap <silent> <leader>f <C-\><C-n>:RnvimrToggle<CR>
 let g:rnvimr_layout = {
             \ 'relative': 'editor',
             \ 'width': float2nr(round(1.0 * &columns)),
