@@ -84,7 +84,16 @@ let g:yapf_style = "google"
 "Plug 'Yggdroot/indentLine'
 Plug 'lervag/vimtex'
 let g:vimtex_view_general_viewer = 'evince'
-
+let g:vimtex_compiler_latexmk_engines = {
+												\ '_'                : '-lualatex',
+												\ 'pdflatex'         : '-pdf',
+												\ 'dvipdfex'         : '-pdfdvi',
+												\ 'lualatex'         : '-lualatex',
+												\ 'xelatex'          : '-xelatex',
+												\ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+												\ 'context (luatex)' : '-pdf -pdflatex=context',
+												\ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+												\}
 "if has('nvim') || has('patch-8.0.902')
   "Plug 'mhinz/vim-signify'
 "else
@@ -98,4 +107,4 @@ map gn :bn<cr>
 map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <Leader>. :wa<CR>
-nmap <Leader>d :up<CR>:!dot -Tpng % -o %:r.png<CR><CR>
+nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
