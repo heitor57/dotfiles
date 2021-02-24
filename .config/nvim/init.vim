@@ -64,6 +64,7 @@ let g:ag_working_path_mode="r"
 "Plug 'tmhedberg/SimpylFold'
 "let g:SimpylFold_docstring_preview = 1
 Plug 'kevinhwang91/rnvimr'
+let g:rnvimr_enable_picker = 1
 nnoremap <silent> <leader>f :RnvimrToggle<CR>
 tnoremap <silent> <leader>f <C-\><C-n>:RnvimrToggle<CR>
 let g:rnvimr_layout = {
