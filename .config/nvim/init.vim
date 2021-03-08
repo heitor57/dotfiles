@@ -98,7 +98,7 @@ let g:yapf_style = "google"
 Plug 'lervag/vimtex'
 let g:vimtex_view_general_viewer = 'evince'
 let g:vimtex_compiler_latexmk_engines = {
-												\ '_'                : '-lualatex',
+												\ '_'                : '-lualatex -shell-escape',
 												\ 'pdflatex'         : '-pdf',
 												\ 'dvipdfex'         : '-pdfdvi',
 												\ 'lualatex'         : '-lualatex',
@@ -121,6 +121,7 @@ let g:vimtex_compiler_latexmk_engines = {
 
 Plug 'godlygeek/tabular'
 "Plug 'honza/vim-snippets'
+"Plug 'aklt/plantuml-syntax'
 call plug#end()
 
 nnoremap <Leader><Leader> :qa!<CR>
