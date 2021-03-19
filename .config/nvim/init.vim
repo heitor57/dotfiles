@@ -14,7 +14,7 @@ set number
 set hlsearch
 set incsearch
 set inccommand=nosplit
-set foldmethod=indent
+set foldmethod=manual
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
@@ -124,8 +124,6 @@ Plug 'godlygeek/tabular'
 "Plug 'honza/vim-snippets'
 "Plug 'aklt/plantuml-syntax'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
-syntax on
-set t_Co=256
 let g:airline_theme='onehalfdark'
 call plug#end()
 colorscheme onehalfdark
