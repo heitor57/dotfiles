@@ -15,7 +15,6 @@ set hlsearch
 set incsearch
 set inccommand=nosplit
 set foldmethod=indent
-set nofoldenable
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
@@ -43,6 +42,7 @@ Plug 'scrooloose/nerdTree'
 "let g:UltiSnipsRemoveSelectModeMappings = 0
 nnoremap <C-n> :NERDTreeToggle<cr>
 nnoremap <C-h> :NERDTreeFind<cr>
+nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>
 let NERDTreeShowHidden=1
 
 Plug 'tpope/vim-surround'
@@ -79,14 +79,14 @@ Plug 'kevinhwang91/rnvimr'
 let g:rnvimr_enable_picker = 1
 nnoremap <silent> <leader>f :RnvimrToggle<CR>
 tnoremap <silent> <leader>f <C-\><C-n>:RnvimrToggle<CR>
-let g:rnvimr_layout = {
-            \ 'relative': 'editor',
-            \ 'width': float2nr(round(1.0 * &columns)),
-            \ 'height': float2nr(round(1.0 * &lines)),
-            \ 'col': float2nr(round(0.5 * &columns)),
-            \ 'row': float2nr(round(0.5 * &lines)),
-            \ 'style': 'minimal'
-            \ }
+"let g:rnvimr_layout = {
+            "\ 'relative': 'editor',
+            "\ 'width': float2nr(round(1.0 * &columns)),
+            "\ 'height': float2nr(round(1.0 * &lines)),
+            "\ 'col': float2nr(round(0.5 * &columns)),
+            "\ 'row': float2nr(round(0.5 * &lines)),
+            "\ 'style': 'minimal'
+            "\ }
 "Plug 'rbgrouleff/bclose.vim'
 Plug 'puremourning/vimspector'
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -98,7 +98,8 @@ let g:yapf_style = "google"
 Plug 'lervag/vimtex'
 let g:vimtex_view_general_viewer = 'evince'
 let g:vimtex_compiler_latexmk_engines = {
-												\ '_'                : '-lualatex -shell-escape',
+												"\ '_'                : '-lualatex -shell-escape',
+												\ '_'                : '-lualatex',
 												\ 'pdflatex'         : '-pdf',
 												\ 'dvipdfex'         : '-pdfdvi',
 												\ 'lualatex'         : '-lualatex',
@@ -122,7 +123,12 @@ let g:vimtex_compiler_latexmk_engines = {
 Plug 'godlygeek/tabular'
 "Plug 'honza/vim-snippets'
 "Plug 'aklt/plantuml-syntax'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+syntax on
+set t_Co=256
+let g:airline_theme='onehalfdark'
 call plug#end()
+colorscheme onehalfdark
 
 nnoremap <Leader><Leader> :qa!<CR>
 nnoremap <Leader>] :PlugInstall<CR>
