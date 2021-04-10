@@ -15,6 +15,7 @@ set hlsearch
 set incsearch
 set inccommand=nosplit
 set foldmethod=manual
+set foldlevel=99
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
@@ -99,7 +100,8 @@ Plug 'lervag/vimtex'
 let g:vimtex_view_general_viewer = 'evince'
 let g:vimtex_compiler_latexmk_engines = {
 												"\ '_'                : '-lualatex -shell-escape',
-												\ '_'                : '-lualatex',
+												"\ '_'                : '-lualatex',
+												"\ '_'                : '-lualatex',
 												\ 'pdflatex'         : '-pdf',
 												\ 'dvipdfex'         : '-pdfdvi',
 												\ 'lualatex'         : '-lualatex',

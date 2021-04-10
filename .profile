@@ -1,7 +1,7 @@
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export TERMINAL="st"
-export BROWSER="firefox"
+#export BROWSER="google-chrome-stable"
 export READER="evince"
 export HISTFILESIZE=1000000
 export PATH="$PATH:$HOME/dotfiles/bin"
