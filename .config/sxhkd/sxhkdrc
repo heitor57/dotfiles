@@ -26,7 +26,7 @@ super + shift + a
 super + e
     emacsclient -c
 super + c
-    google-chrome-stable
+    firefox
 super + z
     zathura
 super + g
