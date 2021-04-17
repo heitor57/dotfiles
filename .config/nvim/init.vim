@@ -207,7 +207,7 @@ Plug 'scrooloose/nerdTree'
 "let g:UltiSnipsRemoveSelectModeMappings = 0
 nnoremap <C-n> :NERDTreeToggle<cr>
 nnoremap <C-h> :NERDTreeFind<cr>
-nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>
+nmap <Leader>m :NERDTreeFocus<cr>R<c-w><c-p>
 let NERDTreeShowHidden=1
 
 Plug 'tpope/vim-surround'
