@@ -225,8 +225,8 @@ nmap <A-;> <plug>NERDCommenterToggle
 "Plug 'jreybert/vimagit'
 Plug 'tpope/vim-fugitive'
 nnoremap <Leader>g :Git<CR>
-nnoremap <Leader>p :Gpush<CR>
-nnoremap <Leader>ç :Gpull<CR>
+nnoremap <Leader>p :G push<CR>
+nnoremap <Leader>ç :G pull<CR>
 nnoremap <Leader>o :Glog<CR>
 command -nargs=+ Ggr execute 'Ggrep' <q-args> | cw
 nnoremap <Leader>a :Ggr 
