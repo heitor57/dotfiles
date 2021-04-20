@@ -21,6 +21,8 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+let g:coc_global_extensions = ['coc-json', 'coc-git','coc-python']
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
 set encoding=utf-8
@@ -287,6 +289,7 @@ let g:vimtex_compiler_latexmk_engines = {
 "nmap ga <Plug>(EasyAlign)
 
 Plug 'godlygeek/tabular'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 "Plug 'honza/vim-snippets'
 "Plug 'aklt/plantuml-syntax'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
