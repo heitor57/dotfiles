@@ -5,7 +5,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 let mapleader=","
-"let maplocalleader = ";"
 set termguicolors     " enable true colors support
 set clipboard=unnamedplus
 set cursorline
@@ -188,16 +187,7 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-"Plug 'ncm2/ncm2'
-"Plug 'roxma/nvim-yarp'
-"autocmd BufEnter * call ncm2#enable_for_buffer()
-"set completeopt=noinsert,menuone
-""
-""list of sources: https://github.com/ncm2/ncm2/wiki
-"Plug 'ncm2/ncm2-bufword'
-"Plug 'ncm2/ncm2-path'
-"Plug 'ncm2/ncm2-jedi'
-"Plug 'ncm2/ncm2-ultisnips'
+
 Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdTree'
 "inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
@@ -216,6 +206,9 @@ Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 nnoremap ,b :CtrlPBuffer<CR>
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+Plug 'sgur/ctrlp-extensions.vim'
+nnoremap ,c :CtrlPCmdline<CR>
+
 "Plug 'nathanaelkane/vim-indent-guides'
 "let g:indent_guides_enable_on_vim_startup = 1
 Plug 'bling/vim-airline'
@@ -235,13 +228,22 @@ nnoremap <Leader>a :Ggr
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/vim-startify'
-"Plug 'mileszs/ack.vim'
 "
-Plug 'rking/ag.vim'
-nnoremap <Leader-q> :Ag 
-let g:ag_working_path_mode="r"
-"Plug 'tmhedberg/SimpylFold'
-"let g:SimpylFold_docstring_preview = 1
+"Plug 'rking/ag.vim'
+"let g:ag_working_path_mode="r"
+"
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+command! -bang -nargs=* FzfAg                              
+  \ call fzf#vim#ag(<q-args>,
+  \                 '--hidden --ignore .git',
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+nnoremap <Leader>q :FzfAg 
+"nmap <leader><tab> <plug>(fzf-maps-n)
+
 Plug 'kevinhwang91/rnvimr'
 let g:rnvimr_enable_picker = 1
 nnoremap <silent> <leader>f :RnvimrToggle<CR>
@@ -276,29 +278,14 @@ let g:vimtex_compiler_latexmk_engines = {
 												\ 'context (luatex)' : '-pdf -pdflatex=context',
 												\ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
 												\}
-"if has('nvim') || has('patch-8.0.902')
-  "Plug 'mhinz/vim-signify'
-"else
-  "Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-"endif
-"Plug 'junegunn/vim-easy-align'
-"" Start interactive EasyAlign in visual mode (e.g. vipga)
-"xmap ga <Plug>(EasyAlign)
-
-"" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-"nmap ga <Plug>(EasyAlign)
 
 Plug 'godlygeek/tabular'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-"Plug 'honza/vim-snippets'
-"Plug 'aklt/plantuml-syntax'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 let g:airline_theme='onehalfdark'
-
 Plug 'cespare/vim-toml'
 call plug#end()
 colorscheme onehalfdark
-
 nnoremap <Leader><Leader> :qa!<CR>
 nnoremap <Leader>] :PlugInstall<CR>
 map gn :bn<cr>
@@ -306,22 +293,3 @@ map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <Leader>. :wa<CR>
 nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
-
-
-
-
-"lua << EOF
-"function _G.statusline()
-    "local filepath = '%f'
-    "local align_section = '%='
-    "local percentage_through_file = '%p%%'
-    "return string.format(
-        "'%s%s%s',
-        "filepath,
-        "align_section,
-        "percentage_through_file
-    ")
-"end
-"EOF
-
-"set statusline=%!v:lua.statusline()
