@@ -284,6 +284,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 let g:airline_theme='onehalfdark'
 Plug 'cespare/vim-toml'
+Plug 'tpope/vim-sleuth'
 call plug#end()
 colorscheme onehalfdark
 nnoremap <Leader><Leader> :qa!<CR>

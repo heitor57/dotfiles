@@ -3,7 +3,7 @@ XF86MonBrightnessDown
 XF86MonBrightnessUp
     xbacklight -inc 10
 super + Return
-    cd ~ && st
+    cd ~ && $TERMINAL
 super + F4
     sxiv -t ~/Pictures
 super + shift + i
@@ -30,7 +30,7 @@ super + c
 super + z
     zathura
 super + g
-    st -e ranger ~
+    $TERMINAL -e ranger ~
 super + x
     import /tmp/latest-screenshot.png && xclip -selection clipboard -t image/png /tmp/latest-screenshot.png
 super + shift + x
@@ -42,4 +42,4 @@ super + a
 super + F7
     pactl set-source-mute 1 toggle
 super + o ; {q,w,e,a,s}
-				{st -e ssh labpi-208,st -e ssh labpi-211,st -e ssh labpi-213,st -e ssh duff,st -e ssh tesla}
+				{$TERMINAL -e ssh labpi-208,$TERMINAL -e ssh labpi-211,$TERMINAL -e ssh labpi-213,$TERMINAL -e ssh duff,$TERMINAL -e ssh tesla}
