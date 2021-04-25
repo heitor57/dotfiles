@@ -188,7 +188,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdTree'
 "inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
