@@ -281,12 +281,16 @@ let g:vimtex_compiler_latexmk_engines = {
 
 Plug 'godlygeek/tabular'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
-let g:airline_theme='onehalfdark'
+"Plug 'sonph/onehalf', { 'rtp': 'vim' }
+"let g:airline_theme='onehalfdark'
 Plug 'cespare/vim-toml'
 Plug 'tpope/vim-sleuth'
+Plug 'tomasr/molokai'
+let g:molokai_original = 1
+"let g:rehash256 = 1
 call plug#end()
-colorscheme onehalfdark
+colorscheme molokai
+"colorscheme onehalfdark
 nnoremap <Leader><Leader> :qa!<CR>
 nnoremap <Leader>] :PlugInstall<CR>
 map gn :bn<cr>
