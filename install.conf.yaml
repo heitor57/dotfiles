@@ -1,0 +1,18 @@
+- shell:
+  - [pip3 install dotbot, Installing dotbot]
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.tmux.conf: tmux.conf
+    ~/.vim: vim
+    ~/.vimrc: vimrc
+    ~/.config/:
+      glob: true
+      path: .config/*
+      relink: true
+    ~/.zshrc:
+      force: true
