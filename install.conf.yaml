@@ -7,12 +7,27 @@
 - clean: ['~']
 
 - link:
-    ~/.tmux.conf: tmux.conf
-    ~/.vim: vim
-    ~/.vimrc: vimrc
+    ~/.tmux.conf: .tmux.conf
+    ~/.vimrc: .vimrc
     ~/.config/:
       glob: true
       path: .config/*
       relink: true
     ~/.zshrc:
+      path: .zshrc
+      force: true
+    ~/.bashrc:
+      path: .bashrc
+      force: true
+    ~/.profile:
+      path: .profile
+      force: true
+    ~/.xprofile:
+      path: .xprofile
+      force: true
+    ~/.emacs:
+      path: .emacs
+      force: true
+    ~/.zsh_plugins.txt:
+      path: .zsh_plugins
       force: true
