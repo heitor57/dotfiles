@@ -27,5 +27,5 @@
       path: .emacs
       force: true
     ~/.zsh_plugins.txt:
-      path: .zsh_plugins
+      path: .zsh_plugins.txt
       force: true
