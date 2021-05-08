@@ -8,7 +8,7 @@ SAVEHIST=10000000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/heitor/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 zstyle ':completion:*' menu select
 #zstyle ':completion:incremental:*' completer _complete _ignored
 #zstyle :incremental stop-keys $'[\e\C-b\C-f\C-n\C-p\C-u-\C-x]'
