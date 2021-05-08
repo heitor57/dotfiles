@@ -1,3 +1,4 @@
 #!/bin/sh
+git pull
 pip3 install dotbot
 python3 -mdotbot -c install.conf.yaml
