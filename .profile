@@ -4,6 +4,8 @@ export VISUAL="$EDITOR"
 #export BROWSER="google-chrome-stable"
 export READER="evince"
 export HISTFILESIZE=1000000
+export HISTSIZE=100000
+#SAVEHIST=10000000
 export PATH="$PATH:$HOME/dotfiles/bin"
 # function kotlinr() {
 #     echo Compiling...
