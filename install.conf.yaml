@@ -20,6 +20,9 @@
     ~/.profile:
       path: .profile
       force: true
+    ~/.zprofile:
+      path: .profile
+      force: true
     ~/.xprofile:
       path: .xprofile
       force: true
