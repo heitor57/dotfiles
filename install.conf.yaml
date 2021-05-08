@@ -1,5 +1,3 @@
-- shell:
-  - [pip3 install dotbot, Installing dotbot]
 - defaults:
     link:
       relink: true
