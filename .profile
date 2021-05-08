@@ -1,6 +1,6 @@
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
-export TERMINAL="konsole"
+#export TERMINAL="konsole"
 #export BROWSER="google-chrome-stable"
 export READER="evince"
 export HISTFILESIZE=1000000
