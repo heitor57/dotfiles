@@ -232,16 +232,19 @@ Plug 'mhinz/vim-startify'
 "Plug 'rking/ag.vim'
 "let g:ag_working_path_mode="r"
 "
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-command! -bang -nargs=* FzfAg                              
-  \ call fzf#vim#ag(<q-args>,
-  \                 '--hidden --ignore .git',
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-nnoremap <Leader>q :FzfAg 
+"
+Plug 'mhinz/vim-grepper'
+nnoremap <Leader>q :Grepper<CR> 
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
+"command! -bang -nargs=* FzfAg                              
+  "\ call fzf#vim#ag(<q-args>,
+  "\                 '--hidden --ignore .git',
+  "\                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  "\                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  "\                 <bang>0)
+"let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+"nnoremap <Leader>q :FzfAg 
 "nmap <leader><tab> <plug>(fzf-maps-n)
 
 Plug 'kevinhwang91/rnvimr'
