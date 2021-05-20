@@ -32,3 +32,6 @@
     ~/.zsh_plugins.txt:
       path: .zsh_plugins.txt
       force: true
+    ~/.condarc:
+      path: .condarc
+      force: true
