@@ -293,6 +293,8 @@ let g:molokai_original = 1
 "let g:rehash256 = 1
 Plug 'moll/vim-bbye' " optional dependency
 Plug 'aymericbeaumet/vim-symlink'
+Plug 'skywind3000/asyncrun.vim'
+let g:asyncrun_open = 6
 call plug#end()
 colorscheme molokai
 "colorscheme onehalfdark

@@ -40,7 +40,7 @@ alias e='emacsclient -c -nw'
 alias mab='cd ~/rl-rss/src/app/'
 alias v='nvim'
 setopt inc_append_history
-
+setopt histignoredups
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
