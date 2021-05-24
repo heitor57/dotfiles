@@ -1,6 +1,4 @@
-# AwesomeWM dependencies
+# Usage
+Just run the following:
 
-    $ git clone https://github.com/lcpz/lain ~/dotfiles/.config/awesome/
-# i3
-
-	$ pacman -S sxhkd
+    $ ./install
