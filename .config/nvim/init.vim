@@ -5,6 +5,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 let mapleader=","
+let maplocalleader = "\\"
 set termguicolors     " enable true colors support
 set clipboard=unnamedplus
 set cursorline
@@ -223,7 +224,7 @@ nnoremap <Leader>g :Git<CR>
 nnoremap <Leader>p :G push<CR>
 nnoremap <Leader>ç :G pull<CR>
 nnoremap <Leader>o :Glog<CR>
-command -nargs=+ Ggr execute 'Ggrep' <q-args> | cw
+command! -nargs=+ Ggr execute 'Ggrep' <q-args> | cw
 nnoremap <Leader>a :Ggr 
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'airblade/vim-rooter'
@@ -305,3 +306,7 @@ map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <Leader>. :wa<CR>
 nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+inoremap jk <esc>
+inoremap <esc> <nop>
