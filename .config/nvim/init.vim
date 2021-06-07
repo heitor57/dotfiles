@@ -308,6 +308,6 @@ nnoremap <Leader>. :wa<CR>
 nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-inoremap jk <esc>
-inoremap <esc> <nop>
+"inoremap jk <esc>
+"inoremap <esc> <nop>
 onoremap p i(
