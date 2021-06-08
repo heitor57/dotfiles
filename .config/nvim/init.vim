@@ -22,7 +22,7 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-let g:coc_global_extensions = ['coc-json', 'coc-git','coc-pyright']
+let g:coc_global_extensions = ['coc-json', 'coc-git','coc-pyright','coc-yaml']
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
 set encoding=utf-8
