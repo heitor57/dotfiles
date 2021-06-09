@@ -14,15 +14,17 @@ set number
 set hlsearch
 set incsearch
 set inccommand=nosplit
-set foldmethod=manual
-set foldlevel=99
-
+"set foldmethod=syntax
+"set foldlevelstart=99
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"let g:coc_filetype_map = {
+"\ 'yaml.ansible': 'yaml',
+"\ }
 
-let g:coc_global_extensions = ['coc-json', 'coc-git','coc-pyright','coc-yaml']
+let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml']
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
 set encoding=utf-8
@@ -296,6 +298,13 @@ Plug 'moll/vim-bbye' " optional dependency
 Plug 'aymericbeaumet/vim-symlink'
 Plug 'skywind3000/asyncrun.vim'
 let g:asyncrun_open = 6
+Plug 'zhimsel/vim-stay'
+Plug 'pseewald/vim-anyfold'
+autocmd Filetype * AnyFoldActivate
+let g:anyfold_fold_comments=1
+hi Folded term=NONE cterm=NONE
+set foldlevel=1
+
 call plug#end()
 colorscheme molokai
 "colorscheme onehalfdark
