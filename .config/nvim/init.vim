@@ -300,9 +300,7 @@ Plug 'skywind3000/asyncrun.vim'
 let g:asyncrun_open = 6
 Plug 'zhimsel/vim-stay'
 Plug 'pseewald/vim-anyfold'
-autocmd Filetype * AnyFoldActivate
-let g:anyfold_fold_comments=1
-hi Folded term=NONE cterm=NONE
+autocmd Filetype yaml AnyFoldActivate
 set foldlevel=1
 
 call plug#end()
