@@ -24,7 +24,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "\ 'yaml.ansible': 'yaml',
 "\ }
 
-let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml']
+let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-spell-checker','coc-cspell-dicts']
+
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
 set encoding=utf-8
@@ -226,8 +227,8 @@ nnoremap <Leader>g :Git<CR>
 nnoremap <Leader>p :G push<CR>
 nnoremap <Leader>ç :G pull<CR>
 nnoremap <Leader>o :Glog<CR>
-command! -nargs=+ Ggr execute 'Ggrep' <q-args> | cw
-nnoremap <Leader>a :Ggr 
+"command! -nargs=+ Ggr execute 'Ggrep' <q-args> | cw
+"nnoremap <Leader>a :Ggr 
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/vim-startify'
@@ -311,7 +312,8 @@ nnoremap <Leader>] :PlugInstall<CR>
 map gn :bn<cr>
 map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-nnoremap <Leader>. :wa<CR>
+nnoremap <Leader>; :wa<CR>
+nnoremap <Leader>. :wa<CR>:q<CR>
 nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
