@@ -312,8 +312,8 @@ nnoremap <Leader>] :PlugInstall<CR>
 map gn :bn<cr>
 map gp :bp<cr>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-nnoremap <Leader>; :wa<CR>
-nnoremap <Leader>. :wa<CR>:q<CR>
+nnoremap <Leader>. :wa<CR>
+nnoremap <Leader>; :wa<CR>:qa!<CR>
 nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
