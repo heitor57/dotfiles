@@ -24,7 +24,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "\ 'yaml.ansible': 'yaml',
 "\ }
 
-let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-spell-checker','coc-cspell-dicts']
+let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-spell-checker','coc-cspell-dicts','coc-sh']
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
@@ -304,6 +304,14 @@ Plug 'pseewald/vim-anyfold'
 autocmd Filetype yaml AnyFoldActivate
 set foldlevel=1
 
+Plug 'matze/vim-move'
+"let g:move_key_modifier = 'C'
+"
+
+nmap <C-Down> <Plug>MoveLineDown
+vmap <C-Down> <Plug>MoveBlockDown
+nmap <C-Up> <Plug>MoveLineUp
+vmap <C-Up> <Plug>MoveBlockUp
 call plug#end()
 colorscheme molokai
 "colorscheme onehalfdark
