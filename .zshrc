@@ -56,3 +56,8 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+autoload -Uz run-help
+(( ${+aliases[run-help]} )) && unalias run-help
+alias help=run-help
+alias rh=run-help
+
