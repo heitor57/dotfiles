@@ -18,4 +18,4 @@ hlissner/zsh-autopair
 #denysdovhan/spaceship-prompt
 
 #popstas/zsh-command-time
-zdharma/history-search-multi-word
+#zdharma/history-search-multi-word
