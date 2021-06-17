@@ -73,3 +73,6 @@ function precmd() {
     unset timer
   fi
 }
+
+
+alias ev="v ~/dotfiles/.config/nvim/init.vim"
