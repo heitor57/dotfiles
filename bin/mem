@@ -1,12 +1,15 @@
 #!/bin/bash
+maxmem=${2:-92}
+secsleep=${1:-0.4}
+echo $secsleep $maxmem
 while true; do 
 
 				ramusage=$(free | awk '/Mem/{printf("RAM Usage: %.2f\n"), $3/$2*100}'| awk '{print $3}')
 
 				echo "Memory Current Usage is: $ramusage%"
-				if (( $(echo "$ramusage > 92" |bc -l) )); then
+				if (( $(echo "$ramusage > $maxmem" |bc -l) )); then
 								killall python3
 								killall python
 				fi
-				sleep ${1:-0.4}
+				sleep $secsleep
 done
