@@ -1,4 +1,7 @@
 #!/bin/bash
+
+export LC_ALL=C.UTF-8
+#set -x
 maxmem=${2:-92}
 secsleep=${1:-0.4}
 echo $secsleep $maxmem
