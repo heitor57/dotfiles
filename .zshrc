@@ -76,3 +76,4 @@ function precmd() {
 
 
 alias ev="v ~/dotfiles/.config/nvim/init.vim"
+export EDITOR="nvim"
