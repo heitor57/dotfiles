@@ -2,8 +2,8 @@
 
 export LC_ALL=C.UTF-8
 #set -x
-maxmem=${2:-92}
-secsleep=${1:-0.4}
+maxmem=${2:-50}
+secsleep=${1:-0.3}
 echo $secsleep $maxmem
 while true; do 
 
