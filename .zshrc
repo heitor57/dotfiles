@@ -62,17 +62,17 @@ autoload -Uz run-help
 alias help=run-help
 alias rh=run-help
 
-function preexec() {
-  timer=${timer:-$SECONDS}
-}
+#function preexec() {
+  #timer=${timer:-$SECONDS}
+#}
 
-function precmd() {
-  if [ $timer ]; then
-    timer_show=$(($SECONDS - $timer))
-    export RPROMPT="%F{cyan}${timer_show}s %{$reset_color%}"
-    unset timer
-  fi
-}
+#function precmd() {
+  #if [ $timer ]; then
+    #timer_show=$(($SECONDS - $timer))
+    #export RPROMPT="%F{cyan}${timer_show}s %{$reset_color%}"
+    #unset timer
+  #fi
+#}
 
 
 alias ev="v ~/dotfiles/.config/nvim/init.vim"
