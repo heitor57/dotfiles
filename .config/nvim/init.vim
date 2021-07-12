@@ -1,3 +1,4 @@
+"if !exists('g:vscode')
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -28,7 +29,38 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "\ 'yaml.ansible': 'yaml',
 "\ }
 
-let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-spell-checker','coc-cspell-dicts','coc-sh','coc-snippets']
+"let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-spell-checker','coc-cspell-dicts','coc-sh','coc-snippets']
+let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-sh','coc-snippets','coc-clangd']
+"Plug 'vigoux/LanguageTool.nvim'
+"let g:languagetool_server_jar='/usr/bin/languagetool'
+"Plug 'dpelle/vim-LanguageTool'
+"let g:languagetool_jar='~/languagetool/LanguageTool-5.4/languagetool-commandline.jar'
+"let g:languagetool_lang='pt-BR'
+" language tool
+Plug 'heitor57/vim-grammarous'
+"nmap <leader>çn <Plug>(grammarous-move-to-next-error)
+
+"let g:grammarous#convert_char_to_byte=1
+"  Move the cursor to the info window
+nmap <leader>çq <Plug>(grammarous-move-to-info-window)
+" 	Open the info window for the error under the cursor
+nmap <leader>çw <Plug>(grammarous-open-info-window)
+" 	Reset the current check
+nmap <leader>çe <Plug>(grammarous-reset)
+" 	Fix the error under the cursor automatically
+nmap <leader>çr <Plug>(grammarous-fixit)
+" 	Fix all the errors in a current buffer automatically
+nmap <leader>çt <Plug>(grammarous-fixall)
+" 	Close the information window from checked buffer
+nmap <leader>çy <Plug>(grammarous-close-info-window)
+" 	Remove the error under the cursor
+nmap <leader>çu <Plug>(grammarous-remove-error)
+" 	Disable the grammar rule under the cursor
+nmap <leader>çi <Plug>(grammarous-disable-rule)
+" 	Move cursor to the next error
+nmap <leader>ço <Plug>(grammarous-move-to-next-error)
+" 	Move cursor to the previous error
+nmap <leader>çp <Plug>(grammarous-move-to-previous-error)
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
@@ -291,18 +323,18 @@ let g:yapf_style = "google"
 Plug 'lervag/vimtex'
 let g:vimtex_view_general_viewer = 'evince'
 let g:vimtex_compiler_latexmk_engines = {
-                                                                                                \ '_'                : '-xelatex -shell-escape',
-												"\ '_'                : '-lualatex -shell-escape',
-												"\ '_'                : '-lualatex',
-												"\ '_'                : '-lualatex',
-												\ 'pdflatex'         : '-pdf',
-												\ 'dvipdfex'         : '-pdfdvi',
-												\ 'lualatex'         : '-lualatex',
-												\ 'xelatex'          : '-xelatex',
-												\ 'context (pdftex)' : '-pdf -pdflatex=texexec',
-												\ 'context (luatex)' : '-pdf -pdflatex=context',
-												\ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
-												\}
+                                                                                                "\ '_'                : '-xelatex -shell-escape',
+                                                                                                \ '_'                : '-lualatex -shell-escape',
+                                                                                                "\ '_'                : '-lualatex',
+                                                                                                "\ '_'                : '-lualatex',
+                                                                                                \ 'pdflatex'         : '-pdf',
+                                                                                                \ 'dvipdfex'         : '-pdfdvi',
+                                                                                                \ 'lualatex'         : '-lualatex',
+                                                                                                \ 'xelatex'          : '-xelatex',
+                                                                                                \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+                                                                                                \ 'context (luatex)' : '-pdf -pdflatex=context',
+                                                                                                \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+                                                                                                \}
 
 Plug 'godlygeek/tabular'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -368,3 +400,4 @@ function! DeleteFileSwaps()
     echo "Reset swap file extension for file: ".expand('%')
 endfunction
 command! DeleteFileSwaps :call DeleteFileSwaps()
+"endif
