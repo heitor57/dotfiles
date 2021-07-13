@@ -354,14 +354,12 @@ Plug 'pseewald/vim-anyfold'
 autocmd Filetype yaml AnyFoldActivate
 set foldlevel=1
 
-Plug 'matze/vim-move'
-"let g:move_key_modifier = 'C'
-"
+"Plug 'matze/vim-move'
 
-nmap <C-Down> <Plug>MoveLineDown
-vmap <C-Down> <Plug>MoveBlockDown
-nmap <C-Up> <Plug>MoveLineUp
-vmap <C-Up> <Plug>MoveBlockUp
+"nmap <C-Down> <Plug>MoveLineDown
+"vmap <C-Down> <Plug>MoveBlockDown
+"nmap <C-Up> <Plug>MoveLineUp
+"vmap <C-Up> <Plug>MoveBlockUp
 call plug#end()
 colorscheme molokai
 "colorscheme onehalfdark
