@@ -324,7 +324,8 @@ Plug 'lervag/vimtex'
 let g:vimtex_view_general_viewer = 'evince'
 let g:vimtex_compiler_latexmk_engines = {
                                                                                                 "\ '_'                : '-xelatex -shell-escape',
-                                                                                                \ '_'                : '-lualatex -shell-escape',
+                                                                                                "\ '_'                : '-lualatex -shell-escape',
+                                                                                                \ '_'                : '-pdf -shell-escape',
                                                                                                 "\ '_'                : '-lualatex',
                                                                                                 "\ '_'                : '-lualatex',
                                                                                                 \ 'pdflatex'         : '-pdf',
