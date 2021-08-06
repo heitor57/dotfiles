@@ -355,6 +355,7 @@ Plug 'pseewald/vim-anyfold'
 autocmd Filetype yaml AnyFoldActivate
 set foldlevel=1
 
+Plug 'sheerun/vim-polyglot'
 "Plug 'matze/vim-move'
 
 "nmap <C-Down> <Plug>MoveLineDown
