@@ -9,7 +9,7 @@ bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu
 #zstyle ':completion:incremental:*' completer _complete _ignored
 #zstyle :incremental stop-keys $'[\e\C-b\C-f\C-n\C-p\C-u-\C-x]'
 autoload -Uz compinit
@@ -61,6 +61,10 @@ autoload -Uz run-help
 (( ${+aliases[run-help]} )) && unalias run-help
 alias help=run-help
 alias rh=run-help
+function mm(){
+	man $(apropos --long . | dmenu -i -l 30 | awk '{print $2, $1}' | tr -d '()')
+}
+#alias mm=""
 
 #function preexec() {
   #timer=${timer:-$SECONDS}
@@ -75,5 +79,5 @@ alias rh=run-help
 #}
 
 
-alias ev="v ~/dotfiles/.config/nvim/init.vim"
-export EDITOR="nvim"
+alias ev="v $DOTFILES/.config/nvim/init.vim"
+alias ez="v $DOTFILES/.zshrc"
