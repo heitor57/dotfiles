@@ -20,6 +20,8 @@ set inccommand=nosplit
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 call plug#begin('~/.vim/plugged')
+Plug 'voldikss/vim-translator'
+let g:translator_target_lang='pt'
 "Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
