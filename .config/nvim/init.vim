@@ -20,6 +20,8 @@ set inccommand=nosplit
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-abolish'
+
 Plug 'voldikss/vim-translator'
 let g:translator_target_lang='pt'
 "Plug 'SirVer/ultisnips'
@@ -32,7 +34,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "\ }
 
 "let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-spell-checker','coc-cspell-dicts','coc-sh','coc-snippets']
-let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-sh','coc-snippets','coc-clangd']
+let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-sh','coc-snippets','coc-clangd', 'coc-go']
 "Plug 'vigoux/LanguageTool.nvim'
 "let g:languagetool_server_jar='/usr/bin/languagetool'
 "Plug 'dpelle/vim-LanguageTool'
@@ -274,7 +276,7 @@ vmap <A-;> <plug>NERDCommenterToggle
 nmap <A-;> <plug>NERDCommenterToggle
 "Plug 'jreybert/vimagit'
 Plug 'tpope/vim-fugitive'
-nnoremap <Leader>g :Git<CR>
+nnoremap <Leader>e :Git<CR>
 nnoremap <Leader>p :G push<CR>
 nnoremap <Leader>ç :G pull<CR>
 nnoremap <Leader>o :Glog<CR>
