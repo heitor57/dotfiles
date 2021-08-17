@@ -1,5 +1,19 @@
 if exists('g:vscode')
+  let mapleader=","
+  set number
   set incsearch
+  set hlsearch
+  set clipboard=unnamedplus
+  vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+  nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+  nnoremap <leader>sv :source $MYVIMRC<cr>
+  nnoremap <Leader>. :wa<CR>
+  nnoremap <Leader>; :wa<CR>:qa!<CR>
+  call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+  Plug 'preservim/nerdcommenter'
+  vmap <leader>ç <plug>NERDCommenterToggle
+  nmap <leader>ç <plug>NERDCommenterToggle
+  call plug#end()
 else
   let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
   if empty(glob(data_dir . '/autoload/plug.vim'))
