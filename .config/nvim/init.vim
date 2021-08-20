@@ -36,6 +36,8 @@ else
   autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
   call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+
+  Plug 'iamcco/markdown-preview.nvim'
   Plug 'fatih/vim-go'
   Plug 'tpope/vim-abolish'
 
