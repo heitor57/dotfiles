@@ -24,6 +24,7 @@ antibody bundle < ~/.zsh_plugins.txt
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+bindkey "\e[3~" delete-char
 
 alias l="ls"
 lsxhkd(){
