@@ -19,11 +19,11 @@
 # ReversingScrollDirection = false
 
 ## Specifies the amount of scrolling by the mouse wheel. The default value is 1.
-# LineToScroll = 1
+ LineToScroll = 4
 
 ## This option makes the whole GUI window in semi-transparent.
 ## This setting also implicitly enables the Drawborder setting
-# Transparent = 1.0
+ #Transparent = 1.0
 
 ## Launch goneovim with full screen window size.
 # StartFullscreen = false
@@ -42,7 +42,8 @@
 ## In Windows
 # FontFamily = "Windows"
 ## Fontsize is
-FontSize = 8
+FontFamily = "Fira Code"
+FontSize = 11
 ## linespace is
 # Linespace = 6
 
