@@ -388,6 +388,11 @@ else
   Plug 'sheerun/vim-polyglot'
   Plug 'Pocco81/Catppuccino.nvim'
   Plug 'tpope/vim-rsi'
+  Plug 'sbdchd/neoformat'
+  augroup fmt
+    autocmd!
+    autocmd BufWritePre * undojoin | Neoformat
+  augroup END
   call plug#end()
 
 lua << EOF
