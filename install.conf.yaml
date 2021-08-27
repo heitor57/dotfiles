@@ -35,3 +35,7 @@
     ~/.condarc:
       path: .condarc
       force: true
+    ~/.goneovim:
+      glob: true
+      path: .goneovim
+      relink: true
