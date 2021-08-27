@@ -39,3 +39,4 @@
       glob: true
       path: .goneovim
       relink: true
+      force: true

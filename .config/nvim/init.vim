@@ -31,6 +31,8 @@ else
   set hlsearch
   set incsearch
   set inccommand=nosplit
+  set pumblend=20
+  set winblend=20
   cnoremap <C-v> <C-r>+
   abbr ref \textbf{[REF]}
   vnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
@@ -377,6 +379,7 @@ else
 
   Plug 'sheerun/vim-polyglot'
   Plug 'Pocco81/Catppuccino.nvim'
+  Plug 'tpope/vim-rsi'
   call plug#end()
 
 lua << EOF
