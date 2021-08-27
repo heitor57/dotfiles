@@ -33,13 +33,12 @@ else
   set inccommand=nosplit
   set pumblend=20
   set winblend=20
-  let g:vimtex_fold_enabled = 1
-  let g:vimtex_fold_manual = 0
   cnoremap <C-v> <C-r>+
   abbr ref \textbf{[REF]}
   vnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
   nnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
-  "set foldmethod=syntax
+  "set foldexpr=1
+  set foldmethod=expr
   "set foldlevelstart=99
   autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
@@ -348,6 +347,13 @@ else
   "Plug 'Yggdroot/indentLine'
   Plug 'lervag/vimtex'
   let g:vimtex_view_general_viewer = 'evince'
+  let g:vimtex_fold_enabled = 1
+  autocmd User VimtexEventInitPost call SetVimTexFolder()
+  function SetVimTexFolder()
+      g:vimtex#fold#init_buffer()
+      setlocal foldlevel=0
+  endfunction
+  "let g:vimtex_fold_manual = 1
   let g:vimtex_compiler_latexmk_engines = {
         "\ '_'                : '-xelatex -shell-escape',
         "\ '_'                : '-lualatex -shell-escape',
@@ -377,7 +383,7 @@ else
   Plug 'zhimsel/vim-stay'
   Plug 'pseewald/vim-anyfold'
   autocmd Filetype yaml AnyFoldActivate
-  set foldlevel=1
+  autocmd Filetype yaml setlocal foldlevel=1
 
   Plug 'sheerun/vim-polyglot'
   Plug 'Pocco81/Catppuccino.nvim'
@@ -426,4 +432,7 @@ EOF
   command! DeleteFileSwaps :call DeleteFileSwaps()
   "endif
 	lua require"telescope".load_extension("bibtex")
+  "autocmd FileType tex setlocal foldmethod=expr
+  "autocmd FileType tex setlocal foldexpr=vimtex#fold#level(v:lnum)
+  "autocmd FileType tex setlocal foldtext=vimtex#fold#text()
 endif
