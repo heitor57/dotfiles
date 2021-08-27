@@ -32,12 +32,19 @@ else
   set incsearch
   set inccommand=nosplit
   cnoremap <C-v> <C-r>+
-  ab ref \textbf{[REF]}
+  abbr ref \textbf{[REF]}
+  vnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
+  nnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
   "set foldmethod=syntax
   "set foldlevelstart=99
   autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
   call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-bibtex.nvim'
+  
 
   Plug 'iamcco/markdown-preview.nvim'
   Plug 'fatih/vim-go'
@@ -338,19 +345,19 @@ else
   Plug 'lervag/vimtex'
   let g:vimtex_view_general_viewer = 'evince'
   let g:vimtex_compiler_latexmk_engines = {
-                                                                                                  "\ '_'                : '-xelatex -shell-escape',
-                                                                                                  "\ '_'                : '-lualatex -shell-escape',
-                                                                                                  \ '_'                : '-pdf -shell-escape',
-                                                                                                  "\ '_'                : '-lualatex',
-                                                                                                  "\ '_'                : '-lualatex',
-                                                                                                  \ 'pdflatex'         : '-pdf',
-                                                                                                  \ 'dvipdfex'         : '-pdfdvi',
-                                                                                                  \ 'lualatex'         : '-lualatex',
-                                                                                                  \ 'xelatex'          : '-xelatex',
-                                                                                                  \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
-                                                                                                  \ 'context (luatex)' : '-pdf -pdflatex=context',
-                                                                                                  \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
-                                                                                                  \}
+        "\ '_'                : '-xelatex -shell-escape',
+        "\ '_'                : '-lualatex -shell-escape',
+        \ '_'                : '-pdf -shell-escape',
+        "\ '_'                : '-lualatex',
+        "\ '_'                : '-lualatex',
+        \ 'pdflatex'         : '-pdf',
+        \ 'dvipdfex'         : '-pdfdvi',
+        \ 'lualatex'         : '-lualatex',
+        \ 'xelatex'          : '-xelatex',
+        \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+        \ 'context (luatex)' : '-pdf -pdflatex=context',
+        \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+        \}
 
   Plug 'godlygeek/tabular'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -413,4 +420,5 @@ EOF
   endfunction
   command! DeleteFileSwaps :call DeleteFileSwaps()
   "endif
+	lua require"telescope".load_extension("bibtex")
 endif
