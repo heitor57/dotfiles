@@ -6,13 +6,12 @@ maxmem=${2:-50}
 secsleep=${1:-0.3}
 echo $secsleep $maxmem
 while true; do 
+	ramusage=$(free | awk '/Mem/{printf("RAM Usage: %.2f\n"), $3/$2*100}'| awk '{print $3}')
 
-				ramusage=$(free | awk '/Mem/{printf("RAM Usage: %.2f\n"), $3/$2*100}'| awk '{print $3}')
-
-				echo "Memory Current Usage is: $ramusage%"
-				if (( $(echo "$ramusage > $maxmem" |bc -l) )); then
-								killall python3
-								killall python
-				fi
-				sleep $secsleep
+	echo "Memory Current Usage is: $ramusage%"
+	if (( $(echo "$ramusage > $maxmem" |bc -l) )); then
+		killall python3
+		killall python
+	fi
+	sleep $secsleep
 done

@@ -5,7 +5,7 @@ if exists('g:vscode')
   set hlsearch
   set clipboard=unnamedplus
   vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-  nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+  nnoremap <leader>ev :e $MYVIMRC<cr>
   nnoremap <leader>sv :source $MYVIMRC<cr>
   nnoremap <Leader>. :wa<CR>
   nnoremap <Leader>; :wa<CR>:qa!<CR>
@@ -15,6 +15,7 @@ if exists('g:vscode')
   nmap <leader>ç <plug>NERDCommenterToggle
   call plug#end()
 else
+  ab ref \textbf{[REF]}
   let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
   if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -47,23 +48,13 @@ else
   Plug 'honza/vim-snippets'
   Plug 'vim-pandoc/vim-rmarkdown'
 
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  "let g:coc_filetype_map = {
-  "\ 'yaml.ansible': 'yaml',
-  "\ }
-
-  "let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-spell-checker','coc-cspell-dicts','coc-sh','coc-snippets']
-  "let g:coc_global_extensions = ['coc-pyright','coc-json', 'coc-git','coc-yaml','coc-sh','coc-snippets','coc-clangd', 'coc-go']
-  "Plug 'vigoux/LanguageTool.nvim'
-  "let g:languagetool_server_jar='/usr/bin/languagetool'
-  "Plug 'dpelle/vim-LanguageTool'
-  "let g:languagetool_jar='~/languagetool/LanguageTool-5.4/languagetool-commandline.jar'
-  "let g:languagetool_lang='pt-BR'
   " language tool
   Plug 'heitor57/vim-grammarous'
   "nmap <leader>çn <Plug>(grammarous-move-to-next-error)
-
   "let g:grammarous#convert_char_to_byte=1
+
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
   "  Move the cursor to the info window
   nmap <leader>çq <Plug>(grammarous-move-to-info-window)
   " 	Open the info window for the error under the cursor
@@ -366,8 +357,6 @@ else
   "let g:airline_theme='onehalfdark'
   Plug 'cespare/vim-toml'
   Plug 'tpope/vim-sleuth'
-  Plug 'tomasr/molokai'
-  let g:molokai_original = 1
   "let g:rehash256 = 1
   Plug 'moll/vim-bbye' " optional dependency
   Plug 'aymericbeaumet/vim-symlink'
@@ -379,15 +368,14 @@ else
   set foldlevel=1
 
   Plug 'sheerun/vim-polyglot'
-  "Plug 'matze/vim-move'
-
-  "nmap <C-Down> <Plug>MoveLineDown
-  "vmap <C-Down> <Plug>MoveBlockDown
-  "nmap <C-Up> <Plug>MoveLineUp
-  "vmap <C-Up> <Plug>MoveBlockUp
+  Plug 'Pocco81/Catppuccino.nvim'
   call plug#end()
-  colorscheme molokai
-  "colorscheme onehalfdark
+
+lua << EOF
+local catppuccino = require("catppuccino")
+catppuccino.setup({colorscheme = "catppuccino"})
+catppuccino.load()
+EOF
   nnoremap <Leader><Leader> :qa!<CR>
   nnoremap <Leader>] :PlugInstall<CR>
   map gn :bn<cr>
@@ -396,7 +384,7 @@ else
   nnoremap <Leader>. :wa<CR>
   nnoremap <Leader>; :wa<CR>:qa!<CR>
   nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
-  nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+  nnoremap <leader>ev :e $MYVIMRC<cr>
   nnoremap <leader>sv :source $MYVIMRC<cr>
   "inoremap jk <esc>
   "inoremap <esc> <nop>
