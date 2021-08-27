@@ -15,7 +15,6 @@ if exists('g:vscode')
   nmap <leader>ç <plug>NERDCommenterToggle
   call plug#end()
 else
-  ab ref \textbf{[REF]}
   let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
   if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -32,6 +31,8 @@ else
   set hlsearch
   set incsearch
   set inccommand=nosplit
+  cnoremap <C-v> <C-r>+
+  ab ref \textbf{[REF]}
   "set foldmethod=syntax
   "set foldlevelstart=99
   autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
