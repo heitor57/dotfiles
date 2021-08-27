@@ -33,6 +33,8 @@ else
   set inccommand=nosplit
   set pumblend=20
   set winblend=20
+  let g:vimtex_fold_enabled = 1
+  let g:vimtex_fold_manual = 0
   cnoremap <C-v> <C-r>+
   abbr ref \textbf{[REF]}
   vnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
