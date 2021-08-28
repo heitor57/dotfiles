@@ -47,7 +47,6 @@ else
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-bibtex.nvim'
-  
 
   Plug 'iamcco/markdown-preview.nvim'
   Plug 'fatih/vim-go'
@@ -297,10 +296,10 @@ else
   nmap <A-;> <plug>NERDCommenterToggle
   "Plug 'jreybert/vimagit'
   Plug 'tpope/vim-fugitive'
-  nnoremap <Leader>e :Git<CR>
-  nnoremap <Leader>p :G push<CR>
-  nnoremap <Leader>ç :G pull<CR>
-  nnoremap <Leader>o :Glog<CR>
+  nnoremap <Leader>pg :Git<CR>
+  nnoremap <Leader>pp :G push<CR>
+  nnoremap <Leader>pu :G pull<CR>
+  nnoremap <Leader>pl :Glog<CR>
   "command! -nargs=+ Ggr execute 'Ggrep' <q-args> | cw
   "nnoremap <Leader>a :Ggr 
   Plug 'pedrohdz/vim-yaml-folds'
@@ -389,10 +388,18 @@ else
   Plug 'Pocco81/Catppuccino.nvim'
   Plug 'tpope/vim-rsi'
   Plug 'sbdchd/neoformat'
-  augroup fmt
-    autocmd!
-    autocmd BufWritePre * undojoin | Neoformat
-  augroup END
+  "let g:neoformat_verbose = 1
+  let g:neoformat_tex_mylatexindent = {
+              \ 'exe': 'latexindent',
+              \ 'args': [],
+              \ 'stdin': 1,
+              \ }
+  let g:neoformat_enabled_tex = ['mylatexindent']
+
+  "augroup fmt
+    "autocmd!
+    "autocmd BufWritePre * undojoin | Neoformat
+  "augroup END
   call plug#end()
 
 lua << EOF
@@ -436,8 +443,9 @@ EOF
   endfunction
   command! DeleteFileSwaps :call DeleteFileSwaps()
   "endif
-	lua require"telescope".load_extension("bibtex")
   "autocmd FileType tex setlocal foldmethod=expr
   "autocmd FileType tex setlocal foldexpr=vimtex#fold#level(v:lnum)
   "autocmd FileType tex setlocal foldtext=vimtex#fold#text()
+  nnoremap <leader>of gg<S-v>Ggq
+	lua require"telescope".load_extension("bibtex")
 endif
