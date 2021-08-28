@@ -79,6 +79,7 @@ function mm(){
   #fi
 #}
 
+alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
 
 alias ev="v $DOTFILES/.config/nvim/init.vim"
 alias ez="v $DOTFILES/.zshrc"
