@@ -33,6 +33,9 @@ else
   set inccommand=nosplit
   set pumblend=20
   set winblend=20
+  set textwidth=62
+  set spelllang=en
+  nnoremap <leader>ça :set spell!<cr>
   cnoremap <C-v> <C-r>+
   abbr ref \textbf{[REF]}
   vnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
