@@ -400,6 +400,10 @@ else
     "autocmd!
     "autocmd BufWritePre * undojoin | Neoformat
   "augroup END
+  Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
+  nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
+  "set timeoutlen=50
   call plug#end()
 
 lua << EOF
