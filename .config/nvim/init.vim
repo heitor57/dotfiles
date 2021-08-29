@@ -35,7 +35,7 @@ else
   set winblend=20
   set textwidth=62
   set spelllang=en
-  nnoremap <leader>ça :set spell!<cr>
+  nnoremap <leader>ça :setlocal spell!<cr>
   cnoremap <C-v> <C-r>+
   abbr ref \textbf{[REF]}
   vnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
@@ -407,6 +407,30 @@ else
 
   nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
   "set timeoutlen=50
+
+  "Plug 'kamykn/spelunker.vim'
+  "let g:enable_spelunker_vim_on_readonly = 0
+  "let g:spelunker_target_min_char_len = 4
+  "let g:spelunker_max_suggest_words = 15
+  "let g:spelunker_max_hi_words_each_buf = 100
+  "let g:spelunker_check_type = 1
+  "let g:spelunker_highlight_type = 1
+  "let g:spelunker_disable_uri_checking = 1
+  "let g:spelunker_disable_email_checking = 1
+  "let g:spelunker_disable_account_name_checking = 1
+  "let g:spelunker_disable_acronym_checking = 1
+  "let g:spelunker_disable_backquoted_checking = 1
+  "let g:spelunker_disable_auto_group = 1
+  "augroup spelunker
+    "autocmd!
+    "autocmd BufWinEnter,BufWritePost *.vim,*.js,*.jsx,*.json,*.md call spelunker#check()
+    "autocmd CursorHold *.vim,*.js,*.jsx,*.json,*.md call spelunker#check_displayed_words()
+  "augroup END
+  "let g:spelunker_spell_bad_group = 'SpelunkerSpellBad'
+  "let g:spelunker_complex_or_compound_word_group = 'SpelunkerComplexOrCompoundWord'
+  "highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
+  "highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
+  "Plug 'kamykn/popup-menu.nvim'
   call plug#end()
 
 lua << EOF

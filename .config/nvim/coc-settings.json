@@ -3,7 +3,8 @@
         "kubernetes": "/*.yaml"
     },
     "cSpellExt.enableDictionaries": ["portuguese-brazilian"],
-    "cSpell.language": "pt_BR",
+    "cSpell.language": "en,pt_BR",
+    //"cSpell.language": "en",
     "cSpell.ignorePaths": [
         "*.py",        // this will ignore anything the node_modules directory
         "*.yaml",        // this will ignore anything the node_modules directory
@@ -18,5 +19,11 @@
         ".git",                // Ignore the .git directory
         "*.dll",               // Ignore all .dll files.
         "**/*.dll"             // Ignore all .dll files
+    ],
+    "cSpell.userWords": [
+      "LBSNs",
+      "WERNECK",
+      "dacrema",
+      "else's"
     ],
 }
