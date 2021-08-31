@@ -33,11 +33,10 @@ else
   set inccommand=nosplit
   set pumblend=20
   set winblend=20
-  set textwidth=62
   set spelllang=en
   nnoremap <leader>ça :setlocal spell!<cr>
   cnoremap <C-v> <C-r>+
-  abbr ref \textbf{[REF]}
+  abbr rf \textbf{[REF]}
   vnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
   nnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
   "set foldexpr=1
@@ -479,4 +478,13 @@ EOF
   "autocmd FileType tex setlocal foldtext=vimtex#fold#text()
   nnoremap <leader>of gg<S-v>Ggq
 	lua require"telescope".load_extension("bibtex")
+  function! CurrentLetterTilde()
+      " Get current letter.
+      normal! yl
+      if @" =~# '[\~]'
+          execute "normal! gg$i0\<ESC>"
+      else
+          execute "normal! gg$i1\<ESC>"
+      endif
+  endfunction
 endif
