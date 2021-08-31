@@ -37,8 +37,10 @@ else
   nnoremap <leader>ça :setlocal spell!<cr>
   cnoremap <C-v> <C-r>+
   abbr rf \textbf{[REF]}
-  vnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
-  nnoremap <leader>w :'<, '>GrammarousCheck --lang=en<cr>
+  vnoremap <leader>wr :'<, '>GrammarousCheck --lang=en<cr>
+  nnoremap <leader>wr :'<, '>GrammarousCheck --lang=en<cr>
+  vnoremap <leader>wa :GrammarousCheck --lang=en<cr>
+  nnoremap <leader>wa :GrammarousCheck --lang=en<cr>
   "set foldexpr=1
   set foldmethod=expr
   "set foldlevelstart=99
@@ -296,6 +298,8 @@ else
   Plug 'preservim/nerdcommenter'
   vmap <A-;> <plug>NERDCommenterToggle
   nmap <A-;> <plug>NERDCommenterToggle
+  vmap <leader>ç <plug>NERDCommenterToggle
+  nmap <leader>ç <plug>NERDCommenterToggle
   "Plug 'jreybert/vimagit'
   Plug 'tpope/vim-fugitive'
   nnoremap <Leader>pg :Git<CR>
@@ -442,8 +446,8 @@ EOF
   map gn :bn<cr>
   map gp :bp<cr>
   vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-  nnoremap <Leader>. :wa<CR>
-  nnoremap <Leader>; :wa<CR>:qa!<CR>
+  nnoremap <Leader>. :w<CR>
+  "nnoremap <Leader>; :wa<CR>:qa!<CR>
   nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
   nnoremap <leader>ev :e $MYVIMRC<cr>
   nnoremap <leader>sv :source $MYVIMRC<cr>
