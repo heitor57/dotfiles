@@ -436,6 +436,7 @@ else
   cmap <c-p> <Plug>CmdlineCompleteBackward
   cmap <c-n> <Plug>CmdlineCompleteForward
   Plug 'vim-ctrlspace/vim-ctrlspace'
+  Plug 'tpope/vim-repeat'
   call plug#end()
 
 lua << EOF
@@ -485,9 +486,8 @@ EOF
   nnoremap <leader>of gg<S-v>Ggq
 lua << EOF
 require('telescope').setup {
-  file_ignore_patterns = {'.git'},
 extensions = {
-  project = {
+  defaults = {
     base_dirs = {
       {path = '~/Documents',max_depth=1},
       {path = '~/Documents/Projects',max_depth=1},
@@ -496,12 +496,17 @@ extensions = {
       {path = '~/mnt', max_depth = 2},
       },
     hidden_files = true
-    }
-}
+    },
+  file_ignore_patterns = {
+    ".backup", ".swap", ".langservers", ".session", ".undo", ".git",
+    "node_modules", "vendor", ".cache", ".vscode-server", "classes",
+    ".venv","%.png","%.jpeg","%.jpg","%.mkv","%.mp3","%.mp4"
+    },
+  }
 }
 vim.api.nvim_set_keymap(
     'n',
-    '<C-m>',
+    '<leader>m',
     ":lua require'telescope'.extensions.project.project{}<CR>",
     {noremap = true, silent = true}
 )
