@@ -397,10 +397,10 @@ else
               \ }
   let g:neoformat_enabled_tex = ['mylatexindent']
   let g:neoformat_enabled_python = ['autopep8', 'yapf', 'docformatter']
-  augroup fmt
-    autocmd!
-    autocmd BufWritePre * undojoin | Neoformat
-  augroup END
+  "augroup fmt
+    "autocmd!
+    "autocmd BufWritePre * undojoin | Neoformat
+  "augroup END
   Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
   nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
