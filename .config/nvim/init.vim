@@ -397,6 +397,7 @@ else
               \ }
   let g:neoformat_enabled_tex = ['mylatexindent']
   let g:neoformat_enabled_python = ['autopep8', 'yapf', 'docformatter']
+  nnoremap <leader>n <cmd>Neoformat<cr>
   "augroup fmt
     "autocmd!
     "autocmd BufWritePre * undojoin | Neoformat
