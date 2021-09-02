@@ -51,7 +51,7 @@ else
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-bibtex.nvim'
-  Plug 'vim-telescope/telescope-project.nvim'
+  Plug 'nvim-telescope/telescope-project.nvim'
 
   Plug 'iamcco/markdown-preview.nvim'
   Plug 'fatih/vim-go'
@@ -65,8 +65,6 @@ else
 
   " language tool
   Plug 'heitor57/vim-grammarous'
-  "nmap <leader>çn <Plug>(grammarous-move-to-next-error)
-  "let g:grammarous#convert_char_to_byte=1
 
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -273,18 +271,11 @@ else
   " Resume latest coc list.
   nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-  "Plug 'SirVer/ultisnips'
-  Plug 'scrooloose/nerdTree'
-  "inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-
-  " c-j c-k for moving in snippet
-   "let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-  "let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-  "let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-  "let g:UltiSnipsRemoveSelectModeMappings = 0
-  nnoremap <C-n> :NERDTreeToggle<cr>
-  nnoremap <C-h> :NERDTreeFind<cr>
-  nmap <Leader>m :NERDTreeFocus<cr>R<c-w><c-p>
+  Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+  nnoremap <C-n> <cmd>CHADopen<cr>
+  "nnoremap <C-n> :NERDTreeToggle<cr>
+  "nnoremap <C-h> :NERDTreeFind<cr>
+  "nmap <Leader>m :NERDTreeFocus<cr>R<c-w><c-p>
   let NERDTreeShowHidden=1
 
   Plug 'tpope/vim-surround'
@@ -405,11 +396,11 @@ else
               \ 'stdin': 1,
               \ }
   let g:neoformat_enabled_tex = ['mylatexindent']
-
-  "augroup fmt
-    "autocmd!
-    "autocmd BufWritePre * undojoin | Neoformat
-  "augroup END
+  let g:neoformat_enabled_python = ['autopep8', 'yapf', 'docformatter']
+  augroup fmt
+    autocmd!
+    autocmd BufWritePre * undojoin | Neoformat
+  augroup END
   Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
   nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
@@ -444,6 +435,7 @@ else
   Plug 'j5shi/CommandlineComplete.vim'
   cmap <c-p> <Plug>CmdlineCompleteBackward
   cmap <c-n> <Plug>CmdlineCompleteForward
+  Plug 'vim-ctrlspace/vim-ctrlspace'
   call plug#end()
 
 lua << EOF
@@ -491,14 +483,29 @@ EOF
   "autocmd FileType tex setlocal foldexpr=vimtex#fold#level(v:lnum)
   "autocmd FileType tex setlocal foldtext=vimtex#fold#text()
   nnoremap <leader>of gg<S-v>Ggq
+lua << EOF
+require('telescope').setup {
+  file_ignore_patterns = {'.git'},
+extensions = {
+  project = {
+    base_dirs = {
+      {path = '~/Documents',max_depth=1},
+      {path = '~/Documents/Projects',max_depth=1},
+      {path = '~/Dropbox',max_depth=1},
+      {path = '~/', max_depth = 1},
+      {path = '~/mnt', max_depth = 2},
+      },
+    hidden_files = true
+    }
+}
+}
+vim.api.nvim_set_keymap(
+    'n',
+    '<C-m>',
+    ":lua require'telescope'.extensions.project.project{}<CR>",
+    {noremap = true, silent = true}
+)
+EOF
 	lua require"telescope".load_extension("bibtex")
-  function! CurrentLetterTilde()
-      " Get current letter.
-      normal! yl
-      if @" =~# '[\~]'
-          execute "normal! gg$i0\<ESC>"
-      else
-          execute "normal! gg$i1\<ESC>"
-      endif
-  endfunction
+  lua require"telescope".load_extension("project")
 endif
