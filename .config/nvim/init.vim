@@ -125,11 +125,6 @@ else
   " other plugin before putting this into your config.
   "
 
-  "inoremap <silent><expr> <TAB>
-        "\ pumvisible() ? coc#_select_confirm() :
-        "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-        "\ <SID>check_back_space() ? "\<TAB>" :
-        "\ coc#refresh()
 
   imap <C-l> <Plug>(coc-snippets-expand)
   vmap <C-j> <Plug>(coc-snippets-select)
@@ -137,10 +132,17 @@ else
   let g:coc_snippet_prev = '<c-k>'
   imap <C-j> <Plug>(coc-snippets-expand-jump)
   xmap <leader>x  <Plug>(coc-convert-snippet)
+
   inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
+        \ pumvisible() ? coc#_select_confirm() :
+        \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
         \ <SID>check_back_space() ? "\<TAB>" :
         \ coc#refresh()
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
   function! s:check_back_space() abort
@@ -434,6 +436,12 @@ else
   "highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
   "highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
   "Plug 'kamykn/popup-menu.nvim'
+  
+  Plug 'kshenoy/vim-signature'
+  Plug 'tpope/vim-surround'
+  Plug 'j5shi/CommandlineComplete.vim'
+  cmap <c-p> <Plug>CmdlineCompleteBackward
+  cmap <c-n> <Plug>CmdlineCompleteForward
   call plug#end()
 
 lua << EOF
