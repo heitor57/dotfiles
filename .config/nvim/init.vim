@@ -51,6 +51,7 @@ else
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-bibtex.nvim'
+  Plug 'vim-telescope/telescope-project.nvim'
 
   Plug 'iamcco/markdown-preview.nvim'
   Plug 'fatih/vim-go'
