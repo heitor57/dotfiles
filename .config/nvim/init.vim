@@ -192,8 +192,8 @@ else
   nmap <leader>rn <Plug>(coc-rename)
 
   " Formatting selected code.
-  xmap <leader>f  <Plug>(coc-format-selected)
-  nmap <leader>f  <Plug>(coc-format-selected)
+  "xmap <leader>f  <Plug>(coc-format-selected)
+  "nmap <leader>f  <Plug>(coc-format-selected)
 
   augroup mygroup
     autocmd!
@@ -251,7 +251,7 @@ else
   " Add (Neo)Vim's native statusline support.
   " NOTE: Please see `:h coc-status` for integrations with external plugins that
   " provide custom statusline: lightline.vim, vim-airline.
-  set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+  "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
   " Mappings for CoCList
   " Show all diagnostics.
@@ -287,9 +287,11 @@ else
 
   "Plug 'nathanaelkane/vim-indent-guides'
   "let g:indent_guides_enable_on_vim_startup = 1
-  Plug 'bling/vim-airline'
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline_powerline_fonts = 1
+  "Plug 'bling/vim-airline'
+  "let g:airline#extensions#tabline#enabled = 1
+  "let g:airline_powerline_fonts = 1
+  "Plug 'vim-airline/vim-airline-themes'
+  "let g:airline_theme='powerlineish'
   Plug 'preservim/nerdcommenter'
   vmap <A-;> <plug>NERDCommenterToggle
   nmap <A-;> <plug>NERDCommenterToggle
@@ -340,9 +342,9 @@ else
   "Plug 'rbgrouleff/bclose.vim'
   Plug 'puremourning/vimspector'
   let g:vimspector_enable_mappings = 'HUMAN'
-  Plug 'mindriot101/vim-yapf'
-  :nnoremap <leader>y :call Yapf()<cr>
-  let g:yapf_style = "google"
+  "Plug 'mindriot101/vim-yapf'
+  ":nnoremap <leader>y :call Yapf()<cr>
+  "let g:yapf_style = "google"
 
   "Plug 'Yggdroot/indentLine'
   Plug 'lervag/vimtex'
@@ -436,8 +438,15 @@ else
   Plug 'j5shi/CommandlineComplete.vim'
   cmap <c-p> <Plug>CmdlineCompleteBackward
   cmap <c-n> <Plug>CmdlineCompleteForward
-  Plug 'vim-ctrlspace/vim-ctrlspace'
+  "Plug 'vim-ctrlspace/vim-ctrlspace'
   Plug 'tpope/vim-repeat'
+  Plug 'Ron89/thesaurus_query.vim'
+  let g:tq_map_keys=0
+  nnoremap <Leader>çz :ThesaurusQueryReplaceCurrentWord<CR>
+  vnoremap <Leader>çx y:ThesaurusQueryReplace <C-r>"<CR>
+  let g:tq_enabled_backends=["openoffice_en","datamuse_com"]
+  Plug 'neomake/neomake'
+  nnoremap <leader>çb <cmd>w<cr><cmd>Neomake!<cr>
   call plug#end()
 
 lua << EOF
