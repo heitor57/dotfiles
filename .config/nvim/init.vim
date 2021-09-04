@@ -271,11 +271,13 @@ else
   " Resume latest coc list.
   nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-  Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-  nnoremap <C-n> <cmd>CHADopen<cr>
-  "nnoremap <C-n> :NERDTreeToggle<cr>
-  "nnoremap <C-h> :NERDTreeFind<cr>
-  "nmap <Leader>m :NERDTreeFocus<cr>R<c-w><c-p>
+  "Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+  "nnoremap <C-n> <cmd>CHADopen<cr>
+  
+  Plug 'preservim/nerdtree'
+  nnoremap <C-n> :NERDTreeToggle<cr>
+  nnoremap <C-h> :NERDTreeFind<cr>
+  nmap <Leader>m :NERDTreeFocus<cr>R<c-w><c-p>
   let NERDTreeShowHidden=1
 
   Plug 'tpope/vim-surround'
@@ -516,7 +518,7 @@ extensions = {
 }
 vim.api.nvim_set_keymap(
     'n',
-    '<leader>m',
+    '<leader>çm',
     ":lua require'telescope'.extensions.project.project{}<CR>",
     {noremap = true, silent = true}
 )
