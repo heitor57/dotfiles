@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/bash
 curl -sfL git.io/antibody | sh -s - -b ./bin
