@@ -12,6 +12,11 @@ vim.cmd([[
   set wrap
   cnoremap <C-v> <C-r>+
 ]])
+
+-- function sleep(n)
+--   os.execute("sleep " .. tonumber(n))
+-- end
+
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = false
@@ -28,8 +33,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- edit a default keymapping
 lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 lvim.keys.visual_mode["//"] = [=========[y/\V<C-R>=escape(@",'/\')<CR><CR>]=========]
-
-
+-- lvim.transparent_window = true
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- lvim.builtin.telescope.on_config_done = function()
 --   local actions = require "telescope.actions"
@@ -58,7 +62,8 @@ lvim.builtin.which_key.mappings["t"] = {
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
 }
-
+lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope find_files hidden=true<CR>", "Find File"}
+-- lvim.builtin.which_key.mappings["s"]["f"] = { "<cmd>Telescope find_files hidden=true<CR>", "Find File"}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -66,26 +71,37 @@ lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
+-- lvim.builtin.telescope.defaults
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ensure_installed = {"lua", "python","yaml"}
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.telescope.defaults.file_ignore_patterns = {'.git/'}
+lvim.builtin.telescope.defaults.hidden = true
+-- lvim.builtin.telescope.on_config_done = function (telescope)
+--   -- telescope.setup({extensions = {
+--   -- 					project = {
+--   -- 						hidden_files = true, -- default: false
+--   -- 					},
+--   -- 				}})
+--   telescope.setup({defaults = {hidden=true}})
+-- end
 
 -- lvim.builtin.compe.
 
 -- generic LSP settings
 -- you can set a custom on_attach function that will be used for all the language servers
 -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
-lvim.lsp.on_attach_callback = function(client, bufnr)
-  client = client
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  -- local opts = { noremap=true, silent=true }
-  buf_set_keymap("i", "<CR>", "compe#confirm({ 'keys': '<CR>', 'select': v:true })", { expr = true })
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-end
+-- lvim.lsp.on_attach_callback = function(client, bufnr)
+--   client = client
+--   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+--   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+--   -- local opts = { noremap=true, silent=true }
+--   buf_set_keymap("i", "<CR>", "compe#confirm({ 'keys': '<CR>', 'select': v:true })", { expr = true })
+--   --Enable completion triggered by <c-x><c-o>
+--   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+-- end
 -- lvim.leader = 1
 -- you can overwrite the null_ls setup table (useful for setting the root_dir function)
 -- lvim.lsp.null_ls.setup = {
@@ -174,4 +190,8 @@ lvim.plugins = {
   {"neomake/neomake"},
   {'tpope/vim-fugitive'},
   {'tanvirtin/monokai.nvim'},
+  -- {'nvim-telescope/telescope.nvim',config=function ()
+  --   -- sleep(2)
+  --   lvim.builtin.which_key.mappings['f'] = { "<cmd>Telescope find_files --hidden<CR>", "Find File" }
+  -- end}
 }
