@@ -39,7 +39,7 @@ alias e='emacsclient -c -nw'
 #[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
 
 alias mab='cd ~/rl-rss/src/app/'
-alias v='nvim'
+alias e='lvim'
 setopt inc_append_history
 setopt histignoredups
 setopt histignorealldups
@@ -81,5 +81,5 @@ function mm(){
 
 alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
 
-alias ev="v $DOTFILES/.config/nvim/init.vim"
+#alias ev="v $DOTFILES/.config/nvim/init.vim"
 alias ez="v $DOTFILES/.zshrc"
