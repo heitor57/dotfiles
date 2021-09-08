@@ -64,6 +64,7 @@ lvim.builtin.which_key.mappings["t"] = {
 }
 lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope find_files hidden=true<CR>", "Find File"}
 -- lvim.builtin.which_key.mappings["s"]["f"] = { "<cmd>Telescope find_files hidden=true<CR>", "Find File"}
+lvim.builtin.which_key.mappings["s"]["g"] = { "<cmd>Telescope git_files<CR>", "Find Git File"}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
