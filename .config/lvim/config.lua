@@ -19,7 +19,7 @@ vim.cmd([[
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = false
+lvim.format_on_save = true
 lvim.lint_on_save = true
 -- lvim.colorscheme = "onedarker"
 lvim.colorscheme = "monokai"
@@ -121,19 +121,19 @@ lvim.builtin.telescope.defaults.hidden = true
 -- end
 
 -- set a formatter if you want to override the default lsp one (if it exists)
--- lvim.lang.python.formatters = {
---   {
---     exe = "black",
---     args = {}
---   }
--- }
+lvim.lang.python.formatters = {
+  {
+    exe = "black",
+    args = {}
+  }
+}
 -- set an additional linter
--- lvim.lang.python.linters = {
---   {
---     exe = "flake8",
---     args = {}
---   }
--- }
+lvim.lang.python.linters = {
+  {
+    exe = "flake8",
+    args = {}
+  }
+}
 
 -- Additional Plugins
 -- lvim.plugins = {
