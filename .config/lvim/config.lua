@@ -19,7 +19,7 @@ vim.cmd([[
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = true
+lvim.format_on_save = false
 lvim.lint_on_save = true
 -- lvim.colorscheme = "onedarker"
 lvim.colorscheme = "monokai"
@@ -127,13 +127,15 @@ lvim.lang.python.formatters = {
     args = {}
   }
 }
--- set an additional linter
-lvim.lang.python.linters = {
-  {
-    exe = "flake8",
-    args = {}
-  }
-}
+-- -- set an additional linter
+
+lvim.lang.python.linters = { { exe = "flake8" } }
+-- lvim.lang.python.linters = {
+--   {
+--     exe = "flake8",
+--     args = {}
+--   }
+-- }
 
 -- Additional Plugins
 -- lvim.plugins = {
@@ -163,25 +165,25 @@ lvim.plugins = {
     requires="neovim/nvim-lspconfig",
     config = function()
       require("grammar-guard").init()
-      -- require("lspconfig").grammar_guard.setup({
-      --   settings = {
-      --     ltex = {
-      --       enabled = { "latex", "tex", "bib", "markdown" },
-      --       language = "en",
-      --       diagnosticSeverity = "information",
-      --       setenceCacheSize = 2000,
-      --       additionalRules = {
-      --         enablePickyRules = true,
-      --         motherTongue = "en",
-      --       },
-      --       trace = { server = "verbose" },
-      --       dictionary = {},
-      --       disabledRules = {},
-      --       hiddenFalsePositives = {},
-      --     },
-      --   },
-      -- }
-      -- )
+      require("lspconfig").grammar_guard.setup({
+        settings = {
+          ltex = {
+            enabled = { "latex", "tex", "bib", "markdown" },
+            language = "en",
+            diagnosticSeverity = "information",
+            setenceCacheSize = 2000,
+            additionalRules = {
+              enablePickyRules = true,
+              motherTongue = "en",
+            },
+            trace = { server = "verbose" },
+            dictionary = {},
+            disabledRules = {},
+            hiddenFalsePositives = {},
+          },
+        },
+      }
+      )
     end,
   },
 		{
@@ -191,6 +193,7 @@ lvim.plugins = {
   {"neomake/neomake"},
   {'tpope/vim-fugitive'},
   {'tanvirtin/monokai.nvim'},
+  {'lervag/vimtex'}
   -- {'nvim-telescope/telescope.nvim',config=function ()
   --   -- sleep(2)
   --   lvim.builtin.which_key.mappings['f'] = { "<cmd>Telescope find_files --hidden<CR>", "Find File" }
