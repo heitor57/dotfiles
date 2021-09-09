@@ -1,0 +1,4 @@
+#!/bin/bash
+mv ~/.config/nvim ~/.config/NVIM.BAK
+git clone --depth 1 https://github.com/NvChad/NvChad ~/.config/nvim
+nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
