@@ -121,15 +121,15 @@ lvim.builtin.telescope.defaults.hidden = true
 -- end
 
 -- set a formatter if you want to override the default lsp one (if it exists)
-lvim.lang.python.formatters = {
-  {
-    exe = "black",
-    args = {}
-  }
-}
+-- lvim.lang.python.formatters = {
+--   {
+--     exe = "black",
+--     args = {}
+--   }
+-- }
 -- -- set an additional linter
 
-lvim.lang.python.linters = { { exe = "flake8" } }
+-- lvim.lang.python.linters = { { exe = "flake8" } }
 -- lvim.lang.python.linters = {
 --   {
 --     exe = "flake8",
@@ -152,7 +152,11 @@ lvim.lang.python.linters = { { exe = "flake8" } }
 -- }
 lvim.plugins = {
   {"lunarvim/colorschemes"},
-  {"folke/tokyonight.nvim"},
+    {"folke/tokyonight.nvim"}, {
+        "ray-x/lsp_signature.nvim",
+        config = function() require"lsp_signature".on_attach() end,
+        event = "InsertEnter"
+    },
   {"folke/trouble.nvim"},
   {"kevinhwang91/rnvimr",
     config = function ()
@@ -160,40 +164,40 @@ lvim.plugins = {
       let g:rnvimr_enable_picker = 1]])
     end
   },
-  {
-    "brymer-meneses/grammar-guard.nvim",
-    requires="neovim/nvim-lspconfig",
-    config = function()
-      require("grammar-guard").init()
-      require("lspconfig").grammar_guard.setup({
-        settings = {
-          ltex = {
-            enabled = { "latex", "tex", "bib", "markdown" },
-            language = "en",
-            diagnosticSeverity = "information",
-            setenceCacheSize = 2000,
-            additionalRules = {
-              enablePickyRules = true,
-              motherTongue = "en",
-            },
-            trace = { server = "verbose" },
-            dictionary = {},
-            disabledRules = {},
-            hiddenFalsePositives = {},
-          },
-        },
-      }
-      )
-    end,
-  },
-		{
-			"lervag/vimtex",
-		},
-  {"airblade/vim-gitgutter"},
-  {"neomake/neomake"},
-  {'tpope/vim-fugitive'},
-  {'tanvirtin/monokai.nvim'},
-  {'lervag/vimtex'}
+  -- {
+  --   "brymer-meneses/grammar-guard.nvim",
+  --   requires="neovim/nvim-lspconfig",
+  --   config = function()
+  --     require("grammar-guard").init()
+  --     require("lspconfig").grammar_guard.setup({
+  --       settings = {
+  --         ltex = {
+  --           enabled = { "latex", "tex", "bib", "markdown" },
+  --           language = "en",
+  --           diagnosticSeverity = "information",
+  --           setenceCacheSize = 2000,
+  --           additionalRules = {
+  --             enablePickyRules = true,
+  --             motherTongue = "en",
+  --           },
+  --           trace = { server = "verbose" },
+  --           dictionary = {},
+  --           disabledRules = {},
+  --           hiddenFalsePositives = {},
+  --         },
+  --       },
+  --     }
+  --     )
+  --   end,
+  -- },
+  -- 		{
+  -- 			"lervag/vimtex",
+  -- 		},
+  -- {"airblade/vim-gitgutter"},
+  -- {"neomake/neomake"},
+  -- {'tpope/vim-fugitive'},
+  -- {'tanvirtin/monokai.nvim'},
+  -- {'lervag/vimtex'}
   -- {'nvim-telescope/telescope.nvim',config=function ()
   --   -- sleep(2)
   --   lvim.builtin.which_key.mappings['f'] = { "<cmd>Telescope find_files --hidden<CR>", "Find File" }
