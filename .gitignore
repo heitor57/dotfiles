@@ -3,3 +3,4 @@ __pycache__/
 *.log
 .config/lvim/plugin/packer_compiled.lua
 .config/ranger/plugins/__init__.py
+.config/lvim/ignore
