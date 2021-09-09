@@ -39,7 +39,7 @@ lsxhkd(){
 #[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
 
 alias mab='cd ~/rl-rss/src/app/'
-alias e='lvim'
+alias e='$EDITOR'
 setopt inc_append_history
 setopt histignoredups
 setopt histignorealldups
