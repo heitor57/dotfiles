@@ -21,8 +21,8 @@ vim.cmd([[
 lvim.log.level = "warn"
 lvim.format_on_save = false
 lvim.lint_on_save = true
--- lvim.colorscheme = "onedarker"
-lvim.colorscheme = "monokai"
+lvim.colorscheme = "onedarker"
+-- lvim.colorscheme = "monokai"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
