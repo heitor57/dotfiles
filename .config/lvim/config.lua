@@ -152,11 +152,11 @@ lvim.builtin.telescope.defaults.hidden = true
 -- }
 lvim.plugins = {
   {"lunarvim/colorschemes"},
-    {"folke/tokyonight.nvim"}, {
-        "ray-x/lsp_signature.nvim",
-        config = function() require"lsp_signature".on_attach() end,
-        event = "InsertEnter"
-    },
+  {"folke/tokyonight.nvim"}, {
+    "ray-x/lsp_signature.nvim",
+    config = function() require"lsp_signature".on_attach() end,
+    event = "InsertEnter"
+  },
   {"folke/trouble.nvim"},
   {"kevinhwang91/rnvimr",
     config = function ()
@@ -164,39 +164,63 @@ lvim.plugins = {
       let g:rnvimr_enable_picker = 1]])
     end
   },
-  -- {
-  --   "brymer-meneses/grammar-guard.nvim",
-  --   requires="neovim/nvim-lspconfig",
-  --   config = function()
-  --     require("grammar-guard").init()
-  --     require("lspconfig").grammar_guard.setup({
-  --       settings = {
-  --         ltex = {
-  --           enabled = { "latex", "tex", "bib", "markdown" },
-  --           language = "en",
-  --           diagnosticSeverity = "information",
-  --           setenceCacheSize = 2000,
-  --           additionalRules = {
-  --             enablePickyRules = true,
-  --             motherTongue = "en",
-  --           },
-  --           trace = { server = "verbose" },
-  --           dictionary = {},
-  --           disabledRules = {},
-  --           hiddenFalsePositives = {},
-  --         },
-  --       },
-  --     }
-  --     )
-  --   end,
-  -- },
-  -- 		{
-  -- 			"lervag/vimtex",
-  -- 		},
-  -- {"airblade/vim-gitgutter"},
-  -- {"neomake/neomake"},
-  -- {'tpope/vim-fugitive'},
-  -- {'tanvirtin/monokai.nvim'},
+  {
+    "brymer-meneses/grammar-guard.nvim",
+    requires="neovim/nvim-lspconfig",
+    config = function()
+      -- require("grammar-guard").init()
+      -- require("lspconfig").grammar_guard.setup({
+      --   settings = {
+      --     ltex = {
+      --       enabled = { "latex", "tex", "bib", "markdown" },
+      --       language = "en",
+      --       diagnosticSeverity = "information",
+      --       setenceCacheSize = 2000,
+      --       additionalRules = {
+      --         enablePickyRules = true,
+      --         motherTongue = "en",
+      --       },
+      --       trace = { server = "verbose" },
+      --       dictionary = {},
+      --       disabledRules = {},
+      --       hiddenFalsePositives = {},
+      --     },
+      --   },
+      -- }
+      -- )
+    end,
+  },
+  {
+    "lervag/vimtex",
+  },
+  {"airblade/vim-gitgutter"},
+  {"neomake/neomake"},
+  {'tpope/vim-fugitive'},
+  {'tanvirtin/monokai.nvim'},
+
+  {'ray-x/lsp_signature.nvim',config=function ()
+    local present, lspsignature = pcall(require, "lsp_signature")
+    if present then
+      lspsignature.setup {
+        bind = true,
+        doc_lines = 2,
+        floating_window = true,
+        fix_pos = true,
+        hint_enable = true,
+        hint_prefix = " ",
+        hint_scheme = "String",
+        hi_parameter = "Search",
+        max_height = 22,
+        max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
+        handler_opts = {
+          border = "single", -- double, single, shadow, none
+        },
+        zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
+        padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
+      }
+    end
+  end}
+
   -- {'lervag/vimtex'}
   -- {'nvim-telescope/telescope.nvim',config=function ()
   --   -- sleep(2)
