@@ -1,4 +1,4 @@
-export EDITOR="nvim"
+export EDITOR="lvim"
 export VISUAL="$EDITOR"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
