@@ -168,30 +168,35 @@ lvim.plugins = {
     "brymer-meneses/grammar-guard.nvim",
     requires="neovim/nvim-lspconfig",
     config = function()
-      -- require("grammar-guard").init()
-      -- require("lspconfig").grammar_guard.setup({
-      --   settings = {
-      --     ltex = {
-      --       enabled = { "latex", "tex", "bib", "markdown" },
-      --       language = "en",
-      --       diagnosticSeverity = "information",
-      --       setenceCacheSize = 2000,
-      --       additionalRules = {
-      --         enablePickyRules = true,
-      --         motherTongue = "en",
-      --       },
-      --       trace = { server = "verbose" },
-      --       dictionary = {},
-      --       disabledRules = {},
-      --       hiddenFalsePositives = {},
-      --     },
-      --   },
-      -- }
-      -- )
+      require("grammar-guard").init()
+      require("lspconfig").grammar_guard.setup({
+        settings = {
+          ltex = {
+            enabled = { "latex", "tex", "bib", "markdown" },
+            language = "en",
+            diagnosticSeverity = "information",
+            setenceCacheSize = 2000,
+            additionalRules = {
+              enablePickyRules = true,
+              motherTongue = "en",
+            },
+            trace = { server = "verbose" },
+            dictionary = {},
+            disabledRules = {},
+            hiddenFalsePositives = {},
+          },
+        },
+      }
+      )
     end,
   },
   {
-    "lervag/vimtex",
+    "lervag/vimtex",config=function ()
+
+    lvim.builtin.which_key.mappings['i'] = {"<plug>(vimtex-compile)", "VimTex Compile" }
+
+      
+    end
   },
   {"airblade/vim-gitgutter"},
   {"neomake/neomake"},
@@ -219,8 +224,15 @@ lvim.plugins = {
         padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
       }
     end
-  end}
+  end},
 
+{"ellisonleao/glow.nvim"},
+  {"jalvesaq/zotcite",config=function ()
+    
+  end},
+  {'iamcco/markdown-preview.nvim',config=function ()
+    
+  end}
   -- {'lervag/vimtex'}
   -- {'nvim-telescope/telescope.nvim',config=function ()
   --   -- sleep(2)
