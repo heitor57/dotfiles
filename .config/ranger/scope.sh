@@ -338,8 +338,19 @@ handle_fallback() {
     exit 1
 }
 
+drop_bigsize() {
+    # change this number for different sizes
+    if [[ `du "${FILE_PATH}" | cut -f1` -gt 21200 ]]; then
+        echo '----- TOO BIG FILE -----'
+        exit 0
+    fi
+}
+
 
 MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
+
+drop_bigsize
+
 if [[ "${PV_IMAGE_ENABLED}" == 'True' ]]; then
     handle_image "${MIMETYPE}"
 fi
