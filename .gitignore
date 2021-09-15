@@ -4,3 +4,5 @@ __pycache__/
 .config/lvim/plugin/packer_compiled.lua
 .config/ranger/plugins/__init__.py
 .config/lvim/ignore
+.config/nvim/plugin/packer_compiled.lua
+.config/ranger/plugins/ranger_devicons/
