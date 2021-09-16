@@ -186,7 +186,7 @@ lvim.plugins = {
   {"neomake/neomake"},
   {'tpope/vim-fugitive',config=function ()
     lvim.builtin.which_key.mappings['g']['f'] = {"<cmd>G<cr>","Vim-Fugitive"}
-    lvim.builtin.which_key.mappings['g']['P'] = {"<cmd>G push<cr>","Vim-Fugitive Push"}
+    lvim.builtin.which_key.mappings['g']['P'] = {"<cmd>G! push<cr>","Vim-Fugitive Push"}
   end
   },
 
@@ -219,4 +219,5 @@ lvim.plugins = {
   {'iamcco/markdown-preview.nvim',config=function ()
   end},
   {'sbdchd/neoformat'},
+  {'farmergreg/vim-lastplace'},
 }
