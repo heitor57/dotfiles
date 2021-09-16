@@ -83,3 +83,4 @@ alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
 
 #alias ev="v $DOTFILES/.config/nvim/init.vim"
 alias ez="v $DOTFILES/.zshrc"
+function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
