@@ -1,16 +1,17 @@
 vim.cmd([[
-  tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
-  nnoremap <silent> <M-o> :RnvimrToggle<CR>
-  tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
-  set cursorline
-  set tabstop=2
-  set number
-  set hlsearch
-  set incsearch
-  set inccommand=nosplit
-  set spelllang=en
-  set wrap
-  cnoremap <C-v> <C-r>+
+tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+nnoremap <silent> <M-o> :RnvimrToggle<CR>
+tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+set cursorline
+set tabstop=2
+set number
+set hlsearch
+set incsearch
+set inccommand=nosplit
+set spelllang=en
+set wrap
+cnoremap <C-v> <C-r>+
+set timeoutlen=500
 ]])
 
 -- function sleep(n)
@@ -65,6 +66,7 @@ lvim.builtin.which_key.mappings["t"] = {
 lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope find_files hidden=true<CR>", "Find File"}
 -- lvim.builtin.which_key.mappings["s"]["f"] = { "<cmd>Telescope find_files hidden=true<CR>", "Find File"}
 lvim.builtin.which_key.mappings["s"]["g"] = { "<cmd>Telescope git_files<CR>", "Find Git File"}
+lvim.builtin.which_key.opts.nowait=false
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -77,7 +79,16 @@ lvim.builtin.nvimtree.show_icons.git = 0
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {}
 lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.highlight.enabled = false
+lvim.builtin.treesitter.active = false
+lvim.builtin.treesitter.on_config_done = function ()
+  vim.cmd([[
+  set foldminlines=20
+  set foldlevel=4
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
+  ]])
+end
 lvim.builtin.telescope.defaults.file_ignore_patterns = {'.git/'}
 lvim.builtin.telescope.defaults.hidden = true
 -- lvim.builtin.telescope.on_config_done = function (telescope)
@@ -152,11 +163,7 @@ lvim.builtin.telescope.defaults.hidden = true
 -- }
 lvim.plugins = {
   {"lunarvim/colorschemes"},
-  {"folke/tokyonight.nvim"}, {
-    "ray-x/lsp_signature.nvim",
-    config = function() require"lsp_signature".on_attach() end,
-    event = "InsertEnter"
-  },
+  {"folke/tokyonight.nvim"}, 
   {"folke/trouble.nvim"},
   {"kevinhwang91/rnvimr",
     config = function ()
@@ -168,40 +175,19 @@ lvim.plugins = {
     "brymer-meneses/grammar-guard.nvim",
     requires="neovim/nvim-lspconfig",
     config = function()
-      require("grammar-guard").init()
-      require("lspconfig").grammar_guard.setup({
-        settings = {
-          ltex = {
-            enabled = { "latex", "tex", "bib", "markdown" },
-            language = "en",
-            diagnosticSeverity = "information",
-            setenceCacheSize = 2000,
-            additionalRules = {
-              enablePickyRules = true,
-              motherTongue = "en",
-            },
-            trace = { server = "verbose" },
-            dictionary = {},
-            disabledRules = {},
-            hiddenFalsePositives = {},
-          },
-        },
-      }
-      )
     end,
   },
   {
     "lervag/vimtex",config=function ()
-
-    lvim.builtin.which_key.mappings['i'] = {"<plug>(vimtex-compile)", "VimTex Compile" }
-
-      
+      lvim.builtin.which_key.mappings['i'] = {"<plug>(vimtex-compile)", "VimTex Compile" }
     end
   },
   {"airblade/vim-gitgutter"},
   {"neomake/neomake"},
-  {'tpope/vim-fugitive'},
-  {'tanvirtin/monokai.nvim'},
+  {'tpope/vim-fugitive',config=function ()
+    lvim.builtin.which_key.mappings['g']['f'] = {"<cmd>G<cr>","Vim-Fugitive"}
+  end
+  },
 
   {'ray-x/lsp_signature.nvim',config=function ()
     local present, lspsignature = pcall(require, "lsp_signature")
@@ -226,16 +212,10 @@ lvim.plugins = {
     end
   end},
 
-{"ellisonleao/glow.nvim"},
+  {"ellisonleao/glow.nvim"},
   {"jalvesaq/zotcite",config=function ()
-    
   end},
   {'iamcco/markdown-preview.nvim',config=function ()
-    
-  end}
-  -- {'lervag/vimtex'}
-  -- {'nvim-telescope/telescope.nvim',config=function ()
-  --   -- sleep(2)
-  --   lvim.builtin.which_key.mappings['f'] = { "<cmd>Telescope find_files --hidden<CR>", "Find File" }
-  -- end}
+  end},
+  {'sbdchd/neoformat'},
 }
