@@ -344,4 +344,9 @@ return require('packer').startup({function()
       let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
       ]])   	
     end}
-  end, config={auto_reload_compiled = true}})
+    use {'sgur/ctrlp-extensions.vim',config=function ()
+      local wk = require("which-key")
+      wk.register({s={name='Search CTRL-P',
+      c={'<cmd>CtrlPCmdline<cr>','CtrlPCmdline'}}})
+    end}
+    end, config={auto_reload_compiled = true}})
