@@ -6,6 +6,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 function reload_config()
   vim.cmd([[PackerSync]])
+  vim.cmd([[PackerCompile]])
 end
 
 vim.cmd([[
@@ -334,5 +335,12 @@ return require('packer').startup({function()
     use {'kdheepak/lazygit.nvim',config=function ()
     local wk = require("which-key")
     wk.register({g={name="Git",g={"<cmd>LazyGit<CR>","LazyGit"}}}, {prefix="<leader>"})
+    end}
+
+    use {'ctrlpvim/ctrlp.vim',config=function ()
+      vim.cmd([[
+      let g:ctrlp_map = '<c-p>'
+      let g:ctrlp_cmd = 'CtrlP'
+      ]])   	
     end}
   end, config={auto_reload_compiled = true}})

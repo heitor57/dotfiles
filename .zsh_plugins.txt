@@ -15,7 +15,7 @@ zsh-users/zsh-history-substring-search
 
 zsh-users/zsh-autosuggestions
 hlissner/zsh-autopair
-#denysdovhan/spaceship-prompt
+#spaceship-prompt/spaceship-prompt
 
 #popstas/zsh-command-time
 #zdharma/history-search-multi-word

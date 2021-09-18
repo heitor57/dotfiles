@@ -220,4 +220,19 @@ lvim.plugins = {
   end},
   {'sbdchd/neoformat'},
   {'farmergreg/vim-lastplace'},
+
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require"telescope".load_extension("frecency")
+    end,
+    requires = {"tami5/sqlite.lua"}
+  },
+  {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end 
+  },
+  {'mhinz/vim-grepper',config=function ()
+    lvim.builtin.which_key.mappings['a']['g']={'<cmd>Grepper<cr>','Grepper'}
+  end},
 }
