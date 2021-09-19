@@ -72,23 +72,29 @@ return require('packer').startup({function()
       buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
       buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
       buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-      buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-      buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-      buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-      buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-      buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+			wk = require("which-key")
+      wk.register({l={name="LSP",
+			w={'<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>',"Add Workspace"},
+			r={'<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>',"Remove Workspace"},
+			l={'<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',"List Workspaces"},
+			t={'<cmd>lua vim.lsp.buf.type_definition()<CR>',"Type Definition"},
+			r={'<cmd>lua vim.lsp.buf.rename()<CR>',"Rename"},
+			o={'<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',"Loc List"},
+			f={"<cmd>lua vim.lsp.buf.formatting()<CR>","Format"},
+		}}, {prefix="<leader>"})
+      --buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
       buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-      buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+      --buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
       buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
       buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-      buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+      --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
       -- Set some keybinds conditional on server capabilities
-      if client.resolved_capabilities.document_formatting then
-	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-      elseif client.resolved_capabilities.document_range_formatting then
-	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-      end
+      --if client.resolved_capabilities.document_formatting then
+	--buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+      --elseif client.resolved_capabilities.document_range_formatting then
+	--buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+      --end
 
       -- Set autocommands conditional on server_capabilities
       if client.resolved_capabilities.document_highlight then
@@ -343,7 +349,7 @@ return require('packer').startup({function()
     end}
     use {'sgur/ctrlp-extensions.vim',config=function ()
       local wk = require("which-key")
-      wk.register({s={name='Search CTRL-P',
+      wk.register({s={name='Search',
       c={'<cmd>CtrlPCmdline<cr>','CtrlPCmdline'},
       b={'<cmd>CtrlPBuffer<cr>','CtrlPBuffer'}}}, {prefix="<leader>"})
     end}
