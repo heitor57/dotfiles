@@ -44,6 +44,8 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 "nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
 "nnoremap <leader>ev :e $MYVIMRC<cr>
 "nnoremap <leader>sv :source $MYVIMRC<cr>
+vnoremap > >gv
+vnoremap < <gv
 ]])
 
 

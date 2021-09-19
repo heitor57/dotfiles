@@ -1,7 +1,13 @@
 
 return require('packer').startup({function()
+	use {'tpope/vim-repeat'}
+	use {'mg979/vim-visual-multi'}
+	use {'matze/vim-move',config=function ()
+		vim.cmd([[let g:move_key_modifier = 'C']])
+	end}
+  use {'tpope/vim-sensible'}
   use {'nvim-lua/plenary.nvim'}
-  use 'kana/vim-smartinput'
+  use 'kana/vim-smartinput'                
   use {'wbthomason/packer.nvim',config=function()
     local wk = require("which-key")
     wk.setup(
