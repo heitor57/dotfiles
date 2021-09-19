@@ -1,11 +1,36 @@
 autoload -U colors && colors
 PS1="%B%{$fg[blue]%}{-=%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%M %{$fg[magenta]%}%~%{$fg[blue]%}-=}%{$reset_color%}$%b "
 
+alias l="ls"
+alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
+alias ez="v $DOTFILES/.zshrc"
+lsxhkd(){
+	sxhkd&
+	disown %1	
+}
+(( ${+aliases[run-help]} )) && unalias run-help
+alias help=run-help
+alias rh=run-help
+alias mab='cd ~/rl-rss/src/app/'
+alias e='$EDITOR'
+function mm(){
+	man $(apropos --long . | dmenu -i -l 30 | awk '{print $2, $1}' | tr -d '()')
+}
+
+function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
 # Lines configured by zsh-newuser-install
+bindkey -e
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+bindkey "\e[3~" delete-char
+
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=10000000
-bindkey -e
+
+setopt inc_append_history
+setopt histignoredups
+setopt histignorealldups
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
@@ -22,15 +47,7 @@ compinit
 source <(antibody init)
 antibody bundle < ~/.zsh_plugins.txt
 
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-bindkey "\e[3~" delete-char
 
-alias l="ls"
-lsxhkd(){
-	sxhkd&
-	disown %1	
-}
 #setopt autocd autopushd
 
 # alias e='emacsclient -c -nw'
@@ -38,11 +55,6 @@ lsxhkd(){
 #eval "$(/home/$USER/miniconda3/bin/conda shell.zsh hook)"
 #[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
 
-alias mab='cd ~/rl-rss/src/app/'
-alias e='$EDITOR'
-setopt inc_append_history
-setopt histignoredups
-setopt histignorealldups
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -59,12 +71,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 autoload -Uz run-help
-(( ${+aliases[run-help]} )) && unalias run-help
-alias help=run-help
-alias rh=run-help
-function mm(){
-	man $(apropos --long . | dmenu -i -l 30 | awk '{print $2, $1}' | tr -d '()')
-}
 #alias mm=""
 
 #function preexec() {
@@ -79,8 +85,7 @@ function mm(){
   #fi
 #}
 
-alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
 
 #alias ev="v $DOTFILES/.config/nvim/init.vim"
-alias ez="v $DOTFILES/.zshrc"
-function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
+autoload -U promptinit; promptinit
+prompt pure
