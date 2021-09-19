@@ -5,7 +5,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd 'packadd packer.nvim'
 end
 function reload_config()
-  vim.cmd([[PackerSync]])
   vim.cmd([[PackerCompile]])
 end
 
@@ -23,6 +22,7 @@ set number
 set hlsearch
 set incsearch
 set spelllang=en
+set confirm
 "nnoremap <leader>ça :setlocal spell!<cr>
 cnoremap <C-v> <C-r>+
 nnoremap <nowait> <c-s> <cmd>w<cr>
@@ -40,9 +40,38 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 "nnoremap <leader>sv :source $MYVIMRC<cr>
 ]])
 return require('packer').startup({function()
+  use {'nvim-lua/plenary.nvim'}
+  use 'kana/vim-smartinput'
   use {'wbthomason/packer.nvim',config=function()
     local wk = require("which-key")
-    wk.register({p={name="Packer",s={"<cmd>PackerSync<cr>","Packer Sync"}}}, {prefix="<leader>"})
+    wk.setup(
+    {
+      marks = true, -- shows a list of your marks on ' and `
+      registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+      -- the presets plugin, adds help for a bunch of default keybindings in Neovim
+      -- No actual key bindings are created
+      presets = {
+	operators = false, -- adds help for operators like d, y, ...
+	motions = false, -- adds help for motions
+	text_objects = false, -- help for text objects triggered after entering an operator
+	windows = true, -- default bindings on <c-w>
+	nav = true, -- misc bindings to work with windows
+	z = true, -- bindings for folds, spelling and others prefixed with z
+	g = true, -- bindings for prefixed with g
+      },
+      spelling = { enabled = true, suggestions = 20 }, -- use which-key for spelling hints
+
+      hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
+    }
+    )
+    wk.register({p=
+    {name="Packer",
+    s={"<cmd>PackerSync<cr>","Sync"},
+    i={"<cmd>PackerInstall<cr>","Install"},
+    c={"<cmd>PackerCompile<cr>","Compile"},
+  }}, {prefix="<leader>"})
+    wk.register({a={name='General',m={'<cmd>Neoformat<cr>','Neoformat'}}}, {prefix="<leader>"})
+
   end}
   use 'neovim/nvim-lspconfig'
   use {
@@ -333,8 +362,8 @@ return require('packer').startup({function()
     end}
 
     use {'kdheepak/lazygit.nvim',config=function ()
-    local wk = require("which-key")
-    wk.register({g={name="Git",g={"<cmd>LazyGit<CR>","LazyGit"}}}, {prefix="<leader>"})
+      local wk = require("which-key")
+      wk.register({g={name="Git",g={"<cmd>LazyGit<CR>","LazyGit"}}}, {prefix="<leader>"})
     end}
 
     use {'ctrlpvim/ctrlp.vim',config=function ()
@@ -347,6 +376,27 @@ return require('packer').startup({function()
     use {'sgur/ctrlp-extensions.vim',config=function ()
       local wk = require("which-key")
       wk.register({s={name='Search CTRL-P',
-      c={'<cmd>CtrlPCmdline<cr>','CtrlPCmdline'}}})
+      c={'<cmd>CtrlPCmdline<cr>','CtrlPCmdline'},
+      b={'<cmd>CtrlPBuffer<cr>','CtrlPBuffer'}}}, {prefix="<leader>"})
     end}
-    end, config={auto_reload_compiled = true}})
+    use {'mhinz/vim-grepper',config=function ()
+      local wk = require("which-key")
+      wk.register({s={g={'<cmd>Grepper<cr>','Grepper'}}},{prefix="<leader>"})
+    end}
+    use {'airblade/vim-rooter'}
+    use {'gabrielpoca/replacer.nvim',config=function ()
+      local wk = require("which-key")
+      wk.register({a={r={':lua require("replacer").run()<cr>','Replacer'}}},{prefix="<leader>"})
+    end}
+    --use {'tamton-aquib/staline.nvim',config=function ()
+    --require('staline').setup{}
+    --end}
+    use {'sbdchd/neoformat',config=function ()
+      local wk = require("which-key")
+      wk.register({a={f={'<cmd>Neoformat<cr>'}}},{prefix="<leader>"})
+    end}
+    use {'tpope/vim-unimpaired'}
+
+    use 'moll/vim-bbye'
+    use 'aymericbeaumet/vim-symlink'
+  end, config={auto_reload_compiled = true}})
