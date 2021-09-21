@@ -17,5 +17,6 @@ zsh-users/zsh-autosuggestions
 hlissner/zsh-autopair
 #spaceship-prompt/spaceship-prompt
 
+marlonrichert/zsh-edit branch:main
 #popstas/zsh-command-time
 #zdharma/history-search-multi-word
