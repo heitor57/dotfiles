@@ -16,7 +16,7 @@ function reload_config()
 end
 vim.cmd([[
 let mapleader=" "
-set timeoutlen=100
+set timeoutlen=500
 set mouse=a
 let maplocalleader = "\\"
 set termguicolors     " enable true colors support

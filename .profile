@@ -1,8 +1,8 @@
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
-export TERMINAL="alacritty"
-export BROWSER="firefox"
-export READER="evince"
+#export TERMINAL="alacritty"
+#export BROWSER="firefox"
+#export READER="evince"
 export HISTFILESIZE=1000000
 export HISTSIZE=100000
 #SAVEHIST=10000000

@@ -1,23 +1,95 @@
 
 return require('packer').startup({function()
+
+  use {'voldikss/vim-translator',config=function ()
+  	vim.cmd([[
+let g:translator_target_lang='pt'
+	]])
+  end}
+  use {'heitor57/vim-grammarous',config=function ()
+  	
+    local wk = require("which-key")
+    wk.register({w=
+    {name='Grammarous',
+      --n={"<cmd>NERDTreeFocus<cr>","NERDTreeFocus"},
+      r={":'<, '>GrammarousCheck --lang=pt<cr>","Check Range"},
+      --r={":'<, '>GrammarousCheck --lang=en<cr>"}
+      a={":GrammarousCheck --lang=pt<cr>","Check Buffer"},
+      f={"<Plug>(grammarous-fixit)","Fix"},
+      --a={":GrammarousCheck --lang=en<cr>"
+    }}, {prefix="<leader>"})
+  --nmap <leader>çq <Plug>(grammarous-move-to-info-window)
+  --" 	Open the info window for the error under the cursor
+  --nmap <leader>çw <Plug>(grammarous-open-info-window)
+  --" 	Reset the current check
+  --nmap <leader>çe <Plug>(grammarous-reset)
+  --" 	Fix the error under the cursor automatically
+  --nmap <leader>çr <Plug>(grammarous-fixit)
+  --" 	Fix all the errors in a current buffer automatically
+  --nmap <leader>çt <Plug>(grammarous-fixall)
+  --" 	Close the information window from checked buffer
+  --nmap <leader>çy <Plug>(grammarous-close-info-window)
+  --" 	Remove the error under the cursor
+  --nmap <leader>çu <Plug>(grammarous-remove-error)
+  --" 	Disable the grammar rule under the cursor
+  --nmap <leader>çi <Plug>(grammarous-disable-rule)
+  --" 	Move cursor to the next error
+  --nmap <leader>ço <Plug>(grammarous-move-to-next-error)
+  --" 	Move cursor to the previous error
+  --nmap <leader>çp <Plug>(grammarous-move-to-previous-error)
+  end}
+  use {'lervag/vimtex',config=function ()
+	  vim.cmd([[
+let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
+	]])
+          --vim.cmd([[
+--let g:vimtex_compiler_latexmk_engines = { '_': '-xelatex -shell-escape'}
+	--]])
+          --vim.cmd([[
+--let g:vimtex_compiler_latexmk_engines = { '_': '-pdf -shell-escape'}
+	--]])
+  end}
+  use {'preservim/nerdtree',config=function ()
+
+    local wk = require("which-key")
+    wk.register({e=
+    {name='Explorer',
+    --nnoremap <C-n> :NERDTree<CR>
+    --nnoremap <C-t> :NERDTreeToggle<CR>
+    --nnoremap <C-f> :NERDTreeFind<CR>
+      e={"<cmd>NERDTree<cr>","NERDTree"},
+      t={"<cmd>NERDTreeToggle<cr>","NERDTreeToggle"},
+      f={"<cmd>NERDTreeFind<cr>","NERDTreeFind"},
+      n={"<cmd>NERDTreeFocus<cr>","NERDTreeFocus"},
+    }}, {prefix="<leader>"})
+  end}
   use {'heavenshell/vim-pydocstring',config=function ()
     vim.cmd([[
-let g:pydocstring_doq_path = '/home/heitor/.local/bin/doq'
-let g:pydocstring_formatter = 'google'
+    let g:pydocstring_doq_path = '/home/heitor/.local/bin/doq'
+    let g:pydocstring_formatter = 'google'
     ]])
     local wk = require("which-key")
     wk.register({a=
     {
-    d={"<cmd>Pydocstring<cr>","Python Doc String"},
-  }}, {prefix="<leader>"})
+      d={"<cmd>Pydocstring<cr>","Python Doc String"},
+    }}, {prefix="<leader>"})
 
     wk.register(
     {
-    d={"<cmd>Pydocstring<cr>","Python Doc String"},
-  }, {prefix="<leader>",mode='v'})
+      d={"<cmd>Pydocstring<cr>","Python Doc String"},
+    }, {prefix="<leader>",mode='v'})
+
+  end}
+  use {'tpope/vim-fugitive',config=function ()
+
+    local wk = require("which-key")
+    wk.register({g=
+    {
+      f={"<cmd>G<cr>","Git Fugitive"},
+      p={"<cmd>G push<cr>","Push"},
+    }}, {prefix="<leader>"})
   	
   end}
-  use {'tpope/vim-fugitive'}
   use {'tpope/vim-abolish'}
   use {'vim-scripts/CmdlineComplete'}
   use {'farmergreg/vim-lastplace'}
@@ -330,90 +402,91 @@ use {
   end}
 
   --use {'projekt0n/github-nvim-theme',config=function()
-    --require('github-theme').setup()
+  --require('github-theme').setup()
+  --end}
+
+  use {'tpope/vim-sleuth'}
+
+  use {'kevinhwang91/rnvimr',config=function ()
+    vim.cmd([[
+    let g:rnvimr_enable_picker = 1
+    tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+    nnoremap <silent> <M-o> :RnvimrToggle<CR>
+    tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+    ]])
+  end}
+  use {'ray-x/lsp_signature.nvim',config=function ()
+    local present, lspsignature = pcall(require, "lsp_signature")
+    if present then
+      lspsignature.setup {
+	bind = true,
+	doc_lines = 2,
+	floating_window = true,
+	fix_pos = true,
+	hint_enable = true,
+	hint_prefix = " ",
+	hint_scheme = "String",
+	hi_parameter = "Search",
+	max_height = 22,
+	max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
+	handler_opts = {
+	  border = "single", -- double, single, shadow, none
+	},
+	zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
+	padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
+      }
+    end
+  end}
+
+  use {'kdheepak/lazygit.nvim',config=function ()
+    local wk = require("which-key")
+    wk.register({g={name="Git",g={"<cmd>LazyGit<CR>","LazyGit"}}}, {prefix="<leader>"})
+  end}
+
+  use {'ctrlpvim/ctrlp.vim',config=function ()
+    vim.cmd([[
+    let g:ctrlp_map = '<c-p>'
+    let g:ctrlp_cmd = 'CtrlP'
+    let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+    ]])   	
+  end}
+  use {'sgur/ctrlp-extensions.vim',config=function ()
+    local wk = require("which-key")
+    wk.register({s={name='Search',
+    c={'<cmd>CtrlPCmdline<cr>','CtrlPCmdline'},
+    b={'<cmd>CtrlPBuffer<cr>','CtrlPBuffer'}}}, {prefix="<leader>"})
+  end}
+  use {'mhinz/vim-grepper',config=function ()
+    local wk = require("which-key")
+    wk.register({s={g={'<cmd>Grepper<cr>','Grepper'}}},{prefix="<leader>"})
+  end}
+  use {'airblade/vim-rooter'}
+  use {'gabrielpoca/replacer.nvim',config=function ()
+    local wk = require("which-key")
+    wk.register({a={r={':lua require("replacer").run()<cr>','Quickfix Replacer'}}},{prefix="<leader>"})
+  end}
+  --use {'tamton-aquib/staline.nvim',config=function ()
+    --require('staline').setup{}
     --end}
+    use {'sbdchd/neoformat',config=function ()
+      local wk = require("which-key")
+      wk.register({a={f={'<cmd>Neoformat<cr>','Format file'}}},{prefix="<leader>"})
 
-    use {'tpope/vim-sleuth'}
-
-    use {'kevinhwang91/rnvimr',config=function ()
+      vim.cmd([[let g:neoformat_enabled_python = ['black', 'docformatter'] ]])
       vim.cmd([[
-      tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
-      nnoremap <silent> <M-o> :RnvimrToggle<CR>
-      tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+      augroup fmt
+      autocmd!
+      autocmd BufWritePre * undojoin | Neoformat
+      augroup END
       ]])
     end}
-    use {'ray-x/lsp_signature.nvim',config=function ()
-      local present, lspsignature = pcall(require, "lsp_signature")
-      if present then
-	lspsignature.setup {
-	  bind = true,
-	  doc_lines = 2,
-	  floating_window = true,
-	  fix_pos = true,
-	  hint_enable = true,
-	  hint_prefix = " ",
-	  hint_scheme = "String",
-	  hi_parameter = "Search",
-	  max_height = 22,
-	  max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
-	  handler_opts = {
-	    border = "single", -- double, single, shadow, none
-	  },
-	  zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
-	  padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
-	}
-      end
-    end}
+    use {'tpope/vim-unimpaired'}
 
-    use {'kdheepak/lazygit.nvim',config=function ()
-      local wk = require("which-key")
-      wk.register({g={name="Git",g={"<cmd>LazyGit<CR>","LazyGit"}}}, {prefix="<leader>"})
+    use 'moll/vim-bbye'
+    use 'aymericbeaumet/vim-symlink'
+    use 'AndrewRadev/bufferize.vim'
+    use {'tanvirtin/monokai.nvim',config=function ()
+      require('monokai')
+      vim.cmd('colorscheme monokai')
     end}
-
-    use {'ctrlpvim/ctrlp.vim',config=function ()
-      vim.cmd([[
-      let g:ctrlp_map = '<c-p>'
-      let g:ctrlp_cmd = 'CtrlP'
-      let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-      ]])   	
-    end}
-    use {'sgur/ctrlp-extensions.vim',config=function ()
-      local wk = require("which-key")
-      wk.register({s={name='Search',
-      c={'<cmd>CtrlPCmdline<cr>','CtrlPCmdline'},
-      b={'<cmd>CtrlPBuffer<cr>','CtrlPBuffer'}}}, {prefix="<leader>"})
-    end}
-    use {'mhinz/vim-grepper',config=function ()
-      local wk = require("which-key")
-      wk.register({s={g={'<cmd>Grepper<cr>','Grepper'}}},{prefix="<leader>"})
-    end}
-    use {'airblade/vim-rooter'}
-    use {'gabrielpoca/replacer.nvim',config=function ()
-      local wk = require("which-key")
-      wk.register({a={r={':lua require("replacer").run()<cr>','Quickfix Replacer'}}},{prefix="<leader>"})
-    end}
-    --use {'tamton-aquib/staline.nvim',config=function ()
-      --require('staline').setup{}
-      --end}
-      use {'sbdchd/neoformat',config=function ()
-	local wk = require("which-key")
-	wk.register({a={f={'<cmd>Neoformat<cr>','Format file'}}},{prefix="<leader>"})
-
-	vim.cmd([[let g:neoformat_enabled_python = ['black', 'docformatter'] ]])
-vim.cmd([[
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
-]])
-      end}
-      use {'tpope/vim-unimpaired'}
-
-      use 'moll/vim-bbye'
-      use 'aymericbeaumet/vim-symlink'
-      use 'AndrewRadev/bufferize.vim'
-      use {'tanvirtin/monokai.nvim',config=function ()
-	require('monokai')
-	vim.cmd('colorscheme monokai')
-      end}
-    end, config={auto_reload_compiled = true}})
+  end, config={auto_reload_compiled = true}})
