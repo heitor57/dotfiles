@@ -86,7 +86,8 @@ let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
     wk.register({g=
     {
       f={"<cmd>G<cr>","Git Fugitive"},
-      p={"<cmd>G push<cr>","Push"},
+      p={"<cmd>G! push<cr>","Push"},
+      u={"<cmd>G! pull<cr>","Pull"},
     }}, {prefix="<leader>"})
   	
   end}
@@ -131,7 +132,6 @@ let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
   }}, {prefix="<leader>"})
 
 end}
-use 'neovim/nvim-lspconfig'
 use {
   "folke/which-key.nvim",
   config = function()
@@ -155,7 +155,11 @@ end
     nmap <leader>/ <plug>NERDCommenterToggle
     ]])
   end}
+
+  -- BEGIN OF LSP
+  
   use {'neovim/nvim-lspconfig',config=function()
+		vim.cmd([[set exrc]])
   end}
   use {'kabouzeid/nvim-lspinstall',config=function()
     local on_attach = function(client, bufnr)
@@ -272,13 +276,13 @@ end
 
       -- language specific config
       if server == "lua" then
-	config.settings = lua_settings
-      end
-      if server == "sourcekit" then
-	config.filetypes = {"swift", "objective-c", "objective-cpp"}; -- we don't want c and cpp!
-      end
-      if server == "clangd" then
-	config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
+				config.settings = lua_settings
+			end
+			if server == "sourcekit" then
+				config.filetypes = {"swift", "objective-c", "objective-cpp"}; -- we don't want c and cpp!
+			end
+			if server == "clangd" then
+				config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
       end
 
       require'lspconfig'[server].setup(config)
@@ -401,20 +405,10 @@ use {
     }
   end}
 
-  --use {'projekt0n/github-nvim-theme',config=function()
-  --require('github-theme').setup()
-  --end}
-
-  use {'tpope/vim-sleuth'}
-
-  use {'kevinhwang91/rnvimr',config=function ()
-    vim.cmd([[
-    let g:rnvimr_enable_picker = 1
-    tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
-    nnoremap <silent> <M-o> :RnvimrToggle<CR>
-    tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
-    ]])
+  use {'projekt0n/github-nvim-theme',config=function()
+  require('github-theme').setup()
   end}
+  
   use {'ray-x/lsp_signature.nvim',config=function ()
     local present, lspsignature = pcall(require, "lsp_signature")
     if present then
@@ -436,6 +430,19 @@ use {
 	padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
       }
     end
+  end}
+
+  -- END OF LSP
+
+  use {'tpope/vim-sleuth'}
+
+  use {'kevinhwang91/rnvimr',config=function ()
+    vim.cmd([[
+    let g:rnvimr_enable_picker = 1
+    tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+    nnoremap <silent> <M-o> :RnvimrToggle<CR>
+    tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+    ]])
   end}
 
   use {'kdheepak/lazygit.nvim',config=function ()
@@ -489,4 +496,8 @@ use {
       require('monokai')
       vim.cmd('colorscheme monokai')
     end}
+
+    --use {'neoclide/coc.nvim', branch='release',config=function ()
+	    --vim.cmd('source ~/.config/nvim/cocnvim.vim')
+    --end}
   end, config={auto_reload_compiled = true}})

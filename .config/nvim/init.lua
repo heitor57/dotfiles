@@ -46,6 +46,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 "nnoremap <leader>sv :source $MYVIMRC<cr>
 vnoremap > >gv
 vnoremap < <gv
+
 ]])
 
 

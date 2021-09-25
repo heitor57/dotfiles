@@ -1,5 +1,9 @@
-autoload -U colors && colors
-PS1="%B%{$fg[blue]%}{-=%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%M %{$fg[magenta]%}%~%{$fg[blue]%}-=}%{$reset_color%}$%b "
+
+autoload -U promptinit; promptinit
+prompt pure
+
+#autoload -U colors && colors
+#PS1="%B%{$fg[blue]%}{-=%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%M %{$fg[magenta]%}%~%{$fg[blue]%}-=}%{$reset_color%}$%b "
 
 alias l="ls"
 alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
@@ -87,5 +91,3 @@ autoload -Uz run-help
 
 
 #alias ev="v $DOTFILES/.config/nvim/init.vim"
-autoload -U promptinit; promptinit
-prompt pure
