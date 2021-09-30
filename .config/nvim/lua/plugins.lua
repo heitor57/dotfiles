@@ -480,12 +480,12 @@ use {
       wk.register({a={f={'<cmd>Neoformat<cr>','Format file'}}},{prefix="<leader>"})
 
       vim.cmd([[let g:neoformat_enabled_python = ['black', 'docformatter'] ]])
-      vim.cmd([[
-      augroup fmt
-      autocmd!
-      autocmd BufWritePre * undojoin | Neoformat
-      augroup END
-      ]])
+      --vim.cmd([[
+      --augroup fmt
+      --autocmd!
+      --autocmd BufWritePre * undojoin | Neoformat
+      --augroup END
+      --]])
     end}
     use {'tpope/vim-unimpaired'}
 
