@@ -480,6 +480,13 @@ use {
       wk.register({a={f={'<cmd>Neoformat<cr>','Format file'}}},{prefix="<leader>"})
 
       vim.cmd([[let g:neoformat_enabled_python = ['black', 'docformatter'] ]])
+      vim.cmd([[
+let g:neoformat_tex_latexindent = {
+  \ 'exe': 'latexindent',
+  \ 'args': ['-l'],
+  \ 'stdin': 1
+  \ }
+      ]])
       --vim.cmd([[
       --augroup fmt
       --autocmd!
