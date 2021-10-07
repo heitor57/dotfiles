@@ -494,7 +494,7 @@ let g:neoformat_tex_latexindent = {
       --augroup END
       --]])
     end}
-    use {'tpope/vim-unimpaired'}
+    --use {'tpope/vim-unimpaired'}
 
     use 'moll/vim-bbye'
     use 'aymericbeaumet/vim-symlink'
