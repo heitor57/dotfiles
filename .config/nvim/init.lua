@@ -48,8 +48,8 @@ vnoremap > >gv
 vnoremap < <gv
 
 ]])
-
-
+local nvimrc = "~/.config/nvim"
+vim.cmd('source ' .. nvimrc .. '/auxinit.vim')
 --M.plugins = lua require('plugins')
 M.plugins = require('plugins')
 --

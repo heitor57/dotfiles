@@ -613,6 +613,10 @@ use {
 			require('orgmode').setup{}
 	end
 			}
+			use {'glepnir/dashboard-nvim',config=function ()
+
+					vim.cmd[[let g:dashboard_default_executive ='telescope']]
+			end}
 			use {'gpanders/vim-oldfiles'}
 			--use {'neoclide/coc.nvim', branch='release',config=function ()
 					--vim.cmd('source ~/.config/nvim/cocnvim.vim')
