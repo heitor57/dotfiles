@@ -10,4 +10,4 @@ function! s:update_oldfiles(file)
   call insert(v:oldfiles, a:file, 0)
 endfunction
 
-autocmd BufNewFile,BufRead,BufFilePre * call s:update_oldfiles(expand('<afile>:p'))
+"autocmd BufNewFile,BufRead,BufFilePre * call s:update_oldfiles(expand('<afile>:p'))

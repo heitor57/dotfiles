@@ -51,18 +51,37 @@ use {'lervag/vimtex',config=function ()
 end}
 use {'preservim/nerdtree',config=function ()
 
+	--local wk = require("which-key")
+	--wk.register({e=
+	--{name='Explorer',
+	----nnoremap <C-n> :NERDTree<CR>
+	----nnoremap <C-t> :NERDTreeToggle<CR>
+	----nnoremap <C-f> :NERDTreeFind<CR>
+	--e={"<cmd>NERDTree<cr>","NERDTree"},
+	--t={"<cmd>NERDTreeToggle<cr>","NERDTreeToggle"},
+	--f={"<cmd>NERDTreeFind<cr>","NERDTreeFind"},
+	--n={"<cmd>NERDTreeFocus<cr>","NERDTreeFocus"},
+--}}, {prefix="<leader>"})
+	end}
+use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function() 
+			require'nvim-tree'.setup {}
 	local wk = require("which-key")
 	wk.register({e=
 	{name='Explorer',
 	--nnoremap <C-n> :NERDTree<CR>
 	--nnoremap <C-t> :NERDTreeToggle<CR>
 	--nnoremap <C-f> :NERDTreeFind<CR>
-	e={"<cmd>NERDTree<cr>","NERDTree"},
-	t={"<cmd>NERDTreeToggle<cr>","NERDTreeToggle"},
-	f={"<cmd>NERDTreeFind<cr>","NERDTreeFind"},
-	n={"<cmd>NERDTreeFocus<cr>","NERDTreeFocus"},
+	e={"<cmd>NvimTreeToggle<cr>","Toggle"},
+	f={"<cmd>NvimTreeFindFile<cr>","Find"},
+	r={"<cmd>NvimTreeRefresh<cr>","Refresh"},
+	n={"<cmd>NvimTreeFocus<cr>","Focus"},
 }}, {prefix="<leader>"})
-	end}
+
+		end
+}
 	use {'heavenshell/vim-pydocstring',config=function ()
 		vim.cmd([[
 		let g:pydocstring_doq_path = '/home/heitor/.local/bin/doq'
@@ -373,7 +392,7 @@ use {
 					select = true,
 				},
 				['<Tab>'] = function(fallback)
-					vim.api.nvim_command('echomsg "tab executed"')
+					--vim.api.nvim_command('echomsg "tab executed"')
 					--vim.api.nvim_echo('optx')
 					if vim.fn.pumvisible() == 1 then
 						vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
@@ -401,7 +420,7 @@ use {
 				{ name = 'luasnip' },
 				{ name = "buffer" },
 				{ name = "nvim_lua" },
-				{ name = "orgmode" },
+				--{ name = "orgmode" },
 			},
 		}
 	end}
@@ -451,19 +470,19 @@ use {
 		wk.register({g={name="Git",g={"<cmd>LazyGit<CR>","LazyGit"}}}, {prefix="<leader>"})
 	end}
 
-	use {'ctrlpvim/ctrlp.vim',config=function ()
-		vim.cmd([[
-		let g:ctrlp_map = '<c-p>'
-		let g:ctrlp_cmd = 'CtrlP'
-		let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-		]])   	
-	end}
-	use {'sgur/ctrlp-extensions.vim',config=function ()
-		local wk = require("which-key")
-		wk.register({s={name='Search',
-		c={'<cmd>CtrlPCmdline<cr>','CtrlPCmdline'},
-		b={'<cmd>CtrlPBuffer<cr>','CtrlPBuffer'}}}, {prefix="<leader>"})
-	end}
+	--use {'ctrlpvim/ctrlp.vim',config=function ()
+		--vim.cmd([[
+		--let g:ctrlp_map = '<c-p>'
+		--let g:ctrlp_cmd = 'CtrlP'
+		--let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+		--]])   	
+	--end}
+	--use {'sgur/ctrlp-extensions.vim',config=function ()
+		--local wk = require("which-key")
+		--wk.register({s={name='Search',
+		--c={'<cmd>CtrlPCmdline<cr>','CtrlPCmdline'},
+		--b={'<cmd>CtrlPBuffer<cr>','CtrlPBuffer'}}}, {prefix="<leader>"})
+	--end}
 	use {'mhinz/vim-grepper',config=function ()
 		local wk = require("which-key")
 		wk.register({s={g={'<cmd>Grepper<cr>','Grepper'}}},{prefix="<leader>"})
@@ -585,11 +604,17 @@ use {
 					requires = { 'nvim-lua/plenary.nvim' ,'nvim-telescope/telescope-project.nvim'},
 					config=function ()
 						require'telescope'.load_extension('project')
+						require("telescope").setup({defaults = { file_ignore_patterns = {"node_modules",'.git'} } })
 						local wk = require("which-key")
 						wk.register({t={name='Telescope',
 						f={'<cmd>Telescope find_files<cr>','Find files'},
+						c={'<cmd>Telescope commands<cr>','Commands'},
 						p={":lua require'telescope'.extensions.project.project{}<CR>",'Projects'},
 						b={'<cmd>Telescope buffers<cr>','Buffers'}}}, {prefix="<leader>"})
+
+					  vim.cmd[[
+noremap <c-p> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>
+						]]
 					end
 				}
 				use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate',config=function ()
@@ -609,16 +634,83 @@ use {
 	end}
 	use {'neomake/neomake'}
 
-	use {'kristijanhusak/orgmode.nvim', config = function()
-			require('orgmode').setup{}
-	end
-			}
+	--use {'kristijanhusak/orgmode.nvim', config = function()
+			--require('orgmode').setup{}
+	--end
+			--}
 			use {'glepnir/dashboard-nvim',config=function ()
 
 					vim.cmd[[let g:dashboard_default_executive ='telescope']]
 			end}
-			use {'gpanders/vim-oldfiles'}
+			--use {'gpanders/vim-oldfiles'}
+use {
+  'lewis6991/gitsigns.nvim',
+  requires = {
+    'nvim-lua/plenary.nvim'
+  },
+  config = function()
+    require('gitsigns').setup({})
+  end
+}
+			use {'skywind3000/asynctasks.vim',requires={'skywind3000/asyncrun.vim','GustavoKatel/telescope-asynctasks.nvim'},config=function ()
+				vim.cmd([[
+let g:asyncrun_open = 6
+				]])
+				
+
+						local wk = require("which-key")
+						wk.register({t={
+						t={require('telescope').extensions.asynctasks.all,'Tasks'}}}, {prefix="<leader>"})
+			end}
+
+
+use {'mfussenegger/nvim-dap',config=function ()
+	local dap = require('dap')
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/usr/bin/lldb-vscode',
+  name = "lldb"
+}
+dap.configurations.cpp = {
+  {
+    name = "Launch",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+    runInTerminal = false,
+  },
+}
+dap.configurations.c = dap.configurations.cpp
+end}
+use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 			--use {'neoclide/coc.nvim', branch='release',config=function ()
 					--vim.cmd('source ~/.config/nvim/cocnvim.vim')
 					--end}
+					--
+		local wk = require("which-key")
+		wk.register({d=
+		{name='DAP',
+    c={":lua require'dap'.continue()<CR>","Continue"},
+    v={":lua require'dap'.step_over()<CR>","Step over"},
+    i={":lua require'dap'.step_into()<CR>","Step into"},
+    o={":lua require'dap'.step_out()<CR>","Step out"},
+    b={":lua require'dap'.toggle_breakpoint()<CR>","Toggle Breakpoint"},
+    n={":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>","Set condition Breakpoint"},
+    m={":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>","log point Breakpoint"},
+    r={":lua require'dap'.repl.open()<CR>","Relp open"},
+    l={":lua require'dap'.run_last()<CR>","run last"},
+		g={name="DAP UI",
+    o={':lua require("dapui").open()',"Open"},
+    c={':lua require("dapui").close()',"Close"},
+    t={':lua require("dapui").toggle()',"Toggle"},
+	}
+	}}, {prefix="<leader>"})
+use {"akinsho/toggleterm.nvim",config=function ()
+	require("toggleterm").setup{}
+end}
 			end, config={auto_reload_compiled = true}})
