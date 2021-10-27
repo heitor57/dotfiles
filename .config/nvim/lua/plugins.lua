@@ -604,7 +604,7 @@ use {
 					requires = { 'nvim-lua/plenary.nvim' ,'nvim-telescope/telescope-project.nvim'},
 					config=function ()
 						require'telescope'.load_extension('project')
-						require("telescope").setup({defaults = { file_ignore_patterns = {"node_modules",'.git'} } })
+						require("telescope").setup({defaults = { file_ignore_patterns = {"node_modules",'.git/'} } })
 						local wk = require("which-key")
 						wk.register({t={name='Telescope',
 						f={'<cmd>Telescope find_files<cr>','Find files'},
