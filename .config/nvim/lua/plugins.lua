@@ -61,94 +61,94 @@ use {'preservim/nerdtree',config=function ()
 	--t={"<cmd>NERDTreeToggle<cr>","NERDTreeToggle"},
 	--f={"<cmd>NERDTreeFind<cr>","NERDTreeFind"},
 	--n={"<cmd>NERDTreeFocus<cr>","NERDTreeFocus"},
---}}, {prefix="<leader>"})
-	end}
+	--}}, {prefix="<leader>"})
+end}
 use {
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function() 
-			require'nvim-tree'.setup {}
-	local wk = require("which-key")
-	wk.register({e=
-	{name='Explorer',
-	--nnoremap <C-n> :NERDTree<CR>
-	--nnoremap <C-t> :NERDTreeToggle<CR>
-	--nnoremap <C-f> :NERDTreeFind<CR>
-	e={"<cmd>NvimTreeToggle<cr>","Toggle"},
-	f={"<cmd>NvimTreeFindFile<cr>","Find"},
-	r={"<cmd>NvimTreeRefresh<cr>","Refresh"},
-	n={"<cmd>NvimTreeFocus<cr>","Focus"},
-}}, {prefix="<leader>"})
-
-		end
-}
-	use {'heavenshell/vim-pydocstring',config=function ()
-		vim.cmd([[
-		let g:pydocstring_doq_path = '/home/heitor/.local/bin/doq'
-		let g:pydocstring_formatter = 'google'
-		]])
+	'kyazdani42/nvim-tree.lua',
+	requires = 'kyazdani42/nvim-web-devicons',
+	config = function() 
+		require'nvim-tree'.setup {}
 		local wk = require("which-key")
-		wk.register({a=
-		{
-			d={"<cmd>Pydocstring<cr>","Python Doc String"},
-		}}, {prefix="<leader>"})
-
-		wk.register(
-		{
-			d={"<cmd>Pydocstring<cr>","Python Doc String"},
-		}, {prefix="<leader>",mode='v'})
-
-	end}
-	use {'tpope/vim-fugitive',config=function ()
-
-		local wk = require("which-key")
-		wk.register({g=
-		{
-			f={"<cmd>G<cr>","Git Fugitive"},
-			p={"<cmd>G! push<cr>","Push"},
-			u={"<cmd>G! pull<cr>","Pull"},
-		}}, {prefix="<leader>"})
-
-	end}
-	use {'tpope/vim-abolish'}
-	use {'vim-scripts/CmdlineComplete'}
-	use {'farmergreg/vim-lastplace'}
-	use {'tpope/vim-repeat'}
-	use {'mg979/vim-visual-multi'}
-	use {'matze/vim-move',config=function ()
-		vim.cmd([[let g:move_key_modifier = 'C']])
-	end}
-	use {'tpope/vim-sensible'}
-	use {'nvim-lua/plenary.nvim'}
-	use 'kana/vim-smartinput'                
-	use {'wbthomason/packer.nvim',config=function()
-		local wk = require("which-key")
-		wk.setup(
-		{
-			marks = true, -- shows a list of your marks on ' and `
-			registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-			-- the presets plugin, adds help for a bunch of default keybindings in Neovim
-			-- No actual key bindings are created
-			presets = {
-				operators = false, -- adds help for operators like d, y, ...
-				motions = false, -- adds help for motions
-				text_objects = false, -- help for text objects triggered after entering an operator
-				windows = true, -- default bindings on <c-w>
-				nav = true, -- misc bindings to work with windows
-				z = true, -- bindings for folds, spelling and others prefixed with z
-				g = true, -- bindings for prefixed with g
-			},
-			spelling = { enabled = true, suggestions = 20 }, -- use which-key for spelling hints
-
-			hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
-		}
-		)
-		wk.register({p=
-		{name="Packer",
-		s={"<cmd>PackerSync<cr>","Sync"},
-		i={"<cmd>PackerInstall<cr>","Install"},
-		c={"<cmd>PackerCompile<cr>","Compile"},
+		wk.register({e=
+		{name='Explorer',
+		--nnoremap <C-n> :NERDTree<CR>
+		--nnoremap <C-t> :NERDTreeToggle<CR>
+		--nnoremap <C-f> :NERDTreeFind<CR>
+		e={"<cmd>NvimTreeToggle<cr>","Toggle"},
+		f={"<cmd>NvimTreeFindFile<cr>","Find"},
+		r={"<cmd>NvimTreeRefresh<cr>","Refresh"},
+		n={"<cmd>NvimTreeFocus<cr>","Focus"},
 	}}, {prefix="<leader>"})
+
+end
+}
+use {'heavenshell/vim-pydocstring',config=function ()
+	vim.cmd([[
+	let g:pydocstring_doq_path = '/home/heitor/.local/bin/doq'
+	let g:pydocstring_formatter = 'google'
+	]])
+	local wk = require("which-key")
+	wk.register({a=
+	{
+		d={"<cmd>Pydocstring<cr>","Python Doc String"},
+	}}, {prefix="<leader>"})
+
+	wk.register(
+	{
+		d={"<cmd>Pydocstring<cr>","Python Doc String"},
+	}, {prefix="<leader>",mode='v'})
+
+end}
+use {'tpope/vim-fugitive',config=function ()
+
+	local wk = require("which-key")
+	wk.register({g=
+	{
+		f={"<cmd>G<cr>","Git Fugitive"},
+		p={"<cmd>G! push<cr>","Push"},
+		u={"<cmd>G! pull<cr>","Pull"},
+	}}, {prefix="<leader>"})
+
+end}
+use {'tpope/vim-abolish'}
+use {'vim-scripts/CmdlineComplete'}
+use {'farmergreg/vim-lastplace'}
+use {'tpope/vim-repeat'}
+use {'mg979/vim-visual-multi'}
+use {'matze/vim-move',config=function ()
+	vim.cmd([[let g:move_key_modifier = 'C']])
+end}
+use {'tpope/vim-sensible'}
+use {'nvim-lua/plenary.nvim'}
+use 'kana/vim-smartinput'                
+use {'wbthomason/packer.nvim',config=function()
+	local wk = require("which-key")
+	wk.setup(
+	{
+		marks = true, -- shows a list of your marks on ' and `
+		registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+		-- the presets plugin, adds help for a bunch of default keybindings in Neovim
+		-- No actual key bindings are created
+		presets = {
+			operators = false, -- adds help for operators like d, y, ...
+			motions = false, -- adds help for motions
+			text_objects = false, -- help for text objects triggered after entering an operator
+			windows = true, -- default bindings on <c-w>
+			nav = true, -- misc bindings to work with windows
+			z = true, -- bindings for folds, spelling and others prefixed with z
+			g = true, -- bindings for prefixed with g
+		},
+		spelling = { enabled = true, suggestions = 20 }, -- use which-key for spelling hints
+
+		hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
+	}
+	)
+	wk.register({p=
+	{name="Packer",
+	s={"<cmd>PackerSync<cr>","Sync"},
+	i={"<cmd>PackerInstall<cr>","Install"},
+	c={"<cmd>PackerCompile<cr>","Compile"},
+}}, {prefix="<leader>"})
 
 end}
 use {
@@ -370,6 +370,9 @@ use {
 		'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
 		'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
 		'L3MON4D3/LuaSnip', -- Snippets plugin
+		'hrsh7th/cmp-buffer',
+		'hrsh7th/cmp-path',
+		'hrsh7th/cmp-cmdline'
 	},config=function()
 		vim.o.completeopt = 'menuone,noselect'
 		local luasnip = require 'luasnip'
@@ -423,6 +426,18 @@ use {
 				--{ name = "orgmode" },
 			},
 		}
+		cmp.setup.cmdline('/', {
+			sources = {
+				{ name = 'buffer' }
+			}
+		})
+		cmp.setup.cmdline(':', {
+			sources = cmp.config.sources({
+				{ name = 'path' }
+			}, {
+				{ name = 'cmdline' }
+			})
+		})
 	end}
 
 	use {'projekt0n/github-nvim-theme',config=function()
@@ -476,241 +491,243 @@ use {
 		--let g:ctrlp_cmd = 'CtrlP'
 		--let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 		--]])   	
-	--end}
-	--use {'sgur/ctrlp-extensions.vim',config=function ()
-		--local wk = require("which-key")
-		--wk.register({s={name='Search',
-		--c={'<cmd>CtrlPCmdline<cr>','CtrlPCmdline'},
-		--b={'<cmd>CtrlPBuffer<cr>','CtrlPBuffer'}}}, {prefix="<leader>"})
-	--end}
-	use {'mhinz/vim-grepper',config=function ()
-		local wk = require("which-key")
-		wk.register({s={g={'<cmd>Grepper<cr>','Grepper'}}},{prefix="<leader>"})
-	end}
-	use {'airblade/vim-rooter'}
-	use {'gabrielpoca/replacer.nvim',config=function ()
-		local wk = require("which-key")
-		wk.register({a={r={':lua require("replacer").run()<cr>','Quickfix Replacer'}}},{prefix="<leader>"})
-	end}
-	--use {'tamton-aquib/staline.nvim',config=function ()
-		--require('staline').setup{}
 		--end}
-		use {'sbdchd/neoformat',config=function ()
-			local wk = require("which-key")
-			wk.register({a={f={'<cmd>Neoformat<cr>','Format file'}}},{prefix="<leader>"})
-
-			vim.cmd([[let g:neoformat_enabled_python = ['black', 'docformatter'] ]])
-			vim.cmd([[
-			let g:neoformat_tex_latexindent = {
-				\ 'exe': 'latexindent',
-				\ 'args': ['-l'],
-				\ 'stdin': 1
-				\ }
-				]])
-				--vim.cmd([[
-				--augroup fmt
-				--autocmd!
-				--autocmd BufWritePre * undojoin | Neoformat
-				--augroup END
-				--]])
+		--use {'sgur/ctrlp-extensions.vim',config=function ()
+			--local wk = require("which-key")
+			--wk.register({s={name='Search',
+			--c={'<cmd>CtrlPCmdline<cr>','CtrlPCmdline'},
+			--b={'<cmd>CtrlPBuffer<cr>','CtrlPBuffer'}}}, {prefix="<leader>"})
+			--end}
+			use {'mhinz/vim-grepper',config=function ()
+				local wk = require("which-key")
+				wk.register({s={g={'<cmd>Grepper<cr>','Grepper'}}},{prefix="<leader>"})
 			end}
-			use {'tpope/vim-unimpaired'}
-
-			use 'moll/vim-bbye'
-			use 'aymericbeaumet/vim-symlink'
-			use 'AndrewRadev/bufferize.vim'
-			use {'tanvirtin/monokai.nvim',config=function ()
-				require('monokai')
-				vim.cmd('colorscheme monokai')
+			use {'airblade/vim-rooter'}
+			use {'gabrielpoca/replacer.nvim',config=function ()
+				local wk = require("which-key")
+				wk.register({a={r={':lua require("replacer").run()<cr>','Quickfix Replacer'}}},{prefix="<leader>"})
 			end}
-			use {'nvim-lua/lsp-status.nvim', requires='neovim/nvim-lspconfig', config=function ()
-				local lsp_status = require('lsp-status')
-				lsp_status.register_progress()
-				local lspconfig = require('lspconfig')
-				lspconfig.clangd.setup({
-					handlers = lsp_status.extensions.clangd.setup(),
-					init_options = {
-						clangdFileStatus = true
-					},
-					on_attach = lsp_status.on_attach,
-					capabilities = lsp_status.capabilities
-				})
+			--use {'tamton-aquib/staline.nvim',config=function ()
+				--require('staline').setup{}
+				--end}
+				use {'sbdchd/neoformat',config=function ()
+					local wk = require("which-key")
+					wk.register({a={f={'<cmd>Neoformat<cr>','Format file'}}},{prefix="<leader>"})
 
-				--lspconfig.pyls_ms.setup({
-					--handlers = lsp_status.extensions.pyls_ms.setup(),
-					--settings = { python = { workspaceSymbols = { enabled = true }}},
-					--on_attach = lsp_status.on_attach,
-					--capabilities = lsp_status.capabilities
-				--})
+					vim.cmd([[let g:neoformat_enabled_python = ['black', 'docformatter'] ]])
+					vim.cmd([[
+					let g:neoformat_tex_latexindent = {
+						\ 'exe': 'latexindent',
+						\ 'args': ['-l'],
+						\ 'stdin': 1
+						\ }
+						]])
+						--vim.cmd([[
+						--augroup fmt
+						--autocmd!
+						--autocmd BufWritePre * undojoin | Neoformat
+						--augroup END
+						--]])
+					end}
+					use {'tpope/vim-unimpaired'}
 
-				lspconfig.ghcide.setup({
-					on_attach = lsp_status.on_attach,
-					capabilities = lsp_status.capabilities
-				})
-				lspconfig.rust_analyzer.setup({
-					on_attach = lsp_status.on_attach,
-					capabilities = lsp_status.capabilities
-				})
-			end
-			}
+					use 'moll/vim-bbye'
+					use 'aymericbeaumet/vim-symlink'
+					use 'AndrewRadev/bufferize.vim'
+					use {'tanvirtin/monokai.nvim',config=function ()
+						require('monokai')
+						vim.cmd('colorscheme monokai')
+					end}
+					use {'nvim-lua/lsp-status.nvim', requires='neovim/nvim-lspconfig', config=function ()
+						local lsp_status = require('lsp-status')
+						lsp_status.register_progress()
+						local lspconfig = require('lspconfig')
+						lspconfig.clangd.setup({
+							handlers = lsp_status.extensions.clangd.setup(),
+							init_options = {
+								clangdFileStatus = true
+							},
+							on_attach = lsp_status.on_attach,
+							capabilities = lsp_status.capabilities
+						})
 
-				use {
-					'hoob3rt/lualine.nvim',
-					requires = {{'kyazdani42/nvim-web-devicons', opt = true},{'nvim-lua/lsp-status.nvim'}},
-					config=function ()
-						require'lualine'.setup {
-							options = {
-								icons_enabled = true,
-								theme = 'horizon',
-								component_separators = {'', ''},
-								section_separators = {'', ''},
-								disabled_filetypes = {}
+						--lspconfig.pyls_ms.setup({
+							--handlers = lsp_status.extensions.pyls_ms.setup(),
+							--settings = { python = { workspaceSymbols = { enabled = true }}},
+							--on_attach = lsp_status.on_attach,
+							--capabilities = lsp_status.capabilities
+							--})
+
+							lspconfig.ghcide.setup({
+								on_attach = lsp_status.on_attach,
+								capabilities = lsp_status.capabilities
+							})
+							lspconfig.rust_analyzer.setup({
+								on_attach = lsp_status.on_attach,
+								capabilities = lsp_status.capabilities
+							})
+						end
+					}
+
+					use {
+						'hoob3rt/lualine.nvim',
+						requires = {{'kyazdani42/nvim-web-devicons', opt = true},{'nvim-lua/lsp-status.nvim'}},
+						config=function ()
+							require'lualine'.setup {
+								options = {
+									icons_enabled = true,
+									theme = 'horizon',
+									component_separators = {'', ''},
+									section_separators = {'', ''},
+									disabled_filetypes = {}
+								},
+								sections = {
+									lualine_a = {'mode'},
+									lualine_b = {'branch'},
+									lualine_c = {'filename'},
+									lualine_x = {require'lsp-status'.status,'encoding' ,'fileformat', 'filetype'},
+									lualine_y = {'progress'},
+									lualine_z = {'location'}
+								},
+								inactive_sections = {
+									lualine_a = {},
+									lualine_b = {},
+									lualine_c = {'filename'},
+									lualine_x = {'location'},
+									lualine_y = {},
+									lualine_z = {}
+								},
+								tabline = {},
+								extensions = {}
+							}
+						end
+					}
+
+
+					use {
+						"nvim-telescope/telescope-frecency.nvim",
+						config = function()
+							require"telescope".load_extension("frecency")
+							local wk = require("which-key")
+							wk.register({t={name='Telescope',
+							r={'<cmd>Telescope frecency<cr>','Buffers'}}}, {prefix="<leader>"})
+						end,
+						requires = {"tami5/sqlite.lua"}
+					}
+					use {
+						'nvim-telescope/telescope.nvim',
+						requires = { 'nvim-lua/plenary.nvim' ,'nvim-telescope/telescope-project.nvim'},
+						config=function ()
+							require'telescope'.load_extension('project')
+							require("telescope").setup({defaults = { file_ignore_patterns = {"node_modules",'.git/','.vscode/'} } })
+							local wk = require("which-key")
+							wk.register({t={name='Telescope',
+							f={'<cmd>Telescope find_files<cr>','Find files'},
+							c={'<cmd>Telescope commands<cr>','Commands'},
+							p={":lua require'telescope'.extensions.project.project{}<CR>",'Projects'},
+							b={'<cmd>Telescope buffers<cr>','Buffers'}}}, {prefix="<leader>"})
+
+							vim.cmd[[
+							noremap <c-p> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>
+							]]
+						end
+					}
+					use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate',config=function ()
+						require'nvim-treesitter.configs'.setup {
+							ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+							ignore_install = { "javascript" }, -- List of parsers to ignore installing
+							highlight = {
+								enable = true,              -- false will disable the whole extension
+								disable = { "rust" },  -- list of language that will be disabled
+								-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+								-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+								-- Using this option may slow down your editor, and you may see some duplicate highlights.
+								-- Instead of true it can also be a list of languages
+								additional_vim_regex_highlighting = false,
 							},
-							sections = {
-								lualine_a = {'mode'},
-								lualine_b = {'branch'},
-								lualine_c = {'filename'},
-								lualine_x = {require'lsp-status'.status,'encoding' ,'fileformat', 'filetype'},
-								lualine_y = {'progress'},
-								lualine_z = {'location'}
-							},
-							inactive_sections = {
-								lualine_a = {},
-								lualine_b = {},
-								lualine_c = {'filename'},
-								lualine_x = {'location'},
-								lualine_y = {},
-								lualine_z = {}
-							},
-							tabline = {},
-							extensions = {}
 						}
-					end
-				}
+					end}
+					use {'neomake/neomake'}
+
+					--use {'kristijanhusak/orgmode.nvim', config = function()
+						--require('orgmode').setup{}
+						--end
+						--}
+						use {'glepnir/dashboard-nvim',config=function ()
+
+							vim.cmd[[let g:dashboard_default_executive ='telescope']]
+						end}
+						--use {'gpanders/vim-oldfiles'}
+						use {
+							'lewis6991/gitsigns.nvim',
+							requires = {
+								'nvim-lua/plenary.nvim'
+							},
+							config = function()
+								require('gitsigns').setup({})
+							end
+						}
+						use {'skywind3000/asynctasks.vim',requires={'skywind3000/asyncrun.vim','GustavoKatel/telescope-asynctasks.nvim'},config=function ()
+							vim.cmd([[
+							let g:asyncrun_open = 6
+							]])
 
 
-				use {
-					"nvim-telescope/telescope-frecency.nvim",
-					config = function()
-						require"telescope".load_extension("frecency")
-						local wk = require("which-key")
-						wk.register({t={name='Telescope',
-						r={'<cmd>Telescope frecency<cr>','Buffers'}}}, {prefix="<leader>"})
-					end,
-					requires = {"tami5/sqlite.lua"}
-				}
-				use {
-					'nvim-telescope/telescope.nvim',
-					requires = { 'nvim-lua/plenary.nvim' ,'nvim-telescope/telescope-project.nvim'},
-					config=function ()
-						require'telescope'.load_extension('project')
-						require("telescope").setup({defaults = { file_ignore_patterns = {"node_modules",'.git/'} } })
-						local wk = require("which-key")
-						wk.register({t={name='Telescope',
-						f={'<cmd>Telescope find_files<cr>','Find files'},
-						c={'<cmd>Telescope commands<cr>','Commands'},
-						p={":lua require'telescope'.extensions.project.project{}<CR>",'Projects'},
-						b={'<cmd>Telescope buffers<cr>','Buffers'}}}, {prefix="<leader>"})
-
-					  vim.cmd[[
-noremap <c-p> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>
-						]]
-					end
-				}
-				use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate',config=function ()
-					require'nvim-treesitter.configs'.setup {
-						ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-						ignore_install = { "javascript" }, -- List of parsers to ignore installing
-						highlight = {
-							enable = true,              -- false will disable the whole extension
-							disable = { "rust" },  -- list of language that will be disabled
-							-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-							-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-							-- Using this option may slow down your editor, and you may see some duplicate highlights.
-							-- Instead of true it can also be a list of languages
-							additional_vim_regex_highlighting = false,
-					},
-			}
-	end}
-	use {'neomake/neomake'}
-
-	--use {'kristijanhusak/orgmode.nvim', config = function()
-			--require('orgmode').setup{}
-	--end
-			--}
-			use {'glepnir/dashboard-nvim',config=function ()
-
-					vim.cmd[[let g:dashboard_default_executive ='telescope']]
-			end}
-			--use {'gpanders/vim-oldfiles'}
-use {
-  'lewis6991/gitsigns.nvim',
-  requires = {
-    'nvim-lua/plenary.nvim'
-  },
-  config = function()
-    require('gitsigns').setup({})
-  end
-}
-			use {'skywind3000/asynctasks.vim',requires={'skywind3000/asyncrun.vim','GustavoKatel/telescope-asynctasks.nvim'},config=function ()
-				vim.cmd([[
-let g:asyncrun_open = 6
-				]])
-				
-
-						local wk = require("which-key")
-						wk.register({t={
-						t={require('telescope').extensions.asynctasks.all,'Tasks'}}}, {prefix="<leader>"})
-			end}
+							local wk = require("which-key")
+							wk.register({t={
+								t={require('telescope').extensions.asynctasks.all,'Tasks'}}}, {prefix="<leader>"})
+							end}
 
 
-use {'mfussenegger/nvim-dap',config=function ()
-	local dap = require('dap')
-dap.adapters.lldb = {
-  type = 'executable',
-  command = '/usr/bin/lldb-vscode',
-  name = "lldb"
-}
-dap.configurations.cpp = {
-  {
-    name = "Launch",
-    type = "lldb",
-    request = "launch",
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-    args = {},
-    runInTerminal = false,
-  },
-}
-dap.configurations.c = dap.configurations.cpp
-end}
-use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-			--use {'neoclide/coc.nvim', branch='release',config=function ()
-					--vim.cmd('source ~/.config/nvim/cocnvim.vim')
-					--end}
-					--
-		local wk = require("which-key")
-		wk.register({d=
-		{name='DAP',
-    c={":lua require'dap'.continue()<CR>","Continue"},
-    v={":lua require'dap'.step_over()<CR>","Step over"},
-    i={":lua require'dap'.step_into()<CR>","Step into"},
-    o={":lua require'dap'.step_out()<CR>","Step out"},
-    b={":lua require'dap'.toggle_breakpoint()<CR>","Toggle Breakpoint"},
-    n={":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>","Set condition Breakpoint"},
-    m={":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>","log point Breakpoint"},
-    r={":lua require'dap'.repl.open()<CR>","Relp open"},
-    l={":lua require'dap'.run_last()<CR>","run last"},
-		g={name="DAP UI",
-    o={':lua require("dapui").open()',"Open"},
-    c={':lua require("dapui").close()',"Close"},
-    t={':lua require("dapui").toggle()',"Toggle"},
-	}
-	}}, {prefix="<leader>"})
-use {"akinsho/toggleterm.nvim",config=function ()
-	require("toggleterm").setup{}
-end}
-			end, config={auto_reload_compiled = true}})
+							use {'mfussenegger/nvim-dap',config=function ()
+								local dap = require('dap')
+								dap.adapters.lldb = {
+									type = 'executable',
+									command = '/usr/bin/lldb-vscode',
+									name = "lldb"
+								}
+								dap.configurations.cpp = {
+									{
+										name = "Launch",
+										type = "lldb",
+										request = "launch",
+										program = function()
+											return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+										end,
+										cwd = '${workspaceFolder}',
+										stopOnEntry = false,
+										args = {},
+										runInTerminal = false,
+									},
+								}
+								dap.configurations.c = dap.configurations.cpp
+							end}
+							use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+							--use {'neoclide/coc.nvim', branch='release',config=function ()
+								--vim.cmd('source ~/.config/nvim/cocnvim.vim')
+								--end}
+								--
+								local wk = require("which-key")
+								wk.register({d=
+								{name='DAP',
+								c={":lua require'dap'.continue()<CR>","Continue"},
+								s={":lua require'dap'.step_over()<CR>","Step over"},
+								i={":lua require'dap'.step_into()<CR>","Step into"},
+								o={":lua require'dap'.step_out()<CR>","Step out"},
+								b={":lua require'dap'.toggle_breakpoint()<CR>","Toggle Breakpoint"},
+								n={":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>","Set condition Breakpoint"},
+								m={":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>","log point Breakpoint"},
+								r={":lua require'dap'.repl.open()<CR>","Relp open"},
+								l={":lua require'dap'.run_last()<CR>","run last"},
+								g={name="DAP UI",
+								o={':lua require("dapui").open()<cr>',"Open"},
+								c={':lua require("dapui").close()<cr>',"Close"},
+								t={':lua require("dapui").toggle()<cr>',"Toggle"},
+								s={':lua require("dapui").setup()<cr>',"Setup"},
+							}
+						}}, {prefix="<leader>"})
+						use {"akinsho/toggleterm.nvim",config=function ()
+							require("toggleterm").setup{}
+						end}
+						use{'rmagatti/auto-session'}
+					end, config={auto_reload_compiled = true}})
