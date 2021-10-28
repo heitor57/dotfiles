@@ -236,7 +236,7 @@ FontSize = 11
 # Disable = false
 
 ## Specifies whether to show the minimap or not.
-# Visible = true
+#Visible = true
 
 ## Specifies the width of the minimap.
 # Width = 100
@@ -252,13 +252,13 @@ FontSize = 11
 
 [SideBar]
 ## Specifies whether to show the external sidebar or not.
-# Visible = false
+#Visible = false
 
 ## Specify the sidebar width
 # Width = 200
 
 ## Specify whether or not to draw a shadow under the sidebar.
-# DropShadow = false
+#DropShadow = true
 
 ## Specify the color to use when selecting items in the sidebar or palette in hexadecimal format
 # AccentColor = "#5596ea"
