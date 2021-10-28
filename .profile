@@ -17,7 +17,7 @@ do
 		break
 	fi
 done
-DOTFILES_BIN=$DOTFILES/bin
+export DOTFILES_BIN=$DOTFILES/bin
 export PATH="$PATH:$DOTFILES_BIN"
 
 # function kotlinr() {

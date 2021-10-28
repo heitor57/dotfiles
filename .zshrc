@@ -88,6 +88,6 @@ autoload -Uz run-help
     #unset timer
   #fi
 #}
-
-
+echo $DOTFILES_BIN
+source $DOTFILES_BIN/remote_utils
 #alias ev="v $DOTFILES/.config/nvim/init.vim"
