@@ -90,3 +90,4 @@ autoload -Uz run-help
 #}
 source $DOTFILES_BIN/remote_utils
 #alias ev="v $DOTFILES/.config/nvim/init.vim"
+zstyle ':completion:*' menu select

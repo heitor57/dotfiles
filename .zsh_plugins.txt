@@ -20,3 +20,5 @@ hlissner/zsh-autopair
 marlonrichert/zsh-edit branch:main
 #popstas/zsh-command-time
 #zdharma/history-search-multi-word
+
+zsh-users/zsh-completions

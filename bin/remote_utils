@@ -14,10 +14,16 @@ do_command_remote (){
 				fusermount -u $fpath
 }
 
+duff_pull_dotfiles (){
+	do_command_remote duff dotfiles "git pull"
+}
+
 
 labpi-208_pull_dotfiles (){
 	do_command_remote labpi-208 dotfiles "git pull"
 }
+
+
 
 labpi-208_clone_parallel-divisor-function (){
 	do_command_remote labpi-208 . "git clone git@github.com:heitor57/parallel-divisor-function.git"
