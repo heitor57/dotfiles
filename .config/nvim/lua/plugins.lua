@@ -180,7 +180,7 @@ end
 	use {'neovim/nvim-lspconfig',config=function()
 		vim.cmd([[set exrc]])
 	end}
-	use {'kabouzeid/nvim-lspinstall',config=function()
+	use {'williamboman/nvim-lsp-installer',requires={'neovim/nvim-lspconfig'},config=function()
 		local on_attach = function(client, bufnr)
 			local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 			local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
