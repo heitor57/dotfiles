@@ -547,7 +547,7 @@ use {
       i = {
         ["<C-h>"] = "which_key"
       }}
-								,file_ignore_patterns = {"node_modules",'.git/','.vscode/'} } })
+								,file_ignore_patterns = {"node_modules",'.git/','.vscode/','mlruns/'} } })
 							local wk = require("which-key")
 							wk.register({t={name='Telescope',
 							f={'<cmd>Telescope find_files<cr>','Find files'},
