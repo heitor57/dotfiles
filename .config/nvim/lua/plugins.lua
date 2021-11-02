@@ -18,25 +18,6 @@ return require('packer').startup({function()
 		f={"<Plug>(grammarous-fixit)","Fix"},
 		--a={":GrammarousCheck --lang=en<cr>"
 	}}, {prefix="<leader>"})
-	--nmap <leader>çq <Plug>(grammarous-move-to-info-window)
-	--" 	Open the info window for the error under the cursor
-	--nmap <leader>çw <Plug>(grammarous-open-info-window)
-	--" 	Reset the current check
-	--nmap <leader>çe <Plug>(grammarous-reset)
-	--" 	Fix the error under the cursor automatically
-	--nmap <leader>çr <Plug>(grammarous-fixit)
-	--" 	Fix all the errors in a current buffer automatically
-	--nmap <leader>çt <Plug>(grammarous-fixall)
-	--" 	Close the information window from checked buffer
-	--nmap <leader>çy <Plug>(grammarous-close-info-window)
-	--" 	Remove the error under the cursor
-	--nmap <leader>çu <Plug>(grammarous-remove-error)
-	--" 	Disable the grammar rule under the cursor
-	--nmap <leader>çi <Plug>(grammarous-disable-rule)
-	--" 	Move cursor to the next error
-	--nmap <leader>ço <Plug>(grammarous-move-to-next-error)
-	--" 	Move cursor to the previous error
-	--nmap <leader>çp <Plug>(grammarous-move-to-previous-error)
 end}
 use {'lervag/vimtex',config=function ()
 	vim.cmd([[
@@ -178,7 +159,6 @@ end
 	-- BEGIN OF LSP
 
 	use {'neovim/nvim-lspconfig',config=function()
-		vim.cmd([[set exrc]])
 	end}
 	use {'williamboman/nvim-lsp-installer',requires={'neovim/nvim-lspconfig'},config=function()
 		local on_attach = function(client, bufnr)
@@ -193,34 +173,23 @@ end
 			buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 			buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 			buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+			buf_set_keymap('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
 			buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 			buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
 			buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 			wk = require("which-key")
 			wk.register({l={name="LSP",
 			w={'<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>',"Add Workspace"},
-			r={'<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>',"Remove Workspace"},
+			--r={'<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>',"Remove Workspace"},
 			l={'<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',"List Workspaces"},
 			t={'<cmd>lua vim.lsp.buf.type_definition()<CR>',"Type Definition"},
 			r={'<cmd>lua vim.lsp.buf.rename()<CR>',"Rename"},
 			o={'<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',"Loc List"},
 			f={"<cmd>lua vim.lsp.buf.formatting()<CR>","Format"},
 		}}, {prefix="<leader>"})
-		--buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
 		buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-		--buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
 		buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
 		buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-		--buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-
-		-- Set some keybinds conditional on server capabilities
-		--if client.resolved_capabilities.document_formatting then
-		--buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-		--elseif client.resolved_capabilities.document_range_formatting then
-		--buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-		--end
-
-		-- Set autocommands conditional on server_capabilities
 		if client.resolved_capabilities.document_highlight then
 			vim.api.nvim_exec([[
 			augroup lsp_document_highlight
@@ -232,29 +201,6 @@ end
 		end
 	end
 
-	-- Configure lua language server for neovim development
-	local lua_settings = {
-		Lua = {
-			runtime = {
-				-- LuaJIT in the case of Neovim
-				version = 'LuaJIT',
-				path = vim.split(package.path, ';'),
-			},
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = {'vim'},
-			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = {
-					[vim.fn.expand('$VIMRUNTIME/lua')] = true,
-					[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-				},
-			},
-		}
-	}
-
-	-- config that activates keymaps and enables snippet support
 	local function make_config()
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
@@ -280,40 +226,19 @@ end
 		}
 	end
 
-	-- lsp-install
-	local function setup_servers()
-		require'lspinstall'.setup()
+	local lsp_installer = require("nvim-lsp-installer")
 
-		-- get all installed servers
-		local servers = require'lspinstall'.installed_servers()
-		-- ... and add manually installed servers
-		table.insert(servers, "clangd")
-		table.insert(servers, "sourcekit")
-
-		for _, server in pairs(servers) do
+	lsp_installer.on_server_ready(function(server)
 			local config = make_config()
 
-			-- language specific config
-			if server == "lua" then
-				config.settings = lua_settings
-			end
-			if server == "sourcekit" then
-				config.filetypes = {"swift", "objective-c", "objective-cpp"}; -- we don't want c and cpp!
-			end
 			if server == "clangd" then
 				config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
 			end
+			server:setup(config)
 
-			require'lspconfig'[server].setup(config)
-		end
-	end
+			vim.cmd [[ do User LspAttachBuffers ]]
+	end)
 
-	setup_servers()
-	-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-	require'lspinstall'.post_install_hook = function ()
-		setup_servers() -- reload installed servers
-		vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-	end
 	local function lspSymbol(name, icon)
 		vim.fn.sign_define("LspDiagnosticsSign" .. name, { text = icon, numhl = "LspDiagnosticsDefaul" .. name })
 	end
@@ -419,6 +344,7 @@ use {
 				{ name = 'luasnip' },
 				{ name = "buffer" },
 				{ name = "nvim_lua" },
+				--{name='omni'},
 				--{ name = "orgmode" },
 			},
 		}
@@ -567,7 +493,7 @@ use {
 
 					use {
 						'hoob3rt/lualine.nvim',
-						requires = {{'kyazdani42/nvim-web-devicons', opt = true},{'nvim-lua/lsp-status.nvim'}},
+						requires = {{'kyazdani42/nvim-web-devicons', opt = true},{'nvim-lua/lsp-status.nvim'},{'arkav/lualine-lsp-progress'}},
 						config=function ()
 							require'lualine'.setup {
 								options = {
@@ -580,7 +506,9 @@ use {
 								sections = {
 									lualine_a = {'mode'},
 									lualine_b = {'branch'},
-									lualine_c = {'filename'},
+									lualine_c = {'filename','lsp_progress'},
+									--lualine_c = {'filename'},
+									--lualine_x = {'encoding' ,'fileformat', 'filetype'},
 									lualine_x = {require'lsp-status'.status,'encoding' ,'fileformat', 'filetype'},
 									lualine_y = {'progress'},
 									lualine_z = {'location'}
@@ -605,8 +533,8 @@ use {
 						config = function()
 							require"telescope".load_extension("frecency")
 							local wk = require("which-key")
-							wk.register({t={name='Telescope',
-							r={'<cmd>Telescope frecency<cr>','Buffers'}}}, {prefix="<leader>"})
+							wk.register({t={
+							r={'<cmd>Telescope frecency<cr>','Frecency'}}}, {prefix="<leader>"})
 						end,
 						requires = {"tami5/sqlite.lua"}
 					}
@@ -615,11 +543,16 @@ use {
 						requires = { 'nvim-lua/plenary.nvim' ,'nvim-telescope/telescope-project.nvim'},
 						config=function ()
 							require'telescope'.load_extension('project')
-							require("telescope").setup({defaults = { file_ignore_patterns = {"node_modules",'.git/','.vscode/'} } })
+							require("telescope").setup({defaults = {mappings = {
+      i = {
+        ["<C-h>"] = "which_key"
+      }}
+								,file_ignore_patterns = {"node_modules",'.git/','.vscode/'} } })
 							local wk = require("which-key")
 							wk.register({t={name='Telescope',
 							f={'<cmd>Telescope find_files<cr>','Find files'},
 							c={'<cmd>Telescope commands<cr>','Commands'},
+							h={'<cmd>Telescope command_history<cr>','Command history'},
 							p={":lua require'telescope'.extensions.project.project{}<CR>",'Projects'},
 							b={'<cmd>Telescope buffers<cr>','Buffers'}}}, {prefix="<leader>"})
 
@@ -692,7 +625,8 @@ use {
 										end,
 										cwd = '${workspaceFolder}',
 										stopOnEntry = false,
-										args = {},
+										args = {'./data/entrada.txt' ,'./data/entrada_out.txt'},
+										--args = {},
 										runInTerminal = false,
 									},
 								}
@@ -703,6 +637,7 @@ use {
 								--vim.cmd('source ~/.config/nvim/cocnvim.vim')
 								--end}
 								--
+								require("dapui").setup()
 								local wk = require("which-key")
 								wk.register({d=
 								{name='DAP',
@@ -715,15 +650,23 @@ use {
 								m={":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>","log point Breakpoint"},
 								r={":lua require'dap'.repl.open()<CR>","Relp open"},
 								l={":lua require'dap'.run_last()<CR>","run last"},
-								g={name="DAP UI",
+								q={':lua require("dap").terminate()<cr>',"Terminate"},
+								u={name="DAP UI",
 								o={':lua require("dapui").open()<cr>',"Open"},
 								c={':lua require("dapui").close()<cr>',"Close"},
 								t={':lua require("dapui").toggle()<cr>',"Toggle"},
-								s={':lua require("dapui").setup()<cr>',"Setup"},
+								--s={':lua require("dapui").setup()<cr>',"Setup"},
 							}
 						}}, {prefix="<leader>"})
 						use {"akinsho/toggleterm.nvim",config=function ()
 							require("toggleterm").setup{}
 						end}
 						use{'rmagatti/auto-session'}
-					end, config={auto_reload_compiled = true}})
+						use {'kkoomen/vim-doge',config=function ()
+
+
+vim.cmd([[
+let g:doge_mapping='<Leader>m'
+]])
+					  end}
+				    end, config={auto_reload_compiled = true}})
