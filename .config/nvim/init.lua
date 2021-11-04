@@ -21,8 +21,8 @@ set mouse=a
 let maplocalleader = "\\"
 set termguicolors     " enable true colors support
 set clipboard=unnamedplus
-set cursorline
-set tabstop=2
+"set cursorline
+set tabstop=4
 set number
 set hlsearch
 set incsearch
@@ -46,6 +46,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 "nnoremap <leader>sv :source $MYVIMRC<cr>
 vnoremap > >gv
 vnoremap < <gv
+"command! -nargs=+ Echoerr call popup_notification(<q-args>, { "pos": "topright", "col": winwidth(win_getid()), })
 
 ]])
 local nvimrc = "~/.config/nvim"
