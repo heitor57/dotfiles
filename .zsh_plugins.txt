@@ -24,3 +24,5 @@ marlonrichert/zsh-edit branch:main
 zsh-users/zsh-completions
 djui/alias-tips
 #unixorn/fzf-zsh-plugin branch:main
+
+zdharma-continuum/history-search-multi-word branch:main

@@ -46,7 +46,6 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 "nnoremap <leader>sv :source $MYVIMRC<cr>
 vnoremap > >gv
 vnoremap < <gv
-"command! -nargs=+ Echoerr call popup_notification(<q-args>, { "pos": "topright", "col": winwidth(win_getid()), })
 
 ]])
 local nvimrc = "~/.config/nvim"

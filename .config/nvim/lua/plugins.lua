@@ -276,6 +276,8 @@ use {'L3MON4D3/LuaSnip',config=function ()
 		updateevents = "TextChanged,TextChangedI",
 	}
 end}
+	use {"petertriho/cmp-git",
+	requires = {"nvim-lua/plenary.nvim","hrsh7th/nvim-cmp"}}
 use {
 	"hrsh7th/nvim-cmp",
 	requires = {
@@ -285,7 +287,9 @@ use {
 		'L3MON4D3/LuaSnip', -- Snippets plugin
 		'hrsh7th/cmp-buffer',
 		'hrsh7th/cmp-path',
-		'hrsh7th/cmp-cmdline'
+		'hrsh7th/cmp-cmdline',
+		'hrsh7th/cmp-omni',
+"petertriho/cmp-git",
 	},config=function()
 		vim.o.completeopt = 'menuone,noselect'
 		local luasnip = require 'luasnip'
@@ -330,6 +334,11 @@ use {
 				  { name = 'luasnip' },
 				  { name = "buffer" },
 				  { name = "nvim_lua" },
+				  {
+					  name = "omni",
+				  },
+				  { name = "cmp_git" },
+				  { name = 'path' },
 				},{
 				  { name = 'buffer' },
 				}),
@@ -346,6 +355,7 @@ use {
 				  { name = 'cmdline' }
 				})
 			  })
+			  require("cmp_git").setup()
 			end}
 
 			--use {'projekt0n/github-nvim-theme',config=function()
@@ -663,4 +673,11 @@ use{'xavierchow/vim-swagger-preview',config=function ()
 		s={"<Plug>GenerateDiagram ","Swagger preview"},
 	}}, {prefix="<leader>"})
 end}
+use {
+  "folke/todo-comments.nvim",
+  requires = "nvim-lua/plenary.nvim",
+  config = function()
+    require("todo-comments").setup {}
+  end
+}
 						end, config={auto_reload_compiled = true}})
