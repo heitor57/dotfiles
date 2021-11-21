@@ -91,3 +91,7 @@ autoload -Uz run-help
 source $DOTFILES_BIN/remote_utils
 #alias ev="v $DOTFILES/.config/nvim/init.vim"
 zstyle ':completion:*' menu select
+
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down

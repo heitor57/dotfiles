@@ -3,7 +3,7 @@ return require('packer').startup({function()
 
 	use {'voldikss/vim-translator',config=function ()
 		vim.cmd([[
-		let g:translator_target_lang='en'
+		let g:translator_target_lang='pt'
 		]])
 	end}
 	use {'heitor57/vim-grammarous',config=function ()
@@ -211,6 +211,10 @@ end
 			if server == "clangd" then
 				config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
 			end
+
+			--if server == "ltex" then
+				--config.filetypes = {"text"}; -- we don't want objective-c and objective-cpp!
+			--end
 
 			if server == "yamlls" then
 			      config.filetypes = {'yaml'}
@@ -664,6 +668,9 @@ use {'bluz71/vim-moonfly-colors',config=function ()
 	vim.cmd [[colorscheme moonfly]]
 	require('lualine').setup({options = {theme = 'moonfly'}})
 	vim.g.moonflyCursorColor = 1
+	vim.cmd([[
+hi Normal guibg=NONE ctermbg=NONE
+	]])
 end}
 
 use{'xavierchow/vim-swagger-preview',config=function ()
@@ -680,4 +687,68 @@ use {
     require("todo-comments").setup {}
   end
 }
+use{'akinsho/bufferline.nvim',config=function ()
+  vim.opt.termguicolors = true
+  require("bufferline").setup{}
+end}
+
+use{'code-biscuits/nvim-biscuits',requires="nvim-treesitter/nvim-treesitter",config=function ()
+  require('nvim-biscuits').setup({
+	default_config = {
+	  max_length = 12,
+	  min_distance = 5,
+	  prefix_string = " 📎 "
+	},
+	language_config = {
+	  html = {
+		prefix_string = " 🌐 "
+	  },
+	  javascript = {
+		prefix_string = " ✨ ",
+		max_length = 80
+	  },
+	  lua = {
+		prefix_string = " ✨ ",
+	  },
+	  python = {
+		disabled = true
+	  }
+	}
+  })
+end}
+use{'rcarriga/nvim-notify',config=function ()
+  require("notify").setup({
+	-- Animation style (see below for details)
+	stages = "fade_in_slide_out",
+
+	-- Function called when a new window is opened, use for changing win settings/config
+	on_open = nil,
+
+	-- Render function for notifications. See notify-render()
+	render = "default",
+
+	-- Default timeout for notifications
+	timeout = 5000,
+
+	-- For stages that change opacity this is treated as the highlight behind the window
+	-- Set this to either a highlight group or an RGB hex value e.g. "#000000"
+	background_colour = "#000000",
+
+	-- Minimum width for notification windows
+	minimum_width = 50,
+
+	-- Icons for the different levels
+	icons = {
+	  ERROR = "",
+	  WARN = "",
+	  INFO = "",
+	  DEBUG = "",
+	  TRACE = "✎",
+	},
+  })
+
+end}
+
+use{'WaylonWalker/Telegraph.nvim'}
+use{'jiangmiao/auto-pairs'}
 						end, config={auto_reload_compiled = true}})

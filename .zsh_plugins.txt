@@ -25,4 +25,9 @@ zsh-users/zsh-completions
 djui/alias-tips
 #unixorn/fzf-zsh-plugin branch:main
 
-zdharma-continuum/history-search-multi-word branch:main
+#zdharma-continuum/history-search-multi-word branch:main
+zsh-users/zsh-history-substring-search
+marzocchi/zsh-notify
+zdharma-continuum/zsh-navigation-tools
+zdharma-continuum/zsh-cmd-architect branch:main
+zdharma-continuum/zsh-editing-workbench branch:main

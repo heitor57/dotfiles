@@ -23,7 +23,7 @@
 
 ## This option makes the whole GUI window in semi-transparent.
 ## This setting also implicitly enables the Drawborder setting
- #Transparent = 1.0
+Transparent = 0.75
 
 ## Launch goneovim with full screen window size.
 # StartFullscreen = false

@@ -46,7 +46,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 "nnoremap <leader>sv :source $MYVIMRC<cr>
 vnoremap > >gv
 vnoremap < <gv
-
+"hi Normal guibg=NONE ctermbg=NONE
 ]])
 local nvimrc = "~/.config/nvim"
 vim.cmd('source ' .. nvimrc .. '/auxinit.vim')
