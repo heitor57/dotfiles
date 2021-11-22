@@ -22,7 +22,7 @@ let maplocalleader = "\\"
 set termguicolors     " enable true colors support
 set clipboard=unnamedplus
 "set cursorline
-set tabstop=4
+set tabstop=2
 set number
 set hlsearch
 set incsearch

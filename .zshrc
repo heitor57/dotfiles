@@ -21,7 +21,8 @@ function mm(){
 	man $(apropos --long . | dmenu -i -l 30 | awk '{print $2, $1}' | tr -d '()')
 }
 
-function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
+function gitignore() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
+alias gi=gitignore
 # Lines configured by zsh-newuser-install
 bindkey -e
 bindkey "^[[1;5C" forward-word

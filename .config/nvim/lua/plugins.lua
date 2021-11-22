@@ -1,4 +1,9 @@
-
+function TableConcat(t1,t2)
+    for i=1,#t2 do
+        t1[#t1+1] = t2[i]
+    end
+    return t1
+end
 return require('packer').startup({function()
 
 	use {'voldikss/vim-translator',config=function ()
@@ -207,16 +212,27 @@ end
 
 	lsp_installer.on_server_ready(function(server)
 			local config = make_config()
+			--vim.cmd([[echo ]] .. 	table.toString server)
 
-			if server == "clangd" then
+			if server.name == "clangd" then
 				config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
 			end
 
-			--if server == "ltex" then
+			--print(vim.inspect(server.name))
+			--print(vim.inspect(server.name == "ltex"))
+			--print(vim.inspect(server == "ltex"))
+			if server.name == "ltex" then
+				--vim.cmd([[echo 'texlab']])
 				--config.filetypes = {"text"}; -- we don't want objective-c and objective-cpp!
-			--end
+				--config.settings = {ltex={additionalRules={motherTongue="pt-BR", languageModel="pt-BR"}}}
+				config.settings = {ltex={language="pt"}}
+				--print(vim.inspect(server.name == "ltex"))
+				--print(vim.inspect(config.settings))
+				--config.settings = {["ltex.additionalRules.motherTongue"]="pt-BR"}
+				--config.settings = {["ltex.additionalRules.languageModel"]="pt-BR"}
+			end
 
-			if server == "yamlls" then
+			if server.name == "yamlls" then
 			      config.filetypes = {'yaml'}
 						--config.on_init = function(client)
 						--local tmp = '/home/' .. vim.cmd[[echo $USER]] .. '/.config/nvim/schemas/swagger.yaml'
@@ -279,6 +295,32 @@ use {'L3MON4D3/LuaSnip',config=function ()
 		history = true,
 		updateevents = "TextChanged,TextChangedI",
 	}
+	--local ls = require("luasnip")
+	--local s = ls.snippet
+	--local sn = ls.snippet_node
+	--local t = ls.text_node
+	--local i = ls.insert_node
+	--local f = ls.function_node
+	--local c = ls.choice_node
+	--local d = ls.dynamic_node
+	--local l = require("luasnip.extras").lambda
+	--local r = require("luasnip.extras").rep
+	----local p = requireluasnip.extras").partial
+	--local m = require("luasnip.extras").match
+	--local n = require("luasnip.extras").nonempty
+	--local dl = require("luasnip.extras").dynamic_lambda
+	--local fmt = require("luasnip.extras.fmt").fmt
+	--local fmta = require("luasnip.extras.fmt").fmta
+	--local types = require("luasnip.util.types")
+	--local conds = require("luasnip.extras.expand_conditions")
+	----luasnip.snippets.all = TableConcat(luasnip.snippets.all,{
+	  ----s({trig="trigger"}, {})
+    ----s("trigger", {
+            ----t({[[\begin{figure}
+----\includegraphics[width=0.95\linewidth]]]}), i(1),
+----t({[[\caption{}
+----\end{figure}]]})
+	----})
 end}
 	use {"petertriho/cmp-git",
 	requires = {"nvim-lua/plenary.nvim","hrsh7th/nvim-cmp"}}
@@ -692,63 +734,75 @@ use{'akinsho/bufferline.nvim',config=function ()
   require("bufferline").setup{}
 end}
 
-use{'code-biscuits/nvim-biscuits',requires="nvim-treesitter/nvim-treesitter",config=function ()
-  require('nvim-biscuits').setup({
-	default_config = {
-	  max_length = 12,
-	  min_distance = 5,
-	  prefix_string = " 📎 "
-	},
-	language_config = {
-	  html = {
-		prefix_string = " 🌐 "
-	  },
-	  javascript = {
-		prefix_string = " ✨ ",
-		max_length = 80
-	  },
-	  lua = {
-		prefix_string = " ✨ ",
-	  },
-	  python = {
-		disabled = true
-	  }
-	}
-  })
-end}
-use{'rcarriga/nvim-notify',config=function ()
-  require("notify").setup({
-	-- Animation style (see below for details)
-	stages = "fade_in_slide_out",
+--use{'code-biscuits/nvim-biscuits',requires="nvim-treesitter/nvim-treesitter",config=function ()
+  --require('nvim-biscuits').setup({
+	--default_config = {
+	  --max_length = 12,
+	  --min_distance = 5,
+	  --prefix_string = "  "
+	--},
+	--language_config = {
+	  --python = {
+		--disabled = true
+	  --}
+	--}
+  --})
+--end}
+--use{'rcarriga/nvim-notify',config=function ()
+  --require("notify").setup({
+	---- Animation style (see below for details)
+	--stages = "fade_in_slide_out",
 
-	-- Function called when a new window is opened, use for changing win settings/config
-	on_open = nil,
+	---- Function called when a new window is opened, use for changing win settings/config
+	--on_open = nil,
 
-	-- Render function for notifications. See notify-render()
-	render = "default",
+	---- Render function for notifications. See notify-render()
+	--render = "default",
 
-	-- Default timeout for notifications
-	timeout = 5000,
+	---- Default timeout for notifications
+	--timeout = 5000,
 
-	-- For stages that change opacity this is treated as the highlight behind the window
-	-- Set this to either a highlight group or an RGB hex value e.g. "#000000"
-	background_colour = "#000000",
+	---- For stages that change opacity this is treated as the highlight behind the window
+	---- Set this to either a highlight group or an RGB hex value e.g. "#000000"
+	--background_colour = "#000000",
 
-	-- Minimum width for notification windows
-	minimum_width = 50,
+	---- Minimum width for notification windows
+	--minimum_width = 50,
 
-	-- Icons for the different levels
-	icons = {
-	  ERROR = "",
-	  WARN = "",
-	  INFO = "",
-	  DEBUG = "",
-	  TRACE = "✎",
-	},
-  })
+	---- Icons for the different levels
+	--icons = {
+		--ERROR = "",
+		--WARN = "",
+		--INFO = "",
+		--DEBUG = "",
+		--TRACE = "✎",
+	--},
+  --})
 
-end}
+--end}
 
 use{'WaylonWalker/Telegraph.nvim'}
 use{'jiangmiao/auto-pairs'}
+use{'ThePrimeagen/harpoon', requires='nvim-lua/plenary.nvim',config=function ()
+  require("harpoon").setup({
+    global_settings = {
+        save_on_toggle = false,
+        save_on_change = true,
+        enter_on_sendcmd = false,
+        excluded_filetypes = { "harpoon" }
+    },
+  })
+  local wk = require("which-key")
+  wk.register({f=
+  {name='Harpoon',
+  a={':lua require("harpoon.mark").add_file()<cr>',"Add file"},
+  m={':lua require("harpoon.ui").toggle_quick_menu()<cr>',"Quick Menu"},
+  q={':lua require("harpoon.ui").nav_file(1)<cr>',"Go to file 1"},
+  w={':lua require("harpoon.ui").nav_file(2)<cr>',"Go to file 2"},
+  e={':lua require("harpoon.ui").nav_file(3)<cr>',"Go to file 3"},
+  r={':lua require("harpoon.ui").nav_file(4)<cr>',"Go to file 4"},
+  t={':lua require("harpoon.ui").nav_file(5)<cr>',"Go to file 5"},
+  --n={"<cmd>NvimTreeFocus<cr>","Focus"},
+}}, {prefix="<leader>"})
+end}
 						end, config={auto_reload_compiled = true}})
