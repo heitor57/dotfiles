@@ -653,156 +653,199 @@ use {
 								command = '/usr/bin/lldb-vscode',
 								name = "lldb"
 							  }
-							  dap.configurations.cpp = {
-								{
-								  name = "Launch",
-								  type = "lldb",
-								  request = "launch",
-								  program = function()
-									return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-								  end,
-								  cwd = '${workspaceFolder}',
-								  stopOnEntry = false,
-								  args = {'./data/entrada.txt' ,'./data/entrada_out.txt'},
-								  --args = {},
-								  runInTerminal = false,
-								},
+							  dap.adapters.gdb = {
+								type = 'executable',
+								command = '/usr/bin/gdb',
+								name = "gdb"
 							  }
-							  dap.configurations.c = dap.configurations.cpp
-							end}
-							use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-							--use {'neoclide/coc.nvim', branch='release',config=function ()
-							  --vim.cmd('source ~/.config/nvim/cocnvim.vim')
-							  --end}
-							  --
-							  require("dapui").setup()
-							  local wk = require("which-key")
-							  wk.register({d=
-							  {name='DAP',
-							  c={":lua require'dap'.continue()<CR>","Continue"},
-							  s={":lua require'dap'.step_over()<CR>","Step over"},
-							  i={":lua require'dap'.step_into()<CR>","Step into"},
-							  o={":lua require'dap'.step_out()<CR>","Step out"},
-							  b={":lua require'dap'.toggle_breakpoint()<CR>","Toggle Breakpoint"},
-							  n={":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>","Set condition Breakpoint"},
-							  m={":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>","log point Breakpoint"},
-							  r={":lua require'dap'.repl.open()<CR>","Relp open"},
-							  l={":lua require'dap'.run_last()<CR>","run last"},
-							  q={':lua require("dap").terminate()<cr>',"Terminate"},
-							  u={name="DAP UI",
-							  o={':lua require("dapui").open()<cr>',"Open"},
-							  c={':lua require("dapui").close()<cr>',"Close"},
-							  t={':lua require("dapui").toggle()<cr>',"Toggle"},
-							  --s={':lua require("dapui").setup()<cr>',"Setup"},
+								dap.adapters.cppdbg = {
+									type = 'executable',
+									command = '/home/heitor/Documents/Projects/cpptools/extension/debugAdapters/bin/OpenDebugAD7',
+								}
+								dap.configurations.cpp = {
+									--{
+										--name = "Launch",
+										--type = "cppdbg",
+										--request = "launch",
+										--program = function()
+											--return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+										--end,
+										--cwd = '${workspaceFolder}',
+										--stopOnEntry = false,
+										--args = {},
+
+										----args = {'<','${workspaceFolder}/data/in/example.txt'},
+										----args = {},
+										----
+										--runInTerminal = false,
+										----setupCommands= {
+											----{
+												----text= "settings set target.input-path ./data/in/input.txt"
+											----}
+										----},
+									--},
+									{
+											name = "Launch file",
+											type = "cppdbg",
+											request = "launch",
+											program = function()
+													return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+											end,
+											cwd = '${workspaceFolder}',
+											stopOnEntry = true,
+											args = {'<','${workspaceFolder}/data/in/example.txt'},
+									},
+									{
+											name = 'Attach to gdbserver :1234',
+											type = 'cppdbg',
+											request = 'launch',
+											MIMode = 'gdb',
+											miDebuggerServerAddress = 'localhost:1234',
+											miDebuggerPath = '/usr/bin/gdb',
+											cwd = '${workspaceFolder}',
+											program = function()
+													return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+											end,
+									},
 							}
-						  }}, {prefix="<leader>"})
-						  use {"akinsho/toggleterm.nvim",config=function ()
-							require("toggleterm").setup{}
-						  end}
-						  use{'rmagatti/auto-session'}
-						  use {'kkoomen/vim-doge',config=function ()
-							vim.cmd([[
-							let g:doge_mapping='<Leader>m'
-							]])
-						  end}
-						  use {'tpope/vim-scriptease'}
-use {'bluz71/vim-moonfly-colors',config=function ()
-	vim.cmd [[colorscheme moonfly]]
-	require('lualine').setup({options = {theme = 'moonfly'}})
-	vim.g.moonflyCursorColor = 1
-	vim.cmd([[
-hi Normal guibg=NONE ctermbg=NONE
-	]])
-end}
+							dap.configurations.c = dap.configurations.cpp
+					end}
+					use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+					--use {'neoclide/coc.nvim', branch='release',config=function ()
+							--vim.cmd('source ~/.config/nvim/cocnvim.vim')
+							--end}
+							--
+							require("dapui").setup()
+							local wk = require("which-key")
+							wk.register({d=
+							{name='DAP',
+							c={":lua require'dap'.continue()<CR>","Continue"},
+							s={":lua require'dap'.step_over()<CR>","Step over"},
+							i={":lua require'dap'.step_into()<CR>","Step into"},
+							o={":lua require'dap'.step_out()<CR>","Step out"},
+							b={":lua require'dap'.toggle_breakpoint()<CR>","Toggle Breakpoint"},
+							n={":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>","Set condition Breakpoint"},
+							m={":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>","log point Breakpoint"},
+							r={":lua require'dap'.repl.open()<CR>","Relp open"},
+							l={":lua require'dap'.run_last()<CR>","run last"},
+							q={':lua require("dap").terminate()<cr>',"Terminate"},
+							u={name="DAP UI",
+							o={':lua require("dapui").open()<cr>',"Open"},
+							c={':lua require("dapui").close()<cr>',"Close"},
+							t={':lua require("dapui").toggle()<cr>',"Toggle"},
+							--s={':lua require("dapui").setup()<cr>',"Setup"},
+					}
+			}}, {prefix="<leader>"})
+			use {"akinsho/toggleterm.nvim",config=function ()
+					require("toggleterm").setup{}
+			end}
+			use{'rmagatti/auto-session'}
+			use {'kkoomen/vim-doge',config=function ()
+					vim.cmd([[
+					let g:doge_mapping='<Leader>m'
+					]])
+			end}
+			use {'tpope/vim-scriptease'}
+			use {'bluz71/vim-moonfly-colors',config=function ()
+					vim.cmd [[colorscheme moonfly]]
+					require('lualine').setup({options = {theme = 'moonfly'}})
+					vim.g.moonflyCursorColor = 1
+					vim.cmd([[
+					hi Normal guibg=NONE ctermbg=NONE
+					]])
+			end}
 
-use{'xavierchow/vim-swagger-preview',config=function ()
-		local wk = require("which-key")
-		wk.register({a=
-		{
-		s={"<Plug>GenerateDiagram ","Swagger preview"},
-	}}, {prefix="<leader>"})
-end}
-use {
-  "folke/todo-comments.nvim",
-  requires = "nvim-lua/plenary.nvim",
-  config = function()
-    require("todo-comments").setup {}
-  end
-}
-use{'akinsho/bufferline.nvim',config=function ()
-  vim.opt.termguicolors = true
-  require("bufferline").setup{}
-end}
+			use{'xavierchow/vim-swagger-preview',config=function ()
+					local wk = require("which-key")
+					wk.register({a=
+					{
+							s={"<Plug>GenerateDiagram ","Swagger preview"},
+					}}, {prefix="<leader>"})
+			end}
+			use {
+					"folke/todo-comments.nvim",
+					requires = "nvim-lua/plenary.nvim",
+					config = function()
+							require("todo-comments").setup {}
+					end
+			}
+			use{'akinsho/bufferline.nvim',config=function ()
+					vim.opt.termguicolors = true
+					require("bufferline").setup{}
+			end}
 
---use{'code-biscuits/nvim-biscuits',requires="nvim-treesitter/nvim-treesitter",config=function ()
-  --require('nvim-biscuits').setup({
-	--default_config = {
-	  --max_length = 12,
-	  --min_distance = 5,
-	  --prefix_string = "  "
-	--},
-	--language_config = {
-	  --python = {
-		--disabled = true
-	  --}
-	--}
-  --})
---end}
---use{'rcarriga/nvim-notify',config=function ()
-  --require("notify").setup({
-	---- Animation style (see below for details)
-	--stages = "fade_in_slide_out",
+			--use{'code-biscuits/nvim-biscuits',requires="nvim-treesitter/nvim-treesitter",config=function ()
+					--require('nvim-biscuits').setup({
+							--default_config = {
+									--max_length = 12,
+									--min_distance = 5,
+									--prefix_string = "  "
+									--},
+									--language_config = {
+											--python = {
+													--disabled = true
+													--}
+													--}
+													--})
+													--end}
+													--use{'rcarriga/nvim-notify',config=function ()
+															--require("notify").setup({
+																	---- Animation style (see below for details)
+																	--stages = "fade_in_slide_out",
 
-	---- Function called when a new window is opened, use for changing win settings/config
-	--on_open = nil,
+																	---- Function called when a new window is opened, use for changing win settings/config
+																	--on_open = nil,
 
-	---- Render function for notifications. See notify-render()
-	--render = "default",
+																	---- Render function for notifications. See notify-render()
+																	--render = "default",
 
-	---- Default timeout for notifications
-	--timeout = 5000,
+																	---- Default timeout for notifications
+																	--timeout = 5000,
 
-	---- For stages that change opacity this is treated as the highlight behind the window
-	---- Set this to either a highlight group or an RGB hex value e.g. "#000000"
-	--background_colour = "#000000",
+																	---- For stages that change opacity this is treated as the highlight behind the window
+																	---- Set this to either a highlight group or an RGB hex value e.g. "#000000"
+																	--background_colour = "#000000",
 
-	---- Minimum width for notification windows
-	--minimum_width = 50,
+																	---- Minimum width for notification windows
+																	--minimum_width = 50,
 
-	---- Icons for the different levels
-	--icons = {
-		--ERROR = "",
-		--WARN = "",
-		--INFO = "",
-		--DEBUG = "",
-		--TRACE = "✎",
-	--},
-  --})
+																	---- Icons for the different levels
+																	--icons = {
+																			--ERROR = "",
+																			--WARN = "",
+																			--INFO = "",
+																			--DEBUG = "",
+																			--TRACE = "✎",
+																			--},
+																			--})
 
---end}
+																			--end}
 
-use{'WaylonWalker/Telegraph.nvim'}
-use{'jiangmiao/auto-pairs'}
-use{'ThePrimeagen/harpoon', requires='nvim-lua/plenary.nvim',config=function ()
-  require("harpoon").setup({
-    global_settings = {
-        save_on_toggle = false,
-        save_on_change = true,
-        enter_on_sendcmd = false,
-        excluded_filetypes = { "harpoon" }
-    },
-  })
-  local wk = require("which-key")
-  wk.register({f=
-  {name='Harpoon',
-  a={':lua require("harpoon.mark").add_file()<cr>',"Add file"},
-  m={':lua require("harpoon.ui").toggle_quick_menu()<cr>',"Quick Menu"},
-  q={':lua require("harpoon.ui").nav_file(1)<cr>',"Go to file 1"},
-  w={':lua require("harpoon.ui").nav_file(2)<cr>',"Go to file 2"},
-  e={':lua require("harpoon.ui").nav_file(3)<cr>',"Go to file 3"},
-  r={':lua require("harpoon.ui").nav_file(4)<cr>',"Go to file 4"},
-  t={':lua require("harpoon.ui").nav_file(5)<cr>',"Go to file 5"},
-  --n={"<cmd>NvimTreeFocus<cr>","Focus"},
-}}, {prefix="<leader>"})
-end}
-						end, config={auto_reload_compiled = true}})
+																			use{'WaylonWalker/Telegraph.nvim'}
+																			use{'jiangmiao/auto-pairs'}
+																			use{'ThePrimeagen/harpoon', requires='nvim-lua/plenary.nvim',config=function ()
+																					require("harpoon").setup({
+																							global_settings = {
+																									save_on_toggle = false,
+																									save_on_change = true,
+																									enter_on_sendcmd = false,
+																									excluded_filetypes = { "harpoon" }
+																							},
+																					})
+																					local wk = require("which-key")
+																					wk.register({f=
+																					{name='Harpoon',
+																					a={':lua require("harpoon.mark").add_file()<cr>',"Add file"},
+																					m={':lua require("harpoon.ui").toggle_quick_menu()<cr>',"Quick Menu"},
+																					q={':lua require("harpoon.ui").nav_file(1)<cr>',"Go to file 1"},
+																					w={':lua require("harpoon.ui").nav_file(2)<cr>',"Go to file 2"},
+																					e={':lua require("harpoon.ui").nav_file(3)<cr>',"Go to file 3"},
+																					r={':lua require("harpoon.ui").nav_file(4)<cr>',"Go to file 4"},
+																					t={':lua require("harpoon.ui").nav_file(5)<cr>',"Go to file 5"},
+																					--n={"<cmd>NvimTreeFocus<cr>","Focus"},
+																			}}, {prefix="<leader>"})
+																	end}
+
+																	use {"iamcco/markdown-preview.nvim",config=function ()
+																	end}
+															end, config={auto_reload_compiled = true}})
