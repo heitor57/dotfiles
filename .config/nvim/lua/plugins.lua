@@ -26,7 +26,7 @@ return require('packer').startup({function()
 end}
 use {'lervag/vimtex',config=function ()
 	vim.cmd([[
-	let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
+	let g:vimtex_compiler_latexmk_engines = { '_': '-pdflatex -shell-escape'}
 	]])
 end}
 use {
@@ -585,7 +585,9 @@ use {
 						requires = { 'nvim-lua/plenary.nvim' ,'nvim-telescope/telescope-project.nvim'},
 						config=function ()
 						  require'telescope'.load_extension('project')
-						  require("telescope").setup({defaults = {mappings = {
+						  require("telescope").setup({defaults = {
+				path_display={truncate=3},
+									mappings = {
 							i = {
 							  ["<C-h>"] = "which_key"
 							}}
@@ -597,12 +599,16 @@ use {
 							h={'<cmd>Telescope command_history<cr>','Command history'},
 							p={":lua require'telescope'.extensions.project.project{}<CR>",'Projects'},
 							b={'<cmd>Telescope buffers<cr>','Buffers'}}}, {prefix="<leader>"})
-
 							vim.cmd[[
 							noremap <c-p> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
+							noremap <c-ç> <cmd>Telescope oldfiles<cr>
 							]]
 						  end
 						}
+use{'nvim-telescope/telescope-bibtex.nvim',config=function ()
+require"telescope".load_extension("bibtex")
+end}
+
 						use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate',config=function ()
 						  require'nvim-treesitter.configs'.setup {
 							ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -741,6 +747,7 @@ use {
 			end}
 			use{'rmagatti/auto-session'}
 			use {'kkoomen/vim-doge',config=function ()
+			    -- Doge - docstring for any language
 					vim.cmd([[
 					let g:doge_mapping='<Leader>m'
 					]])
@@ -848,4 +855,18 @@ use {
 
 																	use {"iamcco/markdown-preview.nvim",config=function ()
 																	end}
-															end, config={auto_reload_compiled = true}})
+			use{'windwp/nvim-ts-autotag',config=function ()
+			    require('nvim-ts-autotag').setup()
+			end}
+
+			--use{'svermeulen/vim-subversive',config=function ()
+			    --vim.cmd([[
+
+--nmap s <plug>(SubversiveSubstitute)
+--nmap ss <plug>(SubversiveSubstituteLine)
+--nmap S <plug>(SubversiveSubstituteToEndOfLine)
+
+			    --]])
+				
+			--end}
+																    end, config={auto_reload_compiled = true}})
