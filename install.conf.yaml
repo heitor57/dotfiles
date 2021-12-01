@@ -35,6 +35,9 @@
     ~/.condarc:
       path: .condarc
       force: true
+    ~/.npmrc:
+      path: .npmrc
+      force: true
     ~/.goneovim:
       glob: true
       path: .goneovim
