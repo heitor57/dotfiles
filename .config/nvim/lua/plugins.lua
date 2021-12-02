@@ -170,6 +170,7 @@ end
 			f={"<cmd>lua vim.lsp.buf.formatting()<CR>","Format"},
 		}}, {prefix="<leader>"})
 		buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+		buf_set_keymap('n', 'g?', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
 		buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
 		buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 		if client.resolved_capabilities.document_highlight then
@@ -601,7 +602,7 @@ use {
 							b={'<cmd>Telescope buffers<cr>','Buffers'}}}, {prefix="<leader>"})
 							vim.cmd[[
 							noremap <c-p> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
-							noremap <c-ç> <cmd>Telescope oldfiles<cr>
+							noremap <c-m> <cmd>Telescope oldfiles<cr>
 							]]
 						  end
 						}
