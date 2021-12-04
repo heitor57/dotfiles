@@ -251,13 +251,15 @@ end
 	end)
 
 	local function lspSymbol(name, icon)
-		vim.fn.sign_define("LspDiagnosticsSign" .. name, { text = icon, numhl = "LspDiagnosticsDefaul" .. name })
+		vim.fn.sign_define("LspDiagnosticsSign" .. name, { text = icon, numhl = "",texthl = "LspDiagnosticsSign" .. name })
+		--vim.fn.sign_define("LspDiagnosticsSign" .. name, { text = icon, numhl = "LspDiagnosticsDefault" .. name })
 	end
 
 	lspSymbol("Error", "")
 	lspSymbol("Information", "")
 	lspSymbol("Hint", "")
 	lspSymbol("Warning", "")
+	--lspSymbol("Warning", "X")
 
 	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 		virtual_text = {
@@ -541,7 +543,7 @@ use {
 						require'lualine'.setup {
 						  options = {
 							icons_enabled = true,
-							theme = 'horizon',
+							theme = 'ayu',
 							component_separators = {'', ''},
 							section_separators = {'', ''},
 							disabled_filetypes = {}
@@ -754,14 +756,14 @@ end}
 					]])
 			end}
 			use {'tpope/vim-scriptease'}
-			use {'bluz71/vim-moonfly-colors',config=function ()
-					vim.cmd [[colorscheme moonfly]]
-					require('lualine').setup({options = {theme = 'moonfly'}})
-					vim.g.moonflyCursorColor = 1
-					vim.cmd([[
-					hi Normal guibg=NONE ctermbg=NONE
-					]])
-			end}
+			--use {'bluz71/vim-moonfly-colors',config=function ()
+					--vim.cmd [[colorscheme moonfly]]
+					--require('lualine').setup({options = {theme = 'moonfly'}})
+					--vim.g.moonflyCursorColor = 1
+					--vim.cmd([[
+					--hi Normal guibg=NONE ctermbg=NONE
+					--]])
+			--end}
 
 			use{'xavierchow/vim-swagger-preview',config=function ()
 					local wk = require("which-key")
@@ -870,4 +872,45 @@ end}
 			    --]])
 				
 			--end}
-																    end, config={auto_reload_compiled = true}})
+
+
+use {'christianchiarulli/nvcode-color-schemes.vim',requires='nvim-treesitter/nvim-treesitter',config=function ()
+
+	
+vim.cmd([[
+let g:nvcode_termcolors=256
+
+syntax on
+colorscheme snazzy " Or whatever colorscheme you make
+
+
+" checks if your terminal has 24-bit color support
+if (has("termguicolors"))
+    set termguicolors
+    hi LineNr ctermbg=NONE guibg=NONE
+endif
+]])
+end}
+
+use{'onsails/lspkind-nvim',config=function ()
+		local lspkind = require('lspkind')
+		local cmp = require'cmp'
+		cmp.setup {
+				formatting = {
+						format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+				}
+		}
+end}
+
+use {
+		'ojroques/nvim-lspfuzzy',
+		requires = {
+				{'junegunn/fzf'},
+				{'junegunn/fzf.vim'},  -- to enable preview (optional)
+		},config=function ()
+				require('lspfuzzy').setup {}
+
+		end
+}
+
+																		end, config={auto_reload_compiled = true}})
