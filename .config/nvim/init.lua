@@ -26,9 +26,9 @@ set tabstop=2
 set number
 set hlsearch
 set incsearch
-set spelllang=en
+set spelllang=pt_br
 set confirm
-"nnoremap <leader>ça :setlocal spell!<cr>
+nnoremap <leader>ça :setlocal spell!<cr>
 cnoremap <C-v> <C-r>+
 nnoremap <nowait> <c-s> <cmd>w<cr>
 inoremap <nowait> <c-s> <cmd>w<cr>

@@ -629,14 +629,14 @@ return require("packer").startup(
 					  \ }
 					  ]]
                     )
-                    vim.cmd(
-                        [[
-                    augroup fmt
-                        autocmd!
-                        autocmd BufWritePre * undojoin | Neoformat
-                    augroup END
-                    ]]
-                    )
+                    --vim.cmd(
+                        --[[
+                    --augroup fmt
+                        --autocmd!
+                        --autocmd BufWritePre * undojoin | Neoformat
+                    --augroup END
+                    --]]
+                    --)
                 end
             }
             use {"tpope/vim-unimpaired"}
@@ -1129,6 +1129,8 @@ if (has("termguicolors"))
     set termguicolors
     hi LineNr ctermbg=NONE guibg=NONE
 endif
+
+hi Normal guibg=NONE ctermbg=NONE
 ]]
                     )
                 end
@@ -1165,6 +1167,7 @@ endif
                     require("trouble").setup {}
                 end
             }
+            use{'mateusbraga/vim-spell-pt-br'}
         end,
         config = {auto_reload_compiled = true}
     }
