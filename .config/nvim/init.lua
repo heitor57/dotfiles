@@ -44,6 +44,13 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 "nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
 "nnoremap <leader>ev :e $MYVIMRC<cr>
 "nnoremap <leader>sv :source $MYVIMRC<cr>
+
+function! LookUpDef()
+    silent !clear
+    execute "!xdg-open https://www.wordnik.com/words/" . expand('<cWORD>')
+endfunction
+command! -nargs=* Dic call LookUpDef(<f-args>)
+
 vnoremap > >gv
 vnoremap < <gv
 "hi Normal guibg=NONE ctermbg=NONE

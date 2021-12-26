@@ -11,7 +11,7 @@ return require("packer").startup(
                 "voldikss/vim-translator",
                 config = function()
                     vim.cmd([[
-		let g:translator_target_lang='pt'
+		let g:translator_target_lang='en'
 		]])
                 end
             }
@@ -33,6 +33,14 @@ return require("packer").startup(
                         },
                         {prefix = "<leader>"}
                     )
+                wk.register(
+                    {
+                        j = {
+                            "<cmd>Dic<CR>", "Dict Word",silent = true
+                        }
+                    },
+                    {prefix = "<leader>"}
+                )
                 end
             }
             use {

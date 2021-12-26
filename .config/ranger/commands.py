@@ -130,3 +130,19 @@ class compress(Command):
 
         extension = ['.zip', '.tar.gz', '.rar', '.7z']
         return ['compress ' + os.path.basename(self.fm.thisdir.path) + ext for ext in extension]
+
+
+class fzf_fasd_mru(Command):
+    def execute(self):
+        import subprocess
+        command="cat ~/.fasd | sort -t'|' -k3 | cut -d'|' -f1 | fzf --tac --no-sort"
+        fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
+        stdout, stderr = fzf.communicate()
+        if fzf.returncode == 0:
+            print(stdout.decode('utf-8').rstrip('\n'))
+            fzf_file = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
+            if os.path.isdir(fzf_file):
+                self.fm.cd(fzf_file)
+            else:
+                self.fm.select_file(fzf_file)
+
