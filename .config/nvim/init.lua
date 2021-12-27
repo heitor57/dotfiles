@@ -19,7 +19,7 @@ let mapleader=" "
 set timeoutlen=500
 set mouse=a
 let maplocalleader = "\\"
-set termguicolors     " enable true colors support
+""set termguicolors     " enable true colors support
 set clipboard=unnamedplus
 "set cursorline
 set tabstop=2

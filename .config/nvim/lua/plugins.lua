@@ -696,7 +696,7 @@ return require("packer").startup(
                     )
                 end
             }
-
+            -- lualine is the below bar
             use {
                 "hoob3rt/lualine.nvim",
                 requires = {
@@ -708,7 +708,7 @@ return require("packer").startup(
                     require "lualine".setup {
                         options = {
                             icons_enabled = true,
-                            theme = "ayu",
+                            theme = "pywal",
                             component_separators = {"", ""},
                             section_separators = {"", ""},
                             disabled_filetypes = {}
@@ -1007,13 +1007,13 @@ return require("packer").startup(
                     require("todo-comments").setup {}
                 end
             }
-            use {
-                "akinsho/bufferline.nvim",
-                config = function()
-                    vim.opt.termguicolors = true
-                    require("bufferline").setup {}
-                end
-            }
+            --use {
+                --"akinsho/bufferline.nvim",
+                --config = function()
+                    ----vim.opt.termguicolors = true
+                    --require("bufferline").setup {}
+                --end
+            --}
 
             --use{'code-biscuits/nvim-biscuits',requires="nvim-treesitter/nvim-treesitter",config=function ()
             --require('nvim-biscuits').setup({
@@ -1121,29 +1121,29 @@ return require("packer").startup(
 
             --end}
 
-            use {
-                "christianchiarulli/nvcode-color-schemes.vim",
-                requires = "nvim-treesitter/nvim-treesitter",
-                config = function()
-                    vim.cmd(
-                        [[
-let g:nvcode_termcolors=256
+            --use {
+                --"christianchiarulli/nvcode-color-schemes.vim",
+                --requires = "nvim-treesitter/nvim-treesitter",
+                --config = function()
+                    --vim.cmd(
+                        --[[
+--let g:nvcode_termcolors=256
 
-syntax on
-colorscheme snazzy " Or whatever colorscheme you make
+--syntax on
+--colorscheme snazzy " Or whatever colorscheme you make
 
 
-" checks if your terminal has 24-bit color support
-if (has("termguicolors"))
-    set termguicolors
-    hi LineNr ctermbg=NONE guibg=NONE
-endif
+--" checks if your terminal has 24-bit color support
+--if (has("termguicolors"))
+    --set termguicolors
+    --hi LineNr ctermbg=NONE guibg=NONE
+--endif
 
-hi Normal guibg=NONE ctermbg=NONE
-]]
-                    )
-                end
-            }
+--hi Normal guibg=NONE ctermbg=NONE
+--]]
+                    --)
+                --end
+            --}
 
             use {
                 "onsails/lspkind-nvim",
@@ -1187,6 +1187,12 @@ let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
                         \ 'fold': { 'enable': 1 } }
 let g:polyglot_disabled = ['markdown'] 
 let g:mkdx#settings = { 'map': { 'prefix': '\\' } }
+                ]])
+            end}
+
+            use{'dylanaraps/wal.vim',config=function()
+                vim.cmd([[
+colorscheme wal
                 ]])
             end}
         end,
