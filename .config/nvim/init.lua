@@ -47,7 +47,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 function! LookUpDef()
     silent !clear
-    execute "!xdg-open https://www.wordnik.com/words/" . expand('<cWORD>')
+    execute "silent !xdg-open https://www.wordnik.com/words/" . expand('<cWORD>')
 endfunction
 command! -nargs=* Dic call LookUpDef(<f-args>)
 

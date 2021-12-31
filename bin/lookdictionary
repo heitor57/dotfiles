@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+#echo $0
+#echo $1
+a=$(cambrinary -w ${*:1})
+echo "$a"
+echo "$a" | sed 's/\x1B\[[0-9;]\{1,\}[A-Za-z]//g' | grep "  - " | cut -b 5- | xclip -selection c
