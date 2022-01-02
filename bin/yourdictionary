@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 import argparse
+from typing import Any
 import urllib.request
 from bs4 import BeautifulSoup
+from bs4.element import ResultSet
 
 # soup = BeautifulSoup("<html>a web page</html>", 'html.parser')
 parser= argparse.ArgumentParser()
@@ -28,6 +30,14 @@ result =urllib.request.urlopen(target_url)
 contents =  result.read()
 soup = BeautifulSoup(contents, 'html.parser')
 
-a=soup.find_all(class_='sentence-item__text',limit=args.n)
+a:ResultSet[Any]
+if args.t == 'sentence':
+    a=soup.find_all(class_='sentence-item__text',limit=args.n)
+elif args.t == 'meaning':
+    a=soup.find_all(class_='compiled-defintion',limit=args.n)
+else:
+    a=soup.find_all(class_='sentence-item__text',limit=args.n)
+    raise ValueError("There is no "+args.t+" type available")
+
 for i in a:
     print(i.get_text())
