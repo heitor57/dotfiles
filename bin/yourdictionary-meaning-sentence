@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+echo "======= Meaning ======="
+yourdictionary -t meaning "$@";
+echo "======= Sentence ======="
+yourdictionary -t sentence "$@";
