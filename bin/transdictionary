@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+res_raw=""
+res=""
+for w in ${*:1}; do
+        raw=$(trans :en $w)
+        res_raw+="$raw"'\n========================\n'
+        res+=$(echo "$raw" | trans-filter-examples)'\n'
+done
+echo -e "$res" | sed 's/\x1B\[[0-9;]\{1,\}[A-Za-z]//g' | xclip -selection c
+echo -e "$res_raw" | head -n -2
+#echo "$(echo -e "$res" | sed 's/\x1B\[[0-9;]\{1,\}[A-Za-z]//g')"
