@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+sqlite3 ~/.config/vivaldi/Default/History "select datetime(last_visit_time/1000000-11644473600,'unixepoch'),url from  urls order by last_visit_time asc" |  filter-words-helper | uniq | xargs -n1 yourdictionary -n 5 -t sentence

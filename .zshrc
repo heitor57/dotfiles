@@ -24,6 +24,7 @@ alias help=run-help
 alias rh=run-help
 alias mab='cd ~/rl-rss/src/app/'
 alias e='$EDITOR'
+alias en='nvim --noplugin'
 function mm(){
 	man $(apropos --long . | dmenu -i -l 30 | awk '{print $2, $1}' | tr -d '()')
 }
@@ -46,7 +47,7 @@ setopt histignorealldups
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
-zstyle ':completion:*' menu
+#zstyle ':completion:*' menu
 #zstyle ':completion:incremental:*' completer _complete _ignored
 #zstyle :incremental stop-keys $'[\e\C-b\C-f\C-n\C-p\C-u-\C-x]'
 autoload -Uz compinit
@@ -98,7 +99,8 @@ autoload -Uz run-help
 #}
 source $DOTFILES_BIN/remote_utils
 #alias ev="v $DOTFILES/.config/nvim/init.vim"
-zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+#zstyle ':completion:*' menu select matcher-list 'm:{a-z}={A-Z}'
 
 
 bindkey '^[[A' history-substring-search-up
