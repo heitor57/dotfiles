@@ -4,4 +4,4 @@ if [ -p /dev/stdin ]; then
 else
 				exit
 fi
-cat /dev/stdin | awk '{print $1 ":" $2}' | awk -F"|" -vDate=`date -u -d'now-23 hours' +%Y-%m-%d":"%H:%M:%S` '$1 > Date {print $0}' | grep "https://dictionary.cambridge.org/pt/dicionario/ingles" | grep -oP "ingles/\K\w+"
+cat /dev/stdin | awk '{print $1 ":" $2}' | awk -F"|" -vDate=`date -u -d'now-21 hours' +%Y-%m-%d":"%H:%M:%S` '$1 > Date {print $0}' | grep "https://dictionary.cambridge.org/pt/dicionario/ingles" | grep -oP "ingles/\K\w+"
