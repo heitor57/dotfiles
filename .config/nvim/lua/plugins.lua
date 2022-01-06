@@ -1190,11 +1190,16 @@ let g:mkdx#settings = { 'map': { 'prefix': '\\' } }
                 ]])
             end}
 
-            use{'dylanaraps/wal.vim',config=function()
-                vim.cmd([[
-colorscheme wal
-                ]])
-            end}
+            --use{'dylanaraps/wal.vim',config=function()
+                --vim.cmd([[
+--colorscheme wal
+                --]])
+            --end}
+            --use{'deviantfero/wpgtk.vim',config=function()
+                --vim.cmd([[
+--colorscheme wpgtk
+                --]])
+            --end}
         end,
         config = {auto_reload_compiled = true}
     }
