@@ -135,7 +135,7 @@ class compress(Command):
 class fzf_fasd_mru(Command):
     def execute(self):
         import subprocess
-        command="cat ~/.fasd | sort -t'|' -k3 | cut -d'|' -f1 | fzf --tac --no-sort"
+        command="cat ~/.fasd | sort -t'|' -k3 | cut -d'|' -f1 | fzf -e --tac --no-sort"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:

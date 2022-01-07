@@ -708,7 +708,7 @@ return require("packer").startup(
                     require "lualine".setup {
                         options = {
                             icons_enabled = true,
-                            theme = "pywal",
+                            theme = "gruvbox",
                             component_separators = {"", ""},
                             section_separators = {"", ""},
                             disabled_filetypes = {}
@@ -1200,6 +1200,11 @@ let g:mkdx#settings = { 'map': { 'prefix': '\\' } }
 --colorscheme wpgtk
                 --]])
             --end}
+            --
+            use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"},config=function()
+                vim.o.background = "dark" -- or "light" for light mode
+                vim.cmd([[colorscheme gruvbox]])
+            end}
         end,
         config = {auto_reload_compiled = true}
     }
