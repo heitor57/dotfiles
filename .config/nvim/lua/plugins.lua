@@ -48,7 +48,7 @@ return require("packer").startup(
                 config = function()
                     vim.cmd([[
 	let g:vimtex_compiler_latexmk_engines = { '_': '-pdflatex -shell-escape'}
-	""let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
+	let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
 	]])
                 end
             }
@@ -1201,11 +1201,25 @@ let g:mkdx#settings = { 'map': { 'prefix': '\\' } }
                 --]])
             --end}
             --
-            use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"},config=function()
-                vim.o.background = "dark" -- or "light" for light mode
-                vim.cmd([[colorscheme gruvbox]])
+            --use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"},config=function()
+                --vim.o.background = "dark" -- or "light" for light mode
+                --vim.cmd([[colorscheme gruvbox]])
+            --end}
+            use{'sheerun/vim-polyglot',setup=function ()
+                vim.cmd([[let g:polyglot_disabled = ['markdown'] ]])
             end}
+            use{'sainnhe/gruvbox-material',config=function()
+            vim.cmd([[
+                if has('termguicolors')
+                    set termguicolors
+                endif
+                set background=dark
+                let g:gruvbox_material_background = 'soft'
+                colorscheme gruvbox-material
+                ]])
+            end}
+
         end,
         config = {auto_reload_compiled = true}
     }
-)
+    )

@@ -2,6 +2,7 @@ font:
   normal:
     family: JetBrainsMono Nerd Font Mono
 # Colors (Gruvbox Material Dark Medium)
+background_opacity: 0.98
 colors:
   primary:
     background: '0x282828'
