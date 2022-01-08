@@ -1,0 +1,18 @@
+#!/bin/bash
+
+a=$(ps -q $$ -o comm=)
+b=$(pgrep "$a" -c)
+if [ $b = 1 ]
+then
+	last_line="3219321371895165891"
+	while IFS= read -r line; do
+		dn=$(dirname "$line")
+		#echo $line $dn
+		if [ "$last_line" != "$dn" ]
+		then
+			fasd --add "$dn"
+			#echo "$dn"
+		fi
+		last_line=$dn
+	done < $NNN_FIFO
+fi

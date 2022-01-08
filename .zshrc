@@ -13,6 +13,7 @@ fi
 #autoload -U colors && colors
 #PS1="%B%{$fg[blue]%}{-=%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%M %{$fg[magenta]%}%~%{$fg[blue]%}-=}%{$reset_color%}$%b "
 
+source ~/.zprofile
 alias l="ls"
 alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
 alias ez="v $DOTFILES/.zshrc"
@@ -120,9 +121,7 @@ PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
-export NNN_SSHFS="sshfs -o follow_symlinks"        # make sshfs follow symlinks on the remote
-export NNN_COLORS="2136"                           # use a different color for each context
-export NNN_TRASH=1
+
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

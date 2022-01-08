@@ -25,3 +25,13 @@ export PATH="$PATH:$DOTFILES_BIN"
 #     kotlinc $1 -include-runtime -d ${1%.*}.jar
 #     java -jar ${1%.*}.jar
 # }
+
+
+export NNN_SSHFS="sshfs -o follow_symlinks"        # make sshfs follow symlinks on the remote
+export NNN_COLORS="2136"                           # use a different color for each context
+#export NNN_SEL='/tmp/.sel'
+export NNN_FIFO='/tmp/nnn.fifo'
+export NNN_TRASH=1
+export NNN_PLUG='a:autojump;z:fzplug;f:finder;o:fzopen;t:fzfasd'
+export NNN_OPENER=$HOME/.config/nnn/plugins/myopener
+export NNN_TMPFILE='/tmp/.lastd'
