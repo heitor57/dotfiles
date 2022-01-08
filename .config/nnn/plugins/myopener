@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+FPATH="$1"
+fasd --add "$FPATH"
+xdg-open "$FPATH"
