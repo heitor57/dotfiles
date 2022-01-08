@@ -708,7 +708,7 @@ return require("packer").startup(
                     require "lualine".setup {
                         options = {
                             icons_enabled = true,
-                            theme = "gruvbox",
+                            theme = "pywal",
                             component_separators = {"", ""},
                             section_separators = {"", ""},
                             disabled_filetypes = {}
@@ -1195,29 +1195,29 @@ let g:mkdx#settings = { 'map': { 'prefix': '\\' } }
 --colorscheme wal
                 --]])
             --end}
-            --use{'deviantfero/wpgtk.vim',config=function()
-                --vim.cmd([[
---colorscheme wpgtk
-                --]])
-            --end}
+            use{'deviantfero/wpgtk.vim',config=function()
+                vim.cmd([[
+colorscheme wpgtkAlt
+                ]])
+            end}
             --
             --use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"},config=function()
                 --vim.o.background = "dark" -- or "light" for light mode
                 --vim.cmd([[colorscheme gruvbox]])
             --end}
-            use{'sheerun/vim-polyglot',setup=function ()
-                vim.cmd([[let g:polyglot_disabled = ['markdown'] ]])
-            end}
-            use{'sainnhe/gruvbox-material',config=function()
-            vim.cmd([[
-                if has('termguicolors')
-                    set termguicolors
-                endif
-                set background=dark
-                let g:gruvbox_material_background = 'soft'
-                colorscheme gruvbox-material
-                ]])
-            end}
+            --use{'sheerun/vim-polyglot',setup=function ()
+                --vim.cmd([[let g:polyglot_disabled = ['markdown'] ]])
+            --end}
+            --use{'sainnhe/gruvbox-material',config=function()
+            --vim.cmd([[
+                --if has('termguicolors')
+                    --set termguicolors
+                --endif
+                --set background=dark
+                --let g:gruvbox_material_background = 'soft'
+                --colorscheme gruvbox-material
+                --]])
+            --end}
 
         end,
         config = {auto_reload_compiled = true}
