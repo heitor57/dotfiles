@@ -1,5 +1,6 @@
 from ranger.api.commands import Command
 import os
+from commands_sshfs import *
 # fzf_fasd - Fasd + Fzf + Ranger (Interactive Style)
 class fzf_fasd(Command):
     """
