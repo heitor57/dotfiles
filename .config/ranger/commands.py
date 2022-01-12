@@ -168,3 +168,16 @@ class dolphin(Command):
             # directory = subprocess.Popen(["dolphin"]+list(arg), close_fds=True)
             raise SystemExit
             # self.fm.execute_command("quit")
+
+
+class zoxide_fzf(Command):
+    def execute(self):
+        import subprocess
+        command="zoxide query --list | fzf -e --no-sort -1 --query \"$query\" | head -1"
+        fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
+        stdout, stderr = fzf.communicate()
+        if fzf.returncode == 0:
+            print(stdout.decode('utf-8').rstrip('\n'))
+            fzf_file = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
+            if os.path.isdir(fzf_file):
+                self.fm.cd(fzf_file)
