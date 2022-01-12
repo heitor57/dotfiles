@@ -146,3 +146,24 @@ class fzf_fasd_mru(Command):
             else:
                 self.fm.select_file(fzf_file)
 
+class dolphin(Command):
+    """
+    :fasd
+
+    Jump to directory using fasd
+    URL: https://github.com/clvv/fasd
+    """
+    def execute(self):
+        import subprocess
+        import os
+        from subprocess import Popen
+        arg = self.rest(1)
+        if arg:
+            devnull = open(os.devnull, 'wb') # Use this in Python < 3.3
+            # Python >= 3.3 has subprocess.DEVNULL
+            Popen(['nohup', 'dolphin',arg], stdout=devnull, stderr=devnull)
+            # p = subprocess.Popen(['/bin/bash',f'dolphin \"{arg}\"'])
+            # os.execv(f"dolphin {arg}")
+            # directory = subprocess.Popen(["dolphin"]+list(arg), close_fds=True)
+            raise SystemExit
+            # self.fm.execute_command("quit")

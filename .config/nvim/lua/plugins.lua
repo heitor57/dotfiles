@@ -1197,7 +1197,7 @@ let g:mkdx#settings = { 'map': { 'prefix': '\\' } }
             --end}
             use{'deviantfero/wpgtk.vim',config=function()
                 vim.cmd([[
-colorscheme wpgtkAlt
+colorscheme wpgtk
                 ]])
             end}
             --
