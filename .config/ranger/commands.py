@@ -181,3 +181,20 @@ class zoxide_fzf(Command):
             fzf_file = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
             if os.path.isdir(fzf_file):
                 self.fm.cd(fzf_file)
+
+
+class git_clone(Command):
+    def execute(self):
+        import subprocess
+        arg = self.rest(1)
+        if arg:
+            command = f'git clone {arg}'
+            self.fm.execute_command(command)
+
+class xdg_switch(Command):
+    def execute(self):
+        import subprocess
+        arg = self.rest(1)
+        if arg:
+            command = f'mimeopen -d {arg}'
+            self.fm.execute_command(command)

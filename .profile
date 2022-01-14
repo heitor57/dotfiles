@@ -4,10 +4,12 @@ export VISUAL="$EDITOR"
 #export BROWSER="firefox"
 #export READER="evince"
 export HISTFILESIZE=1000000
+
 export HISTSIZE=100000
 #SAVEHIST=10000000
 PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
 export PATH="$PATH:$PYTHON_BIN_PATH"
+[ -d /usr/bin/vendor_perl ] && PATH=$PATH:/usr/bin/vendor_perl
 
 export DOTFILES_LIST_OPTION=("$HOME/dotfiles" "$HOME/Documents/Projects/dotfiles")
 for i in "${DOTFILES_LIST_OPTION[@]}"
