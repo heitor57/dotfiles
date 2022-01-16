@@ -1204,10 +1204,10 @@ return require("packer").startup({
                 require('orgmode').setup({
                     org_agenda_files = {'~/Dropbox/Documents/Tasks/'},
                     org_default_notes_file = '~/Dropbox/Documents/Tasks/tasks.org',
-                    org_agenda_span = 'month',
-                    ORG_TODO_KEYWORDS = {
-                        'TODO', 'DOING', '|', 'DONE', 'DELEGATED'
-                    }
+                    org_agenda_span = 'month'
+                    -- org_todo_keywords = {
+                    -- 'TODO', 'DOING', '|', 'DONE', 'DELEGATED'
+                    -- }
                 })
             end
         }
@@ -1257,7 +1257,18 @@ return require("packer").startup({
             "arnamak/stay-centered.nvim",
             config = function() require("stay-centered") end
         }
+        use {
+            'azabiong/vim-highlighter',
+            config = function()
+                vim.cmd([[
+  let HiSet   = 'f<CR>'           " normal, visual
+  let HiErase = 'f<BS>'           " normal, visual
+  let HiClear = 'f<C-L>'          " normal
+  let HiFind  = 'f<Tab>'          " normal, visual
+  ]])
 
+            end
+        }
     end,
     config = {auto_reload_compiled = true}
 })
