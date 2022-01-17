@@ -39,3 +39,18 @@ export NNN_TRASH=1
 export NNN_PLUG='a:autojump;z:fzplug;f:finder;o:fzopen;t:fzfasd'
 export NNN_OPENER=$HOME/.config/nnn/plugins/myopener
 export NNN_TMPFILE='/tmp/.lastd'
+
+
+#alias ev="v $DOTFILES/.config/nvim/init.vim"
+#alias mm=""
+# alias e='emacsclient -c -nw'
+
+alias l="ls"
+alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
+alias ez="v $DOTFILES/.zshrc"
+alias help=run-help
+alias rh=run-help
+alias mab='cd ~/rl-rss/src/app/'
+alias e='$EDITOR'
+alias en='nvim --noplugin'
+alias gi=gitignore

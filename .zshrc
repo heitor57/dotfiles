@@ -14,25 +14,16 @@ fi
 #PS1="%B%{$fg[blue]%}{-=%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%M %{$fg[magenta]%}%~%{$fg[blue]%}-=}%{$reset_color%}$%b "
 
 source ~/.zprofile
-alias l="ls"
-alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
-alias ez="v $DOTFILES/.zshrc"
 lsxhkd(){
 	sxhkd&
 	disown %1	
 }
 (( ${+aliases[run-help]} )) && unalias run-help
-alias help=run-help
-alias rh=run-help
-alias mab='cd ~/rl-rss/src/app/'
-alias e='$EDITOR'
-alias en='nvim --noplugin'
 function mm(){
 	man $(apropos --long . | dmenu -i -l 30 | awk '{print $2, $1}' | tr -d '()')
 }
 
 function gitignore() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;}
-alias gi=gitignore
 # Lines configured by zsh-newuser-install
 bindkey -e
 bindkey "^[[1;5C" forward-word
@@ -67,7 +58,6 @@ antibody bundle < ~/.zsh_plugins.txt
 
 #setopt autocd autopushd
 
-# alias e='emacsclient -c -nw'
 
 #eval "$(/home/$USER/miniconda3/bin/conda shell.zsh hook)"
 #[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
@@ -88,7 +78,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 autoload -Uz run-help
-#alias mm=""
 
 #function preexec() {
   #timer=${timer:-$SECONDS}
@@ -102,7 +91,6 @@ autoload -Uz run-help
   #fi
 #}
 source $DOTFILES_BIN/remote_utils
-#alias ev="v $DOTFILES/.config/nvim/init.vim"
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 #zstyle ':completion:*' menu select matcher-list 'm:{a-z}={A-Z}'
 
