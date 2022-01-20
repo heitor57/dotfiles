@@ -38,8 +38,8 @@ return require("packer").startup({
             "lervag/vimtex",
             config = function()
                 vim.cmd([[
-	let g:vimtex_compiler_latexmk_engines = { '_': '-pdflatex -shell-escape'}
 	let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
+	let g:vimtex_compiler_latexmk_engines = { '_': '-pdflatex -shell-escape'}
 	]])
             end
         }
@@ -801,12 +801,15 @@ return require("packer").startup({
                 }
             end
         }
-        use {"neomake/neomake"}
+        use {
+            "neomake/neomake",
+            config = function()
+                local wk = require("which-key")
+                wk.register({a = {m = {":Neomake!<cr>", "Neomake!"}}},
+                            {prefix = "<leader>"})
+            end
+        }
 
-        -- use {'kristijanhusak/orgmode.nvim', config = function()
-        -- require('orgmode').setup{}
-        -- end
-        -- }
         use {
             "glepnir/dashboard-nvim",
             config = function()

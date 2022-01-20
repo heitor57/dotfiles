@@ -9,6 +9,7 @@ function reload_config()
   --luafile $MYVIMRC
   require('plenary.reload').reload_module('plugins', true)
   require('plenary.reload').reload_module('init', true)
+  vim.cmd([[PackerInstall]])
   vim.cmd([[luafile $MYVIMRC]])
   vim.cmd[[PackerCompile]]
   --vim.cmd[[luafile $MYVIMRC]]
@@ -49,8 +50,8 @@ noremap <Down> gj
 command! -nargs=* Dic call LookUpDef(<f-args>)
 
 "hi Normal guibg=NONE ctermbg=NONE
-"autocmd BufWritePost init.lua lua reload_config()
-"autocmd BufWritePost plugins.lua lua reload_config()
+autocmd BufWritePost init.lua lua reload_config()
+autocmd BufWritePost plugins.lua lua reload_config()
 "nnoremap <Leader>. :w<CR>
 "nnoremap <Leader>; :wa<CR>:qa!<CR>
 "nmap <Leader>d :up<CR>:!sfdp -Tpng % -o %:r.png<CR><CR>
