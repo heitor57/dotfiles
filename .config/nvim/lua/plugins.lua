@@ -514,15 +514,27 @@ return require("packer").startup({
 
         use {"tpope/vim-sleuth"}
 
+        -- use {
+        -- "kevinhwang91/rnvimr",
+        -- config = function()
+        -- vim.cmd([[
+        -- let g:rnvimr_enable_picker = 1
+        -- tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+        -- nnoremap <silent> <M-o> :RnvimrToggle<CR>
+        -- tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+        -- ]])
+        -- end
+        -- }
         use {
-            "kevinhwang91/rnvimr",
+            'voldikss/vim-floaterm',
             config = function()
-                vim.cmd([[
-		let g:rnvimr_enable_picker = 1
-		tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
-		nnoremap <silent> <M-o> :RnvimrToggle<CR>
-		tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
-		]])
+                local wk = require("which-key")
+                wk.register({
+                    r = {
+                        "<cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 ranger --cmd=\"cd expand('%:p:h')\"<CR>",
+                        "Ranger"
+                    }
+                }, {prefix = "<leader>"})
             end
         }
 
@@ -1233,14 +1245,14 @@ return require("packer").startup({
                         ["core.norg.completion"] = {
                             config = {engine = "nvim-cmp"}
                         },
-                        ['core.gtd.base'] = {
-                            config = {
-                                projects = {
-                                    show_completed_projects = true,
-                                    show_projects_without_tasks = true
-                                }
-                            }
-                        },
+                        -- ['core.gtd.base'] = {
+                        -- config = {
+                        -- projects = {
+                        -- show_completed_projects = true,
+                        -- show_projects_without_tasks = true
+                        -- }
+                        -- }
+                        -- },
                         ["core.integrations.telescope"] = {}, -- Enable the telescope module
                         ["core.norg.dirman"] = { -- Manage your directories with Neorg
                             config = {
@@ -1273,5 +1285,5 @@ return require("packer").startup({
             end
         }
     end,
-    config = {auto_reload_compiled = true}
+    config = {auto_reload_compiled = true, max_jobs=13}
 })
