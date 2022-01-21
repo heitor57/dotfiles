@@ -31,3 +31,4 @@ zsh-users/zsh-history-substring-search
 zdharma-continuum/zsh-navigation-tools
 zdharma-continuum/zsh-cmd-architect branch:main
 zdharma-continuum/zsh-editing-workbench branch:main
+romkatv/powerlevel10k

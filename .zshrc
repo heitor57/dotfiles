@@ -55,7 +55,6 @@ compinit
 source <(antibody init)
 antibody bundle < ~/.zsh_plugins.txt
 
-
 #setopt autocd autopushd
 
 
@@ -108,9 +107,6 @@ PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 # command
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
-
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
