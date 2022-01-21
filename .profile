@@ -22,6 +22,7 @@ done
 export DOTFILES_BIN=$DOTFILES/bin
 export PATH="$PATH:$DOTFILES_BIN"
 export PATH="$PATH:$HOME/.luarocks/bin"
+export PATH="$PATH:$HOME/.local/mybin"
 
 
 # function kotlinr() {
