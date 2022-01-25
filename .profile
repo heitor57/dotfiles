@@ -1,3 +1,5 @@
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 #export TERMINAL="alacritty"
@@ -53,5 +55,5 @@ alias help=run-help
 alias rh=run-help
 alias mab='cd ~/rl-rss/src/app/'
 alias e='$EDITOR'
-alias en='nvim --noplugin'
+alias ee='nvim --noplugin'
 alias gi=gitignore

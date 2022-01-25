@@ -6,17 +6,12 @@ super + Return
     cd ~ && $TERMINAL
 super + F4
     sxiv -t ~/Pictures
-super + shift + i
-    slock
 XF86AudioRaiseVolume
-    i3-volume -e 50 -n -N xosd up 5
-# pactl set-sink-volume @DEFAULT_SINK@ +5%
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
 XF86AudioLowerVolume
-    i3-volume -e 50 -n -N xosd down 5
-# pactl set-sink-volume @DEFAULT_SINK@ -5%
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
 XF86AudioMute
-    i3-volume -e 50 -n -N xosd mute
-# pactl set-sink-mute @DEFAULT_SINK@ toggle
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
 super + F11
     exec xbacklight -dec 10
 super + F12
@@ -24,7 +19,7 @@ super + F12
 super + shift + a
     rifle "$(find ~/Documents/ ~/Downloads/ | dmenu -i -l 10 -fn Monospace-11)"
 super + e
-    emacsclient -c
+    nvim
 super + c
     firefox
 super + z

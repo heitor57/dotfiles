@@ -1284,6 +1284,7 @@ return require("packer").startup({
 
             end
         }
+        use{'baskerville/vim-sxhkdrc'}
     end,
     config = {auto_reload_compiled = true, max_jobs=13}
 })
