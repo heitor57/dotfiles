@@ -38,8 +38,8 @@ return require("packer").startup({
             "lervag/vimtex",
             config = function()
                 vim.cmd([[
-	let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
 	let g:vimtex_compiler_latexmk_engines = { '_': '-pdflatex -shell-escape'}
+	let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
 	]])
             end
         }

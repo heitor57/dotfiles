@@ -2,3 +2,8 @@
 #albert&
 # dwmbar &
 # slstatus &
+#
+#if [ $XDG_SESSION_DESKTOP = "qtile" ]
+#then
+				#$HOME/.config/polybar/launch.sh
+#fi
