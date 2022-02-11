@@ -39,7 +39,7 @@ export NNN_COLORS="2136"                           # use a different color for e
 #export NNN_SEL='/tmp/.sel'
 export NNN_FIFO='/tmp/nnn.fifo'
 export NNN_TRASH=1
-export NNN_PLUG='a:autojump;z:fzplug;f:finder;o:fzopen;t:fzfasd'
+export NNN_PLUG='a:autojump;z:fzplug;f:finder;o:fzopen;t:fzfasd;p:preview-tabbed;l:preview-tui'
 export NNN_OPENER=$HOME/.config/nnn/plugins/myopener
 export NNN_TMPFILE='/tmp/.lastd'
 
@@ -57,3 +57,4 @@ alias mab='cd ~/rl-rss/src/app/'
 alias e='$EDITOR'
 alias ee='nvim --noplugin'
 alias gi=gitignore
+
