@@ -664,7 +664,7 @@ return require("packer").startup({
                 require"lualine".setup {
                     options = {
                         icons_enabled = true,
-                        theme = "pywal",
+                        theme = "pywal-nvim",
                         component_separators = {"", ""},
                         section_separators = {"", ""},
                         disabled_filetypes = {}
@@ -1200,14 +1200,20 @@ return require("packer").startup({
         -- colorscheme wal
         -- ]])
         -- end}
-        use {
-            'deviantfero/wpgtk.vim',
-            config = function()
-                vim.cmd([[
-                                                                                                    colorscheme wpgtk
-                                                                                                    ]])
-            end
-        }
+        --use {
+            --'deviantfero/wpgtk.vim',
+            --config = function()
+                --vim.cmd([[
+                                                                                                    --colorscheme wpgtk
+                                                                                                    --]])
+            --end
+        --}
+
+        use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' ,config=function ()
+            local pywal = require('pywal')
+            pywal.setup()
+        end}
+
         -- use{'sheerun/vim-polyglot',setup=function ()
         -- vim.cmd([[let g:polyglot_disabled = ['markdown'] ]])
         -- end}
