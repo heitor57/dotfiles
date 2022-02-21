@@ -90,8 +90,8 @@ autoload -Uz run-help
   #fi
 #}
 source $DOTFILES_BIN/remote_utils
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-#zstyle ':completion:*' menu select matcher-list 'm:{a-z}={A-Z}'
+#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' menu select matcher-list 'm:{a-z}={A-Z}'
 
 
 bindkey '^[[A' history-substring-search-up
