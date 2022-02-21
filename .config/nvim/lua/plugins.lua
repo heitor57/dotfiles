@@ -1291,6 +1291,9 @@ return require("packer").startup({
             end
         }
         use{'baskerville/vim-sxhkdrc'}
+        use{'norcalli/nvim-colorizer.lua',config=function()
+            require'colorizer'.setup()
+        end}
     end,
     config = {auto_reload_compiled = true, max_jobs=13}
 })
