@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+a=0
+v=0
+for i in $(ls);
+do
+				v=$(($a - $a % 10))
+				path=$v/$i
+				mkdir -p "$(dirname "$path")"
+				mv $i $path
+				a=$(($a+1))
+done
