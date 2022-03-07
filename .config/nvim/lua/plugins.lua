@@ -471,8 +471,9 @@ return require("packer").startup({
                     sources = cmp.config.sources({
                         {name = "nvim_lsp"}, {name = "luasnip"},
                         {name = "buffer"}, {name = "nvim_lua"}, {name = "omni"},
-                        {name = "cmp_git"}, {name = "path"}, {name = 'orgmode'},
-                        {name = 'neorg'}
+                        {name = "cmp_git"}, {name = "path"},
+                        --{name = 'orgmode'},
+                        --{name = 'neorg'}
                     }, {{name = "buffer"}})
                 }
                 cmp.setup.cmdline("/", {sources = {{name = "buffer"}}})
@@ -1217,63 +1218,63 @@ return require("packer").startup({
         -- use{'sheerun/vim-polyglot',setup=function ()
         -- vim.cmd([[let g:polyglot_disabled = ['markdown'] ]])
         -- end}
-        use {
-            'nvim-orgmode/orgmode',
-            requires = 'nvim-treesitter/nvim-treesitter',
-            config = function()
+        --use {
+            --'nvim-orgmode/orgmode',
+            --requires = 'nvim-treesitter/nvim-treesitter',
+            --config = function()
 
-                require('orgmode').setup({
-                    org_agenda_files = {'~/Dropbox/Documents/Tasks/'},
-                    org_default_notes_file = '~/Dropbox/Documents/Tasks/tasks.org',
-                    org_agenda_span = 'month'
-                    -- org_todo_keywords = {
-                    -- 'TODO', 'DOING', '|', 'DONE', 'DELEGATED'
-                    -- }
-                })
-            end
-        }
+                --require('orgmode').setup({
+                    --org_agenda_files = {'~/Dropbox/Documents/Tasks/'},
+                    --org_default_notes_file = '~/Dropbox/Documents/Tasks/tasks.org',
+                    --org_agenda_span = 'month'
+                    ---- org_todo_keywords = {
+                    ---- 'TODO', 'DOING', '|', 'DONE', 'DELEGATED'
+                    ---- }
+                --})
+            --end
+        --}
 
-        use {
-            "nvim-neorg/neorg",
-            after = "nvim-treesitter",
-            config = function()
-                require('neorg').setup {
-                    -- Tell Neorg what modules to load
-                    load = {
-                        ["core.defaults"] = {}, -- Load all the default modules
-                        ["core.norg.concealer"] = {}, -- Allows for use of icons
-                        -- ["core.keybinds"] = { -- Configure core.keybinds
-                        -- config = {
-                        -- default_keybinds = true, -- Generate the default keybinds
-                        -- neorg_leader = "<Leader>b" -- This is the default if unspecified
-                        -- }
-                        -- },
-                        ["core.norg.completion"] = {
-                            config = {engine = "nvim-cmp"}
-                        },
-                        -- ['core.gtd.base'] = {
-                        -- config = {
-                        -- projects = {
-                        -- show_completed_projects = true,
-                        -- show_projects_without_tasks = true
-                        -- }
-                        -- }
-                        -- },
-                        ["core.integrations.telescope"] = {}, -- Enable the telescope module
-                        ["core.norg.dirman"] = { -- Manage your directories with Neorg
-                            config = {
-                                workspaces = {
-                                    my_workspace = "~/Dropbox/Documents/Tasks/"
-                                }
-                            }
-                        }
-                    }
-                }
-            end,
-            requires = {
-                {"nvim-lua/plenary.nvim"}, {"nvim-neorg/neorg-telescope"}
-            }
-        }
+        --use {
+            --"nvim-neorg/neorg",
+            --after = "nvim-treesitter",
+            --config = function()
+                --require('neorg').setup {
+                    ---- Tell Neorg what modules to load
+                    --load = {
+                        --["core.defaults"] = {}, -- Load all the default modules
+                        --["core.norg.concealer"] = {}, -- Allows for use of icons
+                        ---- ["core.keybinds"] = { -- Configure core.keybinds
+                        ---- config = {
+                        ---- default_keybinds = true, -- Generate the default keybinds
+                        ---- neorg_leader = "<Leader>b" -- This is the default if unspecified
+                        ---- }
+                        ---- },
+                        --["core.norg.completion"] = {
+                            --config = {engine = "nvim-cmp"}
+                        --},
+                        ---- ['core.gtd.base'] = {
+                        ---- config = {
+                        ---- projects = {
+                        ---- show_completed_projects = true,
+                        ---- show_projects_without_tasks = true
+                        ---- }
+                        ---- }
+                        ---- },
+                        --["core.integrations.telescope"] = {}, -- Enable the telescope module
+                        --["core.norg.dirman"] = { -- Manage your directories with Neorg
+                            --config = {
+                                --workspaces = {
+                                    --my_workspace = "~/Dropbox/Documents/Tasks/"
+                                --}
+                            --}
+                        --}
+                    --}
+                --}
+            --end,
+            --requires = {
+                --{"nvim-lua/plenary.nvim"}, {"nvim-neorg/neorg-telescope"}
+            --}
+        --}
         use {
             "arnamak/stay-centered.nvim",
             config = function() require("stay-centered") end
