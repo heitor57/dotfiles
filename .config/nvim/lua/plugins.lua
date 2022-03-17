@@ -968,7 +968,7 @@ return require("packer").startup({
             "akinsho/toggleterm.nvim",
             config = function() require("toggleterm").setup {} end
         }
-        use {"rmagatti/auto-session"}
+        --use {"rmagatti/auto-session"}
         use {
             "kkoomen/vim-doge",
             config = function()
@@ -1211,6 +1211,7 @@ return require("packer").startup({
         --}
 
         use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' ,config=function ()
+            vim.cmd[[set termguicolors]]
             local pywal = require('pywal')
             pywal.setup()
         end}
@@ -1276,7 +1277,7 @@ return require("packer").startup({
             --}
         --}
         use {
-            "arnamak/stay-centered.nvim",
+            "arnamak/stay-centered.nvim",disable=true,
             config = function() require("stay-centered") end
         }
         use {
@@ -1295,6 +1296,13 @@ return require("packer").startup({
         use{'norcalli/nvim-colorizer.lua',config=function()
             require'colorizer'.setup()
         end}
+use {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end 
+}
+    use{'subnut/nvim-ghost.nvim',
+    run =function() vim.cmd[[':call nvim_ghost#installer#install()']] end
+}
     end,
     config = {auto_reload_compiled = true, max_jobs=13}
 })

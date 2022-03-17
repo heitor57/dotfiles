@@ -1,4 +1,5 @@
 local M = {}
+
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -59,6 +60,7 @@ autocmd BufWritePost plugins.lua lua reload_config()
 "nnoremap <leader>sv :source $MYVIMRC<cr>
 "set list
 "set listchars=tab:>-
+set guifont=Hack\ Nerd\ Font
 ]])
 local nvimrc = "~/.config/nvim"
 vim.cmd('source ' .. nvimrc .. '/auxinit.vim')
