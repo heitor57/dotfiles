@@ -6,3 +6,4 @@ __pycache__/
 .config/lvim/ignore
 .config/nvim/plugin/packer_compiled.lua
 #.config/ranger/plugins/ranger_devicons/
+.config/mpv/watch_later
