@@ -6,6 +6,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
   vim.cmd 'packadd packer.nvim'
 end
+
 function reload_config()
   --luafile $MYVIMRC
   require('plenary.reload').reload_module('plugins', true)
@@ -50,8 +51,8 @@ noremap <Down> gj
 
 command! -nargs=* Dic call LookUpDef(<f-args>)
 
-autocmd BufWritePost init.lua lua reload_config()
-autocmd BufWritePost plugins.lua lua reload_config()
+"autocmd BufWritePost init.lua lua reload_config()
+"autocmd BufWritePost plugins.lua lua reload_config()
 ]])
 local nvimrc = "~/.config/nvim"
 vim.cmd('source ' .. nvimrc .. '/auxinit.vim')
