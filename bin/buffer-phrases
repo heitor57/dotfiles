@@ -1,3 +1,5 @@
 #!/usr/bin/bash
-
-echo $(xsel -o) >> ~/Documents/buffer-phrases.txt
+phrase="$(xsel -o)"
+path=~/Documents/buffer-phrases.txt
+echo "$phrase" >> "$path"
+notify-send "Phrase saved in $path buffer: \"$phrase\""
