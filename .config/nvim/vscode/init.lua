@@ -53,6 +53,8 @@ command! -nargs=* Dic call LookUpDef(<f-args>)
 
 "autocmd BufWritePost init.lua lua reload_config()
 "autocmd BufWritePost plugins.lua lua reload_config()
+
+set clipboard=unnamedplus
 ]])
 local nvimrc = "~/.config/nvim"
 vim.cmd('source ' .. nvimrc .. '/auxinit.vim')
