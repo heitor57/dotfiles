@@ -303,7 +303,8 @@ return require("packer").startup({
                         -- vim.cmd([[echo 'texlab']])
                         -- config.filetypes = {"text"}; -- we don't want objective-c and objective-cpp!
                         -- config.settings = {ltex={additionalRules={motherTongue="pt-BR", languageModel="pt-BR"}}}
-                        config.settings = {ltex = {language = "en"}}
+                        config.settings = {ltex = {language = "pt"}}
+                        --config.settings = {ltex = {language = "en"}}
                         -- print(vim.inspect(server.name == "ltex"))
                         -- print(vim.inspect(config.settings))
                         -- config.settings = {["ltex.additionalRules.motherTongue"]="pt-BR"}
@@ -1300,9 +1301,9 @@ use {
     'glacambre/firenvim',
     run = function() vim.fn['firenvim#install'](0) end 
 }
-    use{'subnut/nvim-ghost.nvim',
-    run =function() vim.cmd[[':call nvim_ghost#installer#install()']] end
-}
+    --use{'subnut/nvim-ghost.nvim',
+    --run =function() vim.cmd[[':call nvim_ghost#installer#install()']] end
+--}
     end,
     config = {auto_reload_compiled = true, max_jobs=13}
 })

@@ -61,6 +61,7 @@ autocmd BufWritePost plugins.lua lua reload_config()
 "set list
 "set listchars=tab:>-
 set guifont=Hack\ Nerd\ Font
+set termguicolors
 ]])
 local nvimrc = "~/.config/nvim"
 vim.cmd('source ' .. nvimrc .. '/auxinit.vim')
