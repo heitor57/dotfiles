@@ -24,15 +24,17 @@ set ifs "\n"
 set scrolloff 10
 
 # use enter for shell commands
-map <enter> shell
-
+#map <enter> shell
+map <enter> open
+map [ shell
 # execute current file (must be executable)
 map x $$f
 map X !$f
 
 # dedicated keys for file opener actions
 map o &mimeopen $f
-map O $mimeopen --ask $f
+map O $mimeopen --ask-default $f
+#map ma $mimeopen --ask $f
 
 # define a custom 'open' command
 # This command is called when current file is not a directory. You may want to
@@ -72,7 +74,7 @@ cmd trash %set -f; mv $fx ~/.trash
 # }}
 
 # use '<delete>' key for either 'trash' or 'delete' command
-# map <delete> trash
+ map <delete> trash
 # map <delete> delete
 
 # extract the current file with the right command
@@ -163,3 +165,9 @@ cmd link %{{
     lf -remote "send clear"
 }}
 map P :link
+
+cmd spawn-konsole &{{
+    konsole --workdir $PWD
+}}
+
+map <c-t> :spawn-konsole
