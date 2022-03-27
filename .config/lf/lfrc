@@ -171,3 +171,5 @@ cmd spawn-konsole &{{
 }}
 
 map <c-t> :spawn-konsole
+cmd mkdir %IFS=" "; mkdir -- "$*"
+map a push :mkdir<space>

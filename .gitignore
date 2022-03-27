@@ -12,3 +12,4 @@ __pycache__/
 .config/nvim/auxinit.vim
 .config/nvim/coc-settings.json
 .config/nvim/oldinit.vim
+.goneovim/sessions/0.vim
