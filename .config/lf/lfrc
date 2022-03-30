@@ -173,3 +173,4 @@ cmd spawn-konsole &{{
 map <c-t> :spawn-konsole
 cmd mkdir %IFS=" "; mkdir -- "$*"
 map a push :mkdir<space>
+map bw %wpg -a "$f" && wpg -s "$f"
