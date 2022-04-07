@@ -1,0 +1,15 @@
+#!/usr/bin/python3
+import datetime
+import subprocess
+
+bashCommand = 'nvme smart-log /dev/nvme0n1 | grep data_units_written | cut -d" " -f2'
+process = subprocess.Popen(['bash','-c',bashCommand], stdout=subprocess.PIPE)
+# process = subprocess.Popen(['bash','-c',bashCommand]+bashCommand.split(), stdout=subprocess.PIPE)
+output, error = process.communicate()
+# print(error)
+output = output.decode("utf-8")
+output=output.strip()
+output=output.replace(",","")
+output=output.replace(".","")
+output = int(output)*512000/1000000000
+print(datetime.datetime.now(datetime.timezone.utc),output)
