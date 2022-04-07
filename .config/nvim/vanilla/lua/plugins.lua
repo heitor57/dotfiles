@@ -666,7 +666,7 @@ return require("packer").startup({
                 require"lualine".setup {
                     options = {
                         icons_enabled = true,
-                        theme = "pywal-nvim",
+                        --theme = "pywal-nvim",
                         component_separators = {"", ""},
                         section_separators = {"", ""},
                         disabled_filetypes = {}
@@ -1211,11 +1211,11 @@ return require("packer").startup({
             --end
         --}
 
-        use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' ,config=function ()
-            vim.cmd[[set termguicolors]]
-            local pywal = require('pywal')
-            pywal.setup()
-        end}
+        --use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' ,config=function ()
+            --vim.cmd[[set termguicolors]]
+            --local pywal = require('pywal')
+            --pywal.setup()
+        --end}
 
         -- use{'sheerun/vim-polyglot',setup=function ()
         -- vim.cmd([[let g:polyglot_disabled = ['markdown'] ]])
@@ -1304,6 +1304,13 @@ use {
     --use{'subnut/nvim-ghost.nvim',
     --run =function() vim.cmd[[':call nvim_ghost#installer#install()']] end
 --}
+--
+
+use{'folke/tokyonight.nvim',config=function()
+    vim.cmd[[colorscheme tokyonight]]
+end}
+
+
     end,
     config = {auto_reload_compiled = true, max_jobs=13}
 })
