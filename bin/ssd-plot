@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+import pandas as pd
+import plotly.express as px
+
+import argparse
+
+argparser = argparse.ArgumentParser()
+argparser.add_argument("-f")
+args = argparser.parse_args()
+
+df = pd.read_csv(args.f, header=None, delimiter=" ")
+
+import dateparser
+
+df["date"] = df[0] + " " + df[1]
+df["date"] = df["date"].apply(dateparser.parse)
+df["value"] = df[2]
+
+import plotly.graph_objects as go
+
+fig = go.Figure([go.Scatter(x=df["date"], y=df["value"])])
+fig.show()
