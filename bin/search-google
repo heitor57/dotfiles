@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+gtk-launch $(xdg-settings get default-web-browser) "https://www.google.com/search?q=$(xsel -o)"
