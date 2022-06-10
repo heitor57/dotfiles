@@ -1,7 +1,7 @@
-export GTK_USE_PORTAL=1
+#export GTK_USE_PORTAL=1
 #export QT_STYLE_OVERRIDE=adwaita
 #export QT_QPA_PLATFORMTHEME="gnome"  
-export QT_QPA_PLATFORMTHEME="qt5ct"  
+#export QT_QPA_PLATFORMTHEME="qt5ct"  
 #export LANG=en_US.UTF-8
 #export LC_ALL=en_US.UTF-8
 export EDITOR="nvim"
