@@ -42,7 +42,8 @@ function copy_sub(prop, subtext)
                 }]], escapedtext)
             } })
         elseif _G.platform == 'linux' then
-            os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' ' | xclip -selection clipboard -i")
+            os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' ' | wl-copy")
+            --os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' ' | xclip -selection clipboard -i")
         end
     end
 end
