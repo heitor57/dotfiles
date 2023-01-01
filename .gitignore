@@ -7,9 +7,9 @@ __pycache__/
 .config/nvim/plugin/packer_compiled.lua
 #.config/ranger/plugins/ranger_devicons/
 .config/mpv/watch_later
-.config/nvim/init.lua
-.config/nvim/lua
-.config/nvim/auxinit.vim
-.config/nvim/coc-settings.json
-.config/nvim/oldinit.vim
+#.config/nvim/init.lua
+#.config/nvim/lua
+#.config/nvim/auxinit.vim
+#.config/nvim/coc-settings.json
+#.config/nvim/oldinit.vim
 .goneovim/sessions/0.vim

@@ -11,3 +11,4 @@ function! s:update_oldfiles(file)
 endfunction
 
 "autocmd BufNewFile,BufRead,BufFilePre * call s:update_oldfiles(expand('<afile>:p'))
+"

@@ -8,8 +8,8 @@ return require("packer").startup({
             "voldikss/vim-translator",
             config = function()
                 vim.cmd([[
-		let g:translator_target_lang='en'
-		]])
+                let g:translator_target_lang='en'
+                ]])
             end
         }
         use {
@@ -38,9 +38,9 @@ return require("packer").startup({
             "lervag/vimtex",
             config = function()
                 vim.cmd([[
-	let g:vimtex_compiler_latexmk_engines = { '_': '-pdflatex -shell-escape'}
-	let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
-	]])
+        let g:vimtex_compiler_latexmk_engines = { '_': '-pdflatex -shell-escape'}
+        let g:vimtex_compiler_latexmk_engines = { '_': '-lualatex -shell-escape'}
+        ]])
             end
         }
         use {
@@ -64,9 +64,9 @@ return require("packer").startup({
             "heavenshell/vim-pydocstring",
             config = function()
                 vim.cmd([[
-	let g:pydocstring_doq_path = '/home/heitor/.local/bin/doq'
-	let g:pydocstring_formatter = 'google'
-	]])
+        let g:pydocstring_doq_path = '/home/heitor/.local/bin/doq'
+        let g:pydocstring_formatter = 'google'
+        ]])
                 local wk = require("which-key")
                 wk.register({
                     a = {d = {"<cmd>Pydocstring<cr>", "Python Doc String"}}
@@ -149,15 +149,15 @@ return require("packer").startup({
             "preservim/nerdcommenter",
             setup = function()
                 vim.cmd([[
-		let g:NERDCreateDefaultMappings=0
-		]])
+                let g:NERDCreateDefaultMappings=0
+                ]])
             end,
             config = function()
                 vim.cmd([[
-		filetype plugin on
-		vmap <leader>/ <plug>NERDCommenterToggle
-		nmap <leader>/ <plug>NERDCommenterToggle
-		]])
+                filetype plugin on
+                vmap <leader>/ <plug>NERDCommenterToggle
+                nmap <leader>/ <plug>NERDCommenterToggle
+                ]])
             end
         }
 
@@ -244,12 +244,12 @@ return require("packer").startup({
                                    opts)
                     if client.resolved_capabilities.document_highlight then
                         vim.api.nvim_exec([[
-			augroup lsp_document_highlight
-			autocmd! * <buffer>
-			autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-			autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-			augroup END
-			]], false)
+                        augroup lsp_document_highlight
+                        autocmd! * <buffer>
+                        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+                        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+                        augroup END
+                        ]], false)
                     end
                 end
 
@@ -599,14 +599,14 @@ return require("packer").startup({
                 vim.cmd(
                     [[let g:neoformat_enabled_python = ['black', 'docformatter'] ]])
                 vim.cmd([[
-					let g:neoformat_tex_latexindent = {
-					  \ 'exe': 'latexindent',
-					  \ 'args': ['-l'],
-					  \ 'stdin': 1
-					  \ }
-					  ]])
+                                        let g:neoformat_tex_latexindent = {
+                                          \ 'exe': 'latexindent',
+                                          \ 'args': ['-l'],
+                                          \ 'stdin': 1
+                                          \ }
+                                          ]])
                 -- vim.cmd(
-                --[[
+                --[>
                     --augroup fmt
                         --autocmd!
                         --autocmd BufWritePre * undojoin | Neoformat
@@ -658,6 +658,7 @@ return require("packer").startup({
         -- lualine is the below bar
         use {
             "hoob3rt/lualine.nvim",
+                    cond=false,
             requires = {
                 {"kyazdani42/nvim-web-devicons", opt = true},
                 {"nvim-lua/lsp-status.nvim"}, {"arkav/lualine-lsp-progress"}
@@ -803,8 +804,7 @@ return require("packer").startup({
                 }
                 require"nvim-treesitter.configs".setup {
                     ensure_installed = {
-                        'org', "norg", "norg_meta", "norg_table", "haskell",
-                        "cpp", "c", "javascript", "markdown"
+                        "markdown"
                     }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
                     ignore_install = {"javascript"}, -- List of parsers to ignore installing
                     highlight = {
@@ -831,11 +831,11 @@ return require("packer").startup({
             end
         }
         -- use {'gpanders/vim-oldfiles'}
-        use {
-            "lewis6991/gitsigns.nvim",
-            requires = {"nvim-lua/plenary.nvim"},
-            config = function() require("gitsigns").setup({}) end
-        }
+        --use {
+            --"lewis6991/gitsigns.nvim",
+            --requires = {"nvim-lua/plenary.nvim"},
+            --config = function() require("gitsigns").setup({}) end
+        --}
         use {
             "skywind3000/asynctasks.vim",
             requires = {
@@ -998,11 +998,11 @@ return require("packer").startup({
                 }, {prefix = "<leader>"})
             end
         }
-        use {
-            "folke/todo-comments.nvim",
-            requires = "nvim-lua/plenary.nvim",
-            config = function() require("todo-comments").setup {} end
-        }
+        --use {
+            --"folke/todo-comments.nvim",
+            --requires = "nvim-lua/plenary.nvim",
+            --config = function() require("todo-comments").setup {} end
+        --}
         -- use {
         -- "akinsho/bufferline.nvim",
         -- config = function()
@@ -1132,7 +1132,7 @@ return require("packer").startup({
         -- requires = "nvim-treesitter/nvim-treesitter",
         -- config = function()
         -- vim.cmd(
-        --[[
+ --       [>
                                                                                         --let g:nvcode_termcolors=256
 
                                                                                         --syntax on
