@@ -472,7 +472,7 @@ return require("packer").startup({
                     sources = cmp.config.sources({
                         {name = "nvim_lsp"}, {name = "luasnip"},
                         {name = "buffer"}, {name = "nvim_lua"}, {name = "omni"},
-                        {name = "cmp_git"}, {name = "path"},
+                        {name = "git"}, {name = "path"},
                         --{name = 'orgmode'},
                         --{name = 'neorg'}
                     }, {{name = "buffer"}})
