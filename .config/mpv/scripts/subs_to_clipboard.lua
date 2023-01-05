@@ -48,6 +48,13 @@ function copy_sub(prop, subtext)
     end
 end
 
+
+function sub2file(prop, subtext)
+    if subtext and subtext ~= '' then
+        os.execute("echo '" .. escape(subtext) .. "' >> ~/Desktop/english_phrases.txt")
+    end
+end
+
 function stop_auto_copy_subs()
     mp.osd_message("Auto-copy subs disabled", 1)
     mp.unobserve_property(copy_sub)

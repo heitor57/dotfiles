@@ -4,6 +4,36 @@
 --- replay-subtitle:         Replay current or previous subtitle.
 --- step-subtitle:           End current subtitle or start next subtitle.
 
+
+
+local char_to_hex = function(c)
+  return string.format("%%%02X", string.byte(c))
+end
+
+local function urlencode(url)
+  if url == nil then
+    return
+  end
+  url = url:gsub("\n", "\r\n")
+  url = string.gsub(url, "([^%w _%%%-%.~])", char_to_hex)
+  url = url:gsub(" ", "+")
+  return url
+end
+
+local hex_to_char = function(x)
+  return string.char(tonumber(x, 16))
+end
+
+local urldecode = function(url)
+  if url == nil then
+    return
+  end
+  url = url:gsub("+", " ")
+  url = url:gsub("%%(%x%x)", hex_to_char)
+  return url
+end
+
+
 _G.abloopavoidjankpause = false
 
 --- platform detection taken from: github.com/rossy/mpv-repl/blob/master/repl.lua
@@ -128,7 +158,19 @@ function step_subtitle()
     end
 end
 
+
+function sub_file(prop, subtext)
+    local subtext = mp.get_property("sub-text")
+    if subtext and subtext ~= '' then
+        os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' ' | wl-copy")
+        os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' '  >> /home/heitor/Desktop/english_phrases.txt")
+        os.execute("echo ''  >> /home/heitor/Desktop/english_phrases.txt")
+        os.execute("gtk-launch $(xdg-settings get default-web-browser) 'https://translate.google.com/?sl=en&tl=pt&text='" .. escape(urlencode(subtext:gsub("[\n\r]"," "))) .. "'&op=translate'")
+    end
+end
+
 mp.add_key_binding(nil, "ab-loop-sub", ab_loop_sub)
 mp.add_key_binding(nil, "copy-subtitle", copy_subtitle)
 mp.add_key_binding(nil, "replay-subtitle", replay_subtitle)
 mp.add_key_binding(nil, "step-subtitle", step_subtitle)
+mp.add_key_binding(nil, "sub-file", sub_file)
