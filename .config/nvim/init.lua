@@ -64,6 +64,10 @@ autocmd BufWritePost plugins.lua lua reload_config()
 set termguicolors
 set cursorline
 set scrolloff=20
+
+set nocompatible
+filetype plugin on
+syntax on
 ]])
 local nvimrc = "~/.config/nvim"
 vim.cmd('source ' .. nvimrc .. '/auxinit.vim')
