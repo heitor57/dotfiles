@@ -44,7 +44,7 @@ zstyle :compinstall filename '~/.zshrc'
 #zstyle ':completion:incremental:*' completer _complete _ignored
 #zstyle :incremental stop-keys $'[\e\C-b\C-f\C-n\C-p\C-u-\C-x]'
 #
-eval "$(zoxide init zsh)"
+#eval "$(zoxide init zsh)"
 autoload -Uz compinit
 compinit
 #_ccomp_options+=(globdots)
