@@ -1,0 +1,12 @@
+#!/usr/bin/zsh
+
+urlencode() {
+    setopt localoptions extendedglob
+    input=( ${(s::)1} )
+    print ${(j::)input/(#b)([^A-Za-z0-9_.\!~*\'\(\)-])/%${(l:2::0:)$(([##16]#match))}}
+}
+temp=$(wl-paste --primary)
+gtk-launch $(xdg-settings get default-web-browser) 'https://translate.google.com/?sl=en&tl=pt&text='"$(urlencode $temp)"'&op=translate'
+
+echo $temp | tr '\n' ' '  >> /home/heitor/Desktop/english_phrases.txt
+echo '' >> /home/heitor/Desktop/english_phrases.txt

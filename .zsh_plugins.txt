@@ -1,33 +1,14 @@
 caarlos0/jvm
-djui/alias-tips
-# comments are supported like this
 caarlos0/zsh-mkc
 zsh-users/zsh-completions
 caarlos0/zsh-open-github-pr
-
-# empty lines are skipped
-
-# annotations are also allowed:
-#robbyrussell/oh-my-zsh path:plugins/aws
-
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-history-substring-search
-
 zsh-users/zsh-autosuggestions
 hlissner/zsh-autopair
-#spaceship-prompt/spaceship-prompt
-
 marlonrichert/zsh-edit branch:main
-#popstas/zsh-command-time
-#zdharma/history-search-multi-word
-
 zsh-users/zsh-completions
-djui/alias-tips
-#unixorn/fzf-zsh-plugin branch:main
-
-#zdharma-continuum/history-search-multi-word branch:main
 zsh-users/zsh-history-substring-search
-#marzocchi/zsh-notify
 zdharma-continuum/zsh-navigation-tools
 zdharma-continuum/zsh-cmd-architect branch:main
 zdharma-continuum/zsh-editing-workbench branch:main

@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+import time
+text = r"""//dinostats
+"""
+import os
+os.system(f"xdotool key slash")
+# os.system(f"xdotool type --delay 500 '{text}'")
+
+# for i in text:
+    # time.sleep(0.05)
+    # os.system(f"xdotool key '{i}'")

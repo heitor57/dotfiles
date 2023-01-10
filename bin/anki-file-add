@@ -1,0 +1,5 @@
+#!/usr/bin/zsh
+
+
+echo $temp | tr '\n' ' '  >> /home/heitor/Desktop/english_phrases.txt
+echo '' >> /home/heitor/Desktop/english_phrases.txt

@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+poss = [[450,337],
+[396,393],
+[405,455],
+[408,514],
+[407,552],
+[414,608],
+[436,687],
+[429,733],
+[445,784]]
+import time
+import os
+for i in poss:
+    os.system(f"xdotool mousemove {i[0]} {i[1]}")
+    os.system(f"xdotool click 1")
+    time.sleep(0.1)
+    os.system(f"xdotool mousemove {1627} {264}")
+    os.system(f"xdotool click 1")
+    time.sleep(0.1)
+    os.system(f"xdotool mousemove {1630} {601}")
+    os.system(f"xdotool click 1")
+    time.sleep(0.1)

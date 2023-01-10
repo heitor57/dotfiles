@@ -1,9 +1,9 @@
 #!/usr/bin/bash
-
+sleep 0.1
+ydotool click --repeat 2 0xC0
 if [ $XDG_SESSION_TYPE = wayland ]
 then
 	gtk-launch $(xdg-settings get default-web-browser) "https://dictionary.cambridge.org/dictionary/english/$(wl-paste --primary)"
-	echo "eowqejwq"
 else
 	gtk-launch $(xdg-settings get default-web-browser) "https://dictionary.cambridge.org/dictionary/english/$(xsel -o)"
 fi
