@@ -162,10 +162,24 @@ end
 function sub_file(prop, subtext)
     local subtext = mp.get_property("sub-text")
     if subtext and subtext ~= '' then
+        --os.execute("xdotool key space")
         os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' ' | wl-copy")
         os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' '  >> /home/heitor/Desktop/english_phrases.txt")
         os.execute("echo ''  >> /home/heitor/Desktop/english_phrases.txt")
         os.execute("gtk-launch $(xdg-settings get default-web-browser) 'https://translate.google.com/?sl=en&tl=pt&text='" .. escape(urlencode(subtext:gsub("[\n\r]"," "))) .. "'&op=translate'")
+        --os.execute("xdotool keydown alt key Tab")
+        --os.execute("sleep 4")
+        --os.execute("xdotool keydown alt key Tab")
+    end
+end
+
+
+function sub_file_only(prop, subtext)
+    local subtext = mp.get_property("sub-text")
+    if subtext and subtext ~= '' then
+        os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' ' | wl-copy")
+        os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' '  >> /home/heitor/Desktop/english_phrases.txt")
+        os.execute("echo ''  >> /home/heitor/Desktop/english_phrases.txt")
     end
 end
 
@@ -174,3 +188,4 @@ mp.add_key_binding(nil, "copy-subtitle", copy_subtitle)
 mp.add_key_binding(nil, "replay-subtitle", replay_subtitle)
 mp.add_key_binding(nil, "step-subtitle", step_subtitle)
 mp.add_key_binding(nil, "sub-file", sub_file)
+mp.add_key_binding(nil, "sub-file-only", sub_file_only)
