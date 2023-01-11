@@ -10,7 +10,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 require('packer').startup(function(use)
-  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  use { 'TimUntersberger/neogit', branch='fix-427', requires = {'nvim-lua/plenary.nvim','sindrets/diffview.nvim', 'nvim-tree/nvim-web-devicons'} }
   use("mickael-menu/zk-nvim")
 
   -- Package manager
@@ -472,4 +472,7 @@ vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts)
 
 local neogit = require('neogit')
 
-neogit.setup {}
+neogit.setup {integrations={diffview=true},
+disable_commit_confirmation = true
+
+}
