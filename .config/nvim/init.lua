@@ -10,7 +10,8 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 require('packer').startup(function(use)
-  use { 'TimUntersberger/neogit', branch='fix-427', requires = {'nvim-lua/plenary.nvim','sindrets/diffview.nvim', 'nvim-tree/nvim-web-devicons'} }
+  use { 'TimUntersberger/neogit', branch = 'fix-427',
+    requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim', 'nvim-tree/nvim-web-devicons' } }
   use("mickael-menu/zk-nvim")
 
   -- Package manager
@@ -33,7 +34,7 @@ require('packer').startup(function(use)
 
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' ,'hrsh7th/cmp-path'},
+    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-path' },
   }
 
   use { -- Highlight, edit, and navigate code
@@ -104,7 +105,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- set incsearch
 
 vim.cmd([[vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>]])
-vim.cmd[[
+vim.cmd [[
 set clipboard=unnamedplus
 cnoremap <C-v> <C-r>+
 nnoremap <nowait> <c-s> <cmd>w<cr>
@@ -186,6 +187,11 @@ require('lualine').setup {
 -- Enable Comment.nvim
 require('Comment').setup()
 
+vim.cmd [[
+vmap <leader>; gc
+nmap <leader>; gcc
+]]
+
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
 require('indent_blankline').setup {
@@ -209,7 +215,7 @@ require('gitsigns').setup {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
-    wrap_results=true,
+    wrap_results = true,
     mappings = {
       i = {
         ['<C-u>'] = false,
@@ -223,7 +229,7 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>o', require('telescope.builtin').oldfiles, { desc = 'Find recently opened [o]ld files' })
+vim.keymap.set('n', '<leader>oo', require('telescope.builtin').oldfiles, { desc = 'Find recently opened [o]ld files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -332,6 +338,7 @@ local on_attach = function(_, bufnr)
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+  nmap('fd', vim.lsp.buf.formatting, 'Format document')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
@@ -407,6 +414,10 @@ require('fidget').setup()
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
+luasnip.config.set_config({
+  enable_autosnippets = true
+})
+require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/LuaSnip/" })
 
 cmp.setup {
   snippet = {
@@ -444,7 +455,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-{
+    {
       name = 'path',
       option = {
         -- Options go into this table
@@ -454,7 +465,7 @@ cmp.setup {
 }
 
 require("zk").setup()
-local opts = { noremap=true, silent=false }
+local opts = { noremap = true, silent = false }
 
 -- Create a new note after asking for its title.
 vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opts)
@@ -465,14 +476,16 @@ vim.api.nvim_set_keymap("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' }
 vim.api.nvim_set_keymap("n", "<leader>zt", "<Cmd>ZkTags<CR>", opts)
 
 -- Search for the notes matching a given query.
-vim.api.nvim_set_keymap("n", "<leader>zf", "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>zf",
+  "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", opts)
 -- Search for the notes matching the current visual selection.
 vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts)
 
 
 local neogit = require('neogit')
 
-neogit.setup {integrations={diffview=true},
-disable_commit_confirmation = true
-
+neogit.setup { integrations = { diffview = true },
+  disable_commit_confirmation = true
 }
+
+vim.api.nvim_set_keymap("n", "<leader>og", "<Cmd>Neogit<CR>", { noremap = true, silent = false })
