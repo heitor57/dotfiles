@@ -1,5 +1,5 @@
-#!/usr/bin/zsh
+#!/usr/bin/bash
 
-
+temp=$(wl-paste --primary)
 echo $temp | tr '\n' ' '  >> /home/heitor/Desktop/english_phrases.txt
 echo '' >> /home/heitor/Desktop/english_phrases.txt

@@ -10,6 +10,11 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 require('packer').startup(function(use)
+  use 'ekickx/clipboard-image.nvim'
+  -- use{'Pocco81/auto-save.nvim'}
+  use {
+    'voldikss/vim-floaterm'
+  }
   use { 'TimUntersberger/neogit', branch = 'fix-427',
     requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim', 'nvim-tree/nvim-web-devicons' } }
   use("mickael-menu/zk-nvim")
@@ -137,7 +142,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Decrease update time
-vim.o.updatetime = 250
+vim.o.updatetime = 10000
 vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
@@ -489,3 +494,17 @@ neogit.setup { integrations = { diffview = true },
 }
 
 vim.api.nvim_set_keymap("n", "<leader>og", "<Cmd>Neogit<CR>", { noremap = true, silent = false })
+
+vim.cmd[[
+nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 ranger<CR>
+]]
+
+--callbacks={before_saving=function()
+ --   os.execute("sleep " .. tonumber(3))
+  --end}
+-- require('auto-save').setup({debounce_delay=50000})
+vim.api.nvim_set_keymap("n", "<leader>os", ":ASToggle<CR>", {})
+--
+vim.cmd[[
+autocmd CursorHoldI,CursorHold * silent! update
+]]
