@@ -48,7 +48,7 @@ end
 beautiful.init("/home/heitor/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "st"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -267,7 +267,7 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "c",function () awful.util.spawn_with_shell("firefox") end,
               {description="Firefox", group="personal"}),
-    awful.key({ modkey,           }, "g",function () awful.util.spawn_with_shell("st -e ranger") end,
+    awful.key({ modkey,           }, "z",function () awful.util.spawn_with_shell("kitty -e ranger") end,
               {description="Ranger", group="personal"}),
     awful.key({         }, "XF86AudioMute",function () awful.util.spawn_with_shell("exec pactl set-sink-mute 0 toggle") end,
               {description="Volume toggle", group="personal"}),
@@ -279,15 +279,15 @@ globalkeys = gears.table.join(
               {description="Show pictures directory", group="personal"}),
     awful.key({ modkey,           }, "i",function () awful.util.spawn_with_shell("slock& sleep 0.5; xset dpms force off") end,
               {description="Lock screen", group="personal"}),
-    awful.key({            }, "XF86MonBrightnessDown",function () awful.util.spawn_with_shell("exec xbacklight -dec 10") end,
+    awful.key({            }, "XF86MonBrightnessDown",function () awful.util.spawn_with_shell("kdesu -c 'exec xbacklight -dec 10'") end,
               {description="Brightness decrease", group="personal"}),
-    awful.key({            }, "XF86MonBrightnessUp",function () awful.util.spawn_with_shell("exec xbacklight -inc 10") end,
+    awful.key({            }, "XF86MonBrightnessUp",function () awful.util.spawn_with_shell("kdesu -c 'exec xbacklight -inc 10'") end,
               {description="Brightness increase", group="personal"}),
-    awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("emacsclient -c") end,
-              {description="Emacs", group="personal"}),
-    awful.key({ modkey,           }, "t",function () awful.util.spawn_with_shell("thunderbird") end,
-              {description="Thunderbird", group="personal"}),
-    awful.key({ modkey,           }, "z",function () awful.util.spawn_with_shell("zathura") end,
+    -- awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("emacsclient -c") end,
+    --           {description="Emacs", group="personal"}),
+    -- awful.key({ modkey,           }, "t",function () awful.util.spawn_with_shell("thunderbird") end,
+    --           {description="Thunderbird", group="personal"}),
+    awful.key({ modkey,           }, "g",function () awful.util.spawn_with_shell("zathura") end,
               {description="Zathura", group="personal"}),
 
 

@@ -1,5 +1,11 @@
 #!/usr/bin/bash
 
-temp=$(wl-paste --primary)
+if [ $XDG_SESSION_TYPE = wayland ]
+then
+	temp=$(wl-paste --primary)
+else
+	temp=$(xsel -o)
+fi
+
 echo $temp | tr '\n' ' '  >> /home/heitor/Desktop/english_phrases.txt
 echo '' >> /home/heitor/Desktop/english_phrases.txt

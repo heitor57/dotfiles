@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+import time
+import os
+import fileinput
+import subprocess
+
+for line in fileinput.input():
+    sentences = subprocess.run(["yourdictionary", "-n","15","-t","sentence",line], capture_output=True, text=True)
+    # definition = subprocess.run([,*r"| sed 's/.\[[0-9]\{1,\}m//g'".split(' ')],capture_output=True, text=True)
+    ps = subprocess.Popen(("trans", "-d",line), stdout=subprocess.PIPE)
+    definition = subprocess.check_output(("sed", r"s/.\[[0-9]\{1,\}m//g"), stdin=ps.stdout)
+    ps.wait()
+    sentences = sentences.stdout
+    definition = definition.decode('utf-8')
+    # definition=definition.encode('ascii', errors='ignore')
+    # definition=definition.decode('ascii')
+    # print(definition)
+    definition=definition.replace('\n',"<br>")
+    # print(sentences)
+    # print(definition)
+    for sentence in sentences.splitlines():
+        print(sentence,'|',definition)
+    time.sleep(20)
+# os.system(f"xdotool type --delay 500 '{text}'")
+
+# for i in text:
+    # time.sleep(0.05)
+    # os.system(f"xdotool key '{i}'")

@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+# pid=$(pgrep live-dict)
+# if [ -z "$pid" -o "$pid" = "$$" ]
+# then
+# 	notify-send Running live-dict
+#
+# if [ $XDG_SESSION_TYPE = wayland ]
+# then
+wl-paste --primary --watch live-dict-keybind
+# else
+# 	;
+# fi
+# fi
+# 	notify-send Stopped live-dict
+# 	killall wl-paste
+# fi

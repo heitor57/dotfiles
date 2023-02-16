@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+
+
+# in=$(cat /dev/stdin)
+# if [ "$(cat ~/Documents/live-dict-cache.txt)" != "$in" ]
+# then
+ydotool key 29:1 56:1 17:1 17:0 56:0 29:0 # CTRL+ALT+W
+# echo KEYBIND PRESSED $in
+# echo $in > ~/Documents/live-dict-cache.txt
+# fi
