@@ -46,3 +46,7 @@
       path: .goneovim
       relink: true
       force: true
+    ~/.config/systemd/user/:
+      glob: true
+      path: systemd/user/*
+      relink: true
