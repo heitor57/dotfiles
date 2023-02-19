@@ -12,12 +12,13 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
+-- local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 awful.util.spawn_with_shell("wmname LG3D")
+-- awful.spawn.once("polybar")
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -47,6 +48,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/heitor/.config/awesome/theme.lua")
 
+beautiful.useless_gap=5
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
@@ -101,44 +103,16 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+-- menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
 
 
-local lain = require("lain")
-local cpu = lain.widget.cpu {
-    settings = function()
-       widget:set_markup("Cpu[" .. cpu_now.usage .. "%]")
-    end
-}
-local mymem = lain.widget.mem{
-   settings= function()
-      widget:set_markup("Mem[" .. mem_now.perc .. "%]")
-   end
-}
-local bat = lain.widget.bat{
-   settings= function()
-      widget:set_markup("Bat[" .. bat_now.perc .. "%] |".. bat_now.ac_status .. "|")
-   end
-}
 
---Volume bar
-local volume = lain.widget.alsabar(
-    {
-    width=100, height=10, followtag = true,
-    ticks = true, ticks_size = 10
-    }
-)
-
-local volume_widget = wibox.container.background(volume.bar)
-volume_widget.bgimage=beautiful.widget_display
 
 
 -- Create a wibox for each screen and add it
@@ -195,6 +169,7 @@ end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
+mytextclock = wibox.widget.textclock()
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
@@ -203,7 +178,6 @@ awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
-    -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
@@ -217,7 +191,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
     }
 
     -- Create a tasklist widget
@@ -241,17 +215,13 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
-	   layout = wibox.layout.fixed.horizontal,
-	   mymem,
-	   cpu,
-	   bat,
-volume_widget,
-	    mykeyboardlayout,
+            layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
         },
     }
+
 end)
 -- }}}
 
@@ -265,10 +235,13 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    awful.key({ modkey,           }, "a",function () awful.util.spawn_with_shell("/home/heitor/Documents/Projects/dotfiles/bin/cambridge-online") end, {description="Fzf open file", group="personal"}),
+    awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("kitty -e fzf-open-file") end,
+              {description="Fzf open file", group="personal"}),
     awful.key({ modkey,           }, "c",function () awful.util.spawn_with_shell("firefox") end,
               {description="Firefox", group="personal"}),
-    awful.key({ modkey,           }, "z",function () awful.util.spawn_with_shell("kitty -e ranger") end,
-              {description="Ranger", group="personal"}),
+    awful.key({ modkey,           }, "z",function () awful.util.spawn_with_shell("kitty -e lfrun") end,
+              {description="Terminal file manager", group="personal"}),
     awful.key({         }, "XF86AudioMute",function () awful.util.spawn_with_shell("exec pactl set-sink-mute 0 toggle") end,
               {description="Volume toggle", group="personal"}),
     awful.key({           }, "XF86AudioLowerVolume",function () awful.util.spawn_with_shell("exec pactl set-sink-volume 0 -5%") end,
@@ -279,9 +252,9 @@ globalkeys = gears.table.join(
               {description="Show pictures directory", group="personal"}),
     awful.key({ modkey,           }, "i",function () awful.util.spawn_with_shell("slock& sleep 0.5; xset dpms force off") end,
               {description="Lock screen", group="personal"}),
-    awful.key({            }, "XF86MonBrightnessDown",function () awful.util.spawn_with_shell("kdesu -c 'exec xbacklight -dec 10'") end,
+    awful.key({            }, "XF86MonBrightnessDown",function () awful.util.spawn_with_shell("xbacklight -dec 10") end,
               {description="Brightness decrease", group="personal"}),
-    awful.key({            }, "XF86MonBrightnessUp",function () awful.util.spawn_with_shell("kdesu -c 'exec xbacklight -inc 10'") end,
+    awful.key({            }, "XF86MonBrightnessUp",function () awful.util.spawn_with_shell("xbacklight -inc 10") end,
               {description="Brightness increase", group="personal"}),
     -- awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("emacsclient -c") end,
     --           {description="Emacs", group="personal"}),
@@ -289,6 +262,9 @@ globalkeys = gears.table.join(
     --           {description="Thunderbird", group="personal"}),
     awful.key({ modkey,           }, "g",function () awful.util.spawn_with_shell("zathura") end,
               {description="Zathura", group="personal"}),
+
+    awful.key({ modkey,           }, "w",function () awful.util.spawn_with_shell("rofi -show drun") end,
+              {description="rofi drun", group="personal"}),
 
 
 
@@ -314,8 +290,8 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
+    -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
+    --           {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -340,7 +316,7 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey, "Control" }, "r", awesome.restart,
+    awful.key({ modkey }, "p", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "e", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
@@ -387,13 +363,16 @@ globalkeys = gears.table.join(
                     history_path = awful.util.get_cache_dir() .. "/history_eval"
                   }
               end,
-              {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "lua execute prompt", group = "awesome"})
+    -- -- Menubar
+    -- awful.key({ modkey }, "p", function() menubar.show() end,
+    --           {description = "show the menubar", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
+
+    awful.key({ modkey, }, "g", function (c) c.sticky = not c.sticky end, {description = "Toggle Sticky", group = "client"}),
+    awful.key({ modkey }, "m", function (c) c.ontop = not c.ontop end , {description = "toggle sticky client", group = "client"}),
     awful.key({ modkey,           }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
@@ -520,6 +499,11 @@ awful.rules.rules = {
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
      }
     },
+    -- polybar
+    {
+    rule = { class = "Polybar" },
+    properties = { border_width = 0 }
+    },
 
     -- Floating clients.
     { rule_any = {
@@ -556,8 +540,11 @@ awful.rules.rules = {
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = false }
     },
-{ rule = { class = "Firefox" },
-  properties = { maximized = false } },
+{ rule = { class = "firefox" },
+
+properties = { opacity = 1, maximized = false, floating = false } },
+-- { rule = { class = "Firefox" },
+--   properties = { maximized = false } },
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },

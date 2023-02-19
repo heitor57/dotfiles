@@ -1,8 +1,6 @@
 # interpreter for shell commands
 set icons
 set shell sh
-set previewer ~/.config/lf/preview
-set cleaner ~/.config/lf/cleaner
 
 # set '-eu' options for shell commands
 # These options are used to have safer shell commands. Option '-e' is used to
@@ -50,8 +48,14 @@ cmd open ${{
         text/*) $EDITOR $fx;;
         *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
+    # fasd -A "$f"
     fasd -A "$f"
 }}
+
+
+
+
+
 
 # define a custom 'rename' command without prompt for overwrite
 # cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
@@ -109,13 +113,13 @@ cmd zip ${{
     rm -rf $1
 }}
 
-cmd az %lf -remote "send $id cd '$(zoxide query $1)'"
+# cmd az %lf -remote "send $id cd '$(zoxide query $1)'"
 #map a push :az<space>
 #cat ~/.fasd | sort -t'|' -k3 | cut -d'|' -f1 | fzf -e --tac --no-sort
 #
 
 cmd fasd_jump_all ${{
-    res="$(cat ~/.fasd | sort -t'|' -k3 | cut -d'|' -f1 | fzf -e --tac --no-sort)"
+    res="$(cat ~/.cache/fasd | sort -t'|' -k3 | cut -d'|' -f1 | fzf -e --tac --no-sort)"
     if [ -d "$res" ] ; then
         cmd="cd"
     elif [ -f "$res" ] ; then
@@ -127,22 +131,22 @@ cmd fasd_jump_all ${{
 }}
 map <c-f> :fasd_jump_all
 
-cmd zoxide_jump_dir ${{
-    res="$(zoxide query --list | fzf -e --no-sort -1 | head -1)"
-    if [ -d "$res" ] ; then
-        cmd="cd"
-    elif [ -f "$res" ] ; then
-        cmd="select"
-    else
-        exit 0
-    fi
-    lf -remote "send $id $cmd \"$res\""
-}}
-map <c-d> :zoxide_jump_dir
+# cmd zoxide_jump_dir ${{
+#     res="$(zoxide query --list | fzf -e --no-sort -1 | head -1)"
+#     if [ -d "$res" ] ; then
+#         cmd="cd"
+#     elif [ -f "$res" ] ; then
+#         cmd="select"
+#     else
+#         exit 0
+#     fi
+#     lf -remote "send $id $cmd \"$res\""
+# }}
+# map <c-d> :zoxide_jump_dir
 
 
 cmd on-cd &{{
-    zoxide add "$PWD"
+    fasd -A "$PWD"
 }}
 
 # y (select for copy) and P to paste soft-link
@@ -172,5 +176,21 @@ cmd spawn-konsole &{{
 
 map <c-t> :spawn-konsole
 cmd mkdir %IFS=" "; mkdir -- "$*"
-map a push :mkdir<space>
+map cd push :mkdir<space>
+map cf push :touch<space>
 map bw %wpg -a "$f" && wpg -s "$f"
+
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner
+
+cmd z %{{
+	result="$(zoxide query --exclude $PWD $@)"
+	lf -remote "send $id cd $result"
+}}
+
+cmd zi ${{
+	result="$(zoxide query -i)"
+	lf -remote "send $id cd $result"
+}}
+
+map zz :fasd_jump_all

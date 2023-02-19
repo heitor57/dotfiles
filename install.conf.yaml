@@ -38,6 +38,9 @@
     ~/.condarc:
       path: .condarc
       force: true
+    ~/.Xresources:
+      path: .Xresources
+      force: true
     ~/.npmrc:
       path: .npmrc
       force: true

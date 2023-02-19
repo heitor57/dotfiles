@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+res="$(cat ~/.cache/fasd | sort -t'|' -k3 | cut -d'|' -f1  | tac | rofi -dmenu -i)"
+if [ -d "$res" ] ; then
+    cmd="cd"
+elif [ -f "$res" ] ; then
+    cmd="select"
+else
+    exit 0
+fi
+rifle "$res"
