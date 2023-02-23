@@ -498,7 +498,7 @@ neogit.setup { integrations = { diffview = true },
 vim.api.nvim_set_keymap("n", "<leader>og", "<Cmd>Neogit<CR>", { noremap = true, silent = false })
 
 vim.cmd[[
-nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 ranger<CR>
+nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 lf<CR>
 ]]
 
 --callbacks={before_saving=function()

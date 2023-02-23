@@ -74,8 +74,8 @@ awful.layout.layouts = {
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
+    awful.layout.suit.max,
+    awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.magnifier,
     -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
@@ -209,18 +209,41 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            -- mylauncher,
             s.mytaglist,
-            s.mypromptbox,
+            -- s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
+
+wibox.widget{
+    markup = ' ',
+    widget = wibox.widget.textbox
+},
+            awful.widget.watch('bash -c "echo $(task limit:1| sed \'4!d\')"', 60),
+wibox.widget{
+    markup = '  ',
+    widget = wibox.widget.textbox
+},
+-- wibox.widget{
+--     markup = ' <span>\u{f017}</span> <i class="fa-regular fa-clock"></i> ',
+--     align  = 'center',
+--     valign = 'center',
+--     widget = wibox.widget.textbox
+-- },
+            awful.widget.watch('bash -c "echo $(timew | sed \'1!d\') $(timew | sed \'4!d\')"', 60),
+wibox.widget{
+    markup = '  ',
+    widget = wibox.widget.textbox
+},
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
         },
     }
+
+ 
 
 end)
 -- }}}
@@ -563,6 +586,16 @@ client.connect_signal("manage", function (c)
       and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
+    end
+end)
+
+client.connect_signal("property::fullscreen", function(c)
+    if c.fullscreen then
+        gears.timer.delayed_call(function()
+            if c.valid then
+                c:geometry(c.screen.geometry)
+            end
+        end)
     end
 end)
 

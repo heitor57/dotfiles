@@ -62,7 +62,7 @@ alias e='$EDITOR'
 alias ee='nvim --noplugin'
 alias gi=gitignore
 
-alias l="lfrun"
+# alias l="lfrun"
 export LF_ICONS="\
 tw=:\
 st=:\

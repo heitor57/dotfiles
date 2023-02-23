@@ -53,3 +53,6 @@
       glob: true
       path: systemd/user/*
       relink: true
+    ~/.taskrc:
+      path: .taskrc
+      force: true

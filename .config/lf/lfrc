@@ -180,8 +180,8 @@ map cd push :mkdir<space>
 map cf push :touch<space>
 map bw %wpg -a "$f" && wpg -s "$f"
 
-set previewer ~/.config/lf/preview
-set cleaner ~/.config/lf/cleaner
+# set previewer ~/.config/lf/preview
+# set cleaner ~/.config/lf/cleaner
 
 cmd z %{{
 	result="$(zoxide query --exclude $PWD $@)"
@@ -193,4 +193,20 @@ cmd zi ${{
 	lf -remote "send $id cd $result"
 }}
 
+cmd mime_switch ${{
+    mimeopen -d "$f"
+}}
+
+cmd set_plasma_wallpaper ${{
+    qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///'$(pwd)'/'%f'")}'
+}}
+
+
 map zz :fasd_jump_all
+map bs :mime_switch
+set autoquit on
+
+
+map bp :set_plasma_wallpaper
+
+map bw $lf -remote "send $id wpg -a %f && wpg -s %f"
