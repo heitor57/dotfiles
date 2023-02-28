@@ -7,5 +7,5 @@ else
 	temp=$(xsel -o)
 fi
 
-echo $temp | tr '\n' ' '  >> /home/heitor/Desktop/english_phrases.txt
-echo '' >> /home/heitor/Desktop/english_phrases.txt
+echo $temp | tr '\n' ' '  >> /home/heitor/Documents/Cache/english_phrases.txt
+echo '' >> /home/heitor/Documents/Cache/english_phrases.txt

@@ -56,3 +56,6 @@
     ~/.taskrc:
       path: .taskrc
       force: true
+    ~/.vit:
+      path: .vit
+      force: true
