@@ -46,9 +46,5 @@ confirmation=no
 urgency.user.tag.healthy.coefficient=2
 #color.active=white on blue
 #/* uda.taskwarrior-tui.style.report.scrollbar.area=blue */
-
-#uda.taskwarrior-tui.style.context.active=blue on rgb444
-#uda.taskwarrior-tui.style.report.scrollbar=blue on rgb444
-#color.summary.background=white on color0
-
 #color.active=color4 on black
+uda.taskwarrior-tui.selection.reverse=yes
