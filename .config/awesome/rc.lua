@@ -18,7 +18,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 awful.util.spawn_with_shell("wmname LG3D")
--- awful.spawn.once("polybar")
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -48,7 +47,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/heitor/.config/awesome/theme.lua")
 
-beautiful.useless_gap=5
+beautiful.useless_gap=1
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
@@ -195,43 +194,30 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
-        screen  = s,
-        filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
-    }
+    -- s.mytasklist = awful.widget.tasklist {
+    --     screen  = s,
+    --     filter  = awful.widget.tasklist.filter.currenttags,
+    --     buttons = tasklist_buttons
+    -- }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s,bg = beautiful.bg_normal .. "55"})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
+        expand = "none",
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             -- mylauncher,
             s.mytaglist,
             -- s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+        -- s.mytasklist, -- Middle widget
+        
+        awful.widget.watch('bash -c "echo  $(task limit:1| sed \'4!d\')"', 60),
         { -- Right widgets
 
-wibox.widget{
-    markup = ' ',
-    widget = wibox.widget.textbox
-},
-            awful.widget.watch('bash -c "echo $(task limit:1| sed \'4!d\')"', 60),
-wibox.widget{
-    markup = '  ',
-    widget = wibox.widget.textbox
-},
--- wibox.widget{
---     markup = ' <span>\u{f017}</span> <i class="fa-regular fa-clock"></i> ',
---     align  = 'center',
---     valign = 'center',
---     widget = wibox.widget.textbox
--- },
-            awful.widget.watch('bash -c "echo $(timew | sed \'1!d\') $(timew | sed \'4!d\')"', 60),
 wibox.widget{
     markup = '  ',
     widget = wibox.widget.textbox
@@ -258,8 +244,9 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "a",function () awful.util.spawn_with_shell("/home/heitor/Documents/Projects/dotfiles/bin/cambridge-online") end, {description="Fzf open file", group="personal"}),
-    awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("kitty -e fzf-open-file") end,
+    awful.key({ modkey,           }, "t",function () awful.util.spawn_with_shell("kitty -e /usr/bin/taskwarrior-tui") end, {description="Tasks", group="personal"}),
+    awful.key({ modkey,           }, "a",function () awful.util.spawn_with_shell("/home/heitor/Documents/Projects/dotfiles/bin/cambridge-online") end, {description="", group="personal"}),
+    awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("fzf-open-file") end,
               {description="Fzf open file", group="personal"}),
     awful.key({ modkey,           }, "c",function () awful.util.spawn_with_shell("firefox") end,
               {description="Firefox", group="personal"}),
