@@ -11,8 +11,8 @@ request='{
     "action": "addNote",
     "params": {
         "note": {
-            "deckName": "M::Languages::English::English Sentences",
-            "modelName": "Basic translate",
+            "deckName": "M::Languages::English::English Words",
+            "modelName": "Basic",
             "fields": {
                 "Front": "'"$temp"'",
                 "Back": ""

@@ -263,7 +263,7 @@ globalkeys = gears.table.join(
               {description="Fzf open file", group="personal"}),
     awful.key({ modkey,           }, "c",function () awful.util.spawn_with_shell("firefox") end,
               {description="Firefox", group="personal"}),
-    awful.key({ modkey,           }, "z",function () awful.util.spawn_with_shell("kitty -e lfrun") end,
+    awful.key({ modkey,           }, "z",function () awful.util.spawn_with_shell("kitty -e ranger") end,
               {description="Terminal file manager", group="personal"}),
     awful.key({         }, "XF86AudioMute",function () awful.util.spawn_with_shell("exec pactl set-sink-mute 0 toggle") end,
               {description="Volume toggle", group="personal"}),
