@@ -13,4 +13,4 @@ else
 	temp=$(xsel -o)
 fi
 
-gtk-launch $(xdg-settings get default-web-browser) 'https://translate.google.com/?sl=en&tl=pt&text='"$(urlencode $temp)"'&op=translate'
+xdg-open 'https://translate.google.com/?sl=en&tl=pt&text='"$(urlencode $temp)"'&op=translate'

@@ -7,4 +7,4 @@ then
 else
 	temp=$(xsel -o)
 fi
-xdg-open "https://www.google.com/search?q=define:$temp"
+gtk-launch $(xdg-settings get default-web-browser) "https://www.google.com/search?q=$temp&tbm=isch"

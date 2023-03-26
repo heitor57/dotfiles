@@ -7,12 +7,13 @@ else
 	temp=$(xsel -o)
 fi
 temp=$(echo $temp | tr '\n' ' ')
+# translation=$(trans -show-original=n en:pt "$temp")
 request='{
     "action": "addNote",
     "params": {
         "note": {
-            "deckName": "M::Languages::English::English Sentences",
-            "modelName": "Basic translate",
+            "deckName": "Languages::English::Sentences Speak::2",
+            "modelName": "Basic translate speak",
             "fields": {
                 "Front": "'"$temp"'",
                 "Back": ""

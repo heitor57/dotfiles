@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+import time
+import os
+import fileinput
+import subprocess
+from anki_connect import invoke
+
+for line in fileinput.input():
+    line = line.replace('\n', '')
+    word, meaning, example = tuple(line.split('|'))
+    invoke('addNote', note={
+        "deckName": "Languages::English::Sentences::1",
+           "modelName": "Sentence word",
+           "fields": {
+               "Word": word,
+               "Meaning": meaning,
+               "Example": example
+           },
+           "options": {
+               "allowDuplicate": True}
+           })

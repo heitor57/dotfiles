@@ -119,7 +119,21 @@ addLookDictionaryText () {
 zle -N addLookDictionaryText
 bindkey '^V' addLookDictionaryText
 
-alias ej='nvim "/home/heitor/Dropbox/Documents/Obsidian/vault/2023/"$(date "+%Y-%m-%d.md")'
+alias ej='nvim "/home/heitor/Dropbox/Documents/Notes/2023/"$(date "+%Y-%m-%d.md")'
 alias tt="taskwarrior-tui"
 
+nb-list() {
+  nb list -t note --no-color | sed -r 's/\[//' | sed -r 's/\]//' |
+  fzf --height 50% \
+    --preview "nb show -p {1} | head -n 200 | bat -l md" \
+    --bind "alt-j:preview-down,alt-k:preview-up,alt-d:preview-page-down,alt-u:preview-page-up" \
+    --preview-window=right:70% |
+  cut -d$' ' -f1
+}
+
+# zle -N nb-list
+# bindkey '^F^F' 'nb edit $(nb-list)'
+bindkey -s "^F^F" 'nb edit $(nb-list)^M'
+
 eval "$(starship init zsh)"
+

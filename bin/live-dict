@@ -7,7 +7,23 @@
 # if [ $XDG_SESSION_TYPE = wayland ]
 # then
 # wl-paste --primary --watch live-dict-keybind
-wl-paste --primary --watch /home/heitor/Documents/Projects/dotfiles/bin/cambridge-online
+
+if [ $XDG_SESSION_TYPE = wayland ]
+then
+	wl-paste --primary --watch /home/heitor/Documents/Projects/dotfiles/bin/cambridge-online
+else
+        previous_selected_text=""
+        while true
+        do
+                selected_text=$(xclip -o)
+                if [ "$selected_text" != "$previous_selected_text" ]
+                then
+                        /home/heitor/Documents/Projects/dotfiles/bin/cambridge-online
+                fi
+                previous_selected_text=$selected_text
+                sleep 1
+        done
+fi
 # else
 # 	;
 # fi

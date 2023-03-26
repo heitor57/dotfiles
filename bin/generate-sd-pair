@@ -3,26 +3,33 @@ import time
 import os
 import fileinput
 import subprocess
+from anki_connect import invoke
 
 for line in fileinput.input():
-    sentences = subprocess.run(["yourdictionary", "-n","15","-t","sentence",line], capture_output=True, text=True)
-    # definition = subprocess.run([,*r"| sed 's/.\[[0-9]\{1,\}m//g'".split(' ')],capture_output=True, text=True)
-    ps = subprocess.Popen(("trans", "-d",line), stdout=subprocess.PIPE)
-    definition = subprocess.check_output(("sed", r"s/.\[[0-9]\{1,\}m//g"), stdin=ps.stdout)
-    ps.wait()
+    sentences = subprocess.run(
+        ["yourdictionary", "-n", "0", "-t", "sentence", line], capture_output=True, text=True)
     sentences = sentences.stdout
-    definition = definition.decode('utf-8')
-    # definition=definition.encode('ascii', errors='ignore')
-    # definition=definition.decode('ascii')
-    # print(definition)
-    definition=definition.replace('\n',"<br>")
-    # print(sentences)
-    # print(definition)
     for sentence in sentences.splitlines():
-        print(sentence,'|',definition)
-    time.sleep(20)
-# os.system(f"xdotool type --delay 500 '{text}'")
-
-# for i in text:
-    # time.sleep(0.05)
-    # os.system(f"xdotool key '{i}'")
+        sentence_num_words = len(sentence.split())
+        if sentence_num_words > 20:
+            continue
+        ps = subprocess.Popen(
+            ("trans", "-show-original=n","en:pt", sentence), stdout=subprocess.PIPE)
+        ps.wait()
+        definition = subprocess.check_output(
+            ("sed", r"s/.\[[0-9]\{1,\}m//g"), stdin=ps.stdout)
+        definition = definition.decode('utf-8')
+        definition=definition.replace('\n',"<br>")
+        print(sentence, '|', definition, end='')
+        invoke('addNote', note={
+            "deckName": "M::English Sentences Audio::2",
+               "modelName": "Basic translate speak",
+               "fields": {
+                   "Front": sentence,
+                   "Back": definition
+               },
+               "options":{
+                   "allowDuplicate":True}
+               })
+        time.sleep(1)
+    time.sleep(0.2)

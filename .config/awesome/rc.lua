@@ -18,6 +18,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 awful.util.spawn_with_shell("wmname LG3D")
+-- awful.spawn.once("systemctl --user start blugon.service")
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -244,9 +245,12 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    awful.key({ modkey,           }, "d",function () awful.util.spawn_with_shell("google-dictionary") end, {description="", group="personal"}),
+    awful.key({ modkey,           }, "r",function () awful.util.spawn_with_shell("word-add") end, {description="", group="personal"}),
+    awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("anki-file-add") end, {description="", group="personal"}),
     awful.key({ modkey,           }, "t",function () awful.util.spawn_with_shell("kitty -e /usr/bin/taskwarrior-tui") end, {description="Tasks", group="personal"}),
     awful.key({ modkey,           }, "a",function () awful.util.spawn_with_shell("/home/heitor/Documents/Projects/dotfiles/bin/cambridge-online") end, {description="", group="personal"}),
-    awful.key({ modkey,           }, "e",function () awful.util.spawn_with_shell("fzf-open-file") end,
+    awful.key({ modkey,           }, "f",function () awful.util.spawn_with_shell("fzf-open-file") end,
               {description="Fzf open file", group="personal"}),
     awful.key({ modkey,           }, "c",function () awful.util.spawn_with_shell("firefox") end,
               {description="Firefox", group="personal"}),

@@ -1,0 +1,52 @@
+#!/usr/bin/python3
+import time
+import os
+import fileinput
+import subprocess
+from anki_connect import invoke
+
+for word in fileinput.input():
+    sentences = subprocess.run(
+        ["yourdictionary", "-n", "0", "-t", "sentence", word], capture_output=True, text=True)
+    sentences = sentences.stdout
+    ps = subprocess.Popen(
+        ("trans", word), stdout=subprocess.PIPE)
+    ps.wait()
+    definition = subprocess.check_output(
+        ("sed", r"s/.\[[0-9]\{1,\}m//g"), stdin=ps.stdout)
+    definition = definition.decode('utf-8')
+    definition = definition.replace('\n', "<br>")
+    invoke('addNote', note={
+        "deckName": "Languages::English::Words::2",
+           "modelName": "Basic",
+           "fields": {
+               "Front": word,
+               "Back": definition
+           },
+           "options": {
+               "allowDuplicate": True}
+           })
+    for sentence in sentences.splitlines():
+        sentence_num_words = len(sentence.split())
+        if sentence_num_words > 20:
+            continue
+        ps = subprocess.Popen(
+            ("trans", "-show-original=n", "en:pt", sentence), stdout=subprocess.PIPE)
+        ps.wait()
+        translation = subprocess.check_output(
+            ("sed", r"s/.\[[0-9]\{1,\}m//g"), stdin=ps.stdout)
+        translation = translation.decode('utf-8')
+        translation = translation.replace('\n', "<br>")
+        # print(sentence, '|', translation, end='')
+        invoke('addNote', note={
+            "deckName": "Languages::English::Sentences Speak::2",
+               "modelName": "Basic translate speak",
+               "fields": {
+                   "Front": sentence,
+                   "Back": translation
+               },
+               "options": {
+                   "allowDuplicate": True}
+               })
+        time.sleep(1)
+    time.sleep(0.2)

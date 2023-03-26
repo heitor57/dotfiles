@@ -40,10 +40,27 @@
 #include no-color.theme
 
 news.version=2.6.0
-confirmation=no
+confirmation=off
+recurrence.confirmation=off
 #uda.taskwarrior-tui.shortcuts.1=~/.task/taskwarrior-tui/track-time-start.sh
 #uda.taskwarrior-tui.shortcuts.2=~/.task/taskwarrior-tui/track-time-stop.sh
 urgency.user.tag.healthy.coefficient=2
+urgency.user.tag.lifestyle.coefficient=0
+uda.priority.values=H,M,L
+urgency.user.priority.L.coefficient=2
+uda.effort.type=string
+uda.effort.label=Effort
+uda.effort.values=s,m,l,xl,xxl
+urgency.uda.effort.s.coefficient=1.5
+urgency.uda.effort.m.coefficient=1.1
+urgency.uda.effort.l.coefficient=1
+urgency.uda.effort.xl.coefficient=0
+urgency.uda.effort.xxl.coefficient=-0.2
+color.uda.effort.s=color180
+color.uda.effort.m=color210
+color.uda.effort.l=color255
+color.uda.effort.xl=color255
+color.uda.effort.xxl=color255
 #color.active=white on blue
 #/* uda.taskwarrior-tui.style.report.scrollbar.area=blue */
 #color.active=color4 on black
