@@ -78,7 +78,7 @@ cmd trash %set -f; mv $fx ~/.trash
 # }}
 
 # use '<delete>' key for either 'trash' or 'delete' command
- map <delete> trash
+map <delete> trash
 # map <delete> delete
 
 # extract the current file with the right command
@@ -180,8 +180,8 @@ map cd push :mkdir<space>
 map cf push :touch<space>
 map bw %wpg -a "$f" && wpg -s "$f"
 
-# set previewer ~/.config/lf/preview
-# set cleaner ~/.config/lf/cleaner
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner
 
 cmd z %{{
 	result="$(zoxide query --exclude $PWD $@)"
@@ -205,7 +205,6 @@ cmd set_plasma_wallpaper ${{
 map zz :fasd_jump_all
 map bs :mime_switch
 set autoquit on
-
 
 map bp :set_plasma_wallpaper
 
