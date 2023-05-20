@@ -259,6 +259,10 @@ pcall(require('telescope').load_extension, 'fzf')
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>u', require('telescope.builtin').oldfiles, { desc = 'Find recently opened [o]ld files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.cmd[[
+noremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
+noremap <c-p> <cmd>Telescope git_files<cr>
+]]
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -267,7 +271,7 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+-- vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
@@ -520,7 +524,7 @@ neogit.setup { integrations = { diffview = true },
 vim.api.nvim_set_keymap("n", "<leader>og", "<Cmd>Neogit<CR>", { noremap = true, silent = false })
 
 vim.cmd [[
-nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 --opener=edit ranger<CR>
+nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 --opener=edit lf<CR>
 ]]
 
 --callbacks={before_saving=function()

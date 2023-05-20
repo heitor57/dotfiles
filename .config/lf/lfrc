@@ -173,6 +173,9 @@ map P :link
 cmd spawn-konsole &{{
     konsole --workdir $PWD
 }}
+cmd spawn-dolphin &{{
+    dolphin $PWD
+}}
 
 map <c-t> :spawn-konsole
 cmd mkdir %IFS=" "; mkdir -- "$*"
@@ -180,8 +183,8 @@ map cd push :mkdir<space>
 map cf push :touch<space>
 map bw %wpg -a "$f" && wpg -s "$f"
 
-set previewer ~/.config/lf/preview
-set cleaner ~/.config/lf/cleaner
+set previewer ~/.config/lf/lf_kitty_preview
+set cleaner ~/.config/lf/lf_kitty_clean
 
 cmd z %{{
 	result="$(zoxide query --exclude $PWD $@)"
@@ -209,3 +212,6 @@ set autoquit on
 map bp :set_plasma_wallpaper
 
 map bw $lf -remote "send $id wpg -a %f && wpg -s %f"
+# map bd %/usr/bin/dolphin "$PWD"
+# map bd $lf -remote "send $id dolphin %PWD"
+map bd :spawn-dolphin
