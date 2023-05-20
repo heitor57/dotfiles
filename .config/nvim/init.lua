@@ -11,7 +11,7 @@ end
 
 require('packer').startup(function(use)
   use 'jamessan/vim-gnupg'
-  use 'Mofiqul/dracula.nvim'
+  -- use 'Mofiqul/dracula.nvim'
   use {
     'SidOfc/mkdx',
     config = function()
@@ -81,7 +81,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
-  -- use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' }
+  use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' }
   -- use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
@@ -206,7 +206,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'dracula-nvim',
+    theme = 'pywal-nvim',
     component_separators = '|',
     section_separators = '',
   },
@@ -533,12 +533,12 @@ vim.cmd [[
 autocmd CursorHoldI,CursorHold * silent! update
 ]]
 
--- local pywal = require('pywal')
--- pywal.setup()
+local pywal = require('pywal')
+pywal.setup()
 
 vim.api.nvim_set_keymap('n', '<Leader>ar', ':lua require("replacer").run()<cr>', { silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ag', ':Grepper<cr>', { silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>pp', ':PasteImg<cr>', { silent = true })
 
-vim.cmd[[colorscheme dracula]]
+-- vim.cmd[[colorscheme dracula]]
 vim.cmd[[let g:markdown_folding = 1]]

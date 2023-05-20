@@ -195,11 +195,11 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create a tasklist widget
-    -- s.mytasklist = awful.widget.tasklist {
-    --     screen  = s,
-    --     filter  = awful.widget.tasklist.filter.currenttags,
-    --     buttons = tasklist_buttons
-    -- }
+    s.mytasklist = awful.widget.tasklist {
+        screen  = s,
+        filter  = awful.widget.tasklist.filter.currenttags,
+        buttons = tasklist_buttons
+    }
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s,bg = beautiful.bg_normal .. "55"})
@@ -214,9 +214,9 @@ awful.screen.connect_for_each_screen(function(s)
             s.mytaglist,
             -- s.mypromptbox,
         },
-        -- s.mytasklist, -- Middle widget
-        
-        awful.widget.watch('bash -c "echo  $(task limit:1| sed \'4!d\')"', 60),
+        s.mytasklist, -- Middle widget
+        -- {},
+        -- awful.widget.watch('bash -c "echo  $(task limit:1| sed \'4!d\')"', 60),
         { -- Right widgets
 
 wibox.widget{
