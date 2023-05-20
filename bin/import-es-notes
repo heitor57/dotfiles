@@ -1,22 +1,16 @@
 #!/usr/bin/python3
 import fileinput
 from anki_connect import invoke
-import argparse
-import sys
-parser = argparse.ArgumentParser()
-parser.add_argument(
-    '--deck', type=str, nargs='?', default="Languages::English::Common Knowledge")
-args = parser.parse_args()
 
-for line in sys.stdin:
+for line in fileinput.input():
     line = line.replace('\n', '')
     fields = tuple(line.split('|'))
     front = fields[0]
     back = '<br>'.join([fields[i] for i in range(1, len(fields))])
+    print(f"Front: {front}\nBack: {back}")
     if (front != '') and (back != ''):
-        print(f"{args.deck}\nFront: {front}\nBack: {back}")
         invoke('addNote', note={
-            "deckName": args.deck,
+            "deckName": "Languages::Espanol::Common Knowledge",
                "modelName": "Basic",
                "fields": {
                    "Front": front,
@@ -25,4 +19,3 @@ for line in sys.stdin:
                "options": {
                    "allowDuplicate": True}
                })
-        print("========")

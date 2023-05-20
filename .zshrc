@@ -119,7 +119,7 @@ addLookDictionaryText () {
 zle -N addLookDictionaryText
 bindkey '^V' addLookDictionaryText
 
-alias ej='nvim "/home/heitor/Dropbox/Documents/Notes/2023/"$(date "+%Y-%m-%d.md")'
+alias ej='nvim "/home/heitor/Dropbox/Documents/Notes/journals/"$(date "+%Y-%m-%d.md")'
 alias tt="taskwarrior-tui"
 
 nb-list() {

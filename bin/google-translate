@@ -12,5 +12,5 @@ then
 else
 	temp=$(xsel -o)
 fi
-
-xdg-open 'https://translate.google.com/?sl=en&tl=pt&text='"$(urlencode $temp)"'&op=translate'
+# echo $temp
+url-launcher 'https://translate.google.com/?sl=auto&tl=pt&text='"$temp"'&op=translate'

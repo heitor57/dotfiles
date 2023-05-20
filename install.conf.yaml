@@ -59,3 +59,6 @@
     ~/.vit:
       path: .vit
       force: true
+    ~/.Xmodmap:
+      path: .Xmodmap
+      force: true

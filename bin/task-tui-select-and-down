@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+xdotool key v
+xdotool key j

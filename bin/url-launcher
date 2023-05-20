@@ -1,11 +1,15 @@
 #!/usr/bin/bash
-desktop=$(xprop -root -notype _NET_CURRENT_DESKTOP | cut -d\  -f3)
-ff_raw=$(wmctrl -lp | grep "  $desktop " | grep Firefox | head -n1)
-[ -z "$ff_raw" ] && xdg-open "$1"
-echo $ff_raw
-ff_wid=$(echo $ff_raw | awk '{print $1}')
+browser=$(xdg-settings get default-web-browser)
+if [ "$browser" != "brave-browser.desktop" ]
+then
+	desktop=$(xprop -root -notype _NET_CURRENT_DESKTOP | cut -d\  -f3)
+	ff_raw=$(wmctrl -lp | grep "  $desktop " | grep Firefox | head -n1)
+	[ -z "$ff_raw" ] && xdg-open "$1"
+	echo $ff_raw
+	ff_wid=$(echo $ff_raw | awk '{print $1}')
 
-wmctrl -i -a $ff_wid
+	wmctrl -i -a $ff_wid
+fi
 xdg-open "$1"
 # xdotool key ctrl+t
 # xdotool getwindowfocus windowfocus --sync type "$1"

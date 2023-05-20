@@ -2,7 +2,7 @@
 import datetime
 import subprocess
 
-bashCommand = 'nvme smart-log /dev/nvme0n1 | grep data_units_written | cut -d" " -f2'
+bashCommand = r'''nvme smart-log /dev/nvme0n1 | grep "Data Units Written" | cut -d":" -f2 | cut -d" " -f2 | sed 's/\.//g' '''
 process = subprocess.Popen(['bash','-c',bashCommand], stdout=subprocess.PIPE)
 # process = subprocess.Popen(['bash','-c',bashCommand]+bashCommand.split(), stdout=subprocess.PIPE)
 output, error = process.communicate()

@@ -10,6 +10,28 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 require('packer').startup(function(use)
+  use 'jamessan/vim-gnupg'
+  use 'Mofiqul/dracula.nvim'
+  use {
+    'SidOfc/mkdx',
+    config = function()
+
+      vim.cmd([[
+       let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
+       \ 'enter': { 'shift': 1 },
+       \ 'links': { 'external': { 'enable': 1 } },
+       \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
+       \ 'fold': { 'enable': 0 } }
+       let g:polyglot_disabled = ['markdown'] 
+       let g:mkdx#settings = { 'map': { 'prefix': '\\' }, 'fold': { 'components': ['toc', 'fence'] }}
+       ]])
+    end
+  }
+  use 'mhinz/vim-grepper'
+  use {
+    "gabrielpoca/replacer.nvim"
+  }
+  use 'mg979/vim-visual-multi'
   -- use 'preservim/vim-markdown'
   use 'ekickx/clipboard-image.nvim'
   -- use{'Pocco81/auto-save.nvim'}
@@ -59,7 +81,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
-  use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' }
+  -- use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' }
   -- use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
@@ -184,7 +206,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'pywal-nvim',
+    theme = 'dracula-nvim',
     component_separators = '|',
     section_separators = '',
   },
@@ -235,7 +257,7 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>oo', require('telescope.builtin').oldfiles, { desc = 'Find recently opened [o]ld files' })
+vim.keymap.set('n', '<leader>u', require('telescope.builtin').oldfiles, { desc = 'Find recently opened [o]ld files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -256,7 +278,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'markdown' },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -497,19 +519,26 @@ neogit.setup { integrations = { diffview = true },
 
 vim.api.nvim_set_keymap("n", "<leader>og", "<Cmd>Neogit<CR>", { noremap = true, silent = false })
 
-vim.cmd[[
-nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 ranger<CR>
+vim.cmd [[
+nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 --opener=edit ranger<CR>
 ]]
 
 --callbacks={before_saving=function()
- --   os.execute("sleep " .. tonumber(3))
-  --end}
+--   os.execute("sleep " .. tonumber(3))
+--end}
 -- require('auto-save').setup({debounce_delay=50000})
 vim.api.nvim_set_keymap("n", "<leader>os", ":ASToggle<CR>", {})
 --
-vim.cmd[[
+vim.cmd [[
 autocmd CursorHoldI,CursorHold * silent! update
 ]]
 
-local pywal = require('pywal')
-pywal.setup()
+-- local pywal = require('pywal')
+-- pywal.setup()
+
+vim.api.nvim_set_keymap('n', '<Leader>ar', ':lua require("replacer").run()<cr>', { silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>ag', ':Grepper<cr>', { silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>pp', ':PasteImg<cr>', { silent = true })
+
+vim.cmd[[colorscheme dracula]]
+vim.cmd[[let g:markdown_folding = 1]]

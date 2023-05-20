@@ -7,4 +7,4 @@ then
 else
 	temp=$(xsel -o)
 fi
-url-launcher "https://www.google.com/search?q=define:$temp"
+echo "- $temp" >> ~/Dropbox/Documents/Notes/journals/$(date "+%Y-%m-%d.md")

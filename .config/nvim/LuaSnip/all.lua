@@ -16,4 +16,12 @@ return {
       { delimiters = "<>" }
     )
   ),
+  s({ trig = "cc", snippetType = "autosnippet" },
+    fmt(
+      [[# <>
+<>]],
+      { i(1),i(2)},
+      { delimiters = "<>" }
+    )
+  ),
 }
