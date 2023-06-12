@@ -1,6 +1,7 @@
 # interpreter for shell commands
 set icons
-set shell sh
+set shell zsh
+set hidden!
 
 # set '-eu' options for shell commands
 # These options are used to have safer shell commands. Option '-e' is used to
@@ -119,7 +120,8 @@ cmd zip ${{
 #
 
 cmd fasd_jump_all ${{
-    res="$(cat ~/.cache/fasd | sort -t'|' -k3 | cut -d'|' -f1 | fzf -e --tac --no-sort)"
+    # res="$(cat ~/.cache/fasd | sort -t'|' -k3 | cut -d'|' -f1 | fzf -e --tac --no-sort)"
+    res="$(fasd -t | sort -k1 -g | fzf --no-sort -e --tac | grep '/.*' -o)"
     if [ -d "$res" ] ; then
         cmd="cd"
     elif [ -f "$res" ] ; then
@@ -207,11 +209,13 @@ cmd set_plasma_wallpaper ${{
 
 map zz :fasd_jump_all
 map bs :mime_switch
-set autoquit on
+set autoquit true
 
 map bp :set_plasma_wallpaper
 
-map bw $lf -remote "send $id wpg -a %f && wpg -s %f"
+# map bw $lf -remote "send $id wpg -a %f && wpg -s %f"
 # map bd %/usr/bin/dolphin "$PWD"
 # map bd $lf -remote "send $id dolphin %PWD"
 map bd :spawn-dolphin
+map bz !zsh
+map . set hidden!

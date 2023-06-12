@@ -10,7 +10,7 @@
 
 if [ $XDG_SESSION_TYPE = wayland ]
 then
-	wl-paste --primary --watch /home/heitor/Documents/Projects/dotfiles/bin/cambridge-online
+	wl-paste --primary --watch /home/heitor/Documents/Projects/dotfiles/bin/google-dictionary
 else
         previous_selected_text=""
         while true
@@ -18,7 +18,7 @@ else
                 selected_text=$(xclip -o)
                 if [ "$selected_text" != "$previous_selected_text" ]
                 then
-                        /home/heitor/Documents/Projects/dotfiles/bin/cambridge-online
+                        /home/heitor/Documents/Projects/dotfiles/bin/google-dictionary
                 fi
                 previous_selected_text=$selected_text
                 sleep 1

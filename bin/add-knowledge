@@ -7,4 +7,4 @@ then
 else
 	temp=$(xsel -o)
 fi
-echo "- $temp" >> ~/Dropbox/Documents/Notes/journals/$(date "+%Y-%m-%d.md")
+echo "- $temp" >> ~/Dropbox/Documents/Notes/journals/$(date "+%Y_%m_%d.md")

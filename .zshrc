@@ -1,3 +1,4 @@
+# if [ "$TMUX" = "" ]; then tmux; else tmux a; fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -119,8 +120,9 @@ addLookDictionaryText () {
 zle -N addLookDictionaryText
 bindkey '^V' addLookDictionaryText
 
-alias ej='nvim "/home/heitor/Dropbox/Documents/Notes/journals/"$(date "+%Y-%m-%d.md")'
+alias ej='$EDITOR "/home/heitor/Dropbox/Documents/Notes/journals/"$(date "+%Y_%m_%d.md")'
 alias tt="taskwarrior-tui"
+alias r="ranger"
 
 nb-list() {
   nb list -t note --no-color | sed -r 's/\[//' | sed -r 's/\]//' |
@@ -133,7 +135,5 @@ nb-list() {
 
 # zle -N nb-list
 # bindkey '^F^F' 'nb edit $(nb-list)'
-bindkey -s "^F^F" 'nb edit $(nb-list)^M'
-
+# bindkey -s "^F^F" 'nb edit $(nb-list)^M'
 eval "$(starship init zsh)"
-

@@ -164,9 +164,10 @@ function sub_file(prop, subtext)
     if subtext and subtext ~= '' then
         --os.execute("xdotool key space")
         os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' ' | wl-copy")
-        os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' '  >> /home/heitor/Desktop/english_phrases.txt")
-        os.execute("echo ''  >> /home/heitor/Desktop/english_phrases.txt")
+        os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' '  >> /home/heitor/Documents/english_phrases.txt")
+        os.execute("echo ''  >> /home/heitor/Documents/english_phrases.txt")
         os.execute("gtk-launch $(xdg-settings get default-web-browser) 'https://translate.google.com/?sl=en&tl=pt&text='" .. escape(urlencode(subtext:gsub("[\n\r]"," "))) .. "'&op=translate'")
+        mp.set_property_native("pause", true)
         --os.execute("xdotool keydown alt key Tab")
         --os.execute("sleep 4")
         --os.execute("xdotool keydown alt key Tab")
@@ -178,8 +179,8 @@ function sub_file_only(prop, subtext)
     local subtext = mp.get_property("sub-text")
     if subtext and subtext ~= '' then
         os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' ' | wl-copy")
-        os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' '  >> /home/heitor/Desktop/english_phrases.txt")
-        os.execute("echo ''  >> /home/heitor/Desktop/english_phrases.txt")
+        os.execute("echo '" .. escape(subtext) .. "' | tr '\n' ' '  >> /home/heitor/Documents/english_phrases.txt")
+        os.execute("echo ''  >> /home/heitor/Documents/english_phrases.txt")
     end
 end
 

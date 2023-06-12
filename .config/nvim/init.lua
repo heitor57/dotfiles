@@ -10,19 +10,34 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 require('packer').startup(function(use)
+  use 'airblade/vim-rooter'
+  use 'itchyny/vim-qfedit'
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v2', -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      -- place this in one of your configuration file(s)
+      local hop = require('hop')
+      hop.setup()
+      -- local directions = require('hop.hint').HintDirection
+      -- vim.keymap.set('', 't', function()
+      --   hop.hint_words()
+      -- end, {remap=true})
+    end
+  }
   use 'jamessan/vim-gnupg'
   -- use 'Mofiqul/dracula.nvim'
   use {
     'SidOfc/mkdx',
     config = function()
-
       vim.cmd([[
        let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
        \ 'enter': { 'shift': 1 },
        \ 'links': { 'external': { 'enable': 1 } },
        \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
        \ 'fold': { 'enable': 0 } }
-       let g:polyglot_disabled = ['markdown'] 
+       let g:polyglot_disabled = ['markdown']
        let g:mkdx#settings = { 'map': { 'prefix': '\\' }, 'fold': { 'components': ['toc', 'fence'] }}
        ]])
     end
@@ -33,12 +48,12 @@ require('packer').startup(function(use)
   }
   use 'mg979/vim-visual-multi'
   -- use 'preservim/vim-markdown'
-  use 'ekickx/clipboard-image.nvim'
+  -- use 'ekickx/clipboard-image.nvim'
   -- use{'Pocco81/auto-save.nvim'}
   use {
     'voldikss/vim-floaterm'
   }
-  use { 'TimUntersberger/neogit', branch = 'fix-427',
+  use { 'TimUntersberger/neogit',
     requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim', 'nvim-tree/nvim-web-devicons' } }
   use("mickael-menu/zk-nvim")
 
@@ -83,10 +98,10 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
   use { 'AlphaTechnolog/pywal.nvim', as = 'pywal' }
   -- use 'navarasu/onedark.nvim' -- Theme inspired by Atom
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+  use 'nvim-lualine/lualine.nvim'           -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use 'numToStr/Comment.nvim'               -- "gc" to comment visual regions/lines
+  use 'tpope/vim-sleuth'                    -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -256,10 +271,35 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+-- local sorters = require "telescope.sorters"
+
+-- TODO: use fzf when available
+local telescope_preserve_order = function(opts)
+  opts = opts or {}
+  local fzy = opts.fzy_mod or require "telescope.algos.fzy"
+
+  return require "telescope.sorters".Sorter:new {
+    scoring_function = function(_, prompt, line, _)
+      if not fzy.has_match(prompt, line) then
+        return -1
+      end
+      return 1
+    end,
+
+    highlighter = function(_, prompt, display)
+      return fzy.positions(prompt, display)
+    end,
+  }
+end
+
+
+
+vim.keymap.set('n', '<leader>r',
+  function() require('telescope.builtin').command_history({ sorter = telescope_preserve_order() }) end, {})
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>u', require('telescope.builtin').oldfiles, { desc = 'Find recently opened [o]ld files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.cmd[[
+vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.cmd [[
 noremap <leader>sf <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
 noremap <c-p> <cmd>Telescope git_files<cr>
 ]]
@@ -274,7 +314,11 @@ end, { desc = '[/] Fuzzily search in current buffer]' })
 -- vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sg',
+  function()
+    require('telescope.builtin').live_grep { hidden = true }
+  end
+  , { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 --vim.keymap.set('n', '<leader>ec', vim.cmd([[e $MYVIMRC]]), { desc = "Edit Config" })
 
@@ -371,7 +415,7 @@ local on_attach = function(_, bufnr)
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('fd', vim.lsp.buf.formatting, 'Format document')
+  nmap('fd', vim.lsp.buf.format, 'Format document')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
@@ -524,7 +568,7 @@ neogit.setup { integrations = { diffview = true },
 vim.api.nvim_set_keymap("n", "<leader>og", "<Cmd>Neogit<CR>", { noremap = true, silent = false })
 
 vim.cmd [[
-nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 --opener=edit lf<CR>
+nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 --opener=edit ranger<CR>
 ]]
 
 --callbacks={before_saving=function()
@@ -545,4 +589,8 @@ vim.api.nvim_set_keymap('n', '<Leader>ag', ':Grepper<cr>', { silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>pp', ':PasteImg<cr>', { silent = true })
 
 -- vim.cmd[[colorscheme dracula]]
-vim.cmd[[let g:markdown_folding = 1]]
+-- vim.cmd [[let g:markdown_folding = 1]]
+vim.cmd [[
+" let g:rooter_change_directory_for_non_project_files = 'home'
+let g:rooter_resolve_links = 1
+]]

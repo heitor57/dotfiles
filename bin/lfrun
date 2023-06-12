@@ -1,4 +1,5 @@
 #!/bin/sh
+exit
 set -e
 
 cleanup() {
