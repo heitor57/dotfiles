@@ -159,7 +159,7 @@ function step_subtitle()
 end
 
 
-function sub_file(prop, subtext)
+function sub_file_base(prop, subtext)
     local subtext = mp.get_property("sub-text")
     if subtext and subtext ~= '' then
         --os.execute("xdotool key space")
@@ -174,6 +174,9 @@ function sub_file(prop, subtext)
     end
 end
 
+function sub_file(prop, subtext)
+    sub_file_base(prop,subtext)
+end
 
 function sub_file_only(prop, subtext)
     local subtext = mp.get_property("sub-text")

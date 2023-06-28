@@ -3,19 +3,35 @@
 if [ "$*" != "" ]
 then
 	temp="$*"
-elif [ $XDG_SESSION_TYPE = wayland ]
-then
-	temp=$(wl-paste --primary)
 else
-	temp=$(xsel -o)
+	if [ $XDG_SESSION_TYPE = wayland ]
+	then
+		temp=$(wl-paste --primary)
+	else
+		temp=$(xsel -o)
+	fi
+fi
+
+if [ $XDG_SESSION_TYPE = wayland ]
+then
+	xdotool set_desktop 1
+	sleep 0.1
+	ydotool mousemove 900 950
+	sleep 0.1
+	xdotool click 0xC0
+	sleep 0.1
+	ydotool type "$temp"
+	sleep 0.3
+	xdotool key Enter
+else
+	xdotool set_desktop 1
+	sleep 0.1
+	xdotool mousemove 900 950
+	sleep 0.1
+	xdotool click 1
+	sleep 0.1
+	xdotool type --delay 10 "$temp"
+	sleep 0.3
+	xdotool key Enter
 fi
 # xdotool key --delay=0 Super_L+2
-xdotool set_desktop 1
-sleep 0.1
-xdotool mousemove 900 950
-sleep 0.1
-xdotool click 1
-sleep 0.1
-xdotool type --delay 10 "$temp"
-sleep 0.3
-xdotool key Enter

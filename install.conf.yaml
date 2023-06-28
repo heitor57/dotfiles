@@ -26,9 +26,6 @@
     ~/.xprofile:
       path: .xprofile
       force: true
-    ~/.emacs:
-      path: .emacs
-      force: true
     ~/.xbindkeysrc:
       path: .xbindkeysrc
       force: true
