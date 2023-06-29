@@ -13,7 +13,7 @@
 
 #autoload -U colors && colors
 #PS1="%B%{$fg[blue]%}{-=%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%M %{$fg[magenta]%}%~%{$fg[blue]%}-=}%{$reset_color%}$%b "
-
+export PATH="$HOME/.config/emacs/bin:$PATH"
 source ~/.zprofile
 lsxhkd(){
 	sxhkd&

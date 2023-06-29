@@ -26,5 +26,3 @@ while [[ $time -gt 0  ]]; do
     echo $time
     time=$(($time-1))
 done
-
-
