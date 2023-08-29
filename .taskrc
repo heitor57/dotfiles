@@ -41,13 +41,13 @@
 
 news.version=2.6.0
 confirmation=off
-#recurrence.confirmation=off
+recurrence.confirmation=off
 #uda.taskwarrior-tui.shortcuts.1=~/.task/taskwarrior-tui/track-time-start.sh
 #uda.taskwarrior-tui.shortcuts.2=~/.task/taskwarrior-tui/track-time-stop.sh
 urgency.user.tag.healthy.coefficient=2
 urgency.user.tag.lifestyle.coefficient=0
 uda.priority.values=H,M,L
-urgency.user.priority.L.coefficient=2
+urgency.uda.priority.H.coefficient=8.0
 uda.effort.type=string
 uda.effort.label=Effort
 uda.effort.values=s,m,l,xl,xxl
@@ -65,9 +65,47 @@ color.uda.effort.xxl=color255
 #/* uda.taskwarrior-tui.style.report.scrollbar.area=blue */
 #color.active=color4 on black
 uda.taskwarrior-tui.selection.reverse=yes
-uda.taskwarrior-tui.shortcuts.1=~/Documents/Projects/dotfiles/bin/task-tui-select-and-down
+uda.taskwarrior-tui.shortcuts.1=~/Documents/Projects/dotfiles/bin/task-tui-select-and-down $selected_tasks_uuid
 uda.taskwarrior-tui.task-report.show-info=false
 context.work.read=+work
 context.work.write=+work
 context.linux.read=+hobby
 context.linux.write=+hobby
+report.next.columns=id,start.age,entry.age,effort,depends.indicator,priority,project,tags,recur.indicator,scheduled.countdown,due,until.age,description.count,urgency
+report.next.filter=status:pending -WAITING
+report.next.labels=ID,Active,Age,Effort,D,P,Project,Tags,R,Sch,Due,Until,Description,Urg
+report.next.sort=urgency-,start-,due+,project+  
+context.usp.read=+usp
+context.usp.write=+usp
+
+#Quadrant 1: urgent and important (pri:h, due.before:1w)
+report.q1.description=urgent and important
+report.q1.columns=id,description,due,project,tags
+report.q1.labels=ID,DESCRIPTION,DUE,PROJECT,TAGS
+report.q1.sort=priority-,due+,project+,tags+
+report.q1.filter=status:pending limit:page pri:H tags:urgent -BLOCKED
+
+#Quadrant 2: important, but not urgent (pri:h, due.after:1w or due emptry)
+report.q2.description=important, but not urgent
+report.q2.columns=id,description,due,project,tags
+report.q2.labels=ID,DESCRIPTION,DUE,PROJECT,TAGS
+report.q2.sort=priority-,due+,project+,tags+
+report.q2.filter=status:pending limit:page pri:H tags.not:urgent
+
+#Quadrant 3: urgent, but not important (pri:<=m, due.before:1w)
+report.q3.description=urgent, but not important
+report.q3.columns=id,description,due,project,tags
+report.q3.labels=ID,DESCRIPTION,DUE,PROJECT,TAGS
+report.q3.sort=priority-,due+,project+,tags+
+report.q3.filter=status:pending limit:page pri.not:H tags:urgent
+
+#Quadrant 4: not urgent and not important (pri:<=m, due.after:1w)
+report.q4.description=not urgent and not important
+report.q4.columns=id,description,due,project,tags
+report.q4.labels=ID,DESCRIPTION,DUE,PROJECT,TAGS
+report.q4.sort=priority-,due+,project+,tags+
+report.q4.filter=status:pending limit:page pri.not:H tags.not:urgent
+#tags.urgent.label=urgent
+#tags.urgent.color=red
+color.tag.urgent=color180
+urgency.user.tag.urgent.coefficient = 6.0

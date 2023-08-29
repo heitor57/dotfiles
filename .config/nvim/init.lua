@@ -10,6 +10,27 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 require('packer').startup(function(use)
+  use { 'nyoom-engineering/oxocarbon.nvim' }
+  use {
+    "nvim-neorg/neorg",
+    config = function()
+      require('neorg').setup {
+        load = {
+          ["core.defaults"] = {},  -- Loads default behaviour
+          ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.dirman"] = {      -- Manages Neorg workspaces
+            config = {
+              workspaces = {
+                notes = "~/Dropbox/Documents/Notes/neorg/",
+              },
+            },
+          },
+        },
+      }
+    end,
+    run = ":Neorg sync-parsers",
+    requires = "nvim-lua/plenary.nvim",
+  }
   use 'airblade/vim-rooter'
   use 'itchyny/vim-qfedit'
   use {
@@ -68,7 +89,7 @@ require('packer').startup(function(use)
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-    {'j-hui/fidget.nvim',tag='legacy'},
+      { 'j-hui/fidget.nvim', tag = 'legacy' },
 
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
@@ -221,7 +242,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'pywal-nvim',
+    theme = 'auto',
     component_separators = '|',
     section_separators = '',
   },
@@ -269,7 +290,7 @@ require('telescope').setup {
   pickers = {
     live_grep = {
       additional_args = function(opts)
-        return {"--hidden"}
+        return { "--hidden" }
       end
     },
   },
@@ -588,8 +609,10 @@ vim.cmd [[
 autocmd CursorHoldI,CursorHold * silent! update
 ]]
 
-local pywal = require('pywal')
-pywal.setup()
+-- local pywal = require('pywal')
+-- pywal.setup()
+vim.opt.background = "dark" -- set this to dark or light
+vim.cmd("colorscheme oxocarbon")
 
 vim.api.nvim_set_keymap('n', '<Leader>ar', ':lua require("replacer").run()<cr>', { silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>ag', ':Grepper<cr>', { silent = true })

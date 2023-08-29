@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+
+cd ~/Documents/Projects/dsp/
+source ~/.virtualenvs/ml/bin/activate
+tmux new-session -d -s dsp
+tmux new-window "jupyter notebook ."
+# tmux new-pane -h "jupyter notebook ."
+# tmux split-window -h "jupyter notebook ."
+tmux attach-session -t dsp

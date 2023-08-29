@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+color=$(xcolor)
+echo -n $color | xsel -i -b

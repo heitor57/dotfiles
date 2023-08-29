@@ -40,20 +40,23 @@ setopt histignoredups
 setopt histignorealldups
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '~/.zshrc'
-#zstyle ':completion:*' menu
-#zstyle ':completion:incremental:*' completer _complete _ignored
-#zstyle :incremental stop-keys $'[\e\C-b\C-f\C-n\C-p\C-u-\C-x]'
-#
-autoload -Uz compinit
-compinit
 #_ccomp_options+=(globdots)
 # End of lines added by compinstall
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #
 
-source <(antibody init)
-antibody bundle < ~/.zsh_plugins.txt
+# source <(antibody init)
+# antibody bundle < ~/.zsh_plugins.txt
+#
+
+zstyle :compinstall filename '~/.zshrc'
+autoload -Uz compinit
+compinit
+
+source '/usr/share/zsh-antidote/antidote.zsh'
+antidote load
+
+
 
 #setopt autocd autopushd
 
@@ -133,6 +136,11 @@ nb-list() {
   cut -d$' ' -f1
 }
 
+# virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+export VIRTUALENVWRAPPER_SCRIPT=/usr/bin/virtualenvwrapper.sh
+source /usr/bin/virtualenvwrapper_lazy.sh
 # zle -N nb-list
 # bindkey '^F^F' 'nb edit $(nb-list)'
 # bindkey -s "^F^F" 'nb edit $(nb-list)^M'
