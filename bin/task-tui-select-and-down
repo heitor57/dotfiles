@@ -3,14 +3,18 @@
 # clear
 # task mod $selected_tasks_uuid effort:s
 echo "Select an option:"
-echo "[1] Set task effort to: s (small)"
-echo "[2] Set task effort to: m (medium)"
-echo "[3] Set task effort to: l (large)"
-echo "[4] Set task effort to: xl (extra large)"
-echo "[5] Set task effort to: xxl (extra extra large)"
-echo "[6] Set task priority to: L (low)"
-echo "[7] Set task priority to: M (medium)"
-echo "[8] Set task priority to: H (high)"
+echo "[1] important"
+echo "[2] urgent"
+echo "[3] important and urgent"
+echo "[4] non-important and non-urgent"
+# echo "[1] Set task effort to: s (small)"
+# echo "[2] Set task effort to: m (medium)"
+# echo "[3] Set task effort to: l (large)"
+# echo "[4] Set task effort to: xl (extra large)"
+# echo "[5] Set task effort to: xxl (extra extra large)"
+# echo "[6] Set task priority to: L (low)"
+# echo "[7] Set task priority to: M (medium)"
+# echo "[8] Set task priority to: H (high)"
 
 read -n1 -p "Enter the option number: " option
 echo # This is to add a new line after the user input.

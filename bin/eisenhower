@@ -1,24 +1,8 @@
 #!/usr/bin/bash
 # Eisenmux
 # Copyright (C) 2016  Nikolai Nowaczyk
-tmux has-session -t 'eisenhower' 2> /dev/null
-if [ "$?" != "0" ]; then
-	tmux new-session -d
-	tmux rename-session -t 0 'eisenhower'
-	tmux split-window -t 'eisenhower' -v
-	tmux split-window -t 'eisenhower' -h
-	tmux select-pane -t 0
-	tmux split-window -t 'eisenhower' -h
-fi
-tmux select-pane -t 0
-tmux send-keys -t 'eisenhower' 'while :; do clear; task q1; sleep 10; done' Enter
-tmux select-pane -t 1
-tmux send-keys -t 'eisenhower' 'while :; do clear; task q2; sleep 10; done' Enter
-tmux select-pane -t 2
-tmux send-keys -t 'eisenhower' 'while :; do clear; task q3; sleep 10; done' Enter
-tmux select-pane -t 3
-tmux send-keys -t 'eisenhower' 'while :; do clear; task q4 sort:created+; sleep 10; done' Enter
-tmux select-pane -t 0
-if [ "$TMUX" == "" ]; then
-	tmux attach
-fi
+kitty @ new-window --title 'eisenhower' --tab-title 'q1' -- bash -c 'while :; do clear; task q1; sleep 10; done'
+kitty @ new-window --title 'eisenhower' --tab-title 'q2' -- bash -c 'while :; do clear; task q2; sleep 10; done'
+kitty @ new-window --title 'eisenhower' --tab-title 'q3' -- bash -c 'while :; do clear; task q3; sleep 10; done'
+kitty @ new-window --title 'eisenhower' --tab-title 'q4 sort:created+' -- bash -c 'while :; do clear; task q4 sort:created+; sleep 10; done'
+kitty @ close-window --match "recent:4"
