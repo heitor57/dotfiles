@@ -1,0 +1,23 @@
+keymap:
+  - name: Rnote
+    application:
+      only: rnote
+    remap:
+      1: C-1
+      2: C-2
+      3: C-3
+      4: C-4
+      5: C-5
+      6: C-6
+  # - name: General
+  #   application:
+  #     not: [Google-chrome, Slack, Gnome-terminal, jetbrains-idea]
+  #   remap:
+  #     Super-x:
+  #       launch: ["/usr/bin/brave"]
+  #     Super-t:
+  #       launch: ["kitty","-e","taskwarrior-tui"]
+  #     Super-n:
+  #       launch: ["kitty","-e","nvim"]
+  #     Super-z:
+  #       launch: ["kitty","-e","ranger"]

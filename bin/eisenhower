@@ -1,8 +1,9 @@
 #!/usr/bin/bash
 # Eisenmux
 # Copyright (C) 2016  Nikolai Nowaczyk
-kitty @ new-window --title 'eisenhower' --tab-title 'q1' -- bash -c 'while :; do clear; task q1; sleep 10; done'
-kitty @ new-window --title 'eisenhower' --tab-title 'q2' -- bash -c 'while :; do clear; task q2; sleep 10; done'
-kitty @ new-window --title 'eisenhower' --tab-title 'q3' -- bash -c 'while :; do clear; task q3; sleep 10; done'
-kitty @ new-window --title 'eisenhower' --tab-title 'q4 sort:created+' -- bash -c 'while :; do clear; task q4 sort:created+; sleep 10; done'
+kitty @ new-window --title 'eisenhower' --tab-title 'q1' -- bash -c 'taskwarrior-tui -r q1'
+kitty @ new-window --title 'eisenhower' --tab-title 'q3' -- bash -c 'taskwarrior-tui -r q3'
+kitty @ new-window --title 'eisenhower' --tab-title 'q2' -- bash -c 'taskwarrior-tui -r q2'
+kitty @ new-window --title 'eisenhower' --tab-title 'q4' -- bash -c 'taskwarrior-tui -r q4'
+# kitty @ new-window --title 'eisenhower' --tab-title 'q4 sort:created+' -- bash -c 'taskwarrior-tui -r q4 sort:created+'
 kitty @ close-window --match "recent:4"

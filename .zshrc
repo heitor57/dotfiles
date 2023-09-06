@@ -107,10 +107,6 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 PATH="$HOME/scripts:$PATH"
 PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
-# Unset manpath so we can inherit from /etc/manpath via the `manpath`
-# command
-unset MANPATH # delete if you already modified MANPATH elsewhere in your config
-MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -124,7 +120,7 @@ zle -N addLookDictionaryText
 bindkey '^V' addLookDictionaryText
 
 alias ej='$EDITOR "/home/heitor/Dropbox/Documents/Notes/journals/"$(date "+%Y_%m_%d.md")'
-alias tt="taskwarrior-tui"
+alias tt="task sync && taskwarrior-tui"
 alias r="ranger"
 
 nb-list() {
@@ -137,10 +133,10 @@ nb-list() {
 }
 
 # virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-export VIRTUALENVWRAPPER_SCRIPT=/usr/bin/virtualenvwrapper.sh
-source /usr/bin/virtualenvwrapper_lazy.sh
+#export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/Devel
+#export VIRTUALENVWRAPPER_SCRIPT=/usr/bin/virtualenvwrapper.sh
+#source /usr/bin/virtualenvwrapper_lazy.sh
 # zle -N nb-list
 # bindkey '^F^F' 'nb edit $(nb-list)'
 # bindkey -s "^F^F" 'nb edit $(nb-list)^M'
