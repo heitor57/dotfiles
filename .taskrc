@@ -114,3 +114,5 @@ urgency.user.tag.urgent.coefficient = 6.0
 include ~/.task/credentials.rc
 urgency.user.tag.SCHEDULED.coefficient = -15.0
 urgency.scheduled.coefficient=20.0
+context.pomodoro.read=effort:s
+context.pomodoro.write=effort:s
