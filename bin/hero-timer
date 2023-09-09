@@ -1,0 +1,8 @@
+#!/bin/bash
+trap 'timew stop; exit' INT
+timew start $2 # use the second argument as the tag
+TIME=$1 # assign the value of the first argument to the time variable
+sleep $TIME
+timewoutput=$(timew stop | grep "Total" 2>&1)
+notify-send -t 20 "$2: $timewoutput"
+paplay /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga
