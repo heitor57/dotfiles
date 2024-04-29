@@ -14,12 +14,10 @@ keymap:
       not: [Google-chrome, Slack, Gnome-terminal, jetbrains-idea]
     remap:
       Super-x:
-        launch: ["/usr/bin/brave"]
-      Super-t:
-        launch: ["kitty","-e","taskwarrior-tui"]
+        launch: ["google-chrome-stable","--enable-features=UseOzonePlatform","--ozone-platform=wayland"]
       Super-n:
-        launch: ["kitty","-e","nvim"]
+        launch: ["wezterm","-e","nvim"]
       Super-z:
-        launch: ["kitty","-e","ranger"]
+        launch: ["wezterm","-e","lf"]
       Super-Enter:
-        launch: ["kitty"]
+        launch: ["wezterm"]

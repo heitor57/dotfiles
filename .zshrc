@@ -92,7 +92,7 @@ autoload -Uz run-help
     #unset timer
   #fi
 #}
-source $DOTFILES_BIN/remote_utils
+source "${HOME}/scripts/remote_utils"
 #zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 #zstyle ':completion:*' menu select matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
