@@ -18,6 +18,6 @@ keymap:
       Super-n:
         launch: ["wezterm","-e","nvim"]
       Super-z:
-        launch: ["wezterm","-e","lf"]
+        launch: ["wezterm","-e","ranger"]
       Super-Enter:
         launch: ["wezterm"]
