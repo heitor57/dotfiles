@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 browser=$(xdg-settings get default-web-browser)
-if [ "$browser" != "brave-browser.desktop" ]
+if [ "$browser" != "brave-browser.desktop"  ] && [ "$browser" != "google-chrome.desktop"  ]
 then
 	desktop=$(xprop -root -notype _NET_CURRENT_DESKTOP | cut -d\  -f3)
 	ff_raw=$(wmctrl -lp | grep "  $desktop " | grep Firefox | head -n1)

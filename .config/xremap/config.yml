@@ -21,3 +21,5 @@ keymap:
         launch: ["wezterm","-e","ranger"]
       Super-Enter:
         launch: ["wezterm"]
+      Super-a:
+        launch: ["google-dictionary"]
