@@ -111,7 +111,7 @@ report.q4.filter=status:pending limit:page pri.not:H tags.not:urgent
 #tags.urgent.color=red
 color.tag.urgent=color180
 urgency.user.tag.urgent.coefficient = 6.0
-include ~/.task/credentials.rc
+#include ~/.task/credentials.rc
 urgency.user.tag.SCHEDULED.coefficient = -15.0
 urgency.scheduled.coefficient=20.0
 context.pomodoro.read=effort:s

@@ -23,3 +23,9 @@ keymap:
         launch: ["wezterm"]
       Super-a:
         launch: ["google-dictionary"]
+      super-m:
+        launch: ["bash", "-c", 'wl-paste -p | import-notes --deck "all::english phrases"']
+      super-w:
+        launch: ["google-translate"]
+
+
