@@ -141,3 +141,4 @@ nb-list() {
 # bindkey '^F^F' 'nb edit $(nb-list)'
 # bindkey -s "^F^F" 'nb edit $(nb-list)^M'
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
