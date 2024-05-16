@@ -4,6 +4,15 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.cmd([[vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>]])
+vim.cmd([[
+set clipboard=unnamedplus
+cnoremap <C-v> <C-r>+
+nnoremap <nowait> <c-s> <cmd>w<cr>
+inoremap <nowait> <c-s> <cmd>w<cr>
+inoremap <nowait> <c-q> <cmd>w<cr>
+nnoremap <nowait> <c-q> <cmd>q<cr>
+]])
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
@@ -141,7 +150,37 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-
+	"mg979/vim-visual-multi",
+	{
+		"mhinz/vim-grepper",
+		config = function()
+			vim.api.nvim_set_keymap("n", "<Leader>ag", ":Grepper<cr>", { silent = true })
+		end,
+	},
+	{
+		"gabrielpoca/replacer.nvim",
+		config = function()
+			vim.api.nvim_set_keymap("n", "<Leader>ar", ':lua require("replacer").run()<cr>', { silent = true })
+		end,
+	},
+	-- lazy.nvim:
+	{
+		"smoka7/multicursors.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"smoka7/hydra.nvim",
+		},
+		opts = {},
+		cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
+		keys = {
+			{
+				mode = { "v", "n" },
+				"<Leader>m",
+				"<cmd>MCstart<cr>",
+				desc = "Create a selection for selected text or word under the cursor",
+			},
+		},
+	},
 	-- NOTE: Plugins can also be added by using a table,
 	-- with the first argument being the link and the following
 	-- keys can be used to configure plugin behavior/loading/etc.
@@ -582,6 +621,7 @@ require("lazy").setup({
 				lua = { "stylua" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
+				python = { "black" },
 				--
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.
@@ -661,9 +701,9 @@ require("lazy").setup({
 
 					-- If you prefer more traditional completion keymaps,
 					-- you can uncomment the following lines
-					--['<CR>'] = cmp.mapping.confirm { select = true },
-					--['<Tab>'] = cmp.mapping.select_next_item(),
-					--['<S-Tab>'] = cmp.mapping.select_prev_item(),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<Tab>"] = cmp.mapping.select_next_item(),
+					["<S-Tab>"] = cmp.mapping.select_prev_item(),
 
 					-- Manually trigger a completion from nvim-cmp.
 					--  Generally you don't need this, because nvim-cmp will display

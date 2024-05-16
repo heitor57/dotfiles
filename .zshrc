@@ -14,6 +14,7 @@
 #autoload -U colors && colors
 #PS1="%B%{$fg[blue]%}{-=%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%M %{$fg[magenta]%}%~%{$fg[blue]%}-=}%{$reset_color%}$%b "
 export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 source ~/.zprofile
 lsxhkd(){
 	sxhkd&
@@ -35,7 +36,11 @@ HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=10000000
 
-setopt inc_append_history
+#setopt append_history extended_history hist_ignore_dups hist_no_store hist_reduce_blanks hist_verify hist_ignore_space share_history inc_append_history
+setopt share_history
+
+#setopt inc_append_history
+# setopt share_history
 setopt histignoredups
 setopt histignorealldups
 # End of lines configured by zsh-newuser-install

@@ -65,3 +65,6 @@
     ~/.ssh:
       path: ~/MEGA/Personal/Linux/ssh/
       force: true
+    ~/.histfile:
+      path: ~/MEGA/Personal/Linux/histfile
+      force: false

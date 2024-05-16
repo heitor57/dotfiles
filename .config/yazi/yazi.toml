@@ -1,2 +1,12 @@
 [manager]
 show_hidden = true
+[opener]
+open = [
+	{ run = 'xdg-open "$@"', desc = "Open" },
+]
+[open]
+rules = [
+	{ mime = "text/*", use = "edit" },
+	{ name = "*.rnote", use = "open" },
+	{ name = "*", use = "open" },
+]

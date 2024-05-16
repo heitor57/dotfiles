@@ -4,11 +4,9 @@ keymap:
       only: rnote
     remap:
       1: C-1
-      2: C-2
-      3: C-3
-      4: C-4
-      5: C-5
-      6: C-6
+      2: C-6
+      3: C-4
+      4: C-5
   - name: General
     application:
       not: [Google-chrome, Slack, Gnome-terminal, jetbrains-idea]
@@ -19,6 +17,8 @@ keymap:
         launch: ["wezterm","-e","nvim"]
       Super-z:
         launch: ["wezterm","-e","ranger"]
+      Super-t:
+        launch: ["wezterm","-e","taskwarrior-tui"]
       Super-Enter:
         launch: ["wezterm"]
       Super-a:
@@ -27,5 +27,3 @@ keymap:
         launch: ["bash", "-c", 'wl-paste -p | import-notes --deck "all::english phrases"']
       super-w:
         launch: ["google-translate"]
-
-
