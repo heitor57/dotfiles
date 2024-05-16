@@ -149,6 +149,7 @@ map <c-f> :fasd_jump_all
 
 cmd on-cd &{{
     fasd -A "$PWD"
+    zoxide add "$PWD"
 }}
 
 # y (select for copy) and P to paste soft-link
@@ -206,8 +207,18 @@ cmd set_plasma_wallpaper ${{
     qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///'$(pwd)'/'%f'")}'
 }}
 
+cmd z %{{
+	result="$(zoxide query --exclude $PWD $@ | sed 's/\\/\\\\/g;s/"/\\"/g')"
+	lf -remote "send $id cd \"$result\""
+}}
 
-map zz :fasd_jump_all
+cmd zi ${{
+	result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+	lf -remote "send $id cd \"$result\""
+}}
+
+map ç :fasd_jump_all
+map zz :zi
 map bs :mime_switch
 set autoquit true
 
