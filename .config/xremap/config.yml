@@ -16,7 +16,7 @@ keymap:
       Super-n:
         launch: ["wezterm","-e","nvim"]
       Super-z:
-        launch: ["wezterm","-e","ranger"]
+        launch: ["wezterm","-e","yazi"]
       Super-t:
         launch: ["wezterm","-e","taskwarrior-tui"]
       Super-Enter:

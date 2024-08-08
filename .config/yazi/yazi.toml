@@ -3,10 +3,18 @@ show_hidden = true
 [opener]
 open = [
 	{ run = 'xdg-open "$@"', desc = "Open" },
+
+]
+edit = [
+	{ run = 'nvim "$@"', block = true },
+]
+play = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
 ]
 [open]
-rules = [
+prepend_rules = [
 	{ mime = "text/*", use = "edit" },
+	{ mime = "*.lua", use = "edit" },
 	{ name = "*.rnote", use = "open" },
-	{ name = "*", use = "open" },
+	#{ name = "*", use = "open" },
 ]

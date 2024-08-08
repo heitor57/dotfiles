@@ -248,10 +248,10 @@
       (error "No number at point"))
   (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
 (use-package smartparens)
-;; (use-package all-the-icons
-;;   :config
-;;   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-;;   )
+(use-package all-the-icons
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+  )
 (require 'org-tempo)
 
 (setq-default indent-tabs-mode nil)

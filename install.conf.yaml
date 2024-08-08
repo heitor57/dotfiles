@@ -68,3 +68,6 @@
     ~/.histfile:
       path: ~/MEGA/Personal/Linux/histfile
       force: false
+    # ~/.emacs:
+    #   path: .emacs
+    #   force: false
