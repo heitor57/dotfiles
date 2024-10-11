@@ -26,9 +26,6 @@
     ~/.xprofile:
       path: .xprofile
       force: true
-    ~/.xbindkeysrc:
-      path: .xbindkeysrc
-      force: true
     ~/.zsh_plugins.txt:
       path: .zsh_plugins.txt
       force: true
@@ -63,11 +60,11 @@
       path: bin
       force: true
     ~/.ssh:
-      path: ~/MEGA/Personal/Linux/ssh/
+      path: ~/MEGA/Documents/Personal/Linux/ssh/
       force: true
     ~/.histfile:
-      path: ~/MEGA/Personal/Linux/histfile
-      force: false
+      path: ~/MEGA/Documents/Personal/Linux/histfile
+      force: true
     # ~/.emacs:
     #   path: .emacs
     #   force: false
