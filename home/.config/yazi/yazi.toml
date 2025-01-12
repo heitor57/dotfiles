@@ -18,5 +18,5 @@ prepend_rules = [
 	{ mime = "*.tex", use = "edit" },
 	{ mime = "*.bib", use = "edit" },
 	{ name = "*.rnote", use = "open" },
-	#{ name = "*", use = "open" },
+	{ name = "*", use = "open" },
 ]

@@ -1,8 +1,0 @@
-font:
-  normal:
-    family: JetBrainsMono Nerd Font Mono
-    #family: FiraMono Nerd Font
-    #family: Monospace Font
-    #family: NonoidMono Font Mono
-import:
-  - ~/.cache/wal/colors-alacritty.yml

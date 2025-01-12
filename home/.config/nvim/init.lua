@@ -12,6 +12,13 @@ inoremap <nowait> <c-s> <cmd>w<cr>
 inoremap <nowait> <c-q> <cmd>w<cr>
 nnoremap <nowait> <c-q> <cmd>q<cr>
 ]])
+-- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+-- 	group = vim.g.user.event,
+-- 	desc = "return cursor to where it was last time closing the file",
+-- 	pattern = "*",
+-- 	command = 'silent! normal! g`"zv',
+-- })
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
@@ -147,7 +154,49 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
-	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
+	"tpope/vim-unimpaired",
+	{
+		"okuuva/auto-save.nvim",
+		version = "^1.0.0", -- see https://devhints.io/semver, alternatively use '*' to use the latest tagged release
+		cmd = "ASToggle", -- optional for lazy loading on command
+		event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
+		keys = {
+			{ "<leader>n", ":ASToggle<CR>", desc = "Toggle auto-save" },
+		},
+		opts = {
+
+			enabled = true, -- start auto-save when the plugin is loaded (i.e. when your package manager loads it)
+			trigger_events = { -- See :h events
+				immediate_save = { "BufLeave", "FocusLost" }, -- vim events that trigger an immediate save
+				defer_save = { "InsertLeave", "TextChanged" }, -- vim events that trigger a deferred save (saves after `debounce_delay`)
+				cancel_deferred_save = { "InsertEnter" }, -- vim events that cancel a pending deferred save
+			},
+			-- function that takes the buffer handle and determines whether to save the current buffer or not
+			-- return true: if buffer is ok to be saved
+			-- return false: if it's not ok to be saved
+			-- if set to `nil` then no specific condition is applied
+			condition = nil,
+			write_all_buffers = false, -- write all buffers when the current one meets `condition`
+			noautocmd = false, -- do not execute autocmds when saving
+			lockmarks = false, -- lock marks when saving, see `:h lockmarks` for more details
+			debounce_delay = 1000, -- delay after which a pending save is executed
+			-- log debug messages to 'auto-save.log' file in neovim cache directory, set to `true` to enable
+			debug = false,
+		},
+	},
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+
+		---enables autocomplete for opts
+		---@module "auto-session"
+		---@type AutoSession.Config
+		opts = {
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			auto_restore_last_session = false,
+			-- log_level = 'debug',
+		},
+	},
 	{
 		"stevearc/aerial.nvim",
 		opts = {},
@@ -176,6 +225,12 @@ require("lazy").setup({
 		init = function()
 			-- VimTeX configuration goes here, e.g.
 			-- vim.g.vimtex_view_method = "zathura"
+			vim.g.vimtex_view_method = "general"
+			-- vim.g.vimtex_compiler_latexmk = {
+			-- 	options = {
+			-- 		"-lualatex",
+			-- 	},
+			-- }
 		end,
 	},
 	{
@@ -239,7 +294,7 @@ require("lazy").setup({
 			end, { remap = true })
 		end,
 	},
-	"airblade/vim-rooter",
+	-- "airblade/vim-rooter",
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 	"mg979/vim-visual-multi",
 	{
@@ -341,7 +396,7 @@ require("lazy").setup({
 				desc = "Open the file manager in nvim's working directory",
 			},
 			{
-				"<c-up>",
+				"<leader>ç",
 				function()
 					-- NOTE: requires a version of yazi that includes
 					-- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
@@ -365,14 +420,34 @@ require("lazy").setup({
 		},
 	},
 	{
-		"voldikss/vim-floaterm",
-		config = function()
-			vim.cmd([[
-      nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 --opener=edit ranger<CR>
-      nnoremap <leader>p <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 --opener=edit lazygit<CR>
-]])
-		end,
+		"kdheepak/lazygit.nvim",
+		lazy = true,
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		-- setting the keybinding for LazyGit with 'keys' is recommended in
+		-- order to load the plugin when the command is run for the first time
+		keys = {
+			{ "<leader>p", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+		},
 	},
+	-- 	{
+	-- 		"voldikss/vim-floaterm",
+	-- 		config = function()
+	-- 			-- nnoremap <leader>ç <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 --opener=edit yazi<CR>
+	-- 			vim.cmd([[
+	--       nnoremap <leader>p <cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --name=floaterm1 --position=center --autoclose=2 --opener=edit lazygit<CR>
+	-- ]])
+	-- 		end,
+	-- 	},
 	{ -- Useful plugin to show you pending keybinds.
 		"folke/which-key.nvim",
 		event = "VimEnter", -- Sets the loading event to 'VimEnter'
@@ -428,37 +503,13 @@ require("lazy").setup({
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		config = function()
-			-- Telescope is a fuzzy finder that comes with a lot of different things that
-			-- it can fuzzy find! It's more than just a "file finder", it can search
-			-- many different aspects of Neovim, your workspace, LSP, and more!
-			--
-			-- The easiest way to use Telescope, is to start by doing something like:
-			--  :Telescope help_tags
-			--
-			-- After running this command, a window will open up and you're able to
-			-- type in the prompt window. You'll see a list of `help_tags` options and
-			-- a corresponding preview of the help.
-			--
-			-- Two important keymaps to use while in Telescope are:
-			--  - Insert mode: <c-/>
-			--  - Normal mode: ?
-			--
-			-- This opens a window that shows you all of the keymaps for the current
-			-- Telescope picker. This is really useful to discover what Telescope can
-			-- do as well as how to actually do it!
-
-			-- [[ Configure Telescope ]]
-			-- See `:help telescope` and `:help telescope.setup()`
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "TelescopePreviewerLoaded",
+				callback = function()
+					vim.wo.wrap = true
+				end,
+			})
 			require("telescope").setup({
-				-- You can put your default mappings / updates / etc. in here
-				--  All the info you're looking for is in `:help telescope.setup()`
-				--
-				-- defaults = {
-				--   mappings = {
-				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-				--   },
-				-- },
-				-- pickers = {}
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -472,16 +523,22 @@ require("lazy").setup({
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
+			-- local telescopebibtex = require("telescope._extensions.bibtex")
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+			vim.keymap.set("n", "<leader>sb", "<cmd>Telescope bibtex<cr>", { desc = "[S]earch [B]ibtex" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+			vim.keymap.set("n", "<leader>sg", function()
+				builtin.live_grep({ wrap_results = true })
+			end, { desc = "[S]earch by [G]rep" })
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<leader><leader>", function()
+				builtin.buffers({ sort_mru = true, ignore_current_buffer = true })
+			end, { desc = "[ ] Find existing buffers" })
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
