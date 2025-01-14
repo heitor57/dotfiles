@@ -16,9 +16,9 @@ shopt -s autocd
 #	wal -i $1
 #}
 alias ls='ls --color=auto'
+alias z=zoxide
 #export PS1="\h@\u \t:\w$ "
 #export PS1="\h@\u \t \w "
-
 
 # Define the user and hostname to check
 EXPECTED_USER="hwerneck"
