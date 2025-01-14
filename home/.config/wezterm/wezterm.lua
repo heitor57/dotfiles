@@ -10,5 +10,19 @@ local config = wezterm.config_builder()
 -- config.color_scheme = "AdventureTime"
 config.enable_scroll_bar = true
 config.font = wezterm.font("FiraCode Nerd Font")
+config.warn_about_missing_glyphs = false
+config.adjust_window_size_when_changing_font_size = false
+config.mouse_bindings = {
+	{
+		event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+		mods = "CTRL",
+		action = wezterm.action.IncreaseFontSize,
+	},
+	{
+		event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+		mods = "CTRL",
+		action = wezterm.action.DecreaseFontSize,
+	},
+}
 -- and finally, return the configuration to wezterm
 return config
