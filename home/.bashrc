@@ -11,13 +11,13 @@ alias mc="make clean"
 alias r="ranger"
 alias c='fasd cd -d'
 shopt -s autocd
-function me () {
-	feh --bg-scale $1
-	wal -i $1
-}
+#function me () {
+#	feh --bg-scale $1
+#	wal -i $1
+#}
 alias ls='ls --color=auto'
 #export PS1="\h@\u \t:\w$ "
-export PS1="\h@\u \t \w "
+#export PS1="\h@\u \t \w "
 
 
 # Define the user and hostname to check
@@ -30,7 +30,7 @@ CURRENT_HOST=$(hostname)
 
 # Check if they match
 if [[ "$CURRENT_USER" == "$EXPECTED_USER" && "$CURRENT_HOST" == "$EXPECTED_HOST" ]]; then
-    echo "Running command on $CURRENT_HOST as $CURRENT_USER..."
+	   # echo "Running command on $CURRENT_HOST as $CURRENT_USER..."
     # Add the command to run here
 	# >>> conda initialize >>>
 	# !! Contents within this block are managed by 'conda init' !!
