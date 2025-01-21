@@ -12,6 +12,7 @@ config.enable_scroll_bar = true
 config.font = wezterm.font("FiraCode Nerd Font")
 config.warn_about_missing_glyphs = false
 config.adjust_window_size_when_changing_font_size = false
+config.window_close_confirmation = "NeverPrompt"
 config.mouse_bindings = {
 	{
 		event = { Down = { streak = 1, button = { WheelUp = 1 } } },
