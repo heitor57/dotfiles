@@ -7,6 +7,7 @@
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export OPENER="rifle"
+alias l=lazygit
 #export TERMINAL="alacritty"
 #export BROWSER="firefox"
 #export READER="evince"
