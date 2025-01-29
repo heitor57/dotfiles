@@ -1,0 +1,11 @@
+[Unit]
+Description=xremap daemon
+BindsTo=default.target
+
+[Service]
+Type=simple
+ExecStart=/home/heitor/.cargo/bin/xremap --watch=config /home/heitor/.config/xremap/config.yml
+ExecStartPre=/bin/sleep 10
+
+[Install]
+WantedBy=default.target
