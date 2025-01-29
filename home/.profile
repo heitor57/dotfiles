@@ -4,6 +4,8 @@
 #export QT_QPA_PLATFORMTHEME="qt5ct"  
 #export LANG=en_US.UTF-8
 #export LC_ALL=en_US.UTF-8
+
+
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export OPENER="rifle"

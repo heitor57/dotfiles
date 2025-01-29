@@ -6,7 +6,9 @@
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export EDITOR="nvim"
+alias l=lazygit
 
 #autoload -U promptinit; promptinit
 #prompt pure
