@@ -154,6 +154,22 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
+	{
+		"stevearc/oil.nvim",
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {},
+		-- Optional dependencies
+		dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+		lazy = false,
+
+		init = function()
+			require("oil").setup()
+			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+		end,
+	},
 	"tpope/vim-unimpaired",
 	{
 		"okuuva/auto-save.nvim",
@@ -380,13 +396,13 @@ require("lazy").setup({
 		event = "VeryLazy",
 		keys = {
 			-- 👇 in this section, choose your own keymappings!
-			{
-				"<leader>-",
-				function()
-					require("yazi").yazi()
-				end,
-				desc = "Open the file manager",
-			},
+			-- {
+			-- 	"<leader>-",
+			-- 	function()
+			-- 		require("yazi").yazi()
+			-- 	end,
+			-- 	desc = "Open the file manager",
+			-- },
 			{
 				-- Open in the current working directory
 				"<leader>cw",
@@ -704,9 +720,9 @@ require("lazy").setup({
 
 			vim.api.nvim_create_autocmd("LspDetach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
-				callback = function(event)
+				callback = function(event2)
 					vim.lsp.buf.clear_references()
-					vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event.buf })
+					vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
 				end,
 			})
 
