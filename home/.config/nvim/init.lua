@@ -39,6 +39,8 @@ vim.opt.mouse = "a"
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
+-- vim.opt.autochdir = true
+
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
@@ -154,6 +156,7 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
+
 	{
 		"stevearc/oil.nvim",
 		---@module 'oil'
@@ -195,7 +198,7 @@ require("lazy").setup({
 			write_all_buffers = false, -- write all buffers when the current one meets `condition`
 			noautocmd = false, -- do not execute autocmds when saving
 			lockmarks = false, -- lock marks when saving, see `:h lockmarks` for more details
-			debounce_delay = 1000, -- delay after which a pending save is executed
+			debounce_delay = 20000, -- delay after which a pending save is executed
 			-- log debug messages to 'auto-save.log' file in neovim cache directory, set to `true` to enable
 			debug = false,
 		},
@@ -208,7 +211,7 @@ require("lazy").setup({
 		---@module "auto-session"
 		---@type AutoSession.Config
 		opts = {
-			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			suppressed_dirs = { "~/", "~/Downloads", "/" },
 			auto_restore_last_session = false,
 			-- log_level = 'debug',
 		},
@@ -310,7 +313,7 @@ require("lazy").setup({
 			end, { remap = true })
 		end,
 	},
-	-- "airblade/vim-rooter",
+	"airblade/vim-rooter", -- root directory changer
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 	"mg979/vim-visual-multi",
 	{
@@ -1020,8 +1023,9 @@ require("lazy").setup({
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		dependencies = { "RRethy/nvim-treesitter-textsubjects" },
 		opts = {
-			ensure_installed = { "bash", "lua", "luadoc", "markdown", "vim", "vimdoc" },
+			ensure_installed = { "bash", "lua", "luadoc", "vim", "vimdoc" },
 			-- Autoinstall languages that are not installed
 			auto_install = true,
 			highlight = {
@@ -1032,6 +1036,19 @@ require("lazy").setup({
 				additional_vim_regex_highlighting = { "ruby" },
 			},
 			indent = { enable = true, disable = { "ruby" } },
+
+			textsubjects = {
+				enable = true,
+				prev_selection = ",", -- (Optional) keymap to select the previous selection
+				keymaps = {
+					["."] = "textsubjects-smart",
+					[";"] = "textsubjects-container-outer",
+					["i;"] = {
+						"textsubjects-container-inner",
+						desc = "Select inside containers (classes, functions, etc.)",
+					},
+				},
+			},
 		},
 		config = function(_, opts)
 			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
