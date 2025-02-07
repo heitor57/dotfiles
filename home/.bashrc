@@ -20,16 +20,15 @@ alias z=zoxide
 #export PS1="\h@\u \t:\w$ "
 #export PS1="\h@\u \t \w "
 
-# Define the user and hostname to check
 EXPECTED_USER="hwerneck"
-EXPECTED_HOST="deeptwo"
+EXPECTED_HOSTS=("deepzero" "deeptwo")
 
 # Get the current username and hostname
 CURRENT_USER=$(whoami)
 CURRENT_HOST=$(hostname)
 
-# Check if they match
-if [[ "$CURRENT_USER" == "$EXPECTED_USER" && "$CURRENT_HOST" == "$EXPECTED_HOST" ]]; then
+# Check if the current host is in the list of expected hosts
+if [[ "$CURRENT_USER" == "$EXPECTED_USER" && " ${EXPECTED_HOSTS[@]} " =~ " $CURRENT_HOST " ]]; then
 	   # echo "Running command on $CURRENT_HOST as $CURRENT_USER..."
     # Add the command to run here
 	# >>> conda initialize >>>
