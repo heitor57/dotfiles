@@ -6,8 +6,6 @@
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-export EDITOR="nvim"
 alias l=lazygit
 
 #autoload -U promptinit; promptinit
@@ -15,8 +13,6 @@ alias l=lazygit
 
 #autoload -U colors && colors
 #PS1="%B%{$fg[blue]%}{-=%{$fg[green]%}%n%{$fg[yellow]%}@%{$fg[red]%}%M %{$fg[magenta]%}%~%{$fg[blue]%}-=}%{$reset_color%}$%b "
-export PATH="$HOME/.config/emacs/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
 #source ~/.zprofile
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
@@ -116,11 +112,6 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-NPM_PACKAGES="${HOME}/.npm-packages"
-NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-PATH="$NPM_PACKAGES/bin:$PATH"
-PATH="$HOME/scripts:$PATH"
-PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

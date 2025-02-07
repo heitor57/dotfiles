@@ -35,6 +35,15 @@ export PATH="$PATH:$DOTFILES_BIN"
 export PATH="$PATH:$HOME/.luarocks/bin"
 export PATH="$PATH:$HOME/.local/mybin"
 
+export PATH="$HOME/scripts:$PATH"
+export NPM_PACKAGES="${HOME}/.npm-packages"
+export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+export PATH="$NPM_PACKAGES/bin:$PATH"
+export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
+
+# export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 
 # function kotlinr() {
 #     echo Compiling...
