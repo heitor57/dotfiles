@@ -7,6 +7,7 @@
 # fi
 alias l=lazygit
 
+source ~/.variables
 #autoload -U promptinit; promptinit
 #prompt pure
 

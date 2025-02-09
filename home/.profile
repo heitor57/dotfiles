@@ -5,14 +5,11 @@
 #export LANG=en_US.UTF-8
 #export LC_ALL=en_US.UTF-8
 
-# export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export OPENER="rifle"
-alias l=lazygit
-alias pu=git push
-alias pl=git pull
 #export TERMINAL="alacritty"
 #export BROWSER="firefox"
 #export READER="evince"
@@ -43,7 +40,6 @@ export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 export PATH="$NPM_PACKAGES/bin:$PATH"
 export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
-# export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export PATH="$HOME/.config/emacs/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 
@@ -68,13 +64,3 @@ export NNN_TMPFILE='/tmp/.lastd'
 #alias mm=""
 # alias e='emacsclient -c -nw'
 
-alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
-alias ez="v $DOTFILES/.zshrc"
-alias help=run-help
-alias rh=run-help
-alias mab='cd ~/rl-rss/src/app/'
-alias e='$EDITOR'
-alias ee='nvim --noplugin'
-alias gi=gitignore
-
-alias l="lfrun"

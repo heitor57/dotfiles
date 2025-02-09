@@ -1,0 +1,30 @@
+#!/bin/sh
+alias l=lazygit
+alias pu=git push
+alias pl=git pull
+alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
+alias ez="v $DOTFILES/.zshrc"
+alias help=run-help
+alias rh=run-help
+alias mab='cd ~/rl-rss/src/app/'
+alias e='$EDITOR'
+alias ee='nvim --noplugin'
+alias gi=gitignore
+alias l="lfrun"
+
+alias mk='sudo make clean install'
+alias update='sudo pacman -Syu'
+alias pf='sudo pacman -Ss'
+alias pi='sudo pacman -S'
+alias vi=vim
+alias l=ls
+alias em="emacsclient -c"
+alias zs="cd ~/cs/aeds3/tp4"
+alias mc="make clean"
+alias r="ranger"
+alias c='fasd cd -d'
+shopt -s autocd
+alias ls='ls --color=auto'
+alias z=zoxide
+
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
