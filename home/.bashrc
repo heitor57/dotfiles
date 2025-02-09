@@ -3,7 +3,7 @@
 source  ~/.variables
 #export PS1="\h@\u \t:\w$ "
 #export PS1="\h@\u \t \w "
-
+shopt -s autocd
 EXPECTED_USER="hwerneck"
 EXPECTED_HOSTS=("deepzero" "deepone" "deeptwo" "deepthree")
 

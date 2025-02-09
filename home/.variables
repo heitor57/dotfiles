@@ -1,7 +1,7 @@
 #!/bin/sh
 alias l=lazygit
-alias pu=git push
-alias pl=git pull
+alias pu="git push"
+alias pl="git pull"
 alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"
 alias ez="v $DOTFILES/.zshrc"
 alias help=run-help
@@ -23,7 +23,6 @@ alias zs="cd ~/cs/aeds3/tp4"
 alias mc="make clean"
 alias r="ranger"
 alias c='fasd cd -d'
-shopt -s autocd
 alias ls='ls --color=auto'
 alias z=zoxide
 
