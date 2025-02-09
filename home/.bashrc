@@ -21,7 +21,7 @@ alias z=zoxide
 #export PS1="\h@\u \t \w "
 
 EXPECTED_USER="hwerneck"
-EXPECTED_HOSTS=("deepzero" "deeptwo")
+EXPECTED_HOSTS=("deepzero" "deepone" "deeptwo" "deepthree")
 
 # Get the current username and hostname
 CURRENT_USER=$(whoami)
