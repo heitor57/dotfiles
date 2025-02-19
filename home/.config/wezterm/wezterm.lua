@@ -25,5 +25,16 @@ config.mouse_bindings = {
 		action = wezterm.action.DecreaseFontSize,
 	},
 }
+
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	wezterm.log_info("var", name, value)
+	if name == "wez_not" then
+		window:toast_notification("wezterm", "msg: " .. value, nil, 1000)
+	end
+
+	if name == "wez_copy" then
+		window:copy_to_clipboard(value, "Clipboard")
+	end
+end)
 -- and finally, return the configuration to wezterm
 return config

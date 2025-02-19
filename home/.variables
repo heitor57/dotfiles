@@ -24,6 +24,32 @@ alias mc="make clean"
 alias r="ranger"
 alias c='fasd cd -d'
 alias ls='ls --color=auto'
-alias z=zoxide
+# alias z='zoxide query'
+#
+## Send a notification with wezterm use like `do think && weznot "think is done"`
+function weznot() {
+    title=$1
+    printf "\033]1337;SetUserVar=%s=%s\007" wez_not $(echo -n "$title" | base64 -w 0)
+}
+
+# Pipeline content to the clipboard `echo "hello" | wezcopy`
+function wezcopy() {
+    clip_stuff=$(cat)
+    printf "\033]1337;SetUserVar=%s=%s\007" wez_copy $(echo -n "$clip_stuff" | base64 -w 0)
+}
+
+# Run a command and notify that the command has failed or succeeded
+function wezmon() {
+    command=$*
+    
+    eval $command
+    
+    last_exit_code=$?
+    if [ $last_exit_code -eq 0 ]; then
+        weznot "✅ '$command' completed successfully"
+    else
+        weznot "❌ '$command' failed"
+    fi
+}
 
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
