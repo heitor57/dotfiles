@@ -30,7 +30,7 @@ if [[ "$CURRENT_USER" == "$EXPECTED_USER" && " ${EXPECTED_HOSTS[@]} " =~ " $CURR
 	unset __conda_setup
 	# <<< conda initialize <<<
 
-	export PROMPT_COMMAND="history -a; history -n"
+	export PROMPT_COMMAND="history -a; history -n;"
 else
 	echo "Not on $EXPECTED_HOST as $EXPECTED_USER. Command not executed."
 #	export PS1="\[\033[38;5;219m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;228m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\] \t \[$(tput sgr0)\]\[\033[38;5;48m\]\w\[$(tput sgr0)\] "

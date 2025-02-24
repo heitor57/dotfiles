@@ -53,3 +53,15 @@ function wezmon() {
 }
 
 export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-${XDG_RUNTIME_DIR}/ssh-agent.socket}"
+
+
+function bell() {
+	
+	u=0
+	while [ $u -lt 8 ]
+	do
+		((u++))
+		printf "\a"
+		sleep 1
+	done
+}
