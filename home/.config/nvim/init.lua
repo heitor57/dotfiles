@@ -157,36 +157,166 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
 	{
+		"jake-stewart/multicursor.nvim",
+		branch = "main",
+		config = function()
+			local mc = require("multicursor-nvim")
+
+			mc.setup()
+
+			local set = vim.keymap.set
+
+			-- Add or skip cursor above/below the main cursor.
+			set({ "n", "x" }, "<C-up>", function()
+				mc.lineAddCursor(-1)
+			end)
+			set({ "n", "x" }, "<C-down>", function()
+				mc.lineAddCursor(1)
+			end)
+			set({ "n", "x" }, "<leader><up>", function()
+				mc.lineSkipCursor(-1)
+			end)
+			set({ "n", "x" }, "<leader><down>", function()
+				mc.lineSkipCursor(1)
+			end)
+
+			-- Add or skip adding a new cursor by matching word/selection
+			set({ "n", "x" }, "<leader>n", function()
+				mc.matchAddCursor(1)
+			end)
+			set({ "n", "x" }, "<leader>s", function()
+				mc.matchSkipCursor(1)
+			end)
+			set({ "n", "x" }, "<leader>N", function()
+				mc.matchAddCursor(-1)
+			end)
+			set({ "n", "x" }, "<leader>S", function()
+				mc.matchSkipCursor(-1)
+			end)
+
+			-- In normal/visual mode, press `mwap` will create a cursor in every match of
+			-- the word captured by `iw` (or visually selected range) inside the bigger
+			-- range specified by `ap`. Useful to replace a word inside a function, e.g. mwif.
+			set({ "n", "x" }, "mw", function()
+				mc.operator({ motion = "iw", visual = true })
+				-- Or you can pass a pattern, press `mwi{` will select every \w,
+				-- basically every char in a `{ a, b, c, d }`.
+				-- mc.operator({ pattern = [[\<\w]] })
+			end)
+
+			-- Press `mWi"ap` will create a cursor in every match of string captured by `i"` inside range `ap`.
+			set("n", "mW", mc.operator)
+
+			-- Add all matches in the document
+			set({ "n", "x" }, "<leader>A", mc.matchAllAddCursors)
+
+			-- You can also add cursors with any motion you prefer:
+			-- set("n", "<right>", function()
+			--     mc.addCursor("w")
+			-- end)
+			-- set("n", "<leader><right>", function()
+			--     mc.skipCursor("w")
+			-- end)
+
+			-- Rotate the main cursor.
+			set({ "n", "x" }, "<C-left>", mc.nextCursor)
+			set({ "n", "x" }, "<C-right>", mc.prevCursor)
+
+			-- Delete the main cursor.
+			set({ "n", "x" }, "<leader>x", mc.deleteCursor)
+
+			-- Add and remove cursors with control + left click.
+			set("n", "<c-leftmouse>", mc.handleMouse)
+			set("n", "<c-leftdrag>", mc.handleMouseDrag)
+			set("n", "<c-leftrelease>", mc.handleMouseRelease)
+
+			-- Easy way to add and remove cursors using the main cursor.
+			set({ "n", "x" }, "<c-q>", mc.toggleCursor)
+
+			-- Clone every cursor and disable the originals.
+			set({ "n", "x" }, "<leader><c-q>", mc.duplicateCursors)
+
+			set("n", "<esc>", function()
+				if not mc.cursorsEnabled() then
+					mc.enableCursors()
+				elseif mc.hasCursors() then
+					mc.clearCursors()
+				else
+					-- Default <esc> handler.
+				end
+			end)
+
+			-- bring back cursors if you accidentally clear them
+			set("n", "<leader>gv", mc.restoreCursors)
+
+			-- Align cursor columns.
+			set("n", "<leader>a", mc.alignCursors)
+
+			-- Split visual selections by regex.
+			set("x", "S", mc.splitCursors)
+
+			-- Append/insert for each line of visual selections.
+			set("x", "I", mc.insertVisual)
+			set("x", "A", mc.appendVisual)
+
+			-- match new cursors within visual selections by regex.
+			set("x", "M", mc.matchCursors)
+
+			-- Rotate visual selection contents.
+			set("x", "<leader>t", function()
+				mc.transposeCursors(1)
+			end)
+			set("x", "<leader>T", function()
+				mc.transposeCursors(-1)
+			end)
+
+			-- Jumplist support
+			set({ "x", "n" }, "<c-i>", mc.jumpForward)
+			set({ "x", "n" }, "<c-o>", mc.jumpBackward)
+
+			-- Customize how cursors look.
+			local hl = vim.api.nvim_set_hl
+			hl(0, "MultiCursorCursor", { link = "Cursor" })
+			hl(0, "MultiCursorVisual", { link = "Visual" })
+			hl(0, "MultiCursorSign", { link = "SignColumn" })
+			hl(0, "MultiCursorMatchPreview", { link = "Search" })
+			hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
+			hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
+			hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
+		end,
+	},
+	"liuchengxu/graphviz.vim",
+	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = true,
 		-- use opts = {} for passing setup options
 		-- this is equivalent to setup({}) function
 	},
-	{
-		"stevearc/quicker.nvim",
-		event = "FileType qf",
-		---@module "quicker"
-		---@type quicker.SetupOptions
-		opts = {
-			keys = {
-				{
-					">",
-					function()
-						require("quicker").expand({ before = 2, after = 2, add_to_existing = true })
-					end,
-					desc = "Expand quickfix context",
-				},
-				{
-					"<",
-					function()
-						require("quicker").collapse()
-					end,
-					desc = "Collapse quickfix context",
-				},
-			},
-		},
-	},
+	-- {
+	-- 	"stevearc/quicker.nvim",
+	-- 	event = "FileType qf",
+	-- 	---@module "quicker"
+	-- 	---@type quicker.SetupOptions
+	-- 	opts = {
+	-- 		keys = {
+	-- 			{
+	-- 				">",
+	-- 				function()
+	-- 					require("quicker").expand({ before = 2, after = 2, add_to_existing = true })
+	-- 				end,
+	-- 				desc = "Expand quickfix context",
+	-- 			},
+	-- 			{
+	-- 				"<",
+	-- 				function()
+	-- 					require("quicker").collapse()
+	-- 				end,
+	-- 				desc = "Collapse quickfix context",
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 
 	{
 		"stevearc/oil.nvim",
@@ -200,7 +330,7 @@ require("lazy").setup({
 		lazy = false,
 
 		init = function()
-			require("oil").setup({ delete_to_trash = true })
+			require("oil").setup({ delete_to_trash = true, default_file_explorer = false })
 			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 		end,
 	},
@@ -346,7 +476,7 @@ require("lazy").setup({
 	},
 	"airblade/vim-rooter", -- root directory changer
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-	"mg979/vim-visual-multi",
+	-- "mg979/vim-visual-multi",
 	{
 		"mhinz/vim-grepper",
 		config = function()
@@ -360,23 +490,6 @@ require("lazy").setup({
 		end,
 	},
 	-- lazy.nvim:
-	{
-		"smoka7/multicursors.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"smoka7/hydra.nvim",
-		},
-		opts = {},
-		cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
-		keys = {
-			{
-				mode = { "v", "n" },
-				"<Leader>m",
-				"<cmd>MCstart<cr>",
-				desc = "Create a selection for selected text or word under the cursor",
-			},
-		},
-	},
 	-- NOTE: Plugins can also be added by using a table,
 	-- with the first argument being the link and the following
 	-- keys can be used to configure plugin behavior/loading/etc.
@@ -982,7 +1095,7 @@ require("lazy").setup({
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
-					{ name = "path" },
+					-- { name = "path" },
 				},
 			})
 		end,
@@ -1024,7 +1137,7 @@ require("lazy").setup({
 			--  - yinq - [Y]ank [I]nside [N]ext [']quote
 			--  - ci'  - [C]hange [I]nside [']quote
 			require("mini.ai").setup({ n_lines = 500 })
-
+			require("mini.move").setup()
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
 			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
@@ -1049,6 +1162,44 @@ require("lazy").setup({
 
 			-- ... and there is more!
 			--  Check out: https://github.com/echasnovski/mini.nvim
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		after = "nvim-treesitter",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				textobjects = {
+					move = {
+						enable = true,
+						goto_next_start = {
+							["]f"] = "@function.outer",
+							["]c"] = "@class.outer",
+							["]a"] = "@parameter.inner",
+							["]p"] = "@parameter.outer",
+						},
+						goto_next_end = {
+							["]F"] = "@function.outer",
+							["]C"] = "@class.outer",
+							["]A"] = "@parameter.inner",
+							["]P"] = "@parameter.outer",
+						},
+						goto_previous_start = {
+							["[f"] = "@function.outer",
+							["[c"] = "@class.outer",
+							["[a"] = "@parameter.inner",
+							["[p"] = "@parameter.outer",
+						},
+						goto_previous_end = {
+							["[F"] = "@function.outer",
+							["[C"] = "@class.outer",
+							["[A"] = "@parameter.inner",
+							["[P"] = "@parameter.outer",
+						},
+					},
+				},
+			})
 		end,
 	},
 	{ -- Highlight, edit, and navigate code
