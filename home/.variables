@@ -1,5 +1,5 @@
 #!/bin/sh
-export EDITOR=nvim
+export EDITOR="nvim"
 alias pu="git push"
 alias pl="git pull"
 alias restartkde="kquitapp5 plasmashell && kstart5 plasmashell"

@@ -16,6 +16,8 @@ prepend_rules = [
 	{ mime = "text/*", use = "edit" },
 	{ mime = "*.lua", use = "edit" },
 	{ mime = "*.tex", use = "edit" },
+	{ mime = "*.lua", use = "edit" },
+	{ mime = "*.py", use = "edit" },
 	{ mime = "*.bib", use = "edit" },
 	{ name = "*.rnote", use = "open" },
 	{ name = "*", use = "open" },
