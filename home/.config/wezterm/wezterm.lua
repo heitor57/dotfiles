@@ -8,6 +8,7 @@ local config = wezterm.config_builder()
 
 -- For example, changing the color scheme:
 -- config.color_scheme = "AdventureTime"
+config.hide_tab_bar_if_only_one_tab = true
 config.enable_scroll_bar = true
 config.font = wezterm.font("FiraCode Nerd Font")
 config.warn_about_missing_glyphs = false
