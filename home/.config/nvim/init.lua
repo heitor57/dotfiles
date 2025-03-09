@@ -101,7 +101,7 @@ require("lazy").setup({
 		},
 		config = true,
 		keys = {
-			{ "gg", "<cmd>Neogit<cr>", desc = "neogit" },
+			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "neogit" },
 		},
 	},
 	{
@@ -448,6 +448,8 @@ require("lazy").setup({
 				--   },
 				-- },
 				-- pickers = {}
+				pickers = { find_files = { hidden = true } },
+
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
