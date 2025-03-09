@@ -14,6 +14,12 @@ config.font = wezterm.font("FiraCode Nerd Font")
 config.warn_about_missing_glyphs = false
 config.adjust_window_size_when_changing_font_size = false
 config.window_close_confirmation = "NeverPrompt"
+config.window_padding = {
+	left = 0,
+	right = 0,
+	top = 0,
+	bottom = 0,
+}
 config.mouse_bindings = {
 	{
 		event = { Down = { streak = 1, button = { WheelUp = 1 } } },
