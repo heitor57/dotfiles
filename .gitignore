@@ -13,3 +13,6 @@ __pycache__/
 #.config/nvim/coc-settings.json
 #.config/nvim/oldinit.vim
 .goneovim/sessions/0.vim
+
+home/scripts/gitwdiff
+home/.config/nvim/spell/

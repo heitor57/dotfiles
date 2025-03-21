@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = [[\]]
+vim.g.maplocalleader = "\\"
 
 vim.g.have_nerd_font = false
 
@@ -44,6 +44,14 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+vim.api.nvim_create_augroup("userconfig", {})
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	group = "userconfig",
+	desc = "return cursor to where it was last time closing the file",
+	pattern = "*",
+	command = 'silent! normal! g`"zv',
+})
+
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -55,6 +63,15 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left wind
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+
+vim.cmd([[vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>]])
+vim.cmd([[
+cnoremap <C-v> <C-r>+
+nnoremap <nowait> <c-s> <cmd>w<cr>
+inoremap <nowait> <c-s> <cmd>w<cr>
+inoremap <nowait> <c-q> <cmd>w<cr>
+nnoremap <nowait> <c-q> <cmd>q<cr>
+]])
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
@@ -75,6 +92,125 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+	{
+		"LintaoAmons/bookmarks.nvim",
+		-- pin the plugin at specific version for stability
+		-- backup your bookmark sqlite db when there are breaking changes
+		-- tag = "v2.3.0",
+		dependencies = {
+			{ "kkharji/sqlite.lua" },
+			{ "nvim-telescope/telescope.nvim" },
+			{ "stevearc/dressing.nvim" }, -- optional: better UI
+		},
+		config = function()
+			local opts = {} -- check the "./lua/bookmarks/default-config.lua" file for all the options
+			require("bookmarks").setup(opts) -- you must call setup to init sqlite db
+			vim.keymap.set(
+				{ "n", "v" },
+				"mm",
+				"<cmd>BookmarksMark<cr>",
+				{ desc = "Mark current line into active BookmarkList." }
+			)
+			vim.keymap.set(
+				{ "n", "v" },
+				"mo",
+				"<cmd>BookmarksGoto<cr>",
+				{ desc = "Go to bookmark at current active BookmarkList" }
+			)
+			vim.keymap.set(
+				{ "n", "v" },
+				"ma",
+				"<cmd>BookmarksCommands<cr>",
+				{ desc = "Find and trigger a bookmark command." }
+			)
+		end,
+	},
+	{
+		"mhinz/vim-grepper",
+		config = function()
+			vim.keymap.set("n", "<leader>se", ':Grepper -noprompt -tool rg -query ""<Left>')
+		end,
+	},
+	{
+		"notjedi/nvim-rooter.lua",
+		config = function()
+			require("nvim-rooter").setup()
+		end,
+	},
+	-- {
+	-- 	"stevearc/quicker.nvim",
+	-- 	event = "FileType qf",
+	-- 	---@module "quicker"
+	-- 	---@type quicker.SetupOptions
+	-- 	opts = { opts = { wrap = true } },
+	-- },
+	{
+		"barreiroleo/ltex_extra.nvim",
+		ft = { "markdown", "tex" },
+		dependencies = { "neovim/nvim-lspconfig" },
+		-- yes, you can use the opts field, just I'm showing the setup explicitly
+		config = function()
+			require("ltex_extra").setup({
+				your_ltex_extra_opts,
+				server_opts = {
+					capabilities = your_capabilities,
+					on_attach = function(client, bufnr)
+						-- your on_attach process
+					end,
+					settings = {
+						ltex = {},
+					},
+				},
+			})
+		end,
+	},
+	-- {
+	-- 	"folke/trouble.nvim",
+	-- 	opts = {}, -- for default options, refer to the configuration section for custom setup.
+	-- 	cmd = "Trouble",
+	-- 	keys = {
+	-- 		{
+	-- 			"<leader>xx",
+	-- 			"<cmd>Trouble diagnostics toggle<cr>",
+	-- 			desc = "Diagnostics (Trouble)",
+	-- 		},
+	-- 		{
+	-- 			"<leader>xX",
+	-- 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+	-- 			desc = "Buffer Diagnostics (Trouble)",
+	-- 		},
+	-- 		{
+	-- 			"<leader>cs",
+	-- 			"<cmd>Trouble symbols toggle focus=false<cr>",
+	-- 			desc = "Symbols (Trouble)",
+	-- 		},
+	-- 		{
+	-- 			"<leader>cl",
+	-- 			"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+	-- 			desc = "LSP Definitions / references / ... (Trouble)",
+	-- 		},
+	-- 		{
+	-- 			"<leader>xL",
+	-- 			"<cmd>Trouble loclist toggle<cr>",
+	-- 			desc = "Location List (Trouble)",
+	-- 		},
+	-- 		{
+	-- 			"<leader>xQ",
+	-- 			"<cmd>Trouble qflist toggle<cr>",
+	-- 			desc = "Quickfix List (Trouble)",
+	-- 		},
+	-- 	},
+	-- },
+	{
+		"lervag/vimtex",
+		lazy = false, -- we don't want to lazy load VimTeX
+		-- tag = "v2.15", -- uncomment to pin to a specific release
+		-- init = function()
+		-- 	-- VimTeX configuration goes here, e.g.
+		-- 	-- vim.g.vimtex_view_method = "zathura"
+		-- end,
+	},
+	{ "tpope/vim-unimpaired" },
 	{
 		"rmagatti/auto-session",
 		lazy = false,
@@ -417,6 +553,7 @@ require("lazy").setup({
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		config = function()
+			local actions = require("telescope.actions")
 			-- Telescope is a fuzzy finder that comes with a lot of different things that
 			-- it can fuzzy find! It's more than just a "file finder", it can search
 			-- many different aspects of Neovim, your workspace, LSP, and more!
@@ -448,6 +585,15 @@ require("lazy").setup({
 				--   },
 				-- },
 				-- pickers = {}
+				defaults = {
+					mappings = {
+						i = {
+							["<C-Down>"] = actions.cycle_history_next,
+							["<C-Up>"] = actions.cycle_history_prev,
+						},
+					},
+					wrap_results = true,
+				},
 				pickers = { find_files = { hidden = true } },
 
 				extensions = {
@@ -683,7 +829,7 @@ require("lazy").setup({
 			vim.diagnostic.config({
 				severity_sort = true,
 				float = { border = "rounded", source = "if_many" },
-				underline = { severity = vim.diagnostic.severity.ERROR },
+				-- underline = { severity = vim.diagnostic.severity.HINT },
 				signs = vim.g.have_nerd_font and {
 					text = {
 						[vim.diagnostic.severity.ERROR] = "󰅚 ",

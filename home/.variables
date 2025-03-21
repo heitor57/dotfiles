@@ -26,6 +26,7 @@ alias c='fasd cd -d'
 alias ls='ls --color=auto'
 
 export PATH="$PATH:$HOME/.config/emacs/bin/"
+export PATH="$PATH:$HOME/scripts/gitwdiff/"
 # alias z='zoxide query'
 #
 ## Send a notification with wezterm use like `do think && weznot "think is done"`
