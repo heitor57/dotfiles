@@ -43,6 +43,8 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+-- vim.opt.spelllang = "en_us"
+-- vim.opt.spell = true
 
 vim.api.nvim_create_augroup("userconfig", {})
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
@@ -144,26 +146,26 @@ require("lazy").setup({
 	-- 	---@type quicker.SetupOptions
 	-- 	opts = { opts = { wrap = true } },
 	-- },
-	{
-		"barreiroleo/ltex_extra.nvim",
-		ft = { "markdown", "tex" },
-		dependencies = { "neovim/nvim-lspconfig" },
-		-- yes, you can use the opts field, just I'm showing the setup explicitly
-		config = function()
-			require("ltex_extra").setup({
-				your_ltex_extra_opts,
-				server_opts = {
-					capabilities = your_capabilities,
-					on_attach = function(client, bufnr)
-						-- your on_attach process
-					end,
-					settings = {
-						ltex = {},
-					},
-				},
-			})
-		end,
-	},
+	-- {
+	-- 	"barreiroleo/ltex_extra.nvim",
+	-- 	ft = { "markdown", "tex" },
+	-- 	dependencies = { "neovim/nvim-lspconfig" },
+	-- 	-- yes, you can use the opts field, just I'm showing the setup explicitly
+	-- 	config = function()
+	-- 		require("ltex_extra").setup({
+	-- 			your_ltex_extra_opts,
+	-- 			server_opts = {
+	-- 				capabilities = your_capabilities,
+	-- 				on_attach = function(client, bufnr)
+	-- 					-- your on_attach process
+	-- 				end,
+	-- 				settings = {
+	-- 					ltex = {},
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	-- {
 	-- 	"folke/trouble.nvim",
 	-- 	opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -223,23 +225,42 @@ require("lazy").setup({
 			-- log_level = 'debug',
 		},
 	},
-
 	{
-		"NeogitOrg/neogit",
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- required
-			"sindrets/diffview.nvim", -- optional - Diff integration
-
-			-- Only one of these is needed.
-			"nvim-telescope/telescope.nvim", -- optional
-			"ibhagwan/fzf-lua", -- optional
-			"echasnovski/mini.pick", -- optional
+		"kdheepak/lazygit.nvim",
+		lazy = true,
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
 		},
-		config = true,
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		-- setting the keybinding for LazyGit with 'keys' is recommended in
+		-- order to load the plugin when the command is run for the first time
 		keys = {
-			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "neogit" },
+			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 		},
 	},
+	-- {
+	-- 	"NeogitOrg/neogit",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim", -- required
+	-- 		"sindrets/diffview.nvim", -- optional - Diff integration
+	--
+	-- 		-- Only one of these is needed.
+	-- 		"nvim-telescope/telescope.nvim", -- optional
+	-- 		"ibhagwan/fzf-lua", -- optional
+	-- 		"echasnovski/mini.pick", -- optional
+	-- 	},
+	-- 	config = true,
+	-- 	keys = {
+	-- 		{ "<leader>gg", "<cmd>Neogit<cr>", desc = "neogit" },
+	-- 	},
+	-- },
 	{
 		"jake-stewart/multicursor.nvim",
 		branch = "1.0",
@@ -531,7 +552,6 @@ require("lazy").setup({
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
 		event = "VimEnter",
-		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{ -- If encountering errors, see telescope-fzf-native README for installation instructions
