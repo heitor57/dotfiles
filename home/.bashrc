@@ -35,3 +35,8 @@ else
 	echo "Not on $EXPECTED_HOST as $EXPECTED_USER. Command not executed."
 #	export PS1="\[\033[38;5;219m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;228m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\] \t \[$(tput sgr0)\]\[\033[38;5;48m\]\w\[$(tput sgr0)\] "
 fi
+
+. "$HOME/.atuin/bin/env"
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"

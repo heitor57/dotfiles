@@ -64,3 +64,5 @@ export NNN_TMPFILE='/tmp/.lastd'
 #alias mm=""
 # alias e='emacsclient -c -nw'
 
+
+. "$HOME/.atuin/bin/env"
