@@ -2,3 +2,7 @@ auto_activate_base: true
 channels:
   - defaults
   - nvidia
+envs_dirs:
+  - /var/tmp/hwerneck/.conda/envs
+pkgs_dirs:
+  - /var/tmp/hwerneck/.conda/pkgs

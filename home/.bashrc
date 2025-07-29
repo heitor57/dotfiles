@@ -31,6 +31,26 @@ if [[ "$CURRENT_USER" == "$EXPECTED_USER" && " ${EXPECTED_HOSTS[@]} " =~ " $CURR
 	# <<< conda initialize <<<
 
 	export PROMPT_COMMAND="history -a; history -n;"
+elif [[ "$CURRENT_USER" == "$EXPECTED_USER" && "brucutuVI" == "$CURRENT_HOST"  ]]; then
+	   # echo "Running command on $CURRENT_HOST as $CURRENT_USER..."
+
+	# >>> conda initialize >>>
+	# !! Contents within this block are managed by 'conda init' !!
+	__conda_setup="$('/opt/conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+	if [ $? -eq 0 ]; then
+		eval "$__conda_setup"
+	else
+		if [ -f "/opt/conda/etc/profile.d/conda.sh" ]; then
+			. "/opt/conda/etc/profile.d/conda.sh"
+		else
+			export PATH="/opt/conda/bin:$PATH"
+		fi
+	fi
+	unset __conda_setup
+	# <<< conda initialize <<<
+	conda activate music-recommendation
+
+	export PROMPT_COMMAND="history -a; history -n;"
 else
 	echo "Not on $EXPECTED_HOST as $EXPECTED_USER. Command not executed."
 #	export PS1="\[\033[38;5;219m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;228m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\] \t \[$(tput sgr0)\]\[\033[38;5;48m\]\w\[$(tput sgr0)\] "

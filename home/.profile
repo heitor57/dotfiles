@@ -63,6 +63,6 @@ export NNN_TMPFILE='/tmp/.lastd'
 #alias ev="v $DOTFILES/.config/nvim/init.vim"
 #alias mm=""
 # alias e='emacsclient -c -nw'
-
+source ~/.bashrc
 
 . "$HOME/.atuin/bin/env"
