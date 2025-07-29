@@ -9,9 +9,9 @@ zsh-users/zsh-autosuggestions
 hlissner/zsh-autopair
 marlonrichert/zsh-edit branch:main
 zsh-users/zsh-completions
-zdharma-continuum/zsh-navigation-tools
-zdharma-continuum/zsh-cmd-architect branch:main
-zdharma-continuum/zsh-editing-workbench branch:main
+#zdharma-continuum/zsh-navigation-tools
+#zdharma-continuum/zsh-cmd-architect branch:main
+#zdharma-continuum/zsh-editing-workbench branch:main
 #ohmyzsh/ohmyzsh path:plugins/history
 #ohmyzsh/ohmyzsh path:plugins/taskwarrior
 #romkatv/powerlevel10k
