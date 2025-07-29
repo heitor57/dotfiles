@@ -1,0 +1,22 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/: 
+        relink: true
+        glob: true
+        force: true
+        path: home/.*
+        # exclude: [ home/config/]
+    ~/: 
+        relink: true
+        glob: true
+        path: home/*
+    ~/.config/:
+        glob: true
+        force: true
+        relink: true
+        path: home/.config/*
